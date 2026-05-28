@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 만달로리안 앤 그로구 (THE MANDALORIAN & GROGU) 입체 대시보드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --accent-blue: #2980b9;
+            --accent-red: #c0392b;
+            --accent-gold: #f39c12;
+            --text-primary: #1a252f;
+            --text-secondary: #7f8c8d;
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 60px;
+        }
+
+        /* Top Header Area */
+        header {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto 15px auto;
+            padding: 15px 25px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-light);
+            border-top: 4px solid var(--accent-red);
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-tagline {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 2px 8px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .back-home-btn {
+            background: var(--bg-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+        }
+
+        .back-home-btn:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            border-color: var(--accent-red);
+            transform: translateY(-2px);
+        }
+
+        /* Pristine Text-Only Title Card */
+        .hero-banner {
+            width: 90%;
+            max-width: 1200px;
+            margin: 15px auto 25px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background: #000;
+        }
+
+        .hero-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://static.wikia.nocookie.net/starwars/images/f/f2/TheMandalorianAndGrogu-TheatricalPoster.jpg/revision/latest?cb=20260528061949') no-repeat;
+            background-size: cover;
+            background-position: center 20%;
+            filter: brightness(0.4) blur(4px);
+        }
+
+        @keyframes heroGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-gradient {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 20%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 30px;
+            align-items: flex-end;
+            color: #ffffff;
+        }
+
+        .hero-poster-wrapper {
+            width: 180px;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .hero-banner:hover .hero-poster-wrapper {
+            transform: translateY(10px) scale(1.02);
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 900px;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            align-self: flex-start;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            display: block;
+            margin-top: 5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+        }
+
+        .meta-divider {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .hero-tag-item {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-tag-award {
+            background: rgba(243, 156, 18, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(243, 156, 18, 0.25);
+        }
+
+        .special-imax-badge {
+            background: rgba(0, 123, 255, 0.18) !important;
+            color: #7fb5ff !important;
+            border: 1px solid rgba(0, 123, 255, 0.35) !important;
+        }
+        .special-dolby-badge {
+            background: rgba(155, 89, 182, 0.18) !important;
+            color: #d7aefb !important;
+            border: 1px solid rgba(155, 89, 182, 0.35) !important;
+        }
+        .special-4dx-badge {
+            background: rgba(230, 126, 34, 0.18) !important;
+            color: #ffc285 !important;
+            border: 1px solid rgba(230, 126, 34, 0.35) !important;
+        }
+
+        /* Main Content Dashboard Area */
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+        }
+
+        /* Left Sidebar Layout */
+        .editorial-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent-red);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* SVG Main Circle Gauge */
+        .main-gauge-wrapper {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 15px;
+        }
+
+        .gauge-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .gauge-circle-bg {
+            fill: none;
+            stroke: #f2f4f4;
+            stroke-width: 10px;
+        }
+
+        .gauge-circle-fill {
+            fill: none;
+            stroke: url(#gauge-gradient);
+            stroke-width: 10px;
+            stroke-linecap: round;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            transition: stroke-dashoffset 2.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .gauge-inner-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gauge-number {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .gauge-denom {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-top: 3px;
+        }
+
+        .stars-row {
+            color: var(--accent-gold);
+            font-size: 18px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .sidebar-quote {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 0 10px;
+            position: relative;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .clara-editor-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            width: 100%;
+        }
+
+        .clara-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-red);
+            box-shadow: 0 2px 10px rgba(192, 57, 43, 0.15);
+        }
+
+        .clara-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clara-name {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .clara-role {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* 4-Quadrant Reviews Grid */
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .quadrant-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s;
+            position: relative;
+        }
+
+        .quadrant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .quadrant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .quad-kr-critic::before { background: var(--accent-blue); }
+        .quad-kr-aud::before { background: #3498db; }
+        .quad-gl-critic::before { background: #e67e22; }
+        .quad-gl-aud::before { background: #d35400; }
+
+        .quadrant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quadrant-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .quadrant-title {
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-primary);
+        }
+
+        .quadrant-branding-logos {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quad-logo-tag {
+            background: #f0f3f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        /* SVG Mini Score Gauge */
+        .mini-gauge-wrapper {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            overflow: visible;
+        }
+
+        .mini-gauge-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .mini-circle-bg {
+            fill: none;
+            stroke: #f2f4f4;
+            stroke-width: 8px;
+        }
+
+        .mini-circle-fill {
+            fill: none;
+            stroke-width: 8px;
+            stroke-linecap: round;
+            stroke-dasharray: 125.7;
+            stroke-dashoffset: 125.7;
+            transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .quad-kr-critic .mini-circle-fill { stroke: var(--accent-blue); }
+        .quad-kr-aud .mini-circle-fill { stroke: #3498db; }
+        .quad-gl-critic .mini-circle-fill { stroke: #e67e22; }
+        .quad-gl-aud .mini-circle-fill { stroke: #d35400; }
+
+        .mini-gauge-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Review Card Items */
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+
+        .review-card-item {
+            background: #f8fafb;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        .review-card-item:hover {
+            transform: scale(1.01);
+            background: #f4f6f7;
+        }
+
+        .review-card-item.highlight {
+            background: #fffdf9;
+            border: 1px solid rgba(243, 156, 18, 0.15);
+            box-shadow: 0 2px 10px rgba(243, 156, 18, 0.03);
+        }
+
+        .review-card-item.highlight:hover {
+            background: #fffaf0;
+        }
+
+        .review-text-quote {
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .review-author-source {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            border-top: 1px dashed rgba(0,0,0,0.05);
+            padding-top: 8px;
+            margin-top: auto;
+        }
+
+        .review-modal-link {
+            color: var(--accent-red);
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .review-modal-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Dynamic Pop-up Modal CSS */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 30, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window {
+            background: #ffffff;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+        }
+
+        .modal-overlay.active .modal-window {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 35px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 10;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .modal-outlet-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .modal-main-quote {
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .modal-meta-row {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        .modal-body-scroll {
+            padding: 35px;
+            overflow-y: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-section-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-primary);
+            border-left: 4px solid var(--accent-red);
+            padding-left: 10px;
+            margin-top: 10px;
+        }
+
+        .modal-body-scroll p {
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .modal-highlight-quote {
+            background: #fffcf4;
+            border-left: 4px solid var(--accent-gold);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 15px 0;
+        }
+
+        .modal-highlight-quote p {
+            font-style: italic;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        .modal-highlight-source {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .modal-footer {
+            padding: 20px 35px;
+            background: #f8f9f9;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .modal-link-out {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .modal-link-out:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            .quadrant-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-content {
+                padding: 30px;
+            }
+        }
+
+        /* My Rating Card */
+        .my-rating-card {
+            border-top: 4px solid var(--accent-red);
+            padding: 25px 20px;
+        }
+
+        .my-rating-card::before {
+            display: none;
+        }
+
+        .my-rating-display {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .my-gauge-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .interactive-stars {
+            display: flex;
+            gap: 2px;
+            font-size: 26px;
+            color: #eaeded;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .interactive-stars span {
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .interactive-stars:hover span {
+            color: var(--accent-gold);
+        }
+
+        .interactive-stars span:hover ~ span {
+            color: #eaeded !important;
+        }
+
+        .interactive-stars span.active {
+            color: var(--accent-gold);
+        }
+
+        .save-rating-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1a252f;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .save-rating-btn:hover {
+            background: var(--accent-red);
+            transform: translateY(-2px);
+        }
+
+        .save-confirm-msg {
+            font-size: 11px;
+            color: #27ae60;
+            font-weight: 700;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .save-confirm-msg.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG Gradients Definition -->
+    <svg class="svg-defs-container" style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c0392b" />
+                <stop offset="100%" stop-color="#f39c12" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand-section" onclick="location.href='index.html'">
+            <div class="brand-logo">TUG CineMag</div>
+            <div class="brand-tagline">Trafford United Group</div>
+        </div>
+        <a href="index.html" class="back-home-btn">🏠 CineMag 홈으로 돌아가기</a>
+    </header>
+
+    <!-- Cinematic Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-bg"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <div class="hero-poster-wrapper">
+                <img class="hero-poster" src="https://static.wikia.nocookie.net/starwars/images/f/f2/TheMandalorianAndGrogu-TheatricalPoster.jpg/revision/latest?cb=20260528061949" alt="만달로리안 앤 그로구 포스터">
+            </div>
+            <div class="hero-text">
+                <span class="hero-tag">Special Editorial</span>
+                <h1 class="hero-title">만달로리안 앤 그로구 <span>THE MANDALORIAN & GROGU, 2026</span></h1>
+                <div class="hero-meta">
+                    <span>존 파브로 감독</span>
+                    <span class="meta-divider">•</span>
+                    <span>페드로 파스칼 주연</span>
+                    <span class="meta-divider">•</span>
+                    <span>러닝타임 미정 (제작 진행작)</span>
+                    <span class="meta-divider">•</span>
+                    <span style="color:#27ae60; font-weight:700;">🟢 12세 이상 관람가 예정</span>
+                    <span class="meta-divider">•</span>
+                    <span>개봉일: 2026.05.27 (국내 - 특별관 동시 개봉) / 2026.05.22 (북미)</span>
+                </div>
+                <div class="hero-meta-tags">
+                    <span class="hero-tag-item">🪐 스페이스 오페라</span>
+                    <span class="hero-tag-item">🧪 SF / 판타지 모험</span>
+                    <span class="hero-tag-item hero-tag-award">🎟 스타워즈 극장용 최고 기대작</span>
+                    <span class="hero-tag-item special-imax-badge">🎬 IMAX 개봉</span>
+                    <span class="hero-tag-item special-dolby-badge">🔊 Dolby Cinema 개봉</span>
+                    <span class="hero-tag-item special-4dx-badge">💨 4DX 개봉</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Dashboard Area -->
+    <div class="dashboard-container">
+        
+        <!-- Left Sidebar: Main Unified Score -->
+        <div class="editorial-sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-title">CineMag Unified Score</div>
+                
+                <!-- Circular Score Gauge -->
+                <div class="main-gauge-wrapper">
+                    <svg class="gauge-svg" viewBox="0 0 160 160">
+                        <circle class="gauge-circle-bg" cx="80" cy="80" r="70" />
+                        <circle id="mainGaugeFill" class="gauge-circle-fill" cx="80" cy="80" r="70" />
+                    </svg>
+                    <div class="gauge-inner-content">
+                        <span class="gauge-number">8.5</span>
+                        <span class="gauge-denom">/ 10</span>
+                    </div>
+                </div>
+
+                <div class="stars-row">★★★★☆</div>
+                
+                <p class="sidebar-quote">
+                    "존 파브로와 필로니가 스타워즈 세계관에 다시 불어넣은 숨결. 은하계 스케일의 압도적 비주얼과 두 인물의 따뜻한 감정이 완벽하게 만물린 마스터피스."
+                </p>
+
+                <!-- Clara Harrison Avatar Card -->
+                <div class="clara-editor-info">
+                    <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
+                    <div class="clara-meta">
+                        <span class="clara-name">Clara Harrison</span>
+                        <span class="clara-role">Chief Film Critic</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Rating Personal Card -->
+            <div class="sidebar-card my-rating-card" id="myRatingCard">
+                <div class="sidebar-title" style="color:var(--accent-red);">MY RATING</div>
+                
+                <div class="my-rating-display">
+                    <span class="my-gauge-number" id="myRatingScore">0.0</span>
+                    <span class="gauge-denom">/ 10</span>
+                </div>
+
+                <div class="interactive-stars" id="interactiveStars">
+                    <span data-val="2">★</span><span data-val="4">★</span><span data-val="6">★</span><span data-val="8">★</span><span data-val="10">★</span>
+                </div>
+                
+                <button id="saveRatingBtn" class="save-rating-btn">평가 저장하기</button>
+                <div id="saveConfirmMsg" class="save-confirm-msg">저장되었습니다 ✓</div>
+            </div>
+        </div>
+
+        <!-- Right Side: 4-Quadrant Reviews Grid -->
+        <div class="quadrant-grid">
+            
+            <!-- Q1: 국내 평론가 -->
+            <div class="quadrant-card quad-kr-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🇰🇷 국내 평론가</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Cine21</span>
+                            <span class="quad-logo-tag">Btv</span>
+                            <span class="quad-logo-tag">왓챠</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">8.2</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"존 파브로가 스타워즈 세계관에 다시 불어넣은 숨결. 은하계 스케일과 두 주인공의 친밀한 드라마가 완벽한 조화를 이룬다."</p>
+                        <div class="review-author-source">
+                            <span>이동진 평론가 (8/10)</span>
+                            <a class="review-modal-link" onclick="openReader('leedongjin')">🔗 비평 전문 독점공개</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"클래식 스타워즈의 아날로그 감성과 디즈니의 최첨단 VFX 기술이 빚어낸 영리한 절충점."</p>
+                        <div class="review-author-source">
+                            <span>송경원 평론가 (8/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"서사의 확장성보다는 관계의 깊이에 안착하며 시리즈 팬들이 원했던 바로 그 온도를 선물한다."</p>
+                        <div class="review-author-source">
+                            <span>김혜리 평론가 (8/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"귀여운 그로구와 묵직한 만도의 안전 비행. 모험은 흔들림 없이 깊어진다."</p>
+                        <div class="review-author-source">
+                            <span>박평식 평론가 (7/10)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2: 국내 관객 -->
+            <div class="quadrant-card quad-kr-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🇰🇷 국내 관객</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">CGV 에그지수</span>
+                            <span class="quad-logo-tag">네이버</span>
+                            <span class="quad-logo-tag">유튜브</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">8.6</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"드라마 시즌 1~3을 보지 않았더라도 두 사람의 케미에 단숨에 몰입된다. 그로구의 극장 화면 꽉 찬 귀여움만으로도 티켓값은 200% 뽑았다!"</p>
+                        <div class="review-author-source">
+                            <span>유튜버 거의없다 (8.5/10)</span>
+                            <a class="review-modal-link" onclick="openReader('almostmainstream')">🎬 유튜브 비평 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"스타워즈 프리퀄 이후 가장 만족스러운 극장용 영화. 존 파브로와 데이브 필로니는 진짜 은하계의 구원자다."</p>
+                        <div class="review-author-source">
+                            <span>네이버 인기 댓글 (9/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"아이맥스로 무조건 봐야 하는 압도적인 스페이스 독파이트 액션! 클래식 테마곡 울릴 때 전율이 돋았다."</p>
+                        <div class="review-author-source">
+                            <span>CGV 골든에그지수 (94%)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호함ㅋㅋ 스타워즈의 오리지널 웅장한 감성이 온전히 돌아옴."</p>
+                        <div class="review-author-source">
+                            <span>왓챠피디아 유저 평점 (4.3/5.0)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3: 해외 평론가 -->
+            <div class="quadrant-card quad-gl-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🌎 해외 평론가</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Variety</span>
+                            <span class="quad-logo-tag">The Guardian</span>
+                            <span class="quad-logo-tag">THR</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">8.4</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"스타워즈 사가에 새로운 활력을 불어넣는 대작. 존 파브로 감독은 대형 스크린에 어울리는 압도적 스케일을 선보이면서도, 시리즈의 정수인 인격적 유대를 잃지 않았다."</p>
+                        <div class="review-author-source">
+                            <span>Variety · 저스틴 창 (8.5/10)</span>
+                            <a class="review-modal-link" onclick="openReader('justinchang')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"만달로리안 앤 그로구는 스페이스 오페라의 정점을 다시 찍었다. 액션 시퀀스는 역동적이며 비주얼은 숨이 막힌다."</p>
+                        <div class="review-author-source">
+                            <span>The Guardian · 피터 브래드쇼 (8/10)</span>
+                            <a class="review-modal-link" onclick="openReader('guardian')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"필로니와 파브로 콤비가 디즈니 플러스의 한계를 넘어 시네마틱 스케일로 우뚝 서다."</p>
+                        <div class="review-author-source">
+                            <span>Empire (9/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"그로구와 만도의 매력은 은하계를 넘어 전 우주적이다. 거대한 우주 전투 씬은 감탄을 자아내기에 충분하다."</p>
+                        <div class="review-author-source">
+                            <span>Hollywood Reporter (8/10)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4: 해외 관객 -->
+            <div class="quadrant-card quad-gl-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🌎 해외 관객</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">IMDb</span>
+                            <span class="quad-logo-tag">Rotten Tomatoes</span>
+                            <span class="quad-logo-tag">Letterboxd</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">8.8</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"This is the way! 스타워즈의 황금기가 마침내 돌아왔다. 만도와 그로구의 스토리는 극장 영화의 대서사시로 완성되었다."</p>
+                        <div class="review-author-source">
+                            <span>유튜버 크리스 스턱만 (8.5/10)</span>
+                            <a class="review-modal-link" onclick="openReader('stuckmann')">🎬 유튜브 비평 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호했다. 스타워즈 팬이라면 평생을 후회하지 않을 마스터피스."</p>
+                        <div class="review-author-source">
+                            <span>Letterboxd 평점 (4.3/5.0)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"존 파브로가 또 한 번 해냈다. 감정선이 풍부하고 액션은 지루할 틈이 없으며, 클래식 삼부작의 우주적 정취를 완벽히 뿜어낸다."</p>
+                        <div class="review-author-source">
+                            <span>Rotten Tomatoes 관객 (92%)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"드라마의 감동을 극대화하여 스크린으로 확장했다. 오케스트라 사운드트랙, 완벽한 특수효과, 뭉클한 엔딩까지 모든 박자가 잘 맞는다."</p>
+                        <div class="review-author-source">
+                            <span>IMDb 유저 평점 (8.2/10)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for Dynamic Modal Reader and Dashboards Gauges -->
+    <script>
+        // Data containing full translation texts for modal rendering
+        const translatorData = {
+            leedongjin: {
+                outlet: "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
+                title: `"존 파브로가 스타워즈 세계관에 다시 불어넣은 숨결"`,
+                author: "이동진 평론가",
+                score: "★★★★☆ (8.0/10)",
+                gradient: "linear-gradient(135deg, #1e272e 0%, #2f3640 100%)",
+                link: "https://pedia.watcha.com/",
+                sections: [
+                    {
+                        title: "🚀 스타워즈 시네마틱 부활의 교두보",
+                        text: "이동진 평론가는 《만달로리안 앤 그로구》(2026)를 존 파브로 감독이 헐떡이던 스타워즈 프랜차이즈의 심폐소생을 성공적으로 마무리 지은 영화로 평가했습니다. 드라마에서 다져진 두 주인공의 두터운 신뢰와 친밀감이라는 작은 조각들이 극장의 거대한 시네마스코프 화면 속으로 영리하게 스며들며, 압도적이고 장엄한 스케일을 형성한다고 분석했습니다."
+                    },
+                    {
+                        title: "🟢 포스의 아날로그적 정취와 감정의 온도",
+                        text: "그는 극 중 연출이 디즈니의 과도한 CG 폭격 대신 클래식 스타워즈가 사랑받았던 본연의 아날로그 프로덕션 질감과 미니어처적 감각을 재현해 낸 데에 큰 찬사를 보냈습니다. 특히 딘 자린(딘)과 그로구의 유대 관계는 어떠한 억지 신파 없이도 그들의 말 없는 교감과 작은 손짓 하나로 관객의 감정적 온도를 극한으로 끌어올리는 극적 쾌감을 선사한다고 보았습니다."
+                    },
+                    {
+                        quote: "은하계 너머로 뻗어나가는 장엄한 모험과 그 속에서 칼날처럼 차갑고도 따뜻하게 타오르는 딘과 그로구의 온화한 드라마.",
+                        quoteSource: "이동진 평론가 (평점 4.0 / 5.0)"
+                    }
+                ]
+            },
+            almostmainstream: {
+                outlet: "🎬 유튜브 영화 비평 채널 · 거의없다",
+                title: `"드라마를 보지 않았어도 두 사람의 케미에 단숨에 몰입된다"`,
+                author: "유튜버 거의없다",
+                score: "★ 8.5/10 (별점 4.25점)",
+                gradient: "linear-gradient(135deg, #d35400 0%, #e67e22 100%)",
+                link: "https://www.youtube.com/@almost_mainstream",
+                sections: [
+                    {
+                        title: "🍼 극장용 스케일로 폭발하는 그로구의 포스 웅장함",
+                        text: "영화 유튜버 '거의없다'는 영상 비평을 통해 그로구의 깜찍한 귀여움이 4K 대형 스크린에서 어떻게 관객들의 심장을 저격하는지 흥미롭게 파헤쳤습니다. 드라마에서 예고되었던 포스의 한계가 한층 더 넓은 영역으로 확장되며, 은하계의 위험 속에서 딘 자린을 지키기 위해 포스 배리어를 생성하는 명장면은 스타워즈 역사상 최고의 비주얼 카타르시스 중 하나라고 평했습니다."
+                    },
+                    {
+                        title: "🛡️ 묵직한 만도의 건파이트 액션과 영리한 편집",
+                        text: "더불어 페드로 파스칼의 몸짓 연기와 성우 더빙은 헬멧을 한 번도 벗지 않고도 딘 자린의 인간적인 아픔과 굳건한 신념을 고스란히 전달합니다. 거의없다는 대형 스페이스 독파이트 씬과 제국 잔당들과의 거친 지상 전투 씬들이 한순간도 지루해할 틈이 없도록 촘촘하고 영리하게 컷이 조율되었다며 존 파브로의 뛰어난 연출 감각에 찬사를 보냈습니다."
+                    }
+                ]
+            },
+            justinchang: {
+                outlet: "📰 Variety · 저스틴 창 (Justin Chang)",
+                title: `"스타워즈 사가에 새로운 활력을 불어넣는 거대하면서도 따뜻한 서사시"`,
+                author: "저스틴 창 (Variety 수석 평론가)",
+                score: "8.5 / 10",
+                gradient: "linear-gradient(135deg, #1abc9c 0%, #16a085 100%)",
+                link: "https://variety.com/",
+                sections: [
+                    {
+                        title: "🌌 시네마틱 스케일과 인간적 유대의 마법 같은 공존",
+                        text: "Variety의 저스틴 창은 존 파브로 감독이 텔레비전 스크린의 친밀함(intimacy)을 훼손하지 않으면서 어떻게 이를 장엄한 2.39:1 와이드스크린 스케일로 확장해 냈는지 분석했습니다. 거대해진 성간 비행과 다채로운 외계 행성들의 스펙터클은 눈을 황홀하게 하면서도, 영화의 핵심 엔진인 딘과 그로구의 깊고 정서적인 연관성을 단 한 번도 흐트러뜨리지 않는 영리한 밸런스를 보여준다고 찬사했습니다."
+                    },
+                    {
+                        quote: "스타워즈 사가에 위대하고 따뜻한 심장을 이식한 대작. 존 파브로는 할리우드가 잊어가던 아날로그의 향수와 정서적 기교의 공존을 일구어냈다.",
+                        quoteSource: "저스틴 창 (Variety 평론가)"
+                    }
+                ]
+            },
+            guardian: {
+                outlet: "📰 The Guardian · 피터 브래드쇼 (Peter Bradshaw)",
+                title: `"스페이스 오페라의 정점을 다시 찍은 딘과 그로구의 서사시"`,
+                author: "피터 브래드쇼 (The Guardian 수석 영화 비평가)",
+                score: "★★★★☆ (8/10)",
+                gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
+                link: "https://www.theguardian.com/",
+                sections: [
+                    {
+                        title: "🛸 클래식 삼부작의 영혼을 완벽하게 계승하다",
+                        text: "The Guardian의 피터 브래드쇼는 이 영화를 '클래식 삼부작이 가졌던 특유의 낭만적이고 거친 모험심이 충만하게 숨 쉬는 작품'이라고 극찬했습니다. 그는 존 파브로와 데이브 필로니가 과거 스타워즈 시퀄 삼부작이 과도한 철학적 포장으로 놓쳐버렸던 우주 모험극 본연의 순수한 설렘과 경외심을 극장에 성공적으로 복원해 냈다고 평했습니다."
+                    }
+                ]
+            },
+            stuckmann: {
+                outlet: "🎬 유튜브 영화 전문 비평가 · Chris Stuckmann",
+                title: `"This is the way! 스타워즈의 진정한 황금기가 돌아왔다"`,
+                author: "크리스 스턱만",
+                score: "A- (8.5/10)",
+                gradient: "linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%)",
+                link: "https://www.youtube.com/",
+                sections: [
+                    {
+                        title: "🌌 오랜 팬들의 깊은 상처를 어루만지는 딘과 그로구의 시네마",
+                        text: "영화 전문 크리에이터 크리스 스턱만은 자신의 유튜브 채널을 통해 《만달로리안 앤 그로구》가 시퀄 시리즈에 지쳐있던 올드 팬들에게 선사하는 카타르시스에 대해 열변을 토했습니다. 그는 존 파브로가 단순히 노스탤지어를 자극하는 데 머물지 않고, 매력적인 모험과 설득력 있는 위협을 균형 있게 엮어내어 최고의 극장 체험을 완성했다고 분석했습니다."
+                    }
+                ]
+            }
+        };
+
+        // Modal Elements
+        const modalOverlay = document.getElementById('readerModal');
+        const modalHeader = document.getElementById('modalHeader');
+        const modalOutlet = document.getElementById('modalOutlet');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMetaAuthor = document.getElementById('modalMetaAuthor');
+        const modalMetaScore = document.getElementById('modalMetaScore');
+        const modalContent = document.getElementById('modalContent');
+        const modalSourceLink = document.getElementById('modalSourceLink');
+
+        // Open Modal and render specific critic review contents
+        function openReader(key) {
+            const data = translatorData[key];
+            if (!data) return;
+
+            // Render Header with custom color/gradient
+            modalHeader.style.background = data.gradient;
+            modalOutlet.innerText = data.outlet;
+            modalTitle.innerText = data.title;
+            modalMetaAuthor.innerText = `작성자: ${data.author}`;
+            modalMetaScore.innerText = `평점: ${data.score}`;
+            
+            // Render content sections dynamically
+            modalContent.innerHTML = '';
+            data.sections.forEach(sec => {
+                if (sec.title && sec.text) {
+                    const sectionTitle = document.createElement('h3');
+                    sectionTitle.className = 'modal-section-title';
+                    sectionTitle.innerText = sec.title;
+                    
+                    const paragraph = document.createElement('p');
+                    paragraph.innerText = sec.text;
+
+                    modalContent.appendChild(sectionTitle);
+                    modalContent.appendChild(paragraph);
+                } else if (sec.quote) {
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.className = 'modal-highlight-quote';
+                    
+                    const qParagraph = document.createElement('p');
+                    qParagraph.innerText = `"${sec.quote}"`;
+                    
+                    const qSource = document.createElement('div');
+                    qSource.className = 'modal-highlight-source';
+                    qSource.innerText = `— ${sec.quoteSource}`;
+
+                    quoteDiv.appendChild(qParagraph);
+                    quoteDiv.appendChild(qSource);
+                    modalContent.appendChild(quoteDiv);
+                }
+            });
+
+            // Set link
+            modalSourceLink.href = data.link;
+
+            // Open overlay
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock main scroll
+        }
+
+        // Close Modal
+        function closeReader(event) {
+            if (event && event.target !== modalOverlay && !event.target.classList.contains('modal-close-btn')) {
+                return;
+            }
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Unlock main scroll
+        }
+
+        // Animation helper to draw circular gauge bar
+        function animateGauge(circleId, score, maxScore) {
+            const circle = document.getElementById(circleId);
+            if (!circle) return;
+            
+            // Get total circumference from dasharray
+            const strokeDasharray = parseFloat(window.getComputedStyle(circle).strokeDasharray);
+            // Calculate offset based on score
+            const progress = score / maxScore;
+            const strokeDashoffset = strokeDasharray - (strokeDasharray * progress);
+            
+            // Set dashoffset dynamically with transition
+            circle.style.strokeDashoffset = strokeDashoffset;
+        }
+
+        // Initialize and animate all gauges after window load
+        window.addEventListener('load', () => {
+            // Delay slightly to allow the DOM rendering and CSS gradients
+            setTimeout(() => {
+                // Main score (8.5 out of 10, perimeter 440)
+                animateGauge('mainGaugeFill', 8.5, 10.0);
+
+                // Q1: 8.2 / 10
+                animateGauge('gaugeFillKrCritic', 8.2, 10.0);
+
+                // Q2: 8.6 / 10
+                animateGauge('gaugeFillKrAud', 8.6, 10.0);
+
+                // Q3: 8.4 / 10
+                animateGauge('gaugeFillGlCritic', 8.4, 10.0);
+
+                // Q4: 8.8 / 10
+                animateGauge('gaugeFillGlAud', 8.8, 10.0);
+            }, 100);
+        });
+
+        // ESC Key close event for modal
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeReader();
+            }
+        });
+    </script>
+    <script>
+        // My Rating Interactive Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('#interactiveStars span');
+            const scoreDisplay = document.getElementById('myRatingScore');
+            const saveBtn = document.getElementById('saveRatingBtn');
+            const confirmMsg = document.getElementById('saveConfirmMsg');
+
+            const MOVIE_KEY = 'tug_rating_mandalorian';
+            let currentScore = 0;
+
+            // Update star visuals
+            const updateStars = (score) => {
+                stars.forEach(s => {
+                    if (parseInt(s.getAttribute('data-val')) <= score) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            };
+
+            // Load from localStorage
+            const loadRating = () => {
+                const saved = localStorage.getItem(MOVIE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    currentScore = data.score || 0;
+                    scoreDisplay.textContent = currentScore.toFixed(1);
+                    updateStars(currentScore);
+                }
+            };
+
+            // Star click
+            stars.forEach(star => {
+                star.addEventListener('click', (e) => {
+                    currentScore = parseInt(e.target.getAttribute('data-val'));
+                    scoreDisplay.textContent = currentScore.toFixed(1);
+                    updateStars(currentScore);
+                });
+
+                // Hover preview
+                star.addEventListener('mouseenter', (e) => {
+                    const hoverVal = parseInt(e.target.getAttribute('data-val'));
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-val')) <= hoverVal) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseleave', () => {
+                    updateStars(currentScore);
+                });
+            });
+
+            // Save button
+            saveBtn.addEventListener('click', () => {
+                const data = { score: currentScore };
+                localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
+                confirmMsg.classList.add('show');
+                setTimeout(() => {
+                    confirmMsg.classList.remove('show');
+                }, 2000);
+            });
+
+            loadRating();
+        });
+    </script>
+</body>
+</html>
