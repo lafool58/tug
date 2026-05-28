@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 모바일 영화 웹진</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        // Redirect to Desktop version if not accessed from a mobile device
+        if (!/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("index.html");
+        }
+    </script>
+    <style>
+        :root {
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --accent-blue: #2980b9;
+            --accent-red: #c0392b;
+            --accent-gold: #f39c12;
+            --text-primary: #1a252f;
+            --text-secondary: #7f8c8d;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding-bottom: 80px; /* Tabbar height offset */
+        }
+
+        /* Top Header Area (Compact Mobile Style) */
+        header {
+            width: 100%;
+            background: var(--card-bg);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-light);
+            border-top: 3px solid var(--accent-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .brand-logo {
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-logo span {
+            color: var(--accent-red);
+        }
+
+        .brand-tagline {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 1px 6px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Featured Section */
+        .featured-m-banner {
+            margin: 15px 15px 20px 15px;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            height: 180px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .featured-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center 20%;
+            filter: brightness(0.45);
+        }
+
+        .featured-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: #ffffff;
+        }
+
+        .featured-tag {
+            font-size: 9px;
+            font-weight: 800;
+            background: var(--accent-gold);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 100px;
+            align-self: flex-start;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .featured-title {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 4px;
+            font-family: 'Playfair Display', 'Noto Sans KR', serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .featured-desc {
+            font-size: 11px;
+            color: #d5dbdb;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Mobile Controls Panel */
+        .controls-m {
+            padding: 0 15px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .search-m-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-m-input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-light);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-m-input:focus {
+            border-color: var(--accent-red);
+        }
+
+        .search-m-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        /* Movie List (Single Column Layout) */
+        .magazine-m-list {
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .movie-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Landscape crop on mobile lists looks cleaner */
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+
+        /* Floating Overlays on the Card Poster Image */
+        .card-badges {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 4px;
+            z-index: 5;
+        }
+
+        .card-badge-special {
+            font-size: 8px;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 3px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .special-imax {
+            color: #ffffff;
+            background: rgba(0, 123, 255, 0.85);
+            border-color: rgba(0, 123, 255, 0.9);
+        }
+
+        .special-dolby {
+            color: #ffffff;
+            background: rgba(155, 89, 182, 0.85);
+            border-color: rgba(155, 89, 182, 0.9);
+        }
+
+        .special-4dx {
+            color: #ffffff;
+            background: rgba(230, 126, 34, 0.85);
+            border-color: rgba(230, 126, 34, 0.9);
+        }
+
+        .card-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .card-genre-row {
+            display: flex;
+            gap: 5px;
+        }
+
+        .card-genre {
+            font-size: 9px;
+            font-weight: 800;
+            color: var(--accent-blue);
+            background: #ebf5fb;
+            padding: 1px 6px;
+            border-radius: 100px;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 800;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .card-meta {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .card-rating-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .card-stars {
+            color: var(--accent-gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .card-score {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .card-score-accent {
+            color: var(--accent-red);
+        }
+
+        /* Dynamically Injected My Rating Style */
+        .my-rating-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .my-rating-tag {
+            font-size: 9px;
+            font-weight: 800;
+            background: #fff8eb;
+            color: var(--accent-gold);
+            border: 1px solid rgba(243, 156, 18, 0.25);
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        .my-alarm-tag {
+            font-size: 9px;
+            font-weight: 800;
+            background: #fde8e7;
+            color: var(--accent-red);
+            border: 1px solid rgba(192, 57, 43, 0.25);
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        /* Navigation Tab Bar for Mobile */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: var(--card-bg);
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.04);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 9px;
+            font-weight: 700;
+            text-decoration: none;
+            gap: 4px;
+            width: 20%;
+        }
+
+        .tab-item.active {
+            color: var(--accent-red);
+        }
+
+        .tab-icon {
+            font-size: 18px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px 20px;
+            border: 1.5px dashed rgba(192, 57, 43, 0.2);
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand-section">
+            <div class="brand-logo">TUG <span>CineMag</span></div>
+            <div class="brand-tagline">TUG</div>
+        </div>
+        <div class="header-icons">
+            <button class="header-btn">🔔</button>
+            <button class="header-btn" onclick="location.href='profiles/clara_harrison_profile.html'">👤</button>
+        </div>
+    </header>
+
+    <!-- Mobile Featured Section -->
+    <div class="featured-m-banner">
+        <div class="featured-bg" id="featuredBg"></div>
+        <div class="featured-content">
+            <span class="featured-tag">TUG Featured</span>
+            <h2 class="featured-title" id="featuredTitle">불러오는 중...</h2>
+            <p class="featured-desc" id="featuredDesc">영화 비평 대시보드를 불러오는 중입니다.</p>
+        </div>
+    </div>
+
+    <!-- Mobile Controls Panel -->
+    <div class="controls-m">
+        <div class="search-m-wrapper">
+            <span class="search-m-icon">🔍</span>
+            <input type="text" class="search-m-input" id="searchInput" placeholder="영화 제목, 감독, 장르 검색...">
+        </div>
+    </div>
+
+    <!-- Movie List -->
+    <div class="magazine-m-list" id="movieGrid">
+        
+        <!-- Card 1: 만달로리안 앤 그로구 -->
+        <a href="mandalorian_dashboard_m.html" class="movie-card" data-movie-key="mandalorian" 
+           data-title="만달로리안 앤 그로구 (THE MANDALORIAN & GROGU)" 
+           data-director="존 파브로" 
+           data-genre="SF" 
+           data-score="8.5" 
+           data-year="2026" 
+           data-meta="존 파브로 감독 • 12세 관람가 예정 • 개봉일: 2026.05.27 (IMAX / Dolby / 4DX 동시 개봉)"
+           data-desc="딘 자린과 그로구가 대형 스크린으로 복귀하여 은하계를 누비는 웅장한 여정을 그린 스페이스 SF 대서사시. 국내 IMAX, Dolby Cinema, 4DX 특별관 동시 개봉 확정! TUG 평론단과 보스가 전격 분석한 4분할 입체 비평을 독점 공개합니다."
+           data-backdrop="https://static.wikia.nocookie.net/starwars/images/f/f2/TheMandalorianAndGrogu-TheatricalPoster.jpg/revision/latest?cb=20260528061949">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="https://static.wikia.nocookie.net/starwars/images/f/f2/TheMandalorianAndGrogu-TheatricalPoster.jpg/revision/latest?cb=20260528061949" alt="만달로리안 앤 그로구">
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-4dx">4DX</span>
+                </div>
+            </div>
+            <div class="card-info">
+                <div class="card-genre-row">
+                    <span class="card-genre">Space</span>
+                    <span class="card-genre">Sci-Fi</span>
+                </div>
+                <h3 class="card-title">만달로리안 앤 그로구 (2026)</h3>
+                <p class="card-meta">존 파브로 감독 • 개봉 예정작 (특별관 확정)</p>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">8.5</span>/10</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Empty Welcome State Screen -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div style="font-size: 35px; margin-bottom: 10px;">🎬</div>
+            <h3 style="font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;">등록된 영화가 없습니다</h3>
+            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.5; max-width: 250px; margin: 0 auto;">
+                클라라 해리슨 비서에게 분석하고 싶은 영화 평가를 요청해 주세요!
+            </p>
+        </div>
+    </div>
+
+    <!-- Navigation Tab Bar -->
+    <div class="tab-bar">
+        <a href="index_m.html" class="tab-item active">
+            <span class="tab-icon">🏠</span>
+            <span>홈</span>
+        </a>
+        <a href="#" class="tab-item" onclick="alert('준비 중인 서비스입니다.'); return false;">
+            <span class="tab-icon">🧭</span>
+            <span>탐색</span>
+        </a>
+        <a href="#" class="tab-item" onclick="alert('준비 중인 서비스입니다.'); return false;">
+            <span class="tab-icon">📖</span>
+            <span>로그</span>
+        </a>
+        <a href="#" class="tab-item" onclick="alert('준비 중인 서비스입니다.'); return false;">
+            <span class="tab-icon">💬</span>
+            <span>라운지</span>
+        </a>
+        <a href="#" class="tab-item" onclick="alert('준비 중인 서비스입니다.'); return false;">
+            <span class="tab-icon">⚙️</span>
+            <span>설정</span>
+        </a>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const movieGrid = document.getElementById('movieGrid');
+        const emptyState = document.getElementById('emptyState');
+        const movieCards = Array.from(document.querySelectorAll('.movie-card'));
+
+        // Apply simple Search filter
+        function applyFilter() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            movieCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const director = card.getAttribute('data-director').toLowerCase();
+                const genre = card.getAttribute('data-genre').toLowerCase();
+
+                if (title.includes(query) || director.includes(query) || genre.includes(query)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+
+        searchInput.addEventListener('input', applyFilter);
+
+        // Load and display User's Ratings & Alarms from localStorage
+        function loadMyRatings() {
+            movieCards.forEach(card => {
+                const movieKey = card.getAttribute('data-movie-key');
+                if (!movieKey) return;
+                
+                const savedRating = localStorage.getItem('tug_rating_' + movieKey);
+                const savedAlarm = localStorage.getItem('tug_alarm_' + movieKey);
+                
+                const hasRating = savedRating !== null;
+                const hasAlarm = savedAlarm === 'true';
+                
+                if (hasRating || hasAlarm) {
+                    let row = card.querySelector('.my-rating-row');
+                    if (!row) {
+                        row = document.createElement('div');
+                        row.className = 'my-rating-row';
+                        const ratingRow = card.querySelector('.card-rating-row');
+                        const cardInfo = card.querySelector('.card-info');
+                        if (cardInfo && ratingRow) {
+                            cardInfo.insertBefore(row, ratingRow);
+                        }
+                    }
+                    
+                    let htmlContent = '';
+                    if (hasRating) {
+                        try {
+                            const data = JSON.parse(savedRating);
+                            if (data && data.score > 0) {
+                                htmlContent += `<span class="my-rating-tag">내 평점 ★ ${data.score.toFixed(1)}</span>`;
+                            }
+                        } catch (e) {
+                            console.error('Error parsing rating for ' + movieKey, e);
+                        }
+                    }
+                    if (hasAlarm) {
+                        htmlContent += `<span class="my-alarm-tag">⏰ 알람 등록됨</span>`;
+                    }
+                    row.innerHTML = htmlContent;
+                }
+            });
+        }
+
+        // Setup dynamic random featured movie banner on load
+        function setupFeaturedMovie() {
+            if (movieCards.length === 0) return;
+            
+            const randomIndex = Math.floor(Math.random() * movieCards.length);
+            const card = movieCards[randomIndex];
+            
+            const title = card.getAttribute('data-title');
+            const desc = card.getAttribute('data-desc') || "TUG 평론단과 일반 관객 여론을 종합한 4분할 입체 비평 및 전용 대시보드가 준비되어 있습니다.";
+            const backdrop = card.getAttribute('data-backdrop');
+            
+            const featuredTitle = document.getElementById('featuredTitle');
+            const featuredDesc = document.getElementById('featuredDesc');
+            const featuredBg = document.getElementById('featuredBg');
+            
+            if (featuredTitle) featuredTitle.textContent = title.split(' (')[0]; // simple name
+            if (featuredDesc) featuredDesc.textContent = desc;
+            if (featuredBg && backdrop) {
+                featuredBg.style.backgroundImage = `url('${backdrop}')`;
+            }
+        }
+
+        // Initialize mobile elements
+        setupFeaturedMovie();
+        loadMyRatings();
+    </script>
+</body>
+</html>
