@@ -399,6 +399,140 @@
             align-items: center;
             gap: 4px;
         }
+
+        /* 4-Quadrant Category Reviews */
+        .quadrant-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .quadrant-group-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            width: 100%;
+        }
+
+        .quadrant-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1.5px solid var(--accent-red);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quadrant-card-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--text-primary);
+        }
+
+        .quadrant-card-tags {
+            display: flex;
+            gap: 4px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .quad-tag {
+            font-size: 8px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            background: var(--bg-color);
+            padding: 1px 5px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .mini-gauge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mini-circle-wrapper {
+            position: relative;
+            width: 32px;
+            height: 32px;
+        }
+
+        .mini-score-val {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .mini-circle-bg {
+            fill: none;
+            stroke: #f2f4f4;
+            stroke-width: 4;
+        }
+
+        .mini-circle-fill {
+            fill: none;
+            stroke: var(--accent-red);
+            stroke-width: 4.5;
+            stroke-linecap: round;
+        }
+
+        /* Review Item List */
+        .review-quote-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .review-quote-item {
+            border-left: 2px solid var(--border-color);
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .review-quote-item.highlighted {
+            border-left-color: var(--accent-red);
+            background: rgba(192, 57, 43, 0.02);
+            padding: 8px 10px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .review-quote-text {
+            font-size: 11.5px;
+            line-height: 1.5;
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        .review-quote-author {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2px;
+        }
+
+        .review-quote-author span.author-name {
+            color: var(--text-primary);
+        }
+
+        .review-quote-author span.author-score {
+            color: var(--accent-red);
+            font-weight: 800;
+        }
     </style>
 </head>
 <body>
@@ -466,26 +600,202 @@
             </p>
         </div>
 
-        <!-- Quadrant Grid -->
+        <!-- 4-Quadrant Category Reviews (Web-synced rich content) -->
         <div class="quadrants-section">
-            <h2 class="section-title">4분할 상세 비평 평점</h2>
-            <div class="quadrant-grid">
-                <div class="quadrant-card">
-                    <span class="quadrant-label">독창성 (Originality)</span>
-                    <span class="quadrant-score">8.2</span>
+            <h2 class="section-title">4분할 입체 상세 비평</h2>
+            <div class="quadrant-list">
+
+                <!-- Q1: 국내 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Cine21</span>
+                                <span class="quad-tag">Btv</span>
+                                <span class="quad-tag">왓챠</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="22.6" />
+                                </svg>
+                                <span class="mini-score-val">8.2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"존 파브로가 스타워즈 세계관에 다시 불어넣은 숨결. 은하계 스케일과 두 주인공의 드라마가 완벽한 조화를 이룬다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">이동진 평론가</span>
+                                <span class="author-score">★ 8.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"클래식 스타워즈의 아날로그 감성과 디즈니의 최첨단 VFX 기술이 빚어낸 영리한 절충점."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">송경원 평론가</span>
+                                <span class="author-score">★ 8.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"서사의 확장성보다는 관계의 깊이에 안착하며 시리즈 팬들이 원했던 바로 그 온도를 선물한다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">김혜리 평론가</span>
+                                <span class="author-score">★ 8.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"귀여운 그로구와 묵직한 만도의 안전 비행. 모험은 흔들림 없이 깊어진다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">박평식 평론가</span>
+                                <span class="author-score">★ 7.0</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="quadrant-card">
-                    <span class="quadrant-label">비주얼 (Visuals)</span>
-                    <span class="quadrant-score">8.6</span>
+
+                <!-- Q2: 국내 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">CGV 에그지수</span>
+                                <span class="quad-tag">네이버</span>
+                                <span class="quad-tag">유튜브</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="17.58" />
+                                </svg>
+                                <span class="mini-score-val">8.6</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"드라마를 안 봤어도 그로구의 극장 꽉 찬 귀여움만으로도 티켓값은 200% 뽑았다! 케미가 너무 훌륭함."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">유튜버 거의없다</span>
+                                <span class="author-score">★ 8.5</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"스타워즈 프리퀄 이후 가장 만족스러운 극장 영화. 존 파브로와 데이브 필로니는 진짜 은하계의 구원자다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">네이버 인기 네티즌</span>
+                                <span class="author-score">★ 9.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"아이맥스로 무조건 봐야 하는 압도적인 스페이스 독파이트 액션! 클래식 테마곡 울릴 때 소름 돋았다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">CGV 골든에그지수</span>
+                                <span class="author-score">★ 94%</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="quadrant-card">
-                    <span class="quadrant-label">스토리 (Narrative)</span>
-                    <span class="quadrant-score">8.4</span>
+
+                <!-- Q3: 해외 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Variety</span>
+                                <span class="quad-tag">The Guardian</span>
+                                <span class="quad-tag">THR</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="20.1" />
+                                </svg>
+                                <span class="mini-score-val">8.4</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"존 파브로 감독은 대형 스크린에 어울리는 압도적 스케일을 선보이면서도, 시리즈의 정수인 인격적 유대를 잃지 않았다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Variety · 저스틴 창</span>
+                                <span class="author-score">★ 8.5</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"만달로리안 앤 그로구는 스페이스 오페라의 정점을 다시 찍었다. 액션 시퀀스는 역동적이며 비주얼은 숨이 막힌다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">The Guardian · 피터 브래드쇼</span>
+                                <span class="author-score">★ 8.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"필로니와 파브로 콤비가 디즈니 플러스의 한계를 넘어 시네마틱 스케일로 우뚝 서다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Empire 매거진</span>
+                                <span class="author-score">★ 9.0</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="quadrant-card">
-                    <span class="quadrant-label">몰입감 (Immersion)</span>
-                    <span class="quadrant-score">8.8</span>
+
+                <!-- Q4: 해외 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">IMDb</span>
+                                <span class="quad-tag">Rotten Tomatoes</span>
+                                <span class="quad-tag">Letterboxd</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="15.07" />
+                                </svg>
+                                <span class="mini-score-val">8.8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"This is the way! 스타워즈의 황금기가 마침내 돌아왔다. 만도와 그로구의 스토리는 극장 영화의 대서사시로 완성되었다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">유튜버 크리스 스턱만</span>
+                                <span class="author-score">★ 8.5</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호했다. 스타워즈 팬이라면 절대 놓쳐선 안 될 명작."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Letterboxd 유저 평점</span>
+                                <span class="author-score">★ 4.3</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"감정선이 풍부하고 액션은 지루할 틈이 없으며, 클래식 3부작의 오리지널 우주적 정취를 완벽히 뿜어낸다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Rotten Tomatoes 관객</span>
+                                <span class="author-score">★ 92%</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
 

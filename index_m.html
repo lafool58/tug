@@ -433,18 +433,8 @@
         </div>
     </header>
 
-    <!-- Mobile Featured Section -->
-    <div class="featured-m-banner">
-        <div class="featured-bg" id="featuredBg"></div>
-        <div class="featured-content">
-            <span class="featured-tag">TUG Featured</span>
-            <h2 class="featured-title" id="featuredTitle">불러오는 중...</h2>
-            <p class="featured-desc" id="featuredDesc">영화 비평 대시보드를 불러오는 중입니다.</p>
-        </div>
-    </div>
-
-    <!-- Mobile Controls Panel -->
-    <div class="controls-m">
+    <!-- Mobile Controls Panel (Absolute Top below Header) -->
+    <div class="controls-m" style="margin-top: 15px;">
         <div class="search-m-wrapper">
             <span class="search-m-icon">🔍</span>
             <input type="text" class="search-m-input" id="searchInput" placeholder="영화 제목, 감독, 장르 검색...">
@@ -596,30 +586,7 @@
             });
         }
 
-        // Setup dynamic random featured movie banner on load
-        function setupFeaturedMovie() {
-            if (movieCards.length === 0) return;
-            
-            const randomIndex = Math.floor(Math.random() * movieCards.length);
-            const card = movieCards[randomIndex];
-            
-            const title = card.getAttribute('data-title');
-            const desc = card.getAttribute('data-desc') || "TUG 평론단과 일반 관객 여론을 종합한 4분할 입체 비평 및 전용 대시보드가 준비되어 있습니다.";
-            const backdrop = card.getAttribute('data-backdrop');
-            
-            const featuredTitle = document.getElementById('featuredTitle');
-            const featuredDesc = document.getElementById('featuredDesc');
-            const featuredBg = document.getElementById('featuredBg');
-            
-            if (featuredTitle) featuredTitle.textContent = title.split(' (')[0]; // simple name
-            if (featuredDesc) featuredDesc.textContent = desc;
-            if (featuredBg && backdrop) {
-                featuredBg.style.backgroundImage = `url('${backdrop}')`;
-            }
-        }
-
         // Initialize mobile elements
-        setupFeaturedMovie();
         loadMyRatings();
     </script>
 </body>
