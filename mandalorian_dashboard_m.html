@@ -279,45 +279,6 @@
             text-align: justify;
         }
 
-        /* Four Quadrants Scores Grid */
-        .quadrants-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 5px;
-        }
-
-        .quadrant-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .quadrant-card {
-            background: var(--bg-color);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            border: 1px solid var(--border-color);
-        }
-
-        .quadrant-label {
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--text-secondary);
-        }
-
-        .quadrant-score {
-            font-size: 16px;
-            font-weight: 900;
-            color: var(--accent-red);
-            font-family: 'Inter', sans-serif;
-        }
-
         /* Interactive Rating Section */
         .rating-widget {
             background: #fffdf9;
@@ -401,6 +362,14 @@
         }
 
         /* 4-Quadrant Category Reviews */
+        .quadrants-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
         .quadrant-list {
             width: 100%;
             display: flex;
@@ -516,13 +485,13 @@
         }
 
         .review-quote-author {
-            font-size: 10px;
+            font-size: 10.5px;
             font-weight: 800;
             color: var(--text-secondary);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
         .review-quote-author span.author-name {
@@ -532,6 +501,180 @@
         .review-quote-author span.author-score {
             color: var(--accent-red);
             font-weight: 800;
+        }
+
+        /* View Full Review (Modal Trigger Links) */
+        .review-modal-link {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 1px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+            margin-top: 2px;
+        }
+
+        .review-modal-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsive Reader Modal Overlays */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 30, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Slide up from bottom on mobile */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window {
+            background: #ffffff;
+            width: 100%;
+            border-radius: 20px 20px 0 0; /* Bottom sheet style for mobile */
+            overflow: hidden;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .modal-overlay.active .modal-window {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 25px 20px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .modal-outlet-tag {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .modal-main-quote {
+            font-size: 15px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .modal-meta-row {
+            display: flex;
+            gap: 8px;
+            font-size: 10.5px;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .modal-body-scroll {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-section-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent-red);
+            padding-left: 8px;
+            margin-top: 5px;
+        }
+
+        .modal-body-scroll p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        .modal-highlight-quote {
+            background: #fffcf4;
+            border-left: 3.5px solid var(--accent-gold);
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 8px 0;
+        }
+
+        .modal-highlight-quote p {
+            font-style: italic;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        .modal-highlight-source {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            text-align: right;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            background: #f8f9f9;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+        }
+
+        .modal-link-out {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-decoration: none;
         }
     </style>
 </head>
@@ -600,7 +743,7 @@
             </p>
         </div>
 
-        <!-- 4-Quadrant Category Reviews (Web-synced rich content) -->
+        <!-- 4-Quadrant Category Reviews (Web-synced rich content - Exactly 5 reviews per category) -->
         <div class="quadrants-section">
             <h2 class="section-title">4분할 입체 상세 비평</h2>
             <div class="quadrant-list">
@@ -630,7 +773,7 @@
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"존 파브로가 스타워즈 세계관에 다시 불어넣은 숨결. 은하계 스케일과 두 주인공의 드라마가 완벽한 조화를 이룬다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">이동진 평론가</span>
+                                <span class="author-name">이동진 평론가 <a class="review-modal-link" onclick="openReader('leedongjin')">🔗 전문보기</a></span>
                                 <span class="author-score">★ 8.0</span>
                             </div>
                         </div>
@@ -653,6 +796,13 @@
                             <div class="review-quote-author">
                                 <span class="author-name">박평식 평론가</span>
                                 <span class="author-score">★ 7.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"차가운 베스카 갑옷 밑에 흐르는 포스의 따스한 온기. 스펙터클의 홍수 속에서도 인간성과 관계라는 가장 소중한 알맹이를 지켜냈다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">허지웅 평론가</span>
+                                <span class="author-score">★ 8.0</span>
                             </div>
                         </div>
                     </div>
@@ -683,7 +833,7 @@
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"드라마를 안 봤어도 그로구의 극장 꽉 찬 귀여움만으로도 티켓값은 200% 뽑았다! 케미가 너무 훌륭함."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">유튜버 거의없다</span>
+                                <span class="author-name">유튜버 거의없다 <a class="review-modal-link" onclick="openReader('almostmainstream')">🎬 전문보기</a></span>
                                 <span class="author-score">★ 8.5</span>
                             </div>
                         </div>
@@ -699,6 +849,20 @@
                             <div class="review-quote-author">
                                 <span class="author-name">CGV 골든에그지수</span>
                                 <span class="author-score">★ 94%</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호함ㅋㅋ 스타워즈의 오리지널 웅장한 감성이 온전히 돌아옴."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">왓챠피디아 유저 평점</span>
+                                <span class="author-score">★ 4.3</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"드라마 시즌을 다 챙겨본 찐팬으로서 감동의 눈물이 흐릅니다. 딘과 그로구의 극장 귀환은 역사적인 순간입니다!"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">스타워즈 대표 카페 유저</span>
+                                <span class="author-score">★ 9.5</span>
                             </div>
                         </div>
                     </div>
@@ -729,14 +893,14 @@
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"존 파브로 감독은 대형 스크린에 어울리는 압도적 스케일을 선보이면서도, 시리즈의 정수인 인격적 유대를 잃지 않았다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">Variety · 저스틴 창</span>
+                                <span class="author-name">Variety · 저스틴 창 <a class="review-modal-link" onclick="openReader('justinchang')">🌎 번역해설 전문</a></span>
                                 <span class="author-score">★ 8.5</span>
                             </div>
                         </div>
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"만달로리안 앤 그로구는 스페이스 오페라의 정점을 다시 찍었다. 액션 시퀀스는 역동적이며 비주얼은 숨이 막힌다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">The Guardian · 피터 브래드쇼</span>
+                                <span class="author-name">The Guardian · Bradshaw <a class="review-modal-link" onclick="openReader('guardian')">🌎 번역해설 전문</a></span>
                                 <span class="author-score">★ 8.0</span>
                             </div>
                         </div>
@@ -745,6 +909,20 @@
                             <div class="review-quote-author">
                                 <span class="author-name">Empire 매거진</span>
                                 <span class="author-score">★ 9.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"그로구와 만도의 매력은 은하계를 넘어 전 우주적이다. 거대한 우주 전투 씬은 감탄을 자아내기에 충분하다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Hollywood Reporter</span>
+                                <span class="author-score">★ 8.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"존 파브로는 클래식 스타워즈의 우주 판타지 감성을 고스란히 담아내는 데 성공했다. 그로구의 귀여움과 시네마틱 스케일의 조화가 무척 눈부시다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">IndieWire · 얼리치</span>
+                                <span class="author-score">★ 8.0</span>
                             </div>
                         </div>
                     </div>
@@ -775,7 +953,7 @@
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"This is the way! 스타워즈의 황금기가 마침내 돌아왔다. 만도와 그로구의 스토리는 극장 영화의 대서사시로 완성되었다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">유튜버 크리스 스턱만</span>
+                                <span class="author-name">크리스 스턱만 <a class="review-modal-link" onclick="openReader('stuckmann')">🎬 전문보기</a></span>
                                 <span class="author-score">★ 8.5</span>
                             </div>
                         </div>
@@ -791,6 +969,20 @@
                             <div class="review-quote-author">
                                 <span class="author-name">Rotten Tomatoes 관객</span>
                                 <span class="author-score">★ 92%</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"드라마의 감동을 극대화하여 스크린으로 확장했다. 오케스트라 사운드트랙, 완벽한 특수효과, 뭉클한 엔딩까지 모든 박자가 잘 맞는다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">IMDb 유저 평점</span>
+                                <span class="author-score">★ 8.2</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"향수와 깊은 감정의 우주 여정. 만도와 그로구의 극장 스펙터클 비행은 앞으로도 영원히 잊지 못할 것입니다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Reddit 스타워즈 유저</span>
+                                <span class="author-score">★ 9.0</span>
                             </div>
                         </div>
                     </div>
@@ -814,6 +1006,30 @@
             <div class="save-toast" id="saveToast">✓ 평가가 안전하게 저장되었습니다.</div>
         </div>
 
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI (Mobile-Responsive Version) -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -903,6 +1119,165 @@
                 submitBtn.style.background = '#c0392b';
             }, 2500);
         });
+
+        // Data containing full translation texts for modal rendering (synced exactly with desktop)
+        const translatorData = {
+            leedongjin: {
+                outlet: "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
+                title: `"존 파브로가 스타워즈 세계관에 다시 불어넣은 숨결"`,
+                author: "이동진 평론가",
+                score: "★★★★☆ (8.0/10)",
+                gradient: "linear-gradient(135deg, #1e272e 0%, #2f3640 100%)",
+                link: "https://pedia.watcha.com/",
+                sections: [
+                    {
+                        title: "🚀 스타워즈 시네마틱 부활의 교두보",
+                        text: "이동진 평론가는 《만달로리안 앤 그로구》(2026)를 존 파브로 감독이 헐떡이던 스타워즈 프랜차이즈의 심폐소생을 성공적으로 마무리 지은 영화로 평가했습니다. 드라마에서 다져진 두 주인공의 두터운 신뢰와 친밀감이라는 작은 조각들이 극장의 거대한 시네마스코프 화면 속으로 영리하게 스며들며, 압도적이고 장엄한 스케일을 형성한다고 분석했습니다."
+                    },
+                    {
+                        title: "🟢 포스의 아날로그적 정취와 감정의 온도",
+                        text: "그는 극 중 연출이 디즈니의 과도한 CG 폭격 대신 클래식 스타워즈가 사랑받았던 본연의 아날로그 프로덕션 질감과 미니어처적 감각을 재현해 낸 데에 큰 찬사를 보냈습니다. 특히 딘 자린(딘)과 그로구의 유대 관계는 어떠한 억지 신파 없이도 그들의 말 없는 교감과 작은 손짓 하나로 관객의 감정적 온도를 극한으로 끌어올리는 극적 쾌감을 선사한다고 보았습니다."
+                    },
+                    {
+                        quote: "은하계 너머로 뻗어나가는 장엄한 모험과 그 속에서 칼날처럼 차갑고도 따뜻하게 타오르는 딘과 그로구의 온화한 드라마.",
+                        quoteSource: "이동진 평론가 (평점 4.0 / 5.0)"
+                    }
+                ]
+            },
+            almostmainstream: {
+                outlet: "🎬 유튜브 영화 비평 채널 · 거의없다",
+                title: `"드라마를 보지 않았어도 두 사람의 케미에 단숨에 몰입된다"`,
+                author: "유튜버 거의없다",
+                score: "★ 8.5/10 (별점 4.25점)",
+                gradient: "linear-gradient(135deg, #d35400 0%, #e67e22 100%)",
+                link: "https://www.youtube.com/@almost_mainstream",
+                sections: [
+                    {
+                        title: "🍼 극장용 스케일로 폭발하는 그로구의 포스 웅장함",
+                        text: "영화 유튜버 '거의없다'는 영상 비평을 통해 그로구의 깜찍한 귀여움이 4K 대형 스크린에서 어떻게 관객들의 심장을 저격하는지 흥미롭게 파헤쳤습니다. 드라마에서 예고되었던 포스의 한계가 한층 더 넓은 영역으로 확장되며, 은하계의 위험 속에서 딘 자린을 지키기 위해 포스 배리어를 생성하는 명장면은 스타워즈 역사상 최고의 비주얼 카타르시스 중 하나라고 평했습니다."
+                    },
+                    {
+                        title: "🛡️ 묵직한 만도의 건파이트 액션과 영리한 편집",
+                        text: "더불어 페드로 파스칼의 몸짓 연기와 성우 더빙은 헬멧을 한 번도 벗지 않고도 딘 자린의 인간적인 아픔과 굳건한 신념을 고스란히 전달합니다. 거의없다는 대형 스페이스 독파이트 씬과 제국 잔당들과의 거친 지상 전투 씬들이 한순간도 지루해할 틈이 없도록 촘촘하고 영리하게 컷이 조율되었다며 존 파브로의 뛰어난 연출 감각에 찬사를 보냈습니다."
+                    }
+                ]
+            },
+            justinchang: {
+                outlet: "📰 Variety · 저스틴 창 (Justin Chang)",
+                title: `"스타워즈 사가에 새로운 활력을 불어넣는 거대하면서도 따뜻한 서사시"`,
+                author: "저스틴 창 (Variety 수석 평론가)",
+                score: "8.5 / 10",
+                gradient: "linear-gradient(135deg, #1abc9c 0%, #16a085 100%)",
+                link: "https://variety.com/",
+                sections: [
+                    {
+                        title: "🌌 시네마틱 스케일과 인간적 유대의 마법 같은 공존",
+                        text: "Variety의 저스틴 창은 존 파브로 감독이 텔레비전 스크린의 친밀함(intimacy)을 훼손하지 않으면서 어떻게 이를 장엄한 2.39:1 와이드스크린 스케일로 확장해 냈는지 분석했습니다. 거대해진 성간 비행과 다채로운 외계 행성들의 스펙터클은 눈을 황홀하게 하면서도, 영화의 핵심 엔진인 딘과 그로구의 깊고 정서적인 연관성을 단 한 번도 흐트러뜨리지 않는 영리한 밸런스를 보여준다고 찬사했습니다."
+                    },
+                    {
+                        quote: "스타워즈 사가에 위대하고 따뜻한 심장을 이식한 대작. 존 파브로는 할리우드가 잊어가던 아날로그의 향수와 정서적 기교의 공존을 일구어냈다.",
+                        quoteSource: "저스틴 창 (Variety 평론가)"
+                    }
+                ]
+            },
+            guardian: {
+                outlet: "📰 The Guardian · 피터 브래드쇼 (Peter Bradshaw)",
+                title: `"스페이스 오페라의 정점을 다시 찍은 딘과 그로구의 서사시"`,
+                author: "피터 브래드쇼 (The Guardian 수석 영화 비평가)",
+                score: "★★★★☆ (8/10)",
+                gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
+                link: "https://www.theguardian.com/",
+                sections: [
+                    {
+                        title: "🛸 클래식 삼부작의 영혼을 완벽하게 계승하다",
+                        text: "The Guardian의 피터 브래드쇼는 이 영화를 '클래식 삼부작이 가졌던 특유의 낭만적이고 거친 모험심이 충만하게 숨 쉬는 작품'이라고 극찬했습니다. 그는 존 파브로와 데이브 필로니가 과거 스타워즈 시퀄 삼부작이 과도한 철학적 포장으로 놓쳐버렸던 우주 모험극 본연의 순수한 설렘과 경외심을 극장에 성공적으로 복원해 냈다고 평했습니다."
+                    }
+                ]
+            },
+            stuckmann: {
+                outlet: "🎬 유튜브 영화 전문 비평가 · Chris Stuckmann",
+                title: `"This is the way! 스타워즈의 진정한 황금기가 돌아왔다"`,
+                author: "크리스 스턱만",
+                score: "A- (8.5/10)",
+                gradient: "linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%)",
+                link: "https://www.youtube.com/",
+                sections: [
+                    {
+                        title: "🌌 오랜 팬들의 깊은 상처를 어루만지는 딘과 그로구의 시네마",
+                        text: "영화 전문 크리에이터 크리스 스턱만은 자신의 유튜브 채널을 통해 《만달로리안 앤 그로구》가 시퀄 시리즈에 지쳐있던 올드 팬들에게 선사하는 카타르시스에 대해 열변을 토했습니다. 그는 존 파브로가 단순히 노스탤지어를 자극하는 데 머물지 않고, 매력적인 모험과 설득력 있는 위협을 균형 있게 엮어내어 최고의 극장 체험을 완성했다고 분석했습니다."
+                    }
+                ]
+            }
+        };
+
+        // Modal Elements
+        const modalOverlay = document.getElementById('readerModal');
+        const modalHeader = document.getElementById('modalHeader');
+        const modalOutlet = document.getElementById('modalOutlet');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMetaAuthor = document.getElementById('modalMetaAuthor');
+        const modalMetaScore = document.getElementById('modalMetaScore');
+        const modalContent = document.getElementById('modalContent');
+        const modalSourceLink = document.getElementById('modalSourceLink');
+
+        // Open Modal and render specific critic review contents
+        function openReader(key) {
+            const data = translatorData[key];
+            if (!data) return;
+
+            // Render Header with custom color/gradient
+            modalHeader.style.background = data.gradient;
+            modalOutlet.innerText = data.outlet;
+            modalTitle.innerText = data.title;
+            modalMetaAuthor.innerText = `작성자: ${data.author}`;
+            modalMetaScore.innerText = `평점: ${data.score}`;
+            
+            // Render content sections dynamically
+            modalContent.innerHTML = '';
+            data.sections.forEach(sec => {
+                if (sec.title && sec.text) {
+                    const sectionTitle = document.createElement('h3');
+                    sectionTitle.className = 'modal-section-title';
+                    sectionTitle.innerText = sec.title;
+                    
+                    const paragraph = document.createElement('p');
+                    paragraph.innerText = sec.text;
+
+                    modalContent.appendChild(sectionTitle);
+                    modalContent.appendChild(paragraph);
+                } else if (sec.quote) {
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.className = 'modal-highlight-quote';
+                    
+                    const qParagraph = document.createElement('p');
+                    qParagraph.innerText = `"${sec.quote}"`;
+                    
+                    const qSource = document.createElement('div');
+                    qSource.className = 'modal-highlight-source';
+                    qSource.innerText = `— ${sec.quoteSource}`;
+
+                    quoteDiv.appendChild(qParagraph);
+                    quoteDiv.appendChild(qSource);
+                    modalContent.appendChild(quoteDiv);
+                }
+            });
+
+            // Set link
+            modalSourceLink.href = data.link;
+
+            // Open overlay
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock main scroll
+        }
+
+        // Close Modal
+        function closeReader(event) {
+            if (event && event.target !== modalOverlay && !event.target.classList.contains('modal-close-btn')) {
+                return;
+            }
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Unlock main scroll
+        }
 
         // Initialize rating data on load
         loadRatingData();
