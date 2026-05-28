@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 만달로리안 앤 그로구 모바일 대시보드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        // Redirect to Desktop version if not accessed from a mobile device
+        if (!/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("mandalorian_dashboard.html");
+        }
+    </script>
+    <style>
+        :root {
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --accent-blue: #2980b9;
+            --accent-red: #c0392b;
+            --accent-gold: #f39c12;
+            --text-primary: #1a252f;
+            --text-secondary: #7f8c8d;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        /* Top Header Area (Compact Mobile Style) */
+        header {
+            width: 100%;
+            background: var(--card-bg);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow-light);
+            border-top: 3px solid var(--accent-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-grow: 1;
+        }
+
+        .brand-logo {
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-logo span {
+            color: var(--accent-red);
+        }
+
+        .brand-tagline {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 1px 6px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Container Card (Matches Mockup exactly) */
+        .dashboard-card {
+            background: var(--card-bg);
+            margin: 15px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Movie Poster inside card */
+        .poster-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+            aspect-ratio: 2 / 2.85;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        .poster-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Floating Badges on Poster */
+        .poster-badges {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* Top-right overlay matching light mockup */
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 5;
+        }
+
+        .poster-badge-special {
+            font-size: 8px;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .special-imax {
+            color: #2980b9;
+            background: rgba(41, 128, 185, 0.08);
+            border-color: rgba(41, 128, 185, 0.25);
+        }
+
+        .special-dolby {
+            color: #1a252f;
+            background: rgba(26, 37, 47, 0.05);
+            border-color: rgba(26, 37, 47, 0.15);
+        }
+
+        .special-4dx {
+            color: #000000;
+            background: rgba(0, 0, 0, 0.06);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Title Area */
+        .title-section {
+            text-align: center;
+            width: 100%;
+        }
+
+        .movie-title {
+            font-size: 19px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .movie-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Unified circular score gauge */
+        .score-gauge-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .gauge-svg-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .gauge-text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gauge-score {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gauge-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .gauge-sublabel {
+            font-size: 9px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Detailed credits */
+        .credits-section {
+            width: 100%;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .credits-item {
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .credits-item span {
+            font-weight: 800;
+            color: var(--accent-red);
+        }
+
+        /* Synopsis */
+        .synopsis-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent-red);
+            padding-left: 8px;
+        }
+
+        .synopsis-text {
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #4a5568;
+            text-align: justify;
+        }
+
+        /* Four Quadrants Scores Grid */
+        .quadrants-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .quadrant-card {
+            background: var(--bg-color);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .quadrant-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-secondary);
+        }
+
+        .quadrant-score {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--accent-red);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Interactive Rating Section */
+        .rating-widget {
+            background: #fffdf9;
+            border: 1px dashed rgba(243, 156, 18, 0.3);
+            border-radius: 16px;
+            width: 100%;
+            padding: 18px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .widget-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--accent-gold);
+            letter-spacing: 0.3px;
+        }
+
+        .stars-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .star-icon {
+            font-size: 26px;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.1s, color 0.1s;
+        }
+
+        .star-icon.active {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .comment-input {
+            width: 100%;
+            height: 60px;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            resize: none;
+            outline: none;
+            color: var(--text-primary);
+        }
+
+        .comment-input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .rate-submit-btn {
+            width: 100%;
+            background: var(--accent-red);
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.15);
+        }
+
+        .rate-submit-btn:active {
+            transform: scale(0.98);
+            background: #a93226;
+        }
+
+        .save-toast {
+            font-size: 11px;
+            font-weight: 700;
+            color: #27ae60;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <button class="back-btn" onclick="location.href='index_m.html'">‹</button>
+        <div class="brand-section">
+            <div class="brand-logo">TUG <span>CineMag</span></div>
+            <div class="brand-tagline">TUG</div>
+        </div>
+    </header>
+
+    <!-- Main Mobile Dashboard Container Card -->
+    <div class="dashboard-card">
+        
+        <!-- Movie Poster -->
+        <div class="poster-wrapper">
+            <img class="poster-image" src="https://static.wikia.nocookie.net/starwars/images/f/f2/TheMandalorianAndGrogu-TheatricalPoster.jpg/revision/latest?cb=20260528061949" alt="만달로리안 앤 그로구 포스터">
+            <div class="poster-badges">
+                <div class="poster-badge-special special-imax">IMAX</div>
+                <div class="poster-badge-special special-dolby">Dolby Cinema</div>
+                <div class="poster-badge-special special-4dx">4DX</div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="title-section">
+            <h1 class="movie-title">만달로리안 앤 그로구 (2026)</h1>
+            <p class="movie-meta">액션, 모험, SF • 미국 • 12세 관람가 • 142분</p>
+        </div>
+
+        <!-- Circular Score Gauge -->
+        <div class="score-gauge-container">
+            <div class="gauge-svg-wrapper">
+                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width: 100%; height: 100%;">
+                    <!-- Background Circle -->
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#f2f4f4" stroke-width="4"></circle>
+                    <!-- TUG Crimson Arc -->
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
+                            stroke-dasharray="125.6" stroke-dashoffset="18.84" stroke-linecap="round"></circle>
+                </svg>
+                <div class="gauge-text">
+                    <span class="gauge-score">8.5</span>
+                </div>
+            </div>
+            <span class="gauge-label">TUG Unified Score</span>
+            <span class="gauge-sublabel">통합 평점</span>
+        </div>
+
+        <!-- Credits -->
+        <div class="credits-section">
+            <div class="credits-item">감독: <span>존 파브로</span></div>
+            <div class="credits-item">주연: <span>페드로 파스칼</span></div>
+            <div class="credits-item" style="font-weight: 500; color: var(--text-secondary); font-size: 12px; margin-top: 6px;">
+                개봉일: 2026.05.27 (국내) / 2026.05.22 (북미)
+            </div>
+        </div>
+
+        <!-- Synopsis -->
+        <div class="synopsis-section">
+            <h2 class="section-title">시놉시스</h2>
+            <p class="synopsis-text">
+                새로운 시대를 여는 만달로리안 현상금 사냥꾼 딘 자린과 그의 사랑스러운 파운들링 그로구가 은하계를 횡단하며 제국의 잔당에 맞서 싸우는 장대하고 웅장한 SF 스페이스 오페라 대서사시.
+            </p>
+        </div>
+
+        <!-- Quadrant Grid -->
+        <div class="quadrants-section">
+            <h2 class="section-title">4분할 상세 비평 평점</h2>
+            <div class="quadrant-grid">
+                <div class="quadrant-card">
+                    <span class="quadrant-label">독창성 (Originality)</span>
+                    <span class="quadrant-score">8.2</span>
+                </div>
+                <div class="quadrant-card">
+                    <span class="quadrant-label">비주얼 (Visuals)</span>
+                    <span class="quadrant-score">8.6</span>
+                </div>
+                <div class="quadrant-card">
+                    <span class="quadrant-label">스토리 (Narrative)</span>
+                    <span class="quadrant-score">8.4</span>
+                </div>
+                <div class="quadrant-card">
+                    <span class="quadrant-label">몰입감 (Immersion)</span>
+                    <span class="quadrant-score">8.8</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Rating Widget -->
+        <div class="rating-widget">
+            <span class="widget-title">✍️ 보스의 감상평 (My Rating)</span>
+            <div class="stars-container" id="starsContainer">
+                <span class="star-icon" data-value="1">★</span>
+                <span class="star-icon" data-value="2">★</span>
+                <span class="star-icon" data-value="3">★</span>
+                <span class="star-icon" data-value="4">★</span>
+                <span class="star-icon" data-value="5">★</span>
+            </div>
+            <textarea class="comment-input" id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..."></textarea>
+            <button class="rate-submit-btn" id="submitBtn">평가 저장하기</button>
+            <div class="save-toast" id="saveToast">✓ 평가가 안전하게 저장되었습니다.</div>
+        </div>
+
+    </div>
+
+    <script>
+        const movieKey = 'mandalorian';
+        const stars = Array.from(document.querySelectorAll('.star-icon'));
+        const commentInput = document.getElementById('commentInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const saveToast = document.getElementById('saveToast');
+        
+        let selectedRating = 0;
+
+        // Interactive Stars logic
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = parseInt(star.getAttribute('data-value'));
+                selectedRating = value;
+                updateStars(value);
+            });
+
+            star.addEventListener('mouseover', () => {
+                const value = parseInt(star.getAttribute('data-value'));
+                highlightStars(value);
+            });
+        });
+
+        document.getElementById('starsContainer').addEventListener('mouseleave', () => {
+            updateStars(selectedRating);
+        });
+
+        function highlightStars(value) {
+            stars.forEach(star => {
+                const starVal = parseInt(star.getAttribute('data-value'));
+                if (starVal <= value) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function updateStars(value) {
+            stars.forEach(star => {
+                const starVal = parseInt(star.getAttribute('data-value'));
+                if (starVal <= value) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Load saved data from LocalStorage
+        function loadRatingData() {
+            const savedData = localStorage.getItem('tug_rating_' + movieKey);
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    if (data) {
+                        selectedRating = data.score || 0;
+                        commentInput.value = data.comment || '';
+                        updateStars(selectedRating);
+                    }
+                } catch (e) {
+                    console.error('Error loading rating data', e);
+                }
+            }
+        }
+
+        // Save rating data to LocalStorage
+        submitBtn.addEventListener('click', () => {
+            const dataToSave = {
+                score: selectedRating,
+                comment: commentInput.value.trim(),
+                timestamp: new Date().toISOString()
+            };
+
+            localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(dataToSave));
+            
+            // Show toast message
+            saveToast.style.display = 'inline-flex';
+            submitBtn.textContent = '저장 완료!';
+            submitBtn.style.background = '#27ae60';
+            
+            setTimeout(() => {
+                saveToast.style.display = 'none';
+                submitBtn.textContent = '평가 저장하기';
+                submitBtn.style.background = '#c0392b';
+            }, 2500);
+        });
+
+        // Initialize rating data on load
+        loadRatingData();
+    </script>
+</body>
+</html>
