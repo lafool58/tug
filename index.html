@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | Trafford United Group 영화 웹진</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --accent-blue: #2980b9;
+            --accent-red: #c0392b;
+            --accent-gold: #f39c12;
+            --text-primary: #1a252f;
+            --text-secondary: #7f8c8d;
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 60px;
+        }
+
+        /* Top Header Area */
+        header {
+            width: 90%;
+            max-width: 1200px;
+            margin: 25px 0 15px 0;
+            padding: 15px 25px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-light);
+            border-top: 4px solid var(--accent-red);
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-tagline {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 2px 8px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        .nav-lounge-btn {
+            background: var(--bg-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Movie Cinematic Featured Banner */
+        .featured-container {
+            width: 90%;
+            max-width: 1200px;
+            height: 380px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background: #000;
+        }
+
+        .featured-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('media/yellow_sea_still.png');
+            background-size: cover;
+            background-position: center 25%;
+            filter: brightness(0.6);
+            transition: transform 0.5s ease;
+        }
+
+        .featured-container:hover .featured-bg {
+            transform: scale(1.02);
+        }
+
+        .featured-gradient {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.4) 70%, transparent 100%);
+            z-index: 1;
+        }
+
+        .featured-content {
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 50%;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .featured-tag {
+            font-size: 11px;
+            font-weight: 800;
+            background: var(--accent-gold);
+            color: #000;
+            padding: 3px 12px;
+            border-radius: 100px;
+            align-self: flex-start;
+            text-transform: uppercase;
+        }
+
+        .featured-title {
+            font-size: 40px;
+            font-weight: 900;
+            font-family: 'Playfair Display', 'Noto Sans KR', serif;
+            line-height: 1.2;
+        }
+
+        .featured-meta {
+            font-size: 13px;
+            color: #d5dbdb;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .featured-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .featured-desc {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #bdc3c7;
+        }
+
+        .featured-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Filters & Search Control Panel */
+        .controls-panel {
+            width: 90%;
+            max-width: 1200px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .search-wrapper {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 42px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-red);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+        }
+
+        .sort-select {
+            padding: 0 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .sort-select:focus {
+            border-color: var(--accent-red);
+        }
+
+        /* Filter Tab Buttons */
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .filter-chip {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .filter-chip:hover {
+            color: var(--text-primary);
+            border-color: var(--text-secondary);
+        }
+
+        .filter-chip.active {
+            background: var(--accent-red);
+            color: #ffffff;
+            border-color: var(--accent-red);
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.2);
+        }
+
+        /* Magazine Grid Layout */
+        .magazine-grid {
+            width: 90%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* Movie Grid Card */
+        .movie-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+            background: #eaeded;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Gradient backup poster styling if no real image */
+        .card-image-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 50px;
+            font-weight: 800;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .movie-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .card-genre-row {
+            display: flex;
+            gap: 5px;
+        }
+
+        .card-genre {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--accent-blue);
+            background: #ebf5fb;
+            padding: 2px 8px;
+            border-radius: 100px;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-primary);
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.3;
+        }
+
+        .card-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .card-rating-row {
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-stars {
+            color: var(--accent-gold);
+            font-size: 12px;
+        }
+
+        .card-score {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-score-accent {
+            color: var(--accent-red);
+        }
+
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            display: none;
+        }
+
+        .empty-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .empty-text {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Area -->
+    <header>
+        <div class="brand-section">
+            <div class="brand-logo">TUG CineMag</div>
+            <div class="brand-tagline">Trafford United Group</div>
+        </div>
+        <div class="nav-links">
+            <a href="../../brain/70f983be-b494-42f4-9274-b5254705b774/organization_chart.html" class="nav-lounge-btn">🏢 전사 통합 조직도</a>
+            <a href="lounge/사내_휴게실_게시판.md" class="nav-lounge-btn">☕️ 휴게실</a>
+            <a href="lounge/업무_요청_대장.md" class="nav-lounge-btn">📝 요청대장</a>
+            <a href="lounge/산출물_대장.md" class="nav-lounge-btn">🎨 산출물대장</a>
+        </div>
+    </header>
+
+    <!-- Movie Cinematic Featured Banner (Yellow Sea) -->
+    <div class="featured-container">
+        <div class="featured-bg"></div>
+        <div class="featured-gradient"></div>
+        <div class="featured-content">
+            <span class="featured-tag">TUG Featured Movie</span>
+            <h1 class="featured-title">황해 (THE YELLOW SEA, 2010)</h1>
+            <div class="featured-meta">
+                <span>나홍진 감독</span>
+                <span>•</span>
+                <span>156분</span>
+                <span>•</span>
+                <span>청소년 관람불가</span>
+                <span class="featured-rating">★ 8.0/10 (별점 4.0점)</span>
+            </div>
+            <p class="featured-desc">
+                지독한 빚더미에서 벗어나기 위해 황해를 건너온 택시 기사 구남. 
+                살인 의뢰를 둘러싼 처절한 배신과 숨 막히는 추격, 그리고 월가의 엘리트 평론단과 보스가 전격 분석한 4분할 입체 비평을 TUG 최초로 독점 공개합니다.
+            </p>
+            <div class="featured-actions">
+                <a href="yellowsea_dashboard.html" class="btn btn-primary">📖 대시보드 비평 읽기</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search & Filter Controls Panel -->
+    <div class="controls-panel">
+        <div class="search-row">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="영화 제목, 감독, 장르를 검색하세요...">
+            </div>
+            <select id="sortSelect" class="sort-select">
+                <option value="score-desc">평점 높은 순</option>
+                <option value="score-asc">평점 낮은 순</option>
+                <option value="year-desc">최신 개봉 순</option>
+            </select>
+        </div>
+        <div class="filter-row">
+            <button class="filter-chip active" onclick="filterGenre('ALL')">전체 장르</button>
+            <button class="filter-chip" onclick="filterGenre('스릴러')">스릴러 / 액션</button>
+            <button class="filter-chip" onclick="filterGenre('오컬트')">오컬트 / 미스터리</button>
+            <button class="filter-chip" onclick="filterGenre('SF')">SF / 우주과학</button>
+            <button class="filter-chip" onclick="filterGenre('히어로')">히어로 / 판타지</button>
+        </div>
+    </div>
+
+    <!-- Movie Magazine Grid -->
+    <div class="magazine-grid" id="movieGrid">
+        
+        <!-- Card 1: 황해 -->
+        <div class="movie-card" data-title="황해 (THE YELLOW SEA)" data-director="나홍진" data-genre="스릴러" data-score="8.0" data-year="2010" onclick="location.href='yellowsea_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/yellow_sea_poster.png" alt="황해">
+            </div>
+            <div class="card-info">
+                <div class="card-genre-row">
+                    <span class="card-genre">Thriller</span>
+                    <span class="card-genre">Action</span>
+                </div>
+                <h3 class="card-title">황해 (2010)</h3>
+                <p class="card-meta">나홍진 감독 • 156분</p>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">8.0</span>/10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: 곡성 -->
+        <div class="movie-card" data-title="곡성 (THE WAILING)" data-director="나홍진" data-genre="오컬트" data-score="8.2" data-year="2016" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/wailing_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/wailing_poster.png" alt="곡성">
+            </div>
+            <div class="card-info">
+                <div class="card-genre-row">
+                    <span class="card-genre">Mystery</span>
+                    <span class="card-genre">Horror</span>
+                </div>
+                <h3 class="card-title">곡성 (2016)</h3>
+                <p class="card-meta">나홍진 감독 • 156분</p>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">8.2</span>/10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: 프로젝트 헤일메리 -->
+        <div class="movie-card" data-title="프로젝트 헤일메리 (PROJECT HAIL MARY)" data-director="드류 고다드" data-genre="SF" data-score="8.5" data-year="2026" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/hailmary_dashboard.html'">
+            <div class="card-image-wrapper">
+                <div class="card-image-fallback" style="background: linear-gradient(135deg, #1f1c2c, #928dab);">
+                    🚀<div style="font-size: 14px; font-weight: 500; margin-top: 10px;">PROJECT HAIL MARY</div>
+                </div>
+            </div>
+            <div class="card-info">
+                <div class="card-genre-row">
+                    <span class="card-genre">Sci-Fi</span>
+                    <span class="card-genre">Space</span>
+                </div>
+                <h3 class="card-title">프로젝트 헤일메리 (2026)</h3>
+                <p class="card-meta">드류 고다드 감독 • 개봉 예정작</p>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">8.5</span>/10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: 슈퍼맨 -->
+        <div class="movie-card" data-title="슈퍼맨 (SUPERMAN)" data-director="제임스 건" data-genre="히어로" data-score="7.8" data-year="2025" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/superman_dashboard.html'">
+            <div class="card-image-wrapper">
+                <div class="card-image-fallback" style="background: linear-gradient(135deg, #c0392b, #2980b9);">
+                    🦸‍♂️<div style="font-size: 14px; font-weight: 500; margin-top: 10px;">SUPERMAN</div>
+                </div>
+            </div>
+            <div class="card-info">
+                <div class="card-genre-row">
+                    <span class="card-genre">Action</span>
+                    <span class="card-genre">Hero</span>
+                </div>
+                <h3 class="card-title">슈퍼맨 (2025)</h3>
+                <p class="card-meta">제임스 건 감독 • 러닝타임 미정</p>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">7.8</span>/10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5: 만달로리안 앤 그로구 -->
+        <div class="movie-card" data-title="만달로리안 앤 그로구 (THE MANDALORIAN & GROGU)" data-director="존 파브로" data-genre="SF" data-score="8.0" data-year="2026" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/mandalorian_dashboard.html'">
+            <div class="card-image-wrapper">
+                <div class="card-image-fallback" style="background: linear-gradient(135deg, #2c3e50, #bdc3c7);">
+                    🪐<div style="font-size: 14px; font-weight: 500; margin-top: 10px;">THE MANDALORIAN</div>
+                </div>
+            </div>
+            <div class="card-info">
+                <div class="card-genre-row">
+                    <span class="card-genre">Space</span>
+                    <span class="card-genre">Fantasy</span>
+                </div>
+                <h3 class="card-title">만달로리안 앤 그로구 (2026)</h3>
+                <p class="card-meta">존 파브로 감독 • 제작 진행작</p>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">8.0</span>/10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6: 지구 최후의 아이들 -->
+        <div class="movie-card" data-title="지구 최후의 아이들 (COLONY)" data-director="코디 캐머런" data-genre="SF" data-score="7.5" data-year="2021" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/colony_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/colony_poster.png" alt="지구 최후의 아이들">
+            </div>
+            <div class="card-info">
+                <div class="card-genre-row">
+                    <span class="card-genre">Sci-Fi</span>
+                    <span class="card-genre">Adventure</span>
+                </div>
+                <h3 class="card-title">지구 최후의 아이들 (2021)</h3>
+                <p class="card-meta">코디 캐머런 감독 • 96분</p>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★☆☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">7.5</span>/10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State Screen -->
+        <div class="empty-state" id="emptyState">
+            <div class="empty-icon">🎬</div>
+            <div class="empty-text">검색 결과에 맞는 영화 비평 카드가 존재하지 않습니다.</div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentGenre = 'ALL';
+
+        // Search and Filter Functions
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        const movieGrid = document.getElementById('movieGrid');
+        const movieCards = Array.from(document.getElementsByClassName('movie-card'));
+        const emptyState = document.getElementById('emptyState');
+
+        function filterGenre(genre) {
+            currentGenre = genre;
+            
+            // Toggle active chip style
+            const chips = document.querySelectorAll('.filter-chip');
+            chips.forEach(chip => {
+                if (chip.innerText.includes(genre) || (genre === 'ALL' && chip.innerText === '전체 장르')) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+
+            applyFilterAndSort();
+        }
+
+        function applyFilterAndSort() {
+            const query = searchInput.value.toLowerCase().trim();
+            const sortBy = sortSelect.value;
+            let visibleCount = 0;
+
+            movieCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const director = card.getAttribute('data-director').toLowerCase();
+                const genre = card.getAttribute('data-genre');
+                
+                const matchesQuery = title.includes(query) || director.includes(query) || genre.toLowerCase().includes(query);
+                const matchesGenre = (currentGenre === 'ALL') || (genre === currentGenre);
+
+                if (matchesQuery && matchesGenre) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show empty state if no movies match
+            if (visibleCount === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+
+            // Perform Sorting
+            const sortedCards = movieCards.filter(card => card.style.display !== 'none').sort((a, b) => {
+                if (sortBy === 'score-desc') {
+                    return parseFloat(b.getAttribute('data-score')) - parseFloat(a.getAttribute('data-score'));
+                } else if (sortBy === 'score-asc') {
+                    return parseFloat(a.getAttribute('data-score')) - parseFloat(b.getAttribute('data-score'));
+                } else if (sortBy === 'year-desc') {
+                    return parseInt(b.getAttribute('data-year')) - parseInt(a.getAttribute('data-year'));
+                }
+                return 0;
+            });
+
+            // Re-append sorted elements in DOM
+            sortedCards.forEach(card => {
+                movieGrid.appendChild(card);
+            });
+            
+            // Ensure emptyState stays at the end
+            movieGrid.appendChild(emptyState);
+        }
+
+        // Event listeners for inputs
+        searchInput.addEventListener('input', applyFilterAndSort);
+        sortSelect.addEventListener('change', applyFilterAndSort);
+
+        // Session scroll restoration setup
+        window.addEventListener('load', () => {
+            const savedScroll = sessionStorage.getItem('tug_cinemag_scroll');
+            if (savedScroll) {
+                window.scrollTo(0, parseInt(savedScroll));
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            sessionStorage.setItem('tug_cinemag_scroll', window.scrollY);
+        });
+
+        // Initialize sorting
+        applyFilterAndSort();
+    </script>
+</body>
+</html>
