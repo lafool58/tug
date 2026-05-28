@@ -120,15 +120,20 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-image: url('media/yellow_sea_still.png');
-            background-size: cover;
-            background-position: center 25%;
-            filter: brightness(0.6);
+            background: linear-gradient(135deg, #0c0f12 0%, #1a0808 50%, #251210 100%);
+            background-size: 200% 200%;
+            animation: ambientGlow 12s ease infinite;
             transition: transform 0.5s ease;
         }
 
+        @keyframes ambientGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .featured-container:hover .featured-bg {
-            transform: scale(1.02);
+            transform: scale(1.01);
         }
 
         .featured-gradient {
@@ -344,7 +349,7 @@
             width: 90%;
             max-width: 1200px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
@@ -369,18 +374,18 @@
         }
 
         .card-image-wrapper {
-            width: 100%;
-            height: 240px;
-            overflow: hidden;
             position: relative;
-            background: #eaeded;
+            width: 100%;
+            aspect-ratio: 2 / 2.85; /* Standard poster ratio */
+            overflow: hidden;
         }
 
         .card-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            object-position: center top;
+            transition: transform 0.6s ease;
         }
 
         /* Gradient backup poster styling if no real image */
@@ -423,6 +428,44 @@
             padding: 2px 8px;
             border-radius: 100px;
             text-transform: uppercase;
+        }
+
+        .card-badges {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            gap: 6px;
+            z-index: 5;
+        }
+
+        .card-badge-special {
+            font-size: 9px;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: inline-flex;
+            align-items: center;
+        }
+        .special-imax {
+            color: #ffffff;
+            background: rgba(0, 123, 255, 0.85);
+            border-color: rgba(0, 123, 255, 0.9);
+        }
+        .special-dolby {
+            color: #ffffff;
+            background: rgba(155, 89, 182, 0.85);
+            border-color: rgba(155, 89, 182, 0.9);
+        }
+        .special-4dx {
+            color: #ffffff;
+            background: rgba(230, 126, 34, 0.85);
+            border-color: rgba(230, 126, 34, 0.9);
         }
 
         .card-title {
@@ -487,6 +530,48 @@
             font-weight: 700;
             color: var(--text-secondary);
         }
+
+        /* Elegant inline My Rating Tag inside card info */
+        .my-rating-row {
+            display: flex;
+            align-items: center;
+            margin-top: 4px;
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .my-rating-tag {
+            background: #fde8e7; /* Trafford light red cream */
+            color: var(--accent-red); /* High-contrast Trafford brand red */
+            font-size: 11.5px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(192, 57, 43, 0.15);
+            letter-spacing: 0.2px;
+        }
+
+        .my-alarm-tag {
+            background: #e8f8f5; /* Soft emerald green cream */
+            color: #117a65;      /* High-contrast emerald green */
+            font-size: 11.5px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(17, 122, 101, 0.15);
+            letter-spacing: 0.2px;
+            margin-left: 6px;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(5px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -497,35 +582,28 @@
             <div class="brand-logo">TUG CineMag</div>
             <div class="brand-tagline">Trafford United Group</div>
         </div>
-        <div class="nav-links">
-            <a href="../../brain/70f983be-b494-42f4-9274-b5254705b774/organization_chart.html" class="nav-lounge-btn">🏢 전사 통합 조직도</a>
-            <a href="lounge/사내_휴게실_게시판.md" class="nav-lounge-btn">☕️ 휴게실</a>
-            <a href="lounge/업무_요청_대장.md" class="nav-lounge-btn">📝 요청대장</a>
-            <a href="lounge/산출물_대장.md" class="nav-lounge-btn">🎨 산출물대장</a>
-        </div>
     </header>
 
-    <!-- Movie Cinematic Featured Banner (Yellow Sea) -->
+    <!-- Movie Cinematic Featured Banner (Welcoming Brand Introduction) -->
     <div class="featured-container">
         <div class="featured-bg"></div>
         <div class="featured-gradient"></div>
         <div class="featured-content">
-            <span class="featured-tag">TUG Featured Movie</span>
-            <h1 class="featured-title">황해 (THE YELLOW SEA, 2010)</h1>
+            <span class="featured-tag">TUG CineMag Special Lounge</span>
+            <h1 class="featured-title">나만의 맞춤형 시네마틱 비평 매거진</h1>
             <div class="featured-meta">
-                <span>나홍진 감독</span>
+                <span>Trafford United Group</span>
                 <span>•</span>
-                <span>156분</span>
+                <span>실시간 별점 연동</span>
                 <span>•</span>
-                <span>청소년 관람불가</span>
-                <span class="featured-rating">★ 8.0/10 (별점 4.0점)</span>
+                <span>개봉 알림 스케줄러</span>
             </div>
             <p class="featured-desc">
-                지독한 빚더미에서 벗어나기 위해 황해를 건너온 택시 기사 구남. 
-                살인 의뢰를 둘러싼 처절한 배신과 숨 막히는 추격, 그리고 월가의 엘리트 평론단과 보스가 전격 분석한 4분할 입체 비평을 TUG 최초로 독점 공개합니다.
+                국내외 권위 있는 매체의 평론가 평판과 소셜 관객들의 생생한 여론을 4분할 입체 구조로 정밀 분석하여 보고해 드립니다. 
+                감상하신 영화에 본인만의 별점을 남겨 저장하고, 개봉을 손꼽아 기다리는 기대작들의 캘린더 알람 예약 현황도 메인 화면에서 손쉽게 트래킹하세요.
             </p>
             <div class="featured-actions">
-                <a href="yellowsea_dashboard.html" class="btn btn-primary">📖 대시보드 비평 읽기</a>
+                <a href="lounge/업무_요청_대장.md" class="btn btn-primary">💬 첫 비평 대시보드 제작 요청하기</a>
             </div>
         </div>
     </div>
@@ -540,6 +618,7 @@
             <select id="sortSelect" class="sort-select">
                 <option value="score-desc">평점 높은 순</option>
                 <option value="score-asc">평점 낮은 순</option>
+                <option value="my-score-desc">내 평점 높은 순</option>
                 <option value="year-desc">최신 개봉 순</option>
             </select>
         </div>
@@ -555,58 +634,34 @@
     <!-- Movie Magazine Grid -->
     <div class="magazine-grid" id="movieGrid">
         
-        <!-- Card 1: 황해 -->
-        <div class="movie-card" data-title="황해 (THE YELLOW SEA)" data-director="나홍진" data-genre="스릴러" data-score="8.0" data-year="2010" onclick="location.href='yellowsea_dashboard.html'">
+        <!-- Card 1: 만달로리안 앤 그로구 -->
+        <div class="movie-card" data-movie-key="mandalorian" 
+             data-title="만달로리안 앤 그로구 (THE MANDALORIAN & GROGU)" 
+             data-director="존 파브로" 
+             data-genre="SF" 
+             data-score="8.5" 
+             data-year="2026" 
+             data-link="mandalorian_dashboard.html"
+             data-meta="존 파브로 감독 • 12세 관람가 예정 • 개봉일: 2026.05.27 (IMAX / Dolby / 4DX 동시 개봉)"
+             data-desc="딘 자린과 그로구가 대형 스크린으로 복귀하여 은하계를 누비는 웅장한 여정을 그린 스페이스 SF 대서사시. 국내 IMAX, Dolby Cinema, 4DX 특별관 동시 개봉 확정! TUG 평론단과 보스가 전격 분석한 4분할 입체 비평을 독점 공개합니다."
+             data-backdrop="https://static.wikia.nocookie.net/starwars/images/f/f2/TheMandalorianAndGrogu-TheatricalPoster.jpg/revision/latest?cb=20260528061949"
+             data-backdrop-gradient="linear-gradient(135deg, #0c0f12 0%, #101626 50%, #1e1136 100%)"
+             onclick="location.href='mandalorian_dashboard.html'">
             <div class="card-image-wrapper">
-                <img class="card-image" src="media/yellow_sea_poster.png" alt="황해">
-            </div>
-            <div class="card-info">
-                <div class="card-genre-row">
-                    <span class="card-genre">Thriller</span>
-                    <span class="card-genre">Action</span>
-                </div>
-                <h3 class="card-title">황해 (2010)</h3>
-                <p class="card-meta">나홍진 감독 • 156분</p>
-                <div class="card-rating-row">
-                    <span class="card-stars">★★★★☆</span>
-                    <span class="card-score">★ <span class="card-score-accent">8.0</span>/10</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 2: 곡성 -->
-        <div class="movie-card" data-title="곡성 (THE WAILING)" data-director="나홍진" data-genre="오컬트" data-score="8.2" data-year="2016" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/wailing_dashboard.html'">
-            <div class="card-image-wrapper">
-                <img class="card-image" src="media/wailing_poster.png" alt="곡성">
-            </div>
-            <div class="card-info">
-                <div class="card-genre-row">
-                    <span class="card-genre">Mystery</span>
-                    <span class="card-genre">Horror</span>
-                </div>
-                <h3 class="card-title">곡성 (2016)</h3>
-                <p class="card-meta">나홍진 감독 • 156분</p>
-                <div class="card-rating-row">
-                    <span class="card-stars">★★★★☆</span>
-                    <span class="card-score">★ <span class="card-score-accent">8.2</span>/10</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 3: 프로젝트 헤일메리 -->
-        <div class="movie-card" data-title="프로젝트 헤일메리 (PROJECT HAIL MARY)" data-director="드류 고다드" data-genre="SF" data-score="8.5" data-year="2026" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/hailmary_dashboard.html'">
-            <div class="card-image-wrapper">
-                <div class="card-image-fallback" style="background: linear-gradient(135deg, #1f1c2c, #928dab);">
-                    🚀<div style="font-size: 14px; font-weight: 500; margin-top: 10px;">PROJECT HAIL MARY</div>
+                <img class="card-image" src="https://static.wikia.nocookie.net/starwars/images/f/f2/TheMandalorianAndGrogu-TheatricalPoster.jpg/revision/latest?cb=20260528061949" alt="만달로리안 앤 그로구">
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-4dx">4DX</span>
                 </div>
             </div>
             <div class="card-info">
                 <div class="card-genre-row">
-                    <span class="card-genre">Sci-Fi</span>
                     <span class="card-genre">Space</span>
+                    <span class="card-genre">Sci-Fi</span>
                 </div>
-                <h3 class="card-title">프로젝트 헤일메리 (2026)</h3>
-                <p class="card-meta">드류 고다드 감독 • 개봉 예정작</p>
+                <h3 class="card-title">만달로리안 앤 그로구 (2026)</h3>
+                <p class="card-meta">존 파브로 감독 • 개봉 예정작 (특별관 확정)</p>
                 <div class="card-rating-row">
                     <span class="card-stars">★★★★☆</span>
                     <span class="card-score">★ <span class="card-score-accent">8.5</span>/10</span>
@@ -614,71 +669,16 @@
             </div>
         </div>
 
-        <!-- Card 4: 슈퍼맨 -->
-        <div class="movie-card" data-title="슈퍼맨 (SUPERMAN)" data-director="제임스 건" data-genre="히어로" data-score="7.8" data-year="2025" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/superman_dashboard.html'">
-            <div class="card-image-wrapper">
-                <div class="card-image-fallback" style="background: linear-gradient(135deg, #c0392b, #2980b9);">
-                    🦸‍♂️<div style="font-size: 14px; font-weight: 500; margin-top: 10px;">SUPERMAN</div>
-                </div>
+        <!-- Empty/Welcome State Screen -->
+        <div class="empty-state" id="emptyState" style="display: none; grid-column: 1 / -1; max-width: 600px; margin: 40px auto; padding: 60px 40px; border-radius: 24px; border: 2px dashed rgba(192, 57, 43, 0.2); background: var(--card-bg); text-align: center; box-shadow: var(--shadow-light);">
+            <div class="empty-icon" style="font-size: 55px; margin-bottom: 20px; animation: pulse 2s infinite;">🎬</div>
+            <h2 style="font-size: 22px; font-weight: 800; color: var(--text-primary); margin-bottom: 12px; font-family: 'Noto Sans KR', sans-serif;">비평 매거진이 깨끗하게 비어 있습니다</h2>
+            <p class="empty-text" style="font-size: 14px; font-weight: 500; color: var(--text-secondary); line-height: 1.6; max-width: 420px; margin: 0 auto 25px auto;">
+                클라라 해리슨 비서에게 분석하고 싶은 영화 평가를 요청해 주세요! 4분할 종합 분석과 실시간 별점 저장 기능이 탑재된 대시보드를 즉시 세팅해 드립니다.
+            </p>
+            <div style="font-size: 12.5px; font-weight: 700; color: var(--accent-red); background: #fde8e7; padding: 8px 20px; border-radius: 100px; display: inline-block; letter-spacing: 0.3px;">
+                💡 대화창 요청 예시: "나홍진 감독의 황해 비평 대시보드 새로 제작해줘!"
             </div>
-            <div class="card-info">
-                <div class="card-genre-row">
-                    <span class="card-genre">Action</span>
-                    <span class="card-genre">Hero</span>
-                </div>
-                <h3 class="card-title">슈퍼맨 (2025)</h3>
-                <p class="card-meta">제임스 건 감독 • 러닝타임 미정</p>
-                <div class="card-rating-row">
-                    <span class="card-stars">★★★★☆</span>
-                    <span class="card-score">★ <span class="card-score-accent">7.8</span>/10</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 5: 만달로리안 앤 그로구 -->
-        <div class="movie-card" data-title="만달로리안 앤 그로구 (THE MANDALORIAN & GROGU)" data-director="존 파브로" data-genre="SF" data-score="8.0" data-year="2026" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/mandalorian_dashboard.html'">
-            <div class="card-image-wrapper">
-                <div class="card-image-fallback" style="background: linear-gradient(135deg, #2c3e50, #bdc3c7);">
-                    🪐<div style="font-size: 14px; font-weight: 500; margin-top: 10px;">THE MANDALORIAN</div>
-                </div>
-            </div>
-            <div class="card-info">
-                <div class="card-genre-row">
-                    <span class="card-genre">Space</span>
-                    <span class="card-genre">Fantasy</span>
-                </div>
-                <h3 class="card-title">만달로리안 앤 그로구 (2026)</h3>
-                <p class="card-meta">존 파브로 감독 • 제작 진행작</p>
-                <div class="card-rating-row">
-                    <span class="card-stars">★★★★☆</span>
-                    <span class="card-score">★ <span class="card-score-accent">8.0</span>/10</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 6: 지구 최후의 아이들 -->
-        <div class="movie-card" data-title="지구 최후의 아이들 (COLONY)" data-director="코디 캐머런" data-genre="SF" data-score="7.5" data-year="2021" onclick="location.href='../../brain/70f983be-b494-42f4-9274-b5254705b774/colony_dashboard.html'">
-            <div class="card-image-wrapper">
-                <img class="card-image" src="media/colony_poster.png" alt="지구 최후의 아이들">
-            </div>
-            <div class="card-info">
-                <div class="card-genre-row">
-                    <span class="card-genre">Sci-Fi</span>
-                    <span class="card-genre">Adventure</span>
-                </div>
-                <h3 class="card-title">지구 최후의 아이들 (2021)</h3>
-                <p class="card-meta">코디 캐머런 감독 • 96분</p>
-                <div class="card-rating-row">
-                    <span class="card-stars">★★★☆☆</span>
-                    <span class="card-score">★ <span class="card-score-accent">7.5</span>/10</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Empty State Screen -->
-        <div class="empty-state" id="emptyState">
-            <div class="empty-icon">🎬</div>
-            <div class="empty-text">검색 결과에 맞는 영화 비평 카드가 존재하지 않습니다.</div>
         </div>
 
     </div>
@@ -743,6 +743,14 @@
                     return parseFloat(b.getAttribute('data-score')) - parseFloat(a.getAttribute('data-score'));
                 } else if (sortBy === 'score-asc') {
                     return parseFloat(a.getAttribute('data-score')) - parseFloat(b.getAttribute('data-score'));
+                } else if (sortBy === 'my-score-desc') {
+                    const keyA = a.getAttribute('data-movie-key');
+                    const keyB = b.getAttribute('data-movie-key');
+                    const savedA = localStorage.getItem('tug_rating_' + keyA);
+                    const savedB = localStorage.getItem('tug_rating_' + keyB);
+                    const scoreA = savedA ? (JSON.parse(savedA).score || 0) : 0;
+                    const scoreB = savedB ? (JSON.parse(savedB).score || 0) : 0;
+                    return scoreB - scoreA;
                 } else if (sortBy === 'year-desc') {
                     return parseInt(b.getAttribute('data-year')) - parseInt(a.getAttribute('data-year'));
                 }
@@ -774,7 +782,110 @@
             sessionStorage.setItem('tug_cinemag_scroll', window.scrollY);
         });
 
-        // Initialize sorting
+        // Load and display User's Ratings & Alarms from localStorage
+        function loadMyRatings() {
+            movieCards.forEach(card => {
+                const movieKey = card.getAttribute('data-movie-key');
+                if (!movieKey) return;
+                
+                const savedRating = localStorage.getItem('tug_rating_' + movieKey);
+                const savedAlarm = localStorage.getItem('tug_alarm_' + movieKey);
+                
+                const hasRating = savedRating !== null;
+                const hasAlarm = savedAlarm === 'true';
+                
+                if (hasRating || hasAlarm) {
+                    let row = card.querySelector('.my-rating-row');
+                    if (!row) {
+                        row = document.createElement('div');
+                        row.className = 'my-rating-row';
+                        const ratingRow = card.querySelector('.card-rating-row');
+                        const cardInfo = card.querySelector('.card-info');
+                        if (cardInfo && ratingRow) {
+                            cardInfo.insertBefore(row, ratingRow);
+                        }
+                    }
+                    
+                    let htmlContent = '';
+                    if (hasRating) {
+                        try {
+                            const data = JSON.parse(savedRating);
+                            if (data && data.score > 0) {
+                                htmlContent += `<span class="my-rating-tag">내 평점 ★ ${data.score.toFixed(1)}</span>`;
+                            }
+                        } catch (e) {
+                            console.error('Error parsing rating for ' + movieKey, e);
+                        }
+                    }
+                    if (hasAlarm) {
+                        htmlContent += `<span class="my-alarm-tag">⏰ 알람 등록됨</span>`;
+                    }
+                    row.innerHTML = htmlContent;
+                }
+            });
+        }
+
+        // Initialize sample alarms for upcoming 2026 movies (Hail Mary & Mandalorian) if not already set
+        if (!localStorage.getItem('tug_alarm_initialized')) {
+            localStorage.setItem('tug_alarm_hailmary', 'true');
+            localStorage.setItem('tug_alarm_mandalorian', 'true');
+            localStorage.setItem('tug_alarm_initialized', 'true');
+        }
+
+        // Setup dynamic random featured movie banner on load
+        function setupFeaturedMovie() {
+            const cards = Array.from(document.querySelectorAll('.movie-card'));
+            if (cards.length === 0) return;
+            
+            const randomIndex = Math.floor(Math.random() * cards.length);
+            const card = cards[randomIndex];
+            
+            const title = card.getAttribute('data-title');
+            const meta = card.getAttribute('data-meta') || `${card.getAttribute('data-director')} 감독 • ${card.getAttribute('data-year')}년 개봉`;
+            const desc = card.getAttribute('data-desc') || "TUG 평론단과 일반 관객 여론을 종합한 4분할 입체 비평 및 전용 대시보드가 준비되어 있습니다.";
+            const score = card.getAttribute('data-score');
+            const link = card.getAttribute('data-link');
+            const backdrop = card.getAttribute('data-backdrop');
+            const gradient = card.getAttribute('data-backdrop-gradient') || "linear-gradient(135deg, #0c0f12 0%, #1a0808 50%, #251210 100%)";
+            
+            const featuredTitle = document.querySelector('.featured-title');
+            const featuredMeta = document.querySelector('.featured-meta');
+            const featuredDesc = document.querySelector('.featured-desc');
+            const featuredBtn = document.querySelector('.featured-actions a');
+            const featuredBg = document.querySelector('.featured-bg');
+            const featuredTag = document.querySelector('.featured-tag');
+            
+            if (featuredTitle) featuredTitle.textContent = title;
+            if (featuredTag) featuredTag.textContent = "TUG Featured Movie";
+            
+            if (featuredMeta) {
+                featuredMeta.innerHTML = `
+                    <span>${meta}</span>
+                    <span class="meta-divider">•</span>
+                    <span class="featured-rating" style="color: var(--accent-gold); font-weight: 800;">★ ${parseFloat(score).toFixed(1)}/10</span>
+                `;
+            }
+            if (featuredDesc) featuredDesc.textContent = desc;
+            if (featuredBtn) {
+                featuredBtn.textContent = "📖 대시보드 비평 읽기";
+                featuredBtn.setAttribute('href', link);
+            }
+            if (featuredBg) {
+                if (backdrop) {
+                    featuredBg.style.backgroundImage = `url('${backdrop}')`;
+                    featuredBg.style.backgroundSize = "cover";
+                    featuredBg.style.backgroundPosition = "center 20%";
+                    featuredBg.style.filter = "brightness(0.45)"; // Highly readable text contrast
+                } else {
+                    featuredBg.style.background = gradient;
+                    featuredBg.style.filter = "brightness(1)";
+                }
+            }
+        }
+
+        // Initialize sorting, load ratings and setup featured banner
+        setupFeaturedMovie();
+        loadMyRatings();
         applyFilterAndSort();
     </script>
 </body>

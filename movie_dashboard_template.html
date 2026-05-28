@@ -120,10 +120,11 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-image: url('media/yellow_sea_still.png');
+            background-color: #0c0c0c;
+            background-image: url('media/yellow_sea_poster.jpg?v=3');
             background-size: cover;
-            background-position: center 30%;
-            filter: brightness(0.5);
+            background-position: center 15%;
+            filter: brightness(1);
             transform: scale(1.01);
             transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
@@ -494,9 +495,11 @@
 
         /* SVG Mini Score Gauge */
         .mini-gauge-wrapper {
+    /* Ensure gauge is not clipped */
+    overflow: visible;
             position: relative;
-            width: 55px;
-            height: 55px;
+            width: 80px;
+            height: 80px;
         }
 
         .mini-gauge-svg {
@@ -515,8 +518,8 @@
             fill: none;
             stroke-width: 8px;
             stroke-linecap: round;
-            stroke-dasharray: 140;
-            stroke-dashoffset: 140;
+            stroke-dasharray: 125.7;
+            stroke-dashoffset: 125.7;
             transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);
         }
 
@@ -816,6 +819,93 @@
                 align-items: center;
             }
         }
+        /* My Rating Card */
+        .my-rating-card {
+            border-top: 4px solid var(--accent-red);
+            padding: 25px 20px;
+        }
+
+        .my-rating-card::before {
+            display: none;
+        }
+
+        .my-rating-display {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .my-gauge-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .interactive-stars {
+            display: flex;
+            gap: 2px;
+            font-size: 26px;
+            color: #eaeded;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .interactive-stars span {
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .interactive-stars:hover span {
+            color: var(--accent-gold);
+        }
+
+        .interactive-stars span:hover ~ span {
+            color: #eaeded !important;
+        }
+
+        .interactive-stars span.active {
+            color: var(--accent-gold);
+        }
+
+
+
+
+
+        .save-rating-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1a252f;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .save-rating-btn:hover {
+            background: var(--accent-red);
+            transform: translateY(-2px);
+        }
+
+        .save-confirm-msg {
+            font-size: 11px;
+            color: #27ae60;
+            font-weight: 700;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .save-confirm-msg.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -845,7 +935,7 @@
         <div class="hero-gradient"></div>
         <div class="hero-content">
             <div class="hero-poster-wrapper">
-                <img class="hero-poster" src="media/yellow_sea_poster.png" alt="황해 포스터">
+                <img class="hero-poster" src="media/yellow_sea_poster.jpg?v=2" alt="황해 포스터">
             </div>
             <div class="hero-text">
                 <span class="hero-tag">Special Editorial</span>
@@ -905,6 +995,25 @@
                     </div>
                 </div>
             </div>
+
+            <!-- My Rating Personal Card -->
+            <div class="sidebar-card my-rating-card" id="myRatingCard">
+                <div class="sidebar-title" style="color:var(--accent-red);">MY RATING</div>
+                
+                <div class="my-rating-display">
+                    <span class="my-gauge-number" id="myRatingScore">0.0</span>
+                    <span class="gauge-denom">/ 10</span>
+                </div>
+
+                <div class="interactive-stars" id="interactiveStars">
+                    <span data-val="2">★</span><span data-val="4">★</span><span data-val="6">★</span><span data-val="8">★</span><span data-val="10">★</span>
+                </div>
+                
+
+                
+                <button id="saveRatingBtn" class="save-rating-btn">평가 저장하기</button>
+                <div id="saveConfirmMsg" class="save-confirm-msg">저장되었습니다 ✓</div>
+            </div>
         </div>
 
         <!-- Right Side: 4-Quadrant Reviews Grid -->
@@ -923,9 +1032,9 @@
                     </div>
                     <!-- Mini Gauge -->
                     <div class="mini-gauge-wrapper">
-                        <svg class="mini-gauge-svg" viewBox="0 0 50 50">
-                            <circle class="mini-circle-bg" cx="25" cy="25" r="22" />
-                            <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="22" />
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
                         </svg>
                         <div class="mini-gauge-text">7.4</div>
                     </div>
@@ -980,9 +1089,9 @@
                     </div>
                     <!-- Mini Gauge -->
                     <div class="mini-gauge-wrapper">
-                        <svg class="mini-gauge-svg" viewBox="0 0 50 50">
-                            <circle class="mini-circle-bg" cx="25" cy="25" r="22" />
-                            <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="22" />
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
                         </svg>
                         <div class="mini-gauge-text">7.7</div>
                     </div>
@@ -1037,9 +1146,9 @@
                     </div>
                     <!-- Mini Gauge -->
                     <div class="mini-gauge-wrapper">
-                        <svg class="mini-gauge-svg" viewBox="0 0 50 50">
-                            <circle class="mini-circle-bg" cx="25" cy="25" r="22" />
-                            <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="22" />
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
                         </svg>
                         <div class="mini-gauge-text">7.7</div>
                     </div>
@@ -1096,9 +1205,9 @@
                     </div>
                     <!-- Mini Gauge -->
                     <div class="mini-gauge-wrapper">
-                        <svg class="mini-gauge-svg" viewBox="0 0 50 50">
-                            <circle class="mini-circle-bg" cx="25" cy="25" r="22" />
-                            <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="22" />
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
                         </svg>
                         <div class="mini-gauge-text">8.1</div>
                     </div>
@@ -1412,6 +1521,77 @@
             if (e.key === 'Escape') {
                 closeReader();
             }
+        });
+    </script>
+    <script>
+        // My Rating Interactive Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('#interactiveStars span');
+            const scoreDisplay = document.getElementById('myRatingScore');
+            const saveBtn = document.getElementById('saveRatingBtn');
+            const confirmMsg = document.getElementById('saveConfirmMsg');
+
+            const MOVIE_KEY = 'tug_rating_yellowsea';
+            let currentScore = 0;
+
+            // Update star visuals
+            const updateStars = (score) => {
+                stars.forEach(s => {
+                    if (parseInt(s.getAttribute('data-val')) <= score) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            };
+
+            // Load from localStorage
+            const loadRating = () => {
+                const saved = localStorage.getItem(MOVIE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    currentScore = data.score || 0;
+                    scoreDisplay.textContent = currentScore.toFixed(1);
+                    updateStars(currentScore);
+                }
+            };
+
+            // Star click
+            stars.forEach(star => {
+                star.addEventListener('click', (e) => {
+                    currentScore = parseInt(e.target.getAttribute('data-val'));
+                    scoreDisplay.textContent = currentScore.toFixed(1);
+                    updateStars(currentScore);
+                });
+
+                // Hover preview
+                star.addEventListener('mouseenter', (e) => {
+                    const hoverVal = parseInt(e.target.getAttribute('data-val'));
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-val')) <= hoverVal) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseleave', () => {
+                    updateStars(currentScore);
+                });
+            });
+
+            // Save button
+            saveBtn.addEventListener('click', () => {
+                const data = { score: currentScore };
+                localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
+                confirmMsg.classList.add('show');
+                setTimeout(() => {
+                    confirmMsg.classList.remove('show');
+                }, 2000);
+            });
+
+            loadRating();
         });
     </script>
 </body>
