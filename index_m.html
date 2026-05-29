@@ -462,6 +462,38 @@
             </div>
         </a>
 
+        <!-- Card 2: 군체 -->
+        <a href="colony_dashboard_m.html" class="movie-card" data-movie-key="colony" 
+           data-title="군체 (COLONY)" 
+           data-director="연상호" 
+           data-genre="스릴러" 
+           data-score="7.2" 
+           data-year="2026" 
+           data-meta="연상호 감독 • 12세 이상 관람가 예정 • 개봉일: 2026년 예정 (국내 특별관 동시 개봉)"
+           data-desc="집단 지성 좀비라는 새로운 개념이 만들어내는 아크로바틱한 공포. 테크니컬 SF 좀비 스릴러 《군체》. TUG 평론단이 국내외 비평가 및 관객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁을 독점 공개합니다."
+           data-backdrop="media/colony_official_poster.png">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/colony_official_poster.png" alt="군체">
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-4dx">4DX</span>
+                </div>
+            </div>
+            <div class="card-info">
+                <div class="card-genre-row">
+                    <span class="card-genre">Zombie</span>
+                    <span class="card-genre">Thriller</span>
+                </div>
+                <h3 class="card-title">군체 (2026)</h3>
+                <p class="card-meta">연상호 감독 • 개봉 예정작 (특별관 확정)</p>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">7.2</span>/10</span>
+                </div>
+            </div>
+        </a>
+
         <!-- Empty Welcome State Screen -->
         <div class="empty-state" id="emptyState" style="display: none;">
             <div style="font-size: 35px; margin-bottom: 10px;">🎬</div>
@@ -565,11 +597,14 @@
             loadMyRatings();
         }
 
-        // Initialize sample alarms for upcoming 2026 movies (Hail Mary & Mandalorian) if not already set
+        // Initialize sample alarms for upcoming 2026 movies (Hail Mary, Mandalorian & Colony) if not already set
         if (!localStorage.getItem('tug_alarm_initialized')) {
             localStorage.setItem('tug_alarm_hailmary', 'true');
             localStorage.setItem('tug_alarm_mandalorian', 'true');
+            localStorage.setItem('tug_alarm_colony', 'true');
             localStorage.setItem('tug_alarm_initialized', 'true');
+        } else if (!localStorage.getItem('tug_alarm_colony')) {
+            localStorage.setItem('tug_alarm_colony', 'true');
         }
 
         // Initialize mobile elements
