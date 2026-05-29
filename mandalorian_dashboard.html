@@ -396,6 +396,13 @@
             object-fit: cover;
             border: 2px solid var(--accent-red);
             box-shadow: 0 2px 10px rgba(192, 57, 43, 0.15);
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .clara-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.35);
         }
 
         .clara-meta {
@@ -993,7 +1000,10 @@
 
                 <!-- Clara Harrison Avatar Card -->
                 <div class="clara-editor-info">
-                    <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
+                    <a href="profiles/clara_harrison_profile.html" title="클라라 해리슨 프로필 보기" style="display:inline-block; line-height:0;">
+                        <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison"
+                             onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
+                    </a>
                     <div class="clara-meta">
                         <span class="clara-name">Clara Harrison</span>
                         <span class="clara-role">Chief Film Critic</span>
