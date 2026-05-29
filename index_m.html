@@ -518,7 +518,10 @@
                         try {
                             const data = JSON.parse(savedRating);
                             if (data && data.score > 0) {
-                                htmlContent += `<span class="my-rating-tag">내 평점 ★ ${data.score.toFixed(1)}</span>`;
+                                const starCount = data.score > 5 ? data.score / 2 : data.score;
+                                const fullStars = '★'.repeat(Math.round(starCount));
+                                const emptyStars = '☆'.repeat(5 - Math.round(starCount));
+                                htmlContent += `<span class="my-rating-tag">내 평점 ${fullStars}${emptyStars}</span>`;
                             }
                         } catch (e) {
                             console.error('Error parsing rating for ' + movieKey, e);
