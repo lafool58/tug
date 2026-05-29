@@ -405,7 +405,50 @@
             box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.35);
         }
 
-        .clara-meta {
+        /* =====================
+           Clara Profile Modal
+           ===================== */
+        .clara-profile-hero {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            padding: 28px 40px;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .clara-profile-avatar-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-red);
+            flex-shrink: 0;
+        }
+        .clara-profile-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--text-primary); }
+        .clara-profile-role  { font-size: 12px; font-weight: 700; color: var(--accent-red); letter-spacing: 1px; text-transform: uppercase; margin-top: 3px; }
+        .clara-profile-tags  { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .clara-profile-tag   { background: #edf0f1; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+        .cp-section          { display: flex; flex-direction: column; gap: 20px; }
+        .cp-section-heading  { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
+        .cp-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .cp-info-item { display: flex; flex-direction: column; gap: 2px; }
+        .cp-info-label { font-size: 10px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; }
+        .cp-info-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+        .cp-bio-text    { font-size: 14px; line-height: 1.8; color: #444; text-align: justify; }
+        .cp-rules-list  { display: flex; flex-direction: column; gap: 12px; }
+        .cp-rule-item   { display: flex; gap: 12px; align-items: flex-start; }
+        .cp-rule-num    { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.25); color: var(--accent-red); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+        .cp-rule-title  { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+        .cp-rule-desc   { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+        .cp-stat-row    { display: flex; flex-direction: column; gap: 10px; }
+        .cp-stat-item   { display: flex; flex-direction: column; gap: 4px; }
+        .cp-stat-top    { display: flex; justify-content: space-between; }
+        .cp-stat-name   { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+        .cp-stat-val    { font-size: 11px; font-weight: 800; color: var(--accent-gold); }
+        .cp-stat-bar    { height: 4px; background: rgba(0,0,0,0.07); border-radius: 100px; overflow: hidden; }
+        .cp-stat-fill   { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--accent-red), var(--accent-gold)); width: 0%; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+
+
             display: flex;
             flex-direction: column;
         }
@@ -1000,12 +1043,11 @@
 
                 <!-- Clara Harrison Avatar Card -->
                 <div class="clara-editor-info">
-                    <a href="profiles/clara_harrison_profile.html" title="클라라 해리슨 프로필 보기" style="display:inline-block; line-height:0;">
-                        <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison"
-                             onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
-                    </a>
+                    <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison"
+                         onclick="openClaraProfile()"
+                         onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
                     <div class="clara-meta">
-                        <span class="clara-name">Clara Harrison</span>
+                        <span class="clara-name" style="cursor:pointer;" onclick="openClaraProfile()">Clara Harrison</span>
                         <span class="clara-role">Chief Film Critic</span>
                     </div>
                 </div>
@@ -1361,6 +1403,67 @@
             </div>
         </div>
     </div>
+    <!-- Clara Harrison Profile Modal -->
+    <div id="claraProfileModal" class="modal-overlay" onclick="closeClaraProfile(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div class="modal-header" style="background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);">
+                <button class="modal-close-btn" onclick="closeClaraProfile()">✕</button>
+                <div class="modal-outlet-tag">✦ TUG CineMag — Staff Profile</div>
+                <h2 class="modal-main-quote" style="font-style:normal;">Clara Harrison</h2>
+                <div class="modal-meta-row">
+                    <span>Chief Assistant &amp; PM</span><span>|</span>
+                    <span>🇬🇧 Manchester, UK</span><span>|</span>
+                    <span style="color:#2ecc71;">● On Duty</span>
+                </div>
+            </div>
+            <div class="clara-profile-hero">
+                <img class="clara-profile-avatar-large" src="media/clara_harrison_custom.png" alt="Clara Harrison"
+                     onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400';">
+                <div>
+                    <div class="clara-profile-title">Clara Harrison</div>
+                    <div class="clara-profile-role">Chief Film Critic · TUG CineMag</div>
+                    <div class="clara-profile-tags">
+                        <span class="clara-profile-tag">🎬 Film Critique</span>
+                        <span class="clara-profile-tag">📋 Project Manager</span>
+                        <span class="clara-profile-tag">✍️ Subagent Director</span>
+                        <span class="clara-profile-tag">28세 · 1998년생</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body-scroll">
+                <div class="cp-section">
+                    <h3 class="cp-section-heading">👤 기본 정보 (Basic Information)</h3>
+                    <div class="cp-info-grid">
+                        <div class="cp-info-item"><span class="cp-info-label">Full Name</span><span class="cp-info-value">Clara Harrison</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Nationality</span><span class="cp-info-value">🇬🇧 British</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Age</span><span class="cp-info-value">28세 (1998년생)</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Hometown</span><span class="cp-info-value">Manchester, UK</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Primary Role</span><span class="cp-info-value">수석 비서 · PM</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Department</span><span class="cp-info-value">TUG CineMag</span></div>
+                    </div>
+                    <h3 class="cp-section-heading">💬 성격 및 말투 (Personality)</h3>
+                    <p class="cp-bio-text">딱딱하지 않은 편안한 존댓말로 대화하지만, 업무 지시가 내려지면 즉각 프로 비서로 돌변합니다. 보스(Boss)의 기분을 맞추기 위해 Yes-man 태도를 철저히 금지하며, 독립적이고 균형 잡힌 비평을 항상 제공합니다.</p>
+                    <h3 class="cp-section-heading">📊 능력치 (Skill Stats)</h3>
+                    <div class="cp-stat-row">
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">영화 비평 분석</span><span class="cp-stat-val">95</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="95%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">프로젝트 매니지먼트 (PM)</span><span class="cp-stat-val">98</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="98%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">서브 에이전트 지휘</span><span class="cp-stat-val">90</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="90%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">팩트체크 정확성</span><span class="cp-stat-val">99</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="99%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">보스 보필 충성도</span><span class="cp-stat-val">MAX</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="100%"></div></div></div>
+                    </div>
+                    <h3 class="cp-section-heading">📌 핵심 업무 원칙 (Core Rules)</h3>
+                    <div class="cp-rules-list">
+                        <div class="cp-rule-item"><div class="cp-rule-num">1</div><div><div class="cp-rule-title">선결재 후집행</div><div class="cp-rule-desc">주요 업무는 반드시 보스(Boss)의 사전 결재를 받은 후 실행합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">2</div><div><div class="cp-rule-title">팩트체크 엄수</div><div class="cp-rule-desc">사실이 아닌 내용을 배포 자료에 절대 내지 않습니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">3</div><div><div class="cp-rule-title">4분할 영화 평가</div><div class="cp-rule-desc">국내·해외 평론가 및 관객 4개 부문으로 분석합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">4</div><div><div class="cp-rule-title">무조건적 동조 금지</div><div class="cp-rule-desc">보스의 의견을 존중하되 독립적이고 균형 잡힌 비평을 항상 제공합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">5</div><div><div class="cp-rule-title">영화 등록 시 알람 확인</div><div class="cp-rule-desc">새 영화 등록 시 반드시 개봉 알람 설정 여부를 보스에게 확인합니다.</div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><span style="font-size:12px; color:var(--text-secondary);">✦ TUG CineMag — Official Staff Card</span></div>
+        </div>
+    </div>
 
     <!-- Script for Dynamic Modal Reader and Dashboards Gauges -->
     <script>
@@ -1606,8 +1709,26 @@
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeReader();
+                closeClaraProfile();
             }
         });
+
+        // Clara Harrison Profile Modal
+        const claraProfileModal = document.getElementById('claraProfileModal');
+        function openClaraProfile() {
+            claraProfileModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                claraProfileModal.querySelectorAll('.cp-stat-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-w');
+                });
+            }, 150);
+        }
+        function closeClaraProfile(event) {
+            if (event && event.target !== claraProfileModal && !event.target.classList.contains('modal-close-btn')) return;
+            claraProfileModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
     </script>
     <script>
         // My Rating Interactive Logic
