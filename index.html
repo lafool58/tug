@@ -541,6 +541,9 @@
         .my-rating-row {
             display: flex;
             align-items: center;
+            gap: 6px;
+            flex-wrap: nowrap;
+            white-space: nowrap;
             margin-top: 4px;
             animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
@@ -548,13 +551,13 @@
         .my-rating-tag {
             background: #fde8e7; /* Trafford light red cream */
             color: var(--accent-red); /* High-contrast Trafford brand red */
-            font-size: 11.5px;
+            font-size: 10px;
             font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 6px;
+            padding: 3px 8px;
+            border-radius: 5px;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             border: 1px solid rgba(192, 57, 43, 0.15);
             letter-spacing: 0.2px;
         }
@@ -562,16 +565,15 @@
         .my-alarm-tag {
             background: #e8f8f5; /* Soft emerald green cream */
             color: #117a65;      /* High-contrast emerald green */
-            font-size: 11.5px;
+            font-size: 10px;
             font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 6px;
+            padding: 3px 8px;
+            border-radius: 5px;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             border: 1px solid rgba(17, 122, 101, 0.15);
             letter-spacing: 0.2px;
-            margin-left: 6px;
         }
 
         @keyframes slideIn {
