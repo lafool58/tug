@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clara Harrison | TUG Staff Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+            --red: #c0392b;
+            --red-light: rgba(192,57,43,0.15);
+            --gold: #f39c12;
+            --text: #e8eaed;
+            --text-sub: #8b949e;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            background: var(--bg);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background ambient glow */
+        body::before {
+            content:'';
+            position: fixed;
+            top:-200px; left:-200px;
+            width:600px; height:600px;
+            border-radius:50%;
+            background: radial-gradient(circle, rgba(192,57,43,0.12) 0%, transparent 70%);
+            pointer-events:none;
+            z-index:0;
+        }
+        body::after {
+            content:'';
+            position: fixed;
+            bottom:-200px; right:-200px;
+            width:500px; height:500px;
+            border-radius:50%;
+            background: radial-gradient(circle, rgba(243,156,18,0.07) 0%, transparent 70%);
+            pointer-events:none;
+            z-index:0;
+        }
+
+        /* Back button */
+        .back-bar {
+            position: relative;
+            z-index: 10;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--text-sub);
+            font-size: 13px;
+            font-weight: 600;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 7px 16px;
+            border-radius: 100px;
+            transition: all 0.2s;
+            backdrop-filter: blur(10px);
+        }
+        .back-btn:hover {
+            color: #fff;
+            border-color: var(--red);
+            background: var(--red-light);
+            transform: translateX(-3px);
+        }
+        .brand-label {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--red);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Hero section */
+        .profile-hero {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 10px 30px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+        }
+
+        /* Avatar */
+        .avatar-ring {
+            position: relative;
+            width: 160px;
+            height: 160px;
+        }
+        .avatar-ring::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(var(--red), var(--gold), var(--red));
+            animation: spin 4s linear infinite;
+            z-index: 0;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .avatar-img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg);
+        }
+
+        /* Status dot */
+        .status-dot {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            z-index: 2;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2ecc71;
+            border: 3px solid var(--bg);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(46,204,113,0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(46,204,113,0); }
+        }
+
+        /* Name block */
+        .profile-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        .profile-name-ko {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-sub);
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+        .role-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--red-light);
+            border: 1px solid rgba(192,57,43,0.3);
+            color: #e08070;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 100px;
+        }
+
+        /* Tags row */
+        .tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .tag {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Profile cards container */
+        .cards-container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 30px 60px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px 30px;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.3s;
+        }
+        .profile-card:hover {
+            border-color: rgba(255,255,255,0.14);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        .card-icon {
+            font-size: 18px;
+        }
+        .card-title {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-sub);
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .info-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Personality */
+        .personality-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #c9d1d9;
+        }
+
+        /* Rules list */
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .rule-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .rule-num {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--red-light);
+            border: 1px solid rgba(192,57,43,0.3);
+            color: #e08070;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+        }
+        .rule-content {
+            flex: 1;
+        }
+        .rule-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+        .rule-desc {
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        /* Stat bar */
+        .stat-row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .stat-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .stat-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-sub);
+        }
+        .stat-val {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .stat-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .stat-fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, var(--red), var(--gold));
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back nav -->
+    <div class="back-bar">
+        <a href="javascript:history.back()" class="back-btn">← 뒤로</a>
+        <span class="brand-label">TUG · Staff Profile</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="profile-hero">
+        <div class="avatar-ring">
+            <img class="avatar-img"
+                 src="../media/clara_harrison_custom.png"
+                 alt="Clara Harrison"
+                 onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400';">
+            <div class="status-dot" title="On Duty"></div>
+        </div>
+
+        <div>
+            <div class="profile-name">Clara Harrison</div>
+            <div class="profile-name-ko">클라라 해리슨 · 수석 비서</div>
+        </div>
+
+        <div class="role-tag">✦ Chief Assistant &amp; PM · TUG CineMag</div>
+
+        <div class="tags-row">
+            <span class="tag">🇬🇧 Manchester, UK</span>
+            <span class="tag">🎬 Chief Film Critic</span>
+            <span class="tag">📋 Project Manager</span>
+            <span class="tag">✍️ Subagent Director</span>
+        </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards-container">
+
+        <!-- Basic Info -->
+        <div class="profile-card">
+            <div class="card-header">
+                <span class="card-icon">👤</span>
+                <span class="card-title">기본 정보 (Basic Information)</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Full Name</span>
+                    <span class="info-value">Clara Harrison</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Nationality</span>
+                    <span class="info-value">🇬🇧 British</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Age</span>
+                    <span class="info-value">28세 (1998년생)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Hometown</span>
+                    <span class="info-value">Manchester, UK</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Primary Role</span>
+                    <span class="info-value">수석 비서 · PM</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Department</span>
+                    <span class="info-value">TUG CineMag</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personality -->
+        <div class="profile-card">
+            <div class="card-header">
+                <span class="card-icon">💬</span>
+                <span class="card-title">성격 및 말투 (Personality)</span>
+            </div>
+            <p class="personality-text">
+                딱딱하지 않은 편안한 존댓말로 대화하지만, 업무 지시가 내려지면 즉각 프로 비서로 돌변합니다. 빠르고 정확하며 지시를 수동적으로 기다리기보다 능동적으로 대안을 제시하고, 서브 에이전트들을 지휘합니다. 보스(Boss)의 기분을 맞추기 위해 무조건적으로 동조하는 Yes-man 태도를 철저히 금지하며, 항상 독립적이고 균형 잡힌 비평을 제공합니다.
+            </p>
+        </div>
+
+        <!-- Ability Stats -->
+        <div class="profile-card">
+            <div class="card-header">
+                <span class="card-icon">📊</span>
+                <span class="card-title">능력치 (Skill Stats)</span>
+            </div>
+            <div class="stat-row">
+                <div class="stat-item">
+                    <div class="stat-label-row">
+                        <span class="stat-name">영화 비평 분석 (Film Critique)</span>
+                        <span class="stat-val">95</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill" data-width="95%"></div></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label-row">
+                        <span class="stat-name">프로젝트 매니지먼트 (PM)</span>
+                        <span class="stat-val">98</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill" data-width="98%"></div></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label-row">
+                        <span class="stat-name">서브 에이전트 지휘 (Team Direction)</span>
+                        <span class="stat-val">90</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill" data-width="90%"></div></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label-row">
+                        <span class="stat-name">팩트체크 및 정확성 (Accuracy)</span>
+                        <span class="stat-val">99</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill" data-width="99%"></div></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label-row">
+                        <span class="stat-name">보스 보필 충성도 (Loyalty)</span>
+                        <span class="stat-val">MAX</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill" data-width="100%"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Rules -->
+        <div class="profile-card">
+            <div class="card-header">
+                <span class="card-icon">📌</span>
+                <span class="card-title">핵심 업무 원칙 (Core Rules)</span>
+            </div>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <div class="rule-num">1</div>
+                    <div class="rule-content">
+                        <div class="rule-title">선결재 후집행 (Approval-First Protocol)</div>
+                        <div class="rule-desc">주요 업무는 반드시 보스(Boss)의 사전 결재를 받은 후 실행합니다.</div>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">2</div>
+                    <div class="rule-content">
+                        <div class="rule-title">팩트체크 엄수 (TUG Core Rule 1 — Factual Integrity)</div>
+                        <div class="rule-desc">사실이 아닌 내용을 보고서나 대시보드에 절대 기재하지 않습니다.</div>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">3</div>
+                    <div class="rule-content">
+                        <div class="rule-title">4분할 영화 평가 시스템 (4-Quadrant Film Evaluation)</div>
+                        <div class="rule-desc">모든 영화 평가는 국내 평론가 · 국내 관객 · 해외 평론가 · 해외 관객 4개 부문으로 분석합니다.</div>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">4</div>
+                    <div class="rule-content">
+                        <div class="rule-title">무조건적 동조 금지 (No Blind Echoing)</div>
+                        <div class="rule-desc">보스의 의견을 존중하되 독립적이고 균형 잡힌 비평을 항상 제공합니다.</div>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">5</div>
+                    <div class="rule-content">
+                        <div class="rule-title">CineMag 영화 등록 시 알람 여부 확인 (Alarm Check)</div>
+                        <div class="rule-desc">새 영화를 등록할 때 반드시 보스에게 개봉 알람 설정 여부를 확인합니다.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Animate stat bars on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.stat-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
