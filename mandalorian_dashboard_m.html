@@ -316,6 +316,13 @@
             transform: scale(1.1);
         }
 
+        .star-icon.half {
+            background: linear-gradient(90deg, var(--accent-gold) 50%, #e2e8f0 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: scale(1.1);
+        }
+
         .comment-input {
             width: 100%;
             height: 60px;
@@ -1043,15 +1050,31 @@
 
         // Interactive Stars logic
         stars.forEach(star => {
-            star.addEventListener('click', () => {
+            star.addEventListener('click', (e) => {
+                const rect = star.getBoundingClientRect();
+                const isHalf = (e.clientX - rect.left) < rect.width / 2;
                 const value = parseInt(star.getAttribute('data-value'));
-                selectedRating = value;
-                updateStars(value);
+                const clickedValue = isHalf ? value - 0.5 : value;
+                
+                if (value === 1) {
+                    if (selectedRating === clickedValue) {
+                        selectedRating = 0;
+                    } else {
+                        selectedRating = clickedValue;
+                    }
+                } else {
+                    selectedRating = clickedValue;
+                }
+                
+                updateStars(selectedRating);
             });
 
-            star.addEventListener('mouseover', () => {
+            star.addEventListener('mousemove', (e) => {
+                const rect = star.getBoundingClientRect();
+                const isHalf = (e.clientX - rect.left) < rect.width / 2;
                 const value = parseInt(star.getAttribute('data-value'));
-                highlightStars(value);
+                const hoverValue = isHalf ? value - 0.5 : value;
+                highlightStars(hoverValue);
             });
         });
 
@@ -1062,10 +1085,15 @@
         function highlightStars(value) {
             stars.forEach(star => {
                 const starVal = parseInt(star.getAttribute('data-value'));
+                star.classList.remove('active', 'half');
+                star.style.background = '';
+                star.style.webkitBackgroundClip = '';
+                star.style.webkitTextFillColor = '';
+                
                 if (starVal <= value) {
                     star.classList.add('active');
-                } else {
-                    star.classList.remove('active');
+                } else if (starVal - 0.5 === value) {
+                    star.classList.add('half');
                 }
             });
         }
@@ -1073,10 +1101,15 @@
         function updateStars(value) {
             stars.forEach(star => {
                 const starVal = parseInt(star.getAttribute('data-value'));
+                star.classList.remove('active', 'half');
+                star.style.background = '';
+                star.style.webkitBackgroundClip = '';
+                star.style.webkitTextFillColor = '';
+                
                 if (starVal <= value) {
                     star.classList.add('active');
-                } else {
-                    star.classList.remove('active');
+                } else if (starVal - 0.5 === value) {
+                    star.classList.add('half');
                 }
             });
         }
@@ -1100,13 +1133,16 @@
 
         // Save rating data to LocalStorage
         submitBtn.addEventListener('click', () => {
-            const dataToSave = {
-                score: selectedRating,
-                comment: commentInput.value.trim(),
-                timestamp: new Date().toISOString()
-            };
-
-            localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(dataToSave));
+            if (selectedRating === 0 && commentInput.value.trim() === '') {
+                localStorage.removeItem('tug_rating_' + movieKey);
+            } else {
+                const dataToSave = {
+                    score: selectedRating,
+                    comment: commentInput.value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+                localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(dataToSave));
+            }
             
             // Show toast message
             saveToast.style.display = 'inline-flex';

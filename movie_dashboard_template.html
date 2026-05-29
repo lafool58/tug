@@ -854,19 +854,19 @@
         }
 
         .interactive-stars span {
-            transition: color 0.2s, transform 0.2s;
-        }
-
-        .interactive-stars:hover span {
-            color: var(--accent-gold);
-        }
-
-        .interactive-stars span:hover ~ span {
-            color: #eaeded !important;
+            transition: color 0.1s, transform 0.1s;
+            position: relative;
+            display: inline-block;
         }
 
         .interactive-stars span.active {
             color: var(--accent-gold);
+        }
+
+        .interactive-stars span.half {
+            background: linear-gradient(90deg, var(--accent-gold) 50%, #eaeded 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
 
@@ -1537,10 +1537,16 @@
             // Update star visuals
             const updateStars = (score) => {
                 stars.forEach(s => {
-                    if (parseInt(s.getAttribute('data-val')) <= score) {
+                    const val = parseInt(s.getAttribute('data-val'));
+                    s.classList.remove('active', 'half');
+                    s.style.background = '';
+                    s.style.webkitBackgroundClip = '';
+                    s.style.webkitTextFillColor = '';
+                    
+                    if (val <= score) {
                         s.classList.add('active');
-                    } else {
-                        s.classList.remove('active');
+                    } else if (val - 1 === score) {
+                        s.classList.add('half');
                     }
                 });
             };
@@ -1559,19 +1565,44 @@
             // Star click
             stars.forEach(star => {
                 star.addEventListener('click', (e) => {
-                    currentScore = parseInt(e.target.getAttribute('data-val'));
+                    const rect = star.getBoundingClientRect();
+                    const isHalf = (e.clientX - rect.left) < rect.width / 2;
+                    const val = parseInt(star.getAttribute('data-val'));
+                    const clickedVal = isHalf ? val - 1 : val;
+                    
+                    // Reset rating if the first star is clicked when it is already at that score
+                    if (val === 2) {
+                        if (currentScore === clickedVal) {
+                            currentScore = 0;
+                        } else {
+                            currentScore = clickedVal;
+                        }
+                    } else {
+                        currentScore = clickedVal;
+                    }
+                    
                     scoreDisplay.textContent = currentScore.toFixed(1);
                     updateStars(currentScore);
                 });
 
                 // Hover preview
-                star.addEventListener('mouseenter', (e) => {
-                    const hoverVal = parseInt(e.target.getAttribute('data-val'));
+                star.addEventListener('mousemove', (e) => {
+                    const rect = star.getBoundingClientRect();
+                    const isHalf = (e.clientX - rect.left) < rect.width / 2;
+                    const val = parseInt(star.getAttribute('data-val'));
+                    const hoverVal = isHalf ? val - 1 : val;
+                    
                     stars.forEach(s => {
-                        if (parseInt(s.getAttribute('data-val')) <= hoverVal) {
+                        const sVal = parseInt(s.getAttribute('data-val'));
+                        s.classList.remove('active', 'half');
+                        s.style.background = '';
+                        s.style.webkitBackgroundClip = '';
+                        s.style.webkitTextFillColor = '';
+                        
+                        if (sVal <= hoverVal) {
                             s.classList.add('active');
-                        } else {
-                            s.classList.remove('active');
+                        } else if (sVal - 1 === hoverVal) {
+                            s.classList.add('half');
                         }
                     });
                 });
@@ -1583,8 +1614,12 @@
 
             // Save button
             saveBtn.addEventListener('click', () => {
-                const data = { score: currentScore };
-                localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
+                if (currentScore === 0) {
+                    localStorage.removeItem(MOVIE_KEY);
+                } else {
+                    const data = { score: currentScore };
+                    localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
+                }
                 confirmMsg.classList.add('show');
                 setTimeout(() => {
                     confirmMsg.classList.remove('show');
