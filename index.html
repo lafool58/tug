@@ -563,8 +563,8 @@
         }
 
         .my-alarm-tag {
-            background: #e8f8f5; /* Soft emerald green cream */
-            color: #117a65;      /* High-contrast emerald green */
+            background: #eaeded; /* Soft gray cream (Grayscale) */
+            color: #7f8c8d;      /* Grayscale dark gray */
             font-size: 10px;
             font-weight: 800;
             padding: 3px 8px;
@@ -572,8 +572,26 @@
             display: inline-flex;
             align-items: center;
             gap: 3px;
-            border: 1px solid rgba(17, 122, 101, 0.15);
+            border: 1px solid rgba(127, 140, 141, 0.2);
             letter-spacing: 0.2px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .my-alarm-tag:hover {
+            background: #d5dbdb;
+            color: #2c3e50;
+        }
+
+        .my-alarm-tag.active {
+            background: #e8f8f5; /* Soft emerald green cream (Color) */
+            color: #117a65;      /* High-contrast emerald green */
+            border: 1px solid rgba(17, 122, 101, 0.25);
+        }
+
+        .my-alarm-tag.active:hover {
+            background: #d1f2eb;
+            color: #0e6251;
         }
 
         @keyframes slideIn {
@@ -802,38 +820,50 @@
                 const hasRating = savedRating !== null;
                 const hasAlarm = savedAlarm === 'true';
                 
-                if (hasRating || hasAlarm) {
-                    let row = card.querySelector('.my-rating-row');
-                    if (!row) {
-                        row = document.createElement('div');
-                        row.className = 'my-rating-row';
-                        const ratingRow = card.querySelector('.card-rating-row');
-                        const cardInfo = card.querySelector('.card-info');
-                        if (cardInfo && ratingRow) {
-                            cardInfo.insertBefore(row, ratingRow);
-                        }
+                let row = card.querySelector('.my-rating-row');
+                if (!row) {
+                    row = document.createElement('div');
+                    row.className = 'my-rating-row';
+                    const ratingRow = card.querySelector('.card-rating-row');
+                    const cardInfo = card.querySelector('.card-info');
+                    if (cardInfo && ratingRow) {
+                        cardInfo.insertBefore(row, ratingRow);
                     }
-                    
-                    let htmlContent = '';
-                    if (hasRating) {
-                        try {
-                            const data = JSON.parse(savedRating);
-                            if (data && data.score > 0) {
-                                const starCount = data.score > 5 ? data.score / 2 : data.score;
-                                const fullStars = '★'.repeat(Math.round(starCount));
-                                const emptyStars = '☆'.repeat(5 - Math.round(starCount));
-                                htmlContent += `<span class="my-rating-tag">내 평점 ${fullStars}${emptyStars}</span>`;
-                            }
-                        } catch (e) {
-                            console.error('Error parsing rating for ' + movieKey, e);
-                        }
-                    }
-                    if (hasAlarm) {
-                        htmlContent += `<span class="my-alarm-tag">⏰ 알람 등록됨</span>`;
-                    }
-                    row.innerHTML = htmlContent;
                 }
+                
+                let htmlContent = '';
+                if (hasRating) {
+                    try {
+                        const data = JSON.parse(savedRating);
+                        if (data && data.score > 0) {
+                            const starCount = data.score > 5 ? data.score / 2 : data.score;
+                            const fullStars = '★'.repeat(Math.round(starCount));
+                            const emptyStars = '☆'.repeat(5 - Math.round(starCount));
+                            htmlContent += `<span class="my-rating-tag">내 평점 ${fullStars}${emptyStars}</span>`;
+                        }
+                    } catch (e) {
+                        console.error('Error parsing rating for ' + movieKey, e);
+                    }
+                }
+                
+                // Alarm tag is ALWAYS displayed.
+                // If hasAlarm is true, add 'active' class (color). If not, no 'active' class (grayscale).
+                const activeClass = hasAlarm ? 'active' : '';
+                htmlContent += `<span class="my-alarm-tag ${activeClass}" onclick="toggleAlarm(event, '${movieKey}')">⏰ 알람</span>`;
+                
+                row.innerHTML = htmlContent;
             });
+        }
+
+        // Toggle alarm registration state in localStorage and update UI reactively
+        function toggleAlarm(event, movieKey) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            const current = localStorage.getItem('tug_alarm_' + movieKey) === 'true';
+            localStorage.setItem('tug_alarm_' + movieKey, current ? 'false' : 'true');
+            loadMyRatings();
         }
 
         // Initialize sample alarms for upcoming 2026 movies (Hail Mary & Mandalorian) if not already set
