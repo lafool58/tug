@@ -890,6 +890,48 @@
             });
         }
 
+        const SYNC_TOKEN = "tug_cinemag_boss_hun_token_2026";
+        const SYNC_BASE = "https://api.keyvalue.xyz/" + SYNC_TOKEN;
+
+        // Cloud sync (PUT/POST)
+        function pushToCloud(key, value) {
+            const dataStr = typeof value === 'object' ? JSON.stringify(value) : String(value);
+            fetch(`${SYNC_BASE}/${key}`, {
+                method: 'POST',
+                body: dataStr
+            }).catch(e => console.error('TUG Cloud Sync: push failed for ' + key, e));
+        }
+
+        // Pull from cloud & merge reactively (GET)
+        function syncWithCloud() {
+            const syncKeys = [
+                'mandalorian_rating', 'colony_rating',
+                'mandalorian_alarm', 'colony_alarm'
+            ];
+            
+            syncKeys.forEach(key => {
+                fetch(`${SYNC_BASE}/${key}`)
+                    .then(res => res.text())
+                    .then(text => {
+                        if (text && text.trim() !== "" && text !== "null") {
+                            const isRating = key.endsWith('rating');
+                            const movieKey = key.startsWith('mandalorian') ? 'mandalorian' : 'colony';
+                            const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
+                            
+                            const localData = localStorage.getItem(localKey);
+                            if (!localData || localData !== text) {
+                                localStorage.setItem(localKey, text);
+                                loadMyRatings();
+                                if (typeof applyFilterAndSort === 'function') {
+                                    applyFilterAndSort();
+                                }
+                            }
+                        }
+                    })
+                    .catch(e => console.warn('TUG Cloud Sync: pull failed for ' + key));
+            });
+        }
+
         // Toggle alarm registration state in localStorage and update UI reactively
         function toggleAlarm(event, movieKey) {
             if (event) {
@@ -897,8 +939,12 @@
                 event.preventDefault();
             }
             const current = localStorage.getItem('tug_alarm_' + movieKey) === 'true';
-            localStorage.setItem('tug_alarm_' + movieKey, current ? 'false' : 'true');
+            const nextVal = current ? 'false' : 'true';
+            localStorage.setItem('tug_alarm_' + movieKey, nextVal);
             loadMyRatings();
+            
+            // Push alarm state to cloud reactively
+            pushToCloud(movieKey + '_alarm', nextVal);
         }
 
         // Initialize sample alarms for upcoming 2026 movies (Hail Mary, Mandalorian & Colony) if not already set
@@ -966,6 +1012,9 @@
         setupFeaturedMovie();
         loadMyRatings();
         applyFilterAndSort();
+        
+        // Trigger Hybrid Cloud Sync
+        syncWithCloud();
 
         // Option A: Real-Time Tab Sync without Page Reload
         window.addEventListener('storage', (e) => {

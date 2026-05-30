@@ -1232,10 +1232,29 @@
             }
         }
 
-        // Save rating data to LocalStorage
+        const SYNC_TOKEN = "tug_cinemag_boss_hun_token_2026";
+        const SYNC_BASE = "https://api.keyvalue.xyz/" + SYNC_TOKEN;
+
+        function pushToCloud(key, value) {
+            if (value === null) {
+                fetch(`${SYNC_BASE}/${key}`, {
+                    method: 'POST',
+                    body: 'null'
+                }).catch(e => console.error(e));
+                return;
+            }
+            const dataStr = JSON.stringify(value);
+            fetch(`${SYNC_BASE}/${key}`, {
+                method: 'POST',
+                body: dataStr
+            }).catch(e => console.error('TUG Cloud Sync: push failed', e));
+        }
+
+        // Save rating data to LocalStorage & Cloud
         submitBtn.addEventListener('click', () => {
             if (selectedRating === 0 && commentInput.value.trim() === '') {
                 localStorage.removeItem('tug_rating_' + movieKey);
+                pushToCloud(movieKey + '_rating', null);
             } else {
                 const dataToSave = {
                     score: selectedRating,
@@ -1243,6 +1262,7 @@
                     timestamp: new Date().toISOString()
                 };
                 localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(dataToSave));
+                pushToCloud(movieKey + '_rating', dataToSave);
             }
             
             // Show toast message

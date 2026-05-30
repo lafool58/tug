@@ -1819,19 +1819,39 @@
                 });
             });
 
-            // Save button
-            saveBtn.addEventListener('click', () => {
-                if (currentScore === 0) {
-                    localStorage.removeItem(MOVIE_KEY);
-                } else {
-                    const data = { score: currentScore };
-                    localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
-                }
-                confirmMsg.classList.add('show');
-                setTimeout(() => {
-                    confirmMsg.classList.remove('show');
-                }, 2000);
-            });
+        const SYNC_TOKEN = "tug_cinemag_boss_hun_token_2026";
+        const SYNC_BASE = "https://api.keyvalue.xyz/" + SYNC_TOKEN;
+
+        function pushToCloud(key, value) {
+            if (value === null) {
+                fetch(`${SYNC_BASE}/${key}`, {
+                    method: 'POST',
+                    body: 'null'
+                }).catch(e => console.error(e));
+                return;
+            }
+            const dataStr = JSON.stringify(value);
+            fetch(`${SYNC_BASE}/${key}`, {
+                method: 'POST',
+                body: dataStr
+            }).catch(e => console.error('TUG Cloud Sync: push failed', e));
+        }
+
+        // Save button
+        saveBtn.addEventListener('click', () => {
+            if (currentScore === 0) {
+                localStorage.removeItem(MOVIE_KEY);
+                pushToCloud('mandalorian_rating', null);
+            } else {
+                const data = { score: currentScore };
+                localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
+                pushToCloud('mandalorian_rating', data);
+            }
+            confirmMsg.classList.add('show');
+            setTimeout(() => {
+                confirmMsg.classList.remove('show');
+            }, 2000);
+        });
 
             loadRating();
         });
