@@ -394,12 +394,8 @@
     <!-- Header Navigation -->
     <header>
         <div class="brand-section">
-            <div class="brand-logo">TUG <span>CineMag</span></div>
+            <a href="index_m.html" class="brand-logo" style="text-decoration: none; color: inherit;">TUG <span>CineMag</span></a>
             <div class="brand-tagline">TUG</div>
-        </div>
-        <div class="header-icons">
-            <button class="header-btn">🔔</button>
-            <button class="header-btn" onclick="location.href='profiles/clara_harrison_profile.html'">👤</button>
         </div>
     </header>
 
@@ -620,7 +616,14 @@
                                     return;
                                 }
                                 const score = parseFloat(cleanVal.replace('_', '.'));
-                                targetLocalVal = JSON.stringify({ score: score });
+                                let existingComment = "";
+                                if (localData) {
+                                    try {
+                                        const parsed = JSON.parse(localData);
+                                        existingComment = parsed.comment || "";
+                                    } catch(e) {}
+                                }
+                                targetLocalVal = JSON.stringify({ score: score, comment: existingComment });
                             } else {
                                 targetLocalVal = cleanVal;
                             }

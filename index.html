@@ -599,7 +599,7 @@
     <!-- Header Area -->
     <header>
         <div class="brand-section">
-            <div class="brand-logo">TUG CineMag</div>
+            <a href="index.html" class="brand-logo" style="text-decoration: none;">TUG CineMag</a>
             <div class="brand-tagline">Trafford United Group</div>
         </div>
     </header>
@@ -938,9 +938,15 @@
                                         }
                                     }
                                     return;
-                                }
                                 const score = parseFloat(cleanVal.replace('_', '.'));
-                                targetLocalVal = JSON.stringify({ score: score });
+                                let existingComment = "";
+                                if (localData) {
+                                    try {
+                                        const parsed = JSON.parse(localData);
+                                        existingComment = parsed.comment || "";
+                                    } catch(e) {}
+                                }
+                                targetLocalVal = JSON.stringify({ score: score, comment: existingComment });
                             } else {
                                 targetLocalVal = cleanVal;
                             }
