@@ -366,24 +366,13 @@
             border: 1px solid rgba(127, 140, 141, 0.2);
             padding: 1px 6px;
             border-radius: 4px;
-            cursor: pointer;
             transition: all 0.2s;
-        }
-
-        .my-alarm-tag:hover {
-            background: #d5dbdb;
-            color: #2c3e50;
         }
 
         .my-alarm-tag.active {
             background: #fde8e7; /* Trafford light red cream */
             color: var(--accent-red);
             border: 1px solid rgba(192, 57, 43, 0.25);
-        }
-
-        .my-alarm-tag.active:hover {
-            background: #fcd7d4;
-            color: #922b21;
         }
 
 
@@ -567,7 +556,7 @@
                 // Alarm tag is ALWAYS displayed.
                 // If hasAlarm is true, add 'active' class (color). If not, no 'active' class (grayscale).
                 const activeClass = hasAlarm ? 'active' : '';
-                htmlContent += `<span class="my-alarm-tag ${activeClass}" onclick="toggleAlarm(event, '${movieKey}')">⏰ 알람</span>`;
+                htmlContent += `<span class="my-alarm-tag ${activeClass}">⏰ 알람</span>`;
                 
                 row.innerHTML = htmlContent;
             });

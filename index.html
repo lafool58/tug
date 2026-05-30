@@ -578,25 +578,14 @@
             border: 1px solid rgba(127, 140, 141, 0.2);
             letter-spacing: 0.2px;
             transition: all 0.2s;
-            cursor: pointer;
             flex: 1;
             max-width: calc(50% - 3px);
-        }
-
-        .my-alarm-tag:hover {
-            background: #d5dbdb;
-            color: #2c3e50;
         }
 
         .my-alarm-tag.active {
             background: #e8f8f5; /* Soft emerald green cream (Color) */
             color: #117a65;      /* High-contrast emerald green */
             border: 1px solid rgba(17, 122, 101, 0.25);
-        }
-
-        .my-alarm-tag.active:hover {
-            background: #d1f2eb;
-            color: #0e6251;
         }
 
         @keyframes slideIn {
@@ -870,7 +859,7 @@
                 
                 // Alarm tag is ALWAYS displayed first.
                 const activeClass = hasAlarm ? 'active' : '';
-                let htmlContent = `<span class="my-alarm-tag ${activeClass}" onclick="toggleAlarm(event, '${movieKey}')">⏰ 알람</span>`;
+                let htmlContent = `<span class="my-alarm-tag ${activeClass}">⏰ 알람</span>`;
 
                 if (hasRating) {
                     try {
