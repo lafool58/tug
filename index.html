@@ -994,8 +994,17 @@
             const cards = Array.from(document.querySelectorAll('.movie-card'));
             if (cards.length === 0) return;
             
-            const randomIndex = Math.floor(Math.random() * cards.length);
-            const card = cards[randomIndex];
+            // Prefer rated movies (score > 0 in localStorage), fallback to all cards
+            var ratedCards = cards.filter(function(c) {
+                var key = c.getAttribute('data-movie-key');
+                if (!key) return false;
+                var saved = localStorage.getItem('tug_rating_' + key);
+                if (!saved) return false;
+                try { var d = JSON.parse(saved); return d && d.score > 0; } catch(e) { return false; }
+            });
+            var pool = ratedCards.length > 0 ? ratedCards : cards;
+            const randomIndex = Math.floor(Math.random() * pool.length);
+            const card = pool[randomIndex];
             
             const title = card.getAttribute('data-title');
             const meta = card.getAttribute('data-meta') || `${card.getAttribute('data-director')} 감독 • ${card.getAttribute('data-year')}년 개봉`;
