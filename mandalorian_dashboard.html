@@ -844,7 +844,7 @@
         }
 
         .my-rating-display {
-            display: flex;
+            display: none !important;
             align-items: baseline;
             justify-content: center;
             margin-bottom: 10px;
@@ -1204,25 +1204,25 @@
                     <div class="review-card-item">
                         <p class="review-text-quote">"클래식 스타워즈의 아날로그 감성과 디즈니의 최첨단 VFX 기술이 빚어낸 영리한 절충점."</p>
                         <div class="review-author-source">
-                            <span>송경원 평론가 (8/10)</span>
+                            <span>송경원 평론가 (★★★★☆)</span>
                         </div>
                     </div>
                     <div class="review-card-item">
                         <p class="review-text-quote">"서사의 확장성보다는 관계의 깊이에 안착하며 시리즈 팬들이 원했던 바로 그 온도를 선물한다."</p>
                         <div class="review-author-source">
-                            <span>김혜리 평론가 (8/10)</span>
+                            <span>김혜리 평론가 (★★★★☆)</span>
                         </div>
                     </div>
                     <div class="review-card-item">
                         <p class="review-text-quote">"귀여운 그로구와 묵직한 만도의 안전 비행. 모험은 흔들림 없이 깊어진다."</p>
                         <div class="review-author-source">
-                            <span>박평식 평론가 (7/10)</span>
+                            <span>박평식 평론가 (★★★☆☆)</span>
                         </div>
                     </div>
                     <div class="review-card-item">
                         <p class="review-text-quote">"차가운 베스카 갑옷 밑에 흐르는 포스의 따스한 온기. 스펙터클의 홍수 속에서도 인간성과 관계라는 가장 소중한 알맹이를 지켜냈다."</p>
                         <div class="review-author-source">
-                            <span>허지웅 평론가 (8/10)</span>
+                            <span>허지웅 평론가 (★★★★☆)</span>
                         </div>
                     </div>
                 </div>
@@ -1254,7 +1254,7 @@
                     <div class="review-card-item highlight">
                         <p class="review-text-quote">"드라마 시즌 1~3을 보지 않았더라도 두 사람의 케미에 단숨에 몰입된다. 그로구의 극장 화면 꽉 찬 귀여움만으로도 티켓값은 200% 뽑았다!"</p>
                         <div class="review-author-source">
-                            <span>유튜버 거의없다 (8.5/10)</span>
+                            <span>유튜버 거의없다 (★★★★☆)</span>
                             <a class="review-modal-link" onclick="openReader('almostmainstream')">🎬 유튜브 비평 전문</a>
                         </div>
                     </div>
@@ -1273,13 +1273,13 @@
                     <div class="review-card-item">
                         <p class="review-text-quote">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호함ㅋㅋ 스타워즈의 오리지널 웅장한 감성이 온전히 돌아옴."</p>
                         <div class="review-author-source">
-                            <span>왓챠피디아 유저 평점 (★★★★☆ 4.3)</span>
+                            <span>왓챠피디아 유저 평점 (★★★★☆)</span>
                         </div>
                     </div>
                     <div class="review-card-item">
                         <p class="review-text-quote">"드라마 시즌을 다 챙겨본 찐팬으로서 감동의 눈물이 흐릅니다. 딘과 그로구의 극장 귀환은 역사적인 순간입니다!"</p>
                         <div class="review-author-source">
-                            <span>스타워즈 네이버 대표 카페 유저 (9.5/10)</span>
+                            <span>스타워즈 네이버 대표 카페 유저 (★★★★★)</span>
                         </div>
                     </div>
                 </div>
@@ -1325,7 +1325,7 @@
                     <div class="review-card-item">
                         <p class="review-text-quote">"필로니와 파브로 콤비가 디즈니 플러스의 한계를 넘어 시네마틱 스케일로 우뚝 서다."</p>
                         <div class="review-author-source">
-                            <span>Empire (★★★★☆ 4.5)</span>
+                            <span>Empire (★★★★☆)</span>
                         </div>
                     </div>
                     <div class="review-card-item">
@@ -1369,14 +1369,14 @@
                     <div class="review-card-item highlight">
                         <p class="review-text-quote">"This is the way! 스타워즈의 황금기가 마침내 돌아왔다. 만도와 그로구의 스토리는 극장 영화의 대서사시로 완성되었다."</p>
                         <div class="review-author-source">
-                            <span>유튜버 크리스 스턱만 (8.5/10)</span>
+                            <span>유튜버 크리스 스턱만 (★★★★☆)</span>
                             <a class="review-modal-link" onclick="openReader('stuckmann')">🎬 유튜브 비평 전문</a>
                         </div>
                     </div>
                     <div class="review-card-item">
                         <p class="review-text-quote">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호했다. 스타워즈 팬이라면 평생을 후회하지 않을 마스터피스."</p>
                         <div class="review-author-source">
-                            <span>Letterboxd 평점 (★★★★☆ 4.3)</span>
+                            <span>Letterboxd 평점 (★★★★☆)</span>
                         </div>
                     </div>
                     <div class="review-card-item">
@@ -1805,11 +1805,11 @@
                     
                     if (val <= score) {
                         s.classList.add('active');
-                    } else if (val - 1 === score) {
-                        s.classList.add('half');
                     }
                 });
             };
+
+            const commentInput = document.getElementById('commentInput');
 
             // Load from localStorage
             const loadRating = () => {
@@ -1819,6 +1819,27 @@
                     currentScore = data.score || 0;
                     scoreDisplay.textContent = currentScore.toFixed(1);
                     updateStars(currentScore);
+                    if (commentInput) commentInput.value = data.comment || '';
+                } else {
+                    currentScore = 0;
+                    scoreDisplay.textContent = "0.0";
+                    updateStars(0);
+                    if (commentInput) commentInput.value = '';
+                }
+            };
+
+            // Save rating to localStorage & cloud helper
+            const saveRatingLocallyAndCloud = () => {
+                const commentText = commentInput ? commentInput.value.trim() : '';
+                if (currentScore === 0 && commentText === '') {
+                    localStorage.removeItem(MOVIE_KEY);
+                    pushToCloud(CLOUD_KEY, null);
+                    pushValueToCloud(CLOUD_KEY.replace('rating', 'comment'), '0');
+                } else {
+                    const data = { score: currentScore, comment: commentText };
+                    localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
+                    pushToCloud(CLOUD_KEY, data);
+                    pushValueToCloud(CLOUD_KEY.replace('rating', 'comment'), safeBtoa(commentText));
                 }
             };
 
@@ -1826,6 +1847,7 @@
             stars.forEach(star => {
                 star.addEventListener('click', (e) => {
                     const val = parseInt(star.getAttribute('data-val'));
+                    // val === 2 means first star; clicking it again resets to 0
                     if (val === 2 && currentScore === 2) {
                         currentScore = 0;
                     } else {
@@ -1833,6 +1855,7 @@
                     }
                     scoreDisplay.textContent = currentScore.toFixed(1);
                     updateStars(currentScore);
+                    saveRatingLocallyAndCloud();
                 });
 
                 // Hover preview (whole stars only)
@@ -1966,17 +1989,7 @@
 
         // Save button
         saveBtn.addEventListener('click', () => {
-            if (currentScore === 0 && commentInput.value.trim() === '') {
-                localStorage.removeItem(MOVIE_KEY);
-                pushToCloud(CLOUD_KEY, null);
-                pushValueToCloud(CLOUD_KEY.replace('rating', 'comment'), '0');
-            } else {
-                const commentText = commentInput.value.trim();
-                const data = { score: currentScore, comment: commentText };
-                localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
-                pushToCloud(CLOUD_KEY, data);
-                pushValueToCloud(CLOUD_KEY.replace('rating', 'comment'), safeBtoa(commentText));
-            }
+            saveRatingLocallyAndCloud();
             confirmMsg.classList.add('show');
             setTimeout(() => {
                 confirmMsg.classList.remove('show');
@@ -1987,6 +2000,11 @@
             loadRating();
             syncWithCloud();
             setInterval(syncWithCloud, 3000);
+
+            // Sync instantly when another tab (e.g. mobile dashboard) updates localStorage
+            window.addEventListener('storage', (e) => {
+                if (e.key === MOVIE_KEY) loadRating();
+            });
         });
     </script>
 </body>
