@@ -437,41 +437,37 @@
         }
 
         .card-badges {
-            position: absolute;
-            top: 12px;
-            left: 12px;
             display: flex;
             gap: 6px;
-            z-index: 5;
+            margin-top: 2px;
+            margin-bottom: 2px;
         }
 
         .card-badge-special {
             font-size: 9px;
             font-weight: 900;
-            padding: 3px 8px;
+            padding: 2px 6px;
             border-radius: 4px;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             display: inline-flex;
             align-items: center;
         }
         .special-imax {
             color: #ffffff;
-            background: rgba(0, 123, 255, 0.85);
-            border-color: rgba(0, 123, 255, 0.9);
+            background: #007bff;
+            border-color: #007bff;
         }
         .special-dolby {
             color: #ffffff;
-            background: rgba(155, 89, 182, 0.85);
-            border-color: rgba(155, 89, 182, 0.9);
+            background: #9b59b6;
+            border-color: #9b59b6;
         }
         .special-4dx {
             color: #ffffff;
-            background: rgba(230, 126, 34, 0.85);
-            border-color: rgba(230, 126, 34, 0.9);
+            background: #e67e22;
+            border-color: #e67e22;
         }
 
         .card-title {
@@ -684,16 +680,16 @@
              onclick="location.href='mandalorian_dashboard.html'">
             <div class="card-image-wrapper">
                 <img class="card-image" src="https://static.wikia.nocookie.net/starwars/images/f/f2/TheMandalorianAndGrogu-TheatricalPoster.jpg/revision/latest?cb=20260528061949" alt="만달로리안 앤 그로구">
-                <div class="card-badges">
-                    <span class="card-badge-special special-imax">IMAX</span>
-                    <span class="card-badge-special special-dolby">Dolby</span>
-                    <span class="card-badge-special special-4dx">4DX</span>
-                </div>
             </div>
             <div class="card-info">
                 <div class="card-genre-row">
                     <span class="card-genre">Space</span>
                     <span class="card-genre">Sci-Fi</span>
+                </div>
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-4dx">4DX</span>
                 </div>
                 <h3 class="card-title">만달로리안 앤 그로구 (2026)</h3>
                 <p class="card-meta">존 파브로 감독 • 개봉 예정작 (특별관 확정)</p>
@@ -721,16 +717,16 @@
              onclick="location.href='colony_dashboard.html'">
             <div class="card-image-wrapper">
                 <img class="card-image" src="media/colony_official_poster.png" alt="군체">
-                <div class="card-badges">
-                    <span class="card-badge-special special-imax">IMAX</span>
-                    <span class="card-badge-special special-dolby">Dolby</span>
-                    <span class="card-badge-special special-4dx">4DX</span>
-                </div>
             </div>
             <div class="card-info">
                 <div class="card-genre-row">
                     <span class="card-genre">Zombie</span>
                     <span class="card-genre">Thriller</span>
+                </div>
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-4dx">4DX</span>
                 </div>
                 <h3 class="card-title">군체 (2026)</h3>
                 <p class="card-meta">연상호 감독 • 개봉 예정작 (특별관 확정)</p>
