@@ -545,7 +545,7 @@
         .my-rating-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 5px;
             flex-wrap: nowrap;
             white-space: nowrap;
             margin-bottom: 8px;
@@ -561,9 +561,11 @@
             border-radius: 5px;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 3px;
             border: 1px solid rgba(192, 57, 43, 0.15);
             letter-spacing: 0.2px;
+            flex: 1;
         }
 
         .my-alarm-tag {
@@ -575,11 +577,13 @@
             border-radius: 5px;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 3px;
             border: 1px solid rgba(127, 140, 141, 0.2);
             letter-spacing: 0.2px;
             transition: all 0.2s;
             cursor: pointer;
+            flex: 1;
         }
 
         .my-alarm-tag:hover {
