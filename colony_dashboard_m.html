@@ -1121,47 +1121,29 @@
         
         let selectedRating = 0;
 
-        // Interactive Stars logic
+        // Interactive Stars logic (whole stars only)
         stars.forEach(star => {
             star.addEventListener('click', (e) => {
-                const rect = star.getBoundingClientRect();
-                const clientX = e.clientX || (e.changedTouches && e.changedTouches[0] && e.changedTouches[0].clientX);
-                const isHalf = clientX !== undefined ? (clientX - rect.left) < rect.width / 2 : false;
                 const value = parseInt(star.getAttribute('data-value'));
-                const clickedValue = isHalf ? value - 0.5 : value;
-                
-                if (value === 1) {
-                    if (selectedRating === clickedValue) {
-                        selectedRating = 0;
-                    } else {
-                        selectedRating = clickedValue;
-                    }
+                if (value === 1 && selectedRating === 1) {
+                    selectedRating = 0;
                 } else {
-                    selectedRating = clickedValue;
+                    selectedRating = value;
                 }
-                
                 updateStars(selectedRating);
             });
 
-            // Touch events for mobile dragging preview
             star.addEventListener('touchstart', (e) => {
-                const rect = star.getBoundingClientRect();
-                const clientX = e.touches[0].clientX;
-                const isHalf = (clientX - rect.left) < rect.width / 2;
                 const value = parseInt(star.getAttribute('data-value'));
-                const hoverValue = isHalf ? value - 0.5 : value;
-                highlightStars(hoverValue);
+                highlightStars(value);
             });
 
             star.addEventListener('touchmove', (e) => {
                 const touch = e.touches[0];
                 const targetStar = document.elementFromPoint(touch.clientX, touch.clientY);
                 if (targetStar && targetStar.classList.contains('star-icon')) {
-                    const rect = targetStar.getBoundingClientRect();
-                    const isHalf = (touch.clientX - rect.left) < rect.width / 2;
                     const value = parseInt(targetStar.getAttribute('data-value'));
-                    const hoverValue = isHalf ? value - 0.5 : value;
-                    highlightStars(hoverValue);
+                    highlightStars(value);
                 }
             });
 
@@ -1170,12 +1152,8 @@
             });
 
             star.addEventListener('mousemove', (e) => {
-                const rect = star.getBoundingClientRect();
-                const clientX = e.clientX || (e.touches && e.touches[0] && e.touches[0].clientX);
-                const isHalf = clientX !== undefined ? (clientX - rect.left) < rect.width / 2 : false;
                 const value = parseInt(star.getAttribute('data-value'));
-                const hoverValue = isHalf ? value - 0.5 : value;
-                highlightStars(hoverValue);
+                highlightStars(value);
             });
         });
 
@@ -1190,12 +1168,7 @@
                 star.style.background = '';
                 star.style.webkitBackgroundClip = '';
                 star.style.webkitTextFillColor = '';
-                
-                if (starVal <= value) {
-                    star.classList.add('active');
-                } else if (starVal - 0.5 === value) {
-                    star.classList.add('half');
-                }
+                if (starVal <= value) star.classList.add('active');
             });
         }
 
@@ -1206,12 +1179,7 @@
                 star.style.background = '';
                 star.style.webkitBackgroundClip = '';
                 star.style.webkitTextFillColor = '';
-                
-                if (starVal <= value) {
-                    star.classList.add('active');
-                } else if (starVal - 0.5 === value) {
-                    star.classList.add('half');
-                }
+                if (starVal <= value) star.classList.add('active');
             });
         }
 
@@ -1222,7 +1190,7 @@
                 try {
                     const data = JSON.parse(savedData);
                     if (data) {
-                        selectedRating = data.score || 0;
+                        selectedRating = Math.round((data.score || 0) / 2);
                         commentInput.value = data.comment || '';
                         updateStars(selectedRating);
                     }
@@ -1292,8 +1260,8 @@
                                 timestamp: new Date().toISOString()
                             };
                             localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(newData));
-                            selectedRating = score;
-                            updateStars(score);
+                            selectedRating = Math.round(score / 2);
+                            updateStars(selectedRating);
                         }
                     }
                 })
@@ -1307,7 +1275,7 @@
                 pushToCloud(movieKey + '_rating', null);
             } else {
                 const dataToSave = {
-                    score: selectedRating,
+                    score: selectedRating * 2,
                     comment: commentInput.value.trim(),
                     timestamp: new Date().toISOString()
                 };

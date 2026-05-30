@@ -1913,48 +1913,30 @@
                 }
             };
 
-            // Star click
+            // Star click (whole stars only)
             stars.forEach(star => {
                 star.addEventListener('click', (e) => {
-                    const rect = star.getBoundingClientRect();
-                    const isHalf = (e.clientX - rect.left) < rect.width / 2;
                     const val = parseInt(star.getAttribute('data-val'));
-                    const clickedVal = isHalf ? val - 1 : val;
-                    
-                    // Reset rating if the first star is clicked when it is already at that score
-                    if (val === 2) {
-                        if (currentScore === clickedVal) {
-                            currentScore = 0;
-                        } else {
-                            currentScore = clickedVal;
-                        }
+                    // val === 2 means first star; clicking it again resets to 0
+                    if (val === 2 && currentScore === 2) {
+                        currentScore = 0;
                     } else {
-                        currentScore = clickedVal;
+                        currentScore = val;
                     }
-                    
                     scoreDisplay.textContent = currentScore.toFixed(1);
                     updateStars(currentScore);
                 });
 
-                // Hover preview
+                // Hover preview (whole stars only)
                 star.addEventListener('mousemove', (e) => {
-                    const rect = star.getBoundingClientRect();
-                    const isHalf = (e.clientX - rect.left) < rect.width / 2;
                     const val = parseInt(star.getAttribute('data-val'));
-                    const hoverVal = isHalf ? val - 1 : val;
-                    
                     stars.forEach(s => {
                         const sVal = parseInt(s.getAttribute('data-val'));
                         s.classList.remove('active', 'half');
                         s.style.background = '';
                         s.style.webkitBackgroundClip = '';
                         s.style.webkitTextFillColor = '';
-                        
-                        if (sVal <= hoverVal) {
-                            s.classList.add('active');
-                        } else if (sVal - 1 === hoverVal) {
-                            s.classList.add('half');
-                        }
+                        if (sVal <= val) s.classList.add('active');
                     });
                 });
 
