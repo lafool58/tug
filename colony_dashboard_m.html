@@ -1121,6 +1121,57 @@
         
         let selectedRating = 0;
 
+        // Base64 helper functions (synced with desktop)
+        function safeBtoa(str) {
+            if (!str) return "";
+            try {
+                const utf8Str = unescape(encodeURIComponent(str));
+                const base64 = btoa(utf8Str);
+                return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+            } catch(e) {
+                return "";
+            }
+        }
+
+        function safeAtob(safeBase64) {
+            if (!safeBase64) return "";
+            let base64 = safeBase64.replace(/-/g, '+').replace(/_/g, '/');
+            while (base64.length % 4) {
+                base64 += '=';
+            }
+            try {
+                const utf8Str = atob(base64);
+                return decodeURIComponent(escape(utf8Str));
+            } catch(e) {
+                return "";
+            }
+        }
+
+        function pushValueToCloud(key, val) {
+            fetch(`${SYNC_BASE}/UpdateValue/${SYNC_TOKEN}/${key}/${val}`, {
+                method: 'POST',
+                body: ''
+            }).catch(e => console.error('TUG Cloud Sync: push failed for ' + key, e));
+        }
+
+        const saveRatingLocallyAndCloud = () => {
+            const commentText = commentInput ? commentInput.value.trim() : '';
+            if (selectedRating === 0 && commentText === '') {
+                localStorage.removeItem('tug_rating_' + movieKey);
+                pushToCloud(movieKey + '_rating', null);
+                pushValueToCloud(movieKey + '_comment', '0');
+            } else {
+                const dataToSave = {
+                    score: selectedRating * 2,
+                    comment: commentText,
+                    timestamp: new Date().toISOString()
+                };
+                localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(dataToSave));
+                pushToCloud(movieKey + '_rating', dataToSave);
+                pushValueToCloud(movieKey + '_comment', safeBtoa(commentText));
+            }
+        };
+
         // Interactive Stars logic (whole stars only)
         stars.forEach(star => {
             star.addEventListener('click', (e) => {
@@ -1131,6 +1182,7 @@
                     selectedRating = value;
                 }
                 updateStars(selectedRating);
+                saveRatingLocallyAndCloud();
             });
 
             star.addEventListener('touchstart', (e) => {
@@ -1191,12 +1243,16 @@
                     const data = JSON.parse(savedData);
                     if (data) {
                         selectedRating = Math.round((data.score || 0) / 2);
-                        commentInput.value = data.comment || '';
+                        if (commentInput) commentInput.value = data.comment || '';
                         updateStars(selectedRating);
                     }
                 } catch (e) {
                     console.error('Error loading rating data', e);
                 }
+            } else {
+                selectedRating = 0;
+                if (commentInput) commentInput.value = '';
+                updateStars(0);
             }
         }
 
@@ -1225,7 +1281,8 @@
         }
 
         const syncWithCloud = () => {
-            fetch(`${SYNC_BASE}/GetValue/${SYNC_TOKEN}/${movieKey}_rating`)
+            const ratingKey = movieKey + '_rating';
+            fetch(`${SYNC_BASE}/GetValue/${SYNC_TOKEN}/${ratingKey}`)
                 .then(res => res.text())
                 .then(text => {
                     if (text && text.trim() !== "" && text !== "null") {
@@ -1236,33 +1293,46 @@
                                 localStorage.removeItem('tug_rating_' + movieKey);
                                 selectedRating = 0;
                                 updateStars(0);
+                                if (commentInput) commentInput.value = '';
                             }
                             return;
                         }
                         const score = parseFloat(cleanVal.replace('_', '.'));
                         
-                        // Check if we need to update local storage
-                        const savedData = localStorage.getItem('tug_rating_' + movieKey);
-                        let localScore = 0;
-                        let localComment = "";
-                        if (savedData) {
-                            try {
-                                const parsed = JSON.parse(savedData);
-                                localScore = parsed.score || 0;
-                                localComment = parsed.comment || "";
-                            } catch(e) {}
-                        }
+                        // Fetch comment
+                        const commentKey = movieKey + '_comment';
+                        fetch(`${SYNC_BASE}/GetValue/${SYNC_TOKEN}/${commentKey}`)
+                            .then(res2 => res2.text())
+                            .then(text2 => {
+                                let commentText = "";
+                                if (text2 && text2.trim() !== "" && text2 !== "null") {
+                                    let cleanComment = text2.trim().replace(/^"|"$/g, '');
+                                    commentText = safeAtob(cleanComment);
+                                }
 
-                        if (localScore !== score) {
-                            const newData = {
-                                score: score,
-                                comment: localComment,
-                                timestamp: new Date().toISOString()
-                            };
-                            localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(newData));
-                            selectedRating = Math.round(score / 2);
-                            updateStars(selectedRating);
-                        }
+                                const localData = JSON.stringify({ score: score, comment: commentText, timestamp: new Date().toISOString() });
+                                const saved = localStorage.getItem('tug_rating_' + movieKey);
+                                let needUpdate = false;
+                                if (!saved) {
+                                    needUpdate = true;
+                                } else {
+                                    try {
+                                        const parsed = JSON.parse(saved);
+                                        if (parsed.score !== score || parsed.comment !== commentText) {
+                                            needUpdate = true;
+                                        }
+                                    } catch(e) {
+                                        needUpdate = true;
+                                    }
+                                }
+
+                                if (needUpdate) {
+                                    localStorage.setItem('tug_rating_' + movieKey, localData);
+                                    selectedRating = Math.round(score / 2);
+                                    updateStars(selectedRating);
+                                    if (commentInput) commentInput.value = commentText;
+                                }
+                            });
                     }
                 })
                 .catch(e => console.warn('TUG Cloud Sync: pull failed'));
@@ -1270,18 +1340,7 @@
 
         // Save rating data to LocalStorage & Cloud
         submitBtn.addEventListener('click', () => {
-            if (selectedRating === 0 && commentInput.value.trim() === '') {
-                localStorage.removeItem('tug_rating_' + movieKey);
-                pushToCloud(movieKey + '_rating', null);
-            } else {
-                const dataToSave = {
-                    score: selectedRating * 2,
-                    comment: commentInput.value.trim(),
-                    timestamp: new Date().toISOString()
-                };
-                localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(dataToSave));
-                pushToCloud(movieKey + '_rating', dataToSave);
-            }
+            saveRatingLocallyAndCloud();
             
             // Show toast message
             saveToast.style.display = 'inline-flex';
@@ -1490,6 +1549,11 @@
         loadRatingData();
         syncWithCloud();
         setInterval(syncWithCloud, 3000);
+
+        // Sync instantly when another tab (e.g. desktop dashboard) updates localStorage
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'tug_rating_' + movieKey) loadRatingData();
+        });
         
         setTimeout(() => {
             const imaxFill = document.querySelector('.theater-guide-widget .imax-gauge-fill');
