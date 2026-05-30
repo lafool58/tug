@@ -980,14 +980,18 @@
             pushToCloud(movieKey + '_alarm', nextVal);
         }
 
-        // Initialize sample alarms for upcoming 2026 movies (Hail Mary, Mandalorian & Colony) if not already set
-        if (!localStorage.getItem('tug_alarm_initialized')) {
-            localStorage.setItem('tug_alarm_hailmary', 'true');
-            localStorage.setItem('tug_alarm_mandalorian', 'true');
-            localStorage.setItem('tug_alarm_colony', 'true');
+        // Initialize sample alarms to false by default, and migrate existing force-enabled alarms to false
+        if (!localStorage.getItem('tug_alarm_cleaned_v2')) {
+            localStorage.setItem('tug_alarm_hailmary', 'false');
+            localStorage.setItem('tug_alarm_mandalorian', 'false');
+            localStorage.setItem('tug_alarm_colony', 'false');
             localStorage.setItem('tug_alarm_initialized', 'true');
-        } else if (!localStorage.getItem('tug_alarm_colony')) {
-            localStorage.setItem('tug_alarm_colony', 'true');
+            localStorage.setItem('tug_alarm_cleaned_v2', 'true');
+            
+            // Push reset state to cloud reactively
+            pushToCloud('hailmary_alarm', 'false');
+            pushToCloud('mandalorian_alarm', 'false');
+            pushToCloud('colony_alarm', 'false');
         }
 
         // Setup dynamic random featured movie banner on load
