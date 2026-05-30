@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TUG CineMag | 디스클로저 데이 (Disclosure Day) 모바일 대시보드</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        // Redirect to Desktop version if not accessed from a mobile device
+        if (!/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("disclosure_dashboard.html");
+        }
+    </script>
     <style>
         :root {
-            --bg-color: #0c0d10;
-            --card-bg: #16171f;
-            --border-color: rgba(255, 255, 255, 0.05);
-            --accent-blue: #3498db;
-            --accent-red: #e74c3c;
-            --accent-gold: #f1c40f;
-            --text-primary: #ffffff;
-            --text-secondary: #9aa0a6;
-            --font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --accent-blue: #2980b9;
+            --accent-red: #c0392b;
+            --accent-gold: #f39c12;
+            --text-primary: #1a252f;
+            --text-secondary: #7f8c8d;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
 
         * {
@@ -27,26 +34,21 @@
 
         body {
             background-color: var(--bg-color);
-            font-family: var(--font-family);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
             color: var(--text-primary);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             padding-bottom: 40px;
-            overflow-x: hidden;
         }
 
-        /* Mobile Header */
-        .mobile-header {
+        /* Top Header Area (Compact Mobile Style) */
+        header {
             width: 100%;
-            height: 60px;
-            background: #11121a;
-            border-bottom: 1.5px solid var(--border-color);
+            background: var(--card-bg);
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
+            box-shadow: var(--shadow-light);
+            border-top: 3px solid var(--accent-red);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -55,62 +57,68 @@
         .back-btn {
             background: none;
             border: none;
-            color: #ffffff;
-            font-size: 24px;
+            font-size: 20px;
+            color: var(--text-primary);
             cursor: pointer;
-            width: 36px;
-            height: 36px;
+            margin-right: 15px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
         .brand-section {
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-grow: 1;
         }
 
         .brand-logo {
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 900;
-            letter-spacing: 0.5px;
-            color: #ffffff;
+            letter-spacing: 0.2px;
+            color: var(--text-primary);
             font-family: 'Playfair Display', serif;
         }
 
         .brand-logo span {
-            font-weight: 400;
-            color: var(--text-secondary);
+            color: var(--accent-red);
         }
 
         .brand-tagline {
             font-size: 9px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--accent-red);
-            background: rgba(231, 76, 60, 0.15);
+            background: #fde8e7;
             padding: 1px 6px;
-            border-radius: 40px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
-        /* Dashboard Container */
+        /* Container Card (Matches Mockup exactly) */
         .dashboard-card {
-            width: 92%;
-            max-width: 480px;
-            margin-top: 20px;
+            background: var(--card-bg);
+            margin: 15px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 20px;
         }
 
-        /* Poster Cover Area */
+        /* Movie Poster inside card */
         .poster-wrapper {
             position: relative;
             width: 100%;
-            height: 280px;
-            border-radius: 20px;
+            max-width: 250px;
+            aspect-ratio: 2 / 2.85;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
         }
 
         .poster-image {
@@ -119,388 +127,217 @@
             object-fit: cover;
         }
 
+        /* Floating Badges on Poster */
         .poster-badges {
             position: absolute;
-            left: 15px;
-            bottom: 15px;
+            top: 10px;
+            right: 10px; /* Top-right overlay matching light mockup */
             display: flex;
-            gap: 5px;
-            z-index: 2;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 5;
         }
 
         .poster-badge-special {
-            font-size: 10px;
-            font-weight: 800;
-            padding: 3px 10px;
-            border-radius: 6px;
-            color: #ffffff;
-            backdrop-filter: blur(5px);
+            font-size: 8px;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.15);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .special-imax { background: rgba(243, 156, 18, 0.65); }
-        .special-dolby { background: rgba(46, 204, 113, 0.65); }
-        .special-4dx { background: rgba(230, 126, 34, 0.65); }
+        .special-imax {
+            color: #2980b9;
+            background: rgba(41, 128, 185, 0.08);
+            border-color: rgba(41, 128, 185, 0.25);
+        }
 
-        /* Movie Title & Info */
+        .special-dolby {
+            color: #1a252f;
+            background: rgba(26, 37, 47, 0.05);
+            border-color: rgba(26, 37, 47, 0.15);
+        }
+
+        .special-4dx {
+            color: #000000;
+            background: rgba(0, 0, 0, 0.06);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Title Area */
         .title-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            text-align: center;
+            width: 100%;
         }
 
         .movie-title {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 900;
-            font-family: 'Playfair Display', 'Noto Sans KR', serif;
-            color: #ffffff;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 6px;
         }
 
         .movie-meta {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-secondary);
+            font-weight: 500;
         }
 
-        /* Unified Gauge Score */
+        /* Unified circular score gauge */
         .score-gauge-container {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            text-align: center;
+            margin: 10px 0;
         }
 
         .gauge-svg-wrapper {
             position: relative;
-            width: 110px;
-            height: 110px;
-        }
-
-        .gauge-circle {
-            width: 100%;
-            height: 100%;
-            transform: rotate(-90deg);
-        }
-
-        .gauge-circle-bg {
-            fill: none;
-            stroke: #252631;
-            stroke-width: 10px;
-        }
-
-        .gauge-circle-fill {
-            fill: none;
-            stroke: #e74c3c;
-            stroke-width: 10px;
-            stroke-linecap: round;
-            stroke-dasharray: 282.7; /* 2 * pi * 45 */
-            stroke-dashoffset: 282.7;
-            transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);
+            width: 120px;
+            height: 120px;
         }
 
         .gauge-text {
             position: absolute;
-            top: 50%;
             left: 50%;
+            top: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: center;
         }
 
         .gauge-score {
             font-size: 26px;
             font-weight: 900;
-            color: #ffffff;
+            color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            line-height: 1;
-        }
-
-        .gauge-denom {
-            font-size: 9px;
-            color: var(--text-secondary);
-            margin-top: 1px;
-            font-weight: 700;
         }
 
         .gauge-label {
             font-size: 11px;
             font-weight: 800;
-            letter-spacing: 1px;
-            color: var(--accent-red);
-            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-top: 4px;
         }
 
         .gauge-sublabel {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-secondary);
-            margin-top: -8px;
+            margin-top: 2px;
         }
 
-        /* Credits & Director */
+        /* Detailed credits */
         .credits-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-size: 12px;
+            width: 100%;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
         }
 
         .credits-item {
-            color: var(--text-secondary);
+            margin-bottom: 4px;
+            font-weight: 600;
         }
 
         .credits-item span {
-            color: #ffffff;
-            font-weight: 700;
+            font-weight: 800;
+            color: var(--accent-red);
         }
 
         /* Synopsis */
         .synopsis-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .section-title {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 900;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
+            color: var(--text-primary);
             border-left: 3px solid var(--accent-red);
             padding-left: 8px;
         }
 
         .synopsis-text {
-            font-size: 12px;
-            line-height: 1.8;
-            color: #cbd5e0;
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #4a5568;
             text-align: justify;
         }
 
-        /* Quadrants Area */
-        .quadrants-section {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .quadrant-list {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .quadrant-group-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .quadrant-card-header {
-            padding: 16px 20px;
-            background: rgba(255,255,255,0.02);
-            border-bottom: 1.5px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .quadrant-card-title {
-            font-size: 14px;
-            font-weight: 800;
-            color: #ffffff;
-        }
-
-        .quadrant-card-tags {
-            display: flex;
-            gap: 4px;
-            margin-top: 3px;
-        }
-
-        .quad-tag {
-            font-size: 9px;
-            background: rgba(255,255,255,0.06);
-            color: var(--text-secondary);
-            padding: 1.5px 6px;
-            border-radius: 4px;
-            font-weight: 700;
-        }
-
-        /* Mini SVG Gauge */
-        .mini-gauge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .mini-circle-wrapper {
-            position: relative;
-            width: 44px;
-            height: 44px;
-        }
-
-        .mini-circle-svg {
+        /* Interactive Rating Section */
+        .rating-widget {
+            background: #fffdf9;
+            border: 1px dashed rgba(243, 156, 18, 0.3);
+            border-radius: 16px;
             width: 100%;
-            height: 100%;
-            transform: rotate(-90deg);
-        }
-
-        .mini-circle-bg {
-            fill: none;
-            stroke: #252631;
-            stroke-width: 5px;
-        }
-
-        .mini-circle-fill {
-            fill: none;
-            stroke: var(--accent-blue);
-            stroke-width: 5px;
-            stroke-linecap: round;
-        }
-
-        .quadrant-group-card:nth-child(2) .mini-circle-fill { stroke: #3498db; }
-        .quadrant-group-card:nth-child(3) .mini-circle-fill { stroke: #e67e22; }
-        .quadrant-group-card:nth-child(4) .mini-circle-fill { stroke: #d35400; }
-
-        .mini-score-val {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 10px;
-            font-weight: 900;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Review Quote list */
-        .review-quote-list {
-            padding: 15px 20px;
+            padding: 18px 15px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 12px;
         }
 
-        .review-quote-item {
-            background: rgba(255,255,255,0.01);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            padding: 12px 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .review-quote-item.highlighted {
-            background: rgba(241, 196, 15, 0.03);
-            border-left: 3px solid var(--accent-gold);
-            border-color: rgba(241, 196, 15, 0.1);
-        }
-
-        .review-quote-text {
-            font-size: 11.5px;
-            line-height: 1.6;
-            color: #cbd5e0;
-            font-style: italic;
-            text-align: justify;
-        }
-
-        .review-quote-author {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 10.5px;
-            font-weight: 700;
-        }
-
-        .author-name {
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .review-modal-link {
-            font-size: 10px;
-            color: var(--accent-red);
-            text-decoration: none;
-            background: rgba(231, 76, 60, 0.12);
-            padding: 2.5px 7px;
-            border-radius: 6px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-
-        .author-score {
+        .widget-title {
+            font-size: 13px;
+            font-weight: 900;
             color: var(--accent-gold);
-        }
-
-        /* Rating Widget */
-        .rating-widget {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px 20px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            text-align: center;
+            letter-spacing: 0.3px;
         }
 
         .stars-container {
             display: flex;
-            gap: 6px;
-            font-size: 28px;
-            color: #2a2b36;
-            cursor: pointer;
+            gap: 8px;
         }
 
         .star-icon {
-            transition: color 0.15s, transform 0.15s;
+            font-size: 26px;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.1s, color 0.1s;
         }
 
         .star-icon.active {
             color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .star-icon.half {
+            background: linear-gradient(90deg, var(--accent-gold) 50%, #e2e8f0 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: scale(1.1);
         }
 
         .comment-input {
             width: 100%;
-            height: 80px;
-            background: #0f1016;
+            height: 60px;
+            padding: 8px 12px;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 8px;
             font-size: 12px;
-            color: #ffffff;
+            font-weight: 500;
             resize: none;
             outline: none;
-            font-family: inherit;
-            transition: border-color 0.2s;
+            color: var(--text-primary);
         }
 
         .comment-input:focus {
-            border-color: var(--accent-red);
+            border-color: var(--accent-gold);
         }
 
         .rate-submit-btn {
@@ -508,44 +345,203 @@
             background: var(--accent-red);
             color: #ffffff;
             border: none;
-            border-radius: 12px;
-            padding: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 800;
-            font-size: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
-            transition: transform 0.1s;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.15);
         }
 
         .rate-submit-btn:active {
             transform: scale(0.98);
+            background: #a93226;
         }
 
         .save-toast {
             font-size: 11px;
             font-weight: 700;
-            color: #2ecc71;
-            opacity: 0;
-            transition: opacity 0.3s;
+            color: #27ae60;
+            display: none;
+            align-items: center;
+            gap: 4px;
         }
 
-        .save-toast.show {
-            opacity: 1;
+        /* 4-Quadrant Category Reviews */
+        .quadrants-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .quadrant-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .quadrant-group-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            width: 100%;
+        }
+
+        .quadrant-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1.5px solid var(--accent-red);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quadrant-card-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--text-primary);
+        }
+
+        .quadrant-card-tags {
+            display: flex;
+            gap: 4px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .quad-tag {
+            font-size: 8px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            background: var(--bg-color);
+            padding: 1px 5px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .mini-gauge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mini-circle-wrapper {
+            position: relative;
+            width: 32px;
+            height: 32px;
+        }
+
+        .mini-score-val {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .mini-circle-bg {
+            fill: none;
+            stroke: #f2f4f4;
+            stroke-width: 4;
+        }
+
+        .mini-circle-fill {
+            fill: none;
+            stroke: var(--accent-red);
+            stroke-width: 4.5;
+            stroke-linecap: round;
+        }
+
+        /* Review Item List */
+        .review-quote-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .review-quote-item {
+            border-left: 2px solid var(--border-color);
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .review-quote-item.highlighted {
+            border-left-color: var(--accent-red);
+            background: rgba(192, 57, 43, 0.02);
+            padding: 8px 10px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .review-quote-text {
+            font-size: 11.5px;
+            line-height: 1.5;
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        .review-quote-author {
+            font-size: 10.5px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .review-quote-author span.author-name {
+            color: var(--text-primary);
+        }
+
+        .review-quote-author span.author-score {
+            color: var(--accent-red);
+            font-weight: 800;
+        }
+
+        /* View Full Review (Modal Trigger Links) */
+        .review-modal-link {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 1px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+            margin-top: 2px;
+        }
+
+        .review-modal-link:hover {
+            opacity: 0.8;
         }
 
         /* Mobile Responsive Reader Modal Overlays */
         .modal-overlay {
             position: fixed;
-            left: 0;
             top: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(10, 11, 16, 0.7);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 30, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
+            align-items: flex-end; /* Slide up from bottom on mobile */
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -557,17 +553,16 @@
         }
 
         .modal-window {
-            background: #161720;
+            background: #ffffff;
             width: 100%;
-            max-width: 480px;
-            border-radius: 24px 24px 0 0;
-            max-height: 80vh;
+            border-radius: 20px 20px 0 0; /* Bottom sheet style for mobile */
+            overflow: hidden;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            max-height: 85vh;
             transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid var(--border-color);
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .modal-overlay.active .modal-window {
@@ -575,53 +570,55 @@
         }
 
         .modal-header {
-            padding: 20px;
+            padding: 25px 20px;
             color: #ffffff;
             position: relative;
         }
 
         .modal-close-btn {
             position: absolute;
-            right: 15px;
             top: 15px;
-            background: rgba(255, 255, 255, 0.12);
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
             border: none;
             width: 28px;
             height: 28px;
             border-radius: 50%;
-            color: #ffffff;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            z-index: 10;
         }
 
         .modal-outlet-tag {
             font-size: 9px;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            opacity: 0.8;
-            margin-bottom: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
         }
 
         .modal-main-quote {
-            font-family: 'Playfair Display', 'Noto Sans KR', serif;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             line-height: 1.4;
-            font-style: italic;
-            margin-bottom: 8px;
-            padding-right: 20px;
+            margin-bottom: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
         }
 
         .modal-meta-row {
-            font-size: 10.5px;
-            opacity: 0.7;
-            font-weight: 600;
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            font-size: 10.5px;
+            opacity: 0.85;
+            font-weight: 500;
         }
 
         .modal-body-scroll {
@@ -630,59 +627,59 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 15px;
         }
 
         .modal-section-title {
-            font-family: 'Playfair Display', 'Noto Sans KR', serif;
-            font-size: 14px;
-            font-weight: 800;
-            color: #ffffff;
-            padding-bottom: 6px;
-            border-bottom: 1.5px solid var(--border-color);
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent-red);
+            padding-left: 8px;
+            margin-top: 5px;
         }
 
         .modal-body-scroll p {
             font-size: 12px;
-            line-height: 1.75;
-            color: #cbd5e0;
+            line-height: 1.6;
+            color: #2c3e50;
+            font-weight: 500;
             text-align: justify;
         }
 
         .modal-highlight-quote {
-            background: rgba(255,255,255,0.01);
-            border-left: 3px solid var(--accent-red);
-            border-radius: 0 10px 10px 0;
-            padding: 14px 18px;
-            margin: 10px 0;
+            background: #fffcf4;
+            border-left: 3.5px solid var(--accent-gold);
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 8px 0;
         }
 
         .modal-highlight-quote p {
-            font-family: 'Playfair Display', 'Noto Sans KR', serif;
-            font-size: 13px;
             font-style: italic;
-            color: #ffffff;
-            line-height: 1.5;
-            margin-bottom: 4px;
+            font-weight: 600;
+            color: #7f8c8d;
         }
 
         .modal-highlight-source {
-            font-size: 9.5px;
-            color: var(--text-secondary);
+            font-size: 10px;
             font-weight: 700;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            text-align: right;
         }
 
         .modal-footer {
             padding: 15px 20px;
-            background: #0f1016;
-            border-top: 1.5px solid var(--border-color);
+            background: #f8f9f9;
+            border-top: 1px solid var(--border-color);
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
         }
 
         .modal-link-out {
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--accent-red);
             text-decoration: none;
         }
@@ -690,20 +687,19 @@
 </head>
 <body>
 
-    <!-- Mobile Header Navigation -->
-    <div class="mobile-header">
+    <!-- Header Navigation -->
+    <header>
         <button class="back-btn" onclick="location.href='index_m.html'">‹</button>
         <div class="brand-section">
             <a href="index_m.html" class="brand-logo" style="text-decoration: none; color: inherit;">TUG <span>CineMag</span></a>
             <div class="brand-tagline">TUG</div>
         </div>
-        <div style="width:36px;"></div> <!-- Spacing dummy -->
-    </div>
+    </header>
 
-    <!-- Dashboard Main Card View -->
+    <!-- Main Mobile Dashboard Container Card -->
     <div class="dashboard-card">
         
-        <!-- Cover Art -->
+        <!-- Movie Poster -->
         <div class="poster-wrapper">
             <img class="poster-image" src="media/disclosure_official_poster.png" alt="디스클로저 데이 포스터">
             <div class="poster-badges">
@@ -713,34 +709,36 @@
             </div>
         </div>
 
-        <!-- Movie Details -->
+        <!-- Title -->
         <div class="title-section">
             <h1 class="movie-title">디스클로저 데이 (Disclosure Day) (2026)</h1>
             <p class="movie-meta">SF, 미스터리, 드라마 • 미국 • 12세이상관람가 • 135분</p>
         </div>
 
-        <!-- TUG Gauge Score -->
+        <!-- Circular Score Gauge -->
         <div class="score-gauge-container">
             <div class="gauge-svg-wrapper">
-                <svg class="gauge-circle" viewBox="0 0 100 100">
-                    <circle class="gauge-circle-bg" cx="50" cy="50" r="45" />
-                    <circle id="mainGaugeFill" class="gauge-circle-fill" cx="50" cy="50" r="45" />
+                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width: 100%; height: 100%;">
+                    <!-- Background Circle -->
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#f2f4f4" stroke-width="4"></circle>
+                    <!-- TUG Crimson Arc -->
+                    <circle id="mainGaugeFill" cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
+                            stroke-dasharray="125.6" stroke-dashoffset="125.6" stroke-linecap="round"></circle>
                 </svg>
                 <div class="gauge-text">
                     <span class="gauge-score">9.5</span>
-                    <span class="gauge-denom">/ 10</span>
                 </div>
             </div>
             <span class="gauge-label">TUG Unified Score</span>
-            <span class="gauge-sublabel">통합 추천 평점</span>
+            <span class="gauge-sublabel">통합 평점</span>
         </div>
 
         <!-- Credits -->
         <div class="credits-section">
             <div class="credits-item">감독: <span>스티븐 스필버그</span></div>
             <div class="credits-item">주연: <span>톰 행크스 · 미셸 윌리엄스 · 폴 다노</span></div>
-            <div class="credits-item" style="font-weight: 500; color: var(--text-secondary); font-size: 11px; margin-top: 6px;">
-                💡 **추천 포인트**: 스필버그 감독 필생의 SF 휴먼 마스터피스로, 압도적인 경외감과 묵직한 정서적 긴장이 완벽히 교차함.
+            <div class="credits-item" style="font-weight: 500; color: var(--text-secondary); font-size: 12px; margin-top: 6px;">
+                개봉일: 2026.06.12
             </div>
         </div>
 
@@ -752,15 +750,15 @@
             </p>
         </div>
 
-        <!-- 4-Quadrant Reviews -->
+        <!-- 4-Quadrant Category Reviews (Web-synced rich content - Exactly 5 reviews per category) -->
         <div class="quadrants-section">
             <h2 class="section-title">4분할 입체 상세 비평</h2>
             <div class="quadrant-list">
-                
+
                 <!-- Q1: 국내 평론가 -->
                 <div class="quadrant-group-card">
                     <div class="quadrant-card-header">
-                        <div class="quadrant-title-group">
+                        <div>
                             <h3 class="quadrant-card-title">🇰🇷 국내 평론가</h3>
                             <div class="quadrant-card-tags">
                                 <span class="quad-tag">Cine21</span>
@@ -770,9 +768,9 @@
                         </div>
                         <div class="mini-gauge">
                             <div class="mini-circle-wrapper">
-                                <svg class="mini-circle-svg" viewBox="0 0 50 50">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="7.5" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="7.54" />
                                 </svg>
                                 <span class="mini-score-val">9.4</span>
                             </div>
@@ -799,7 +797,7 @@
                 <!-- Q2: 국내 관객 -->
                 <div class="quadrant-group-card">
                     <div class="quadrant-card-header">
-                        <div class="quadrant-title-group">
+                        <div>
                             <h3 class="quadrant-card-title">🇰🇷 국내 관객</h3>
                             <div class="quadrant-card-tags">
                                 <span class="quad-tag">에그지수</span>
@@ -809,9 +807,9 @@
                         </div>
                         <div class="mini-gauge">
                             <div class="mini-circle-wrapper">
-                                <svg class="mini-circle-svg" viewBox="0 0 50 50">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="5.0" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="5.02" />
                                 </svg>
                                 <span class="mini-score-val">9.6</span>
                             </div>
@@ -838,7 +836,7 @@
                 <!-- Q3: 해외 평론가 -->
                 <div class="quadrant-group-card">
                     <div class="quadrant-card-header">
-                        <div class="quadrant-title-group">
+                        <div>
                             <h3 class="quadrant-card-title">🌎 해외 평론가</h3>
                             <div class="quadrant-card-tags">
                                 <span class="quad-tag">Variety</span>
@@ -848,9 +846,9 @@
                         </div>
                         <div class="mini-gauge">
                             <div class="mini-circle-wrapper">
-                                <svg class="mini-circle-svg" viewBox="0 0 50 50">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="6.3" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="6.28" />
                                 </svg>
                                 <span class="mini-score-val">9.5</span>
                             </div>
@@ -877,7 +875,7 @@
                 <!-- Q4: 해외 관객 -->
                 <div class="quadrant-group-card">
                     <div class="quadrant-card-header">
-                        <div class="quadrant-title-group">
+                        <div>
                             <h3 class="quadrant-card-title">🌎 해외 관객</h3>
                             <div class="quadrant-card-tags">
                                 <span class="quad-tag">IMDb</span>
@@ -887,9 +885,9 @@
                         </div>
                         <div class="mini-gauge">
                             <div class="mini-circle-wrapper">
-                                <svg class="mini-circle-svg" viewBox="0 0 50 50">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="3.8" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="3.77" />
                                 </svg>
                                 <span class="mini-score-val">9.7</span>
                             </div>
@@ -983,7 +981,7 @@
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    💺 **실관람 평단 인용**: "자극적인 파괴 액션이 배제되고 톰 행크스와 미셸 윌리엄스의 내밀한 가족 드라마와 인물 간 소통이 서사의 핵심을 이루기에, 일반관의 편안한 시야에서 거장의 대사와 깊은 눈빛에 집중하는 것만으로도 온전한 서사적 카타르시스를 느낄 수 있다."
+                    💺 **실관람 평단 인용**: "자극적인 파괴 액션이 배제되고 톰 행크스와 미셸 윌리엄스의 내밀한 가족 드라마 and 인물 간 소통이 서사의 핵심을 이루기에, 일반관의 편안한 시야에서 거장의 대사와 깊은 눈빛에 집중하는 것만으로도 온전한 서사적 카타르시스를 느낄 수 있다."
                 </div>
             </div>
 
@@ -1069,7 +1067,7 @@
         const translatorData = {
             leedongjin: {
                 outlet: "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
-                title: `"거장의 필생이 담긴 걸작. 미학적 경외감과 정서적 교감이 완벽히 조화된 SF"`,
+                title: `"거장의 필생이 담긴 걸작. 미학적 경외감과 정서적 교감이 완벽한 밸런스로 조화된 SF"`,
                 author: "이동진 평론가",
                 score: "★★★★★ (5.0)",
                 gradient: "linear-gradient(135deg, #1e272e 0%, #2f3640 100%)",
@@ -1262,6 +1260,7 @@
             }
         }
 
+        // Reset Rating UI
         function resetRatingUI() {
             selectedRating = 0;
             updateStars(0);
@@ -1378,9 +1377,9 @@
         setTimeout(() => {
             const mainGaugeFill = document.getElementById('mainGaugeFill');
             if (mainGaugeFill) {
-                // Unified score is 9.5 out of 10. Dashoffset = 282.7 - (282.7 * (9.5 / 10))
+                // Unified score is 9.5 out of 10. Dashoffset = 125.7 - (125.7 * (9.5 / 10))
                 const score = 9.5;
-                const offset = 282.7 - (282.7 * (score / 10));
+                const offset = 125.7 - (125.7 * (score / 10));
                 mainGaugeFill.style.strokeDashoffset = offset;
             }
         }, 150);
