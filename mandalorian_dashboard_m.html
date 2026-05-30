@@ -1013,6 +1013,79 @@
             <div class="save-toast" id="saveToast">✓ 평가가 안전하게 저장되었습니다.</div>
         </div>
 
+        <!-- TUG Theater Format Recommendation Widget (Relocated to Dashboard Body) -->
+        <div class="theater-guide-widget" style="background: #fffbf5; border: 1px dashed rgba(243, 156, 18, 0.3); border-radius: 16px; width: 100%; padding: 18px 15px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 25px; margin-bottom: 10px; box-sizing: border-box;">
+            <span class="widget-title" style="align-self: center; font-size: 13px; font-weight: 900; color: var(--accent-gold); letter-spacing: 0.3px; margin-bottom: 5px;">🎬 극장별 추천 가이드 (Theater Guide)</span>
+            
+            <div class="theater-guide-intro" style="font-size: 10.5px; color: #718096; line-height: 1.4; text-align: center; width: 100%;">
+                TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
+            </div>
+
+            <!-- IMAX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">IMAX (스케일)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.6 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🪐 **추천**: 1.43:1 우주 화면비 확장으로 스케일과 개방감이 환상적임. (최강의 몰입감)
+                </div>
+            </div>
+
+            <!-- Dolby Cinema Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Dolby Cinema (화질/음향)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.4 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🔊 **추천**: 입체 음향의 방향 분리도 및 우주 배경의 깊은 암흑 명암대비가 완전함.
+                </div>
+            </div>
+
+            <!-- 4DX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">4DX (역동성)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">8.2 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🌀 **추천**: 스타파이터 비행 시 모션 감각 및 바람 진동 체감이 우수하나 다소 피로함.
+                </div>
+            </div>
+
+            <!-- Standard Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #95a5a6;">Standard 일반관 (안정성)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">7.5 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    💺 **추천**: 시선 피로감 없이 편하게 관람하기에는 가성비 최고의 선택이나, 영화의 거대한 음향 효과 체감은 반감됨.
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Inline Modal Pop-up Reader UI (Mobile-Responsive Version) -->
@@ -1035,79 +1108,6 @@
 
             <div class="modal-footer">
                 <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
-            </div>
-        </div>
-
-        <!-- TUG Theater Format Recommendation Widget -->
-        <div class="theater-guide-widget" style="background: #fffbf5; border: 1px dashed rgba(243, 156, 18, 0.3); border-radius: 16px; width: 100%; padding: 18px 15px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 15px;">
-            <span class="widget-title" style="align-self: center; font-size: 13px; font-weight: 900; color: var(--accent-gold); letter-spacing: 0.3px; margin-bottom: 5px;">🎬 극장별 추천 가이드 (Theater Guide)</span>
-            
-            <div class="theater-guide-intro" style="font-size: 10.5px; color: #718096; line-height: 1.4; text-align: center; width: 100%;">
-                TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
-            </div>
-
-            <!-- IMAX Recommendation -->
-            <div class="theater-metric-row" style="width: 100%; margin-top: 5px;">
-                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">IMAX (스케일)</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.6 / 10</span>
-                </div>
-                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
-                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
-                    </div>
-                </div>
-                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    🪐 **추천**: 1.43:1 우주 화면비 확장으로 스케일과 개방감이 환상적임. (최강의 몰입감)
-                </div>
-            </div>
-
-            <!-- Dolby Cinema Recommendation -->
-            <div class="theater-metric-row" style="width: 100%; margin-top: 10px;">
-                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Dolby Cinema (화질/음향)</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.4 / 10</span>
-                </div>
-                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
-                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
-                    </div>
-                </div>
-                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    🔊 **추천**: 입체 음향의 방향 분리도 및 우주 배경의 깊은 암흑 명암대비가 완전함.
-                </div>
-            </div>
-
-            <!-- 4DX Recommendation -->
-            <div class="theater-metric-row" style="width: 100%; margin-top: 10px;">
-                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">4DX (역동성)</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">8.2 / 10</span>
-                </div>
-                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
-                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
-                    </div>
-                </div>
-                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    🌀 **추천**: 스타파이터 비행 시 모션 감각 및 바람 진동 체감이 우수하나 다소 피로함.
-                </div>
-            </div>
-
-            <!-- Standard Recommendation -->
-            <div class="theater-metric-row" style="width: 100%; margin-top: 10px;">
-                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Standard 일반관 (안정성)</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">7.5 / 10</span>
-                </div>
-                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
-                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
-                    </div>
-                </div>
-                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    💺 **추천**: 시선 피로감 없이 편하게 관람하기에는 가성비 최고의 선택이나, 영화의 거대한 음향 효과 체감은 반감됨.
-                </div>
             </div>
         </div>
     </div>
