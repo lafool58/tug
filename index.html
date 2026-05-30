@@ -541,16 +541,18 @@
         .my-rating-row {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             flex-wrap: nowrap;
             white-space: nowrap;
             margin-bottom: 8px;
+            width: 100%;
+            box-sizing: border-box;
             animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         .my-rating-tag {
-            background: #fde8e7;
-            color: var(--accent-red);
+            background: #eaeded;
+            color: #7f8c8d;
             font-size: 10px;
             font-weight: 800;
             padding: 3px 8px;
@@ -559,9 +561,18 @@
             align-items: center;
             justify-content: center;
             gap: 3px;
-            border: 1px solid rgba(192, 57, 43, 0.15);
+            border: 1px solid rgba(127, 140, 141, 0.2);
             letter-spacing: 0.2px;
             flex: 1;
+            width: 50%;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+
+        .my-rating-tag.active {
+            background: #fde8e7;
+            color: var(--accent-red);
+            border: 1px solid rgba(192, 57, 43, 0.15);
         }
 
         .my-alarm-tag {
@@ -579,7 +590,9 @@
             letter-spacing: 0.2px;
             transition: all 0.2s;
             flex: 1;
-            max-width: calc(50% - 3px);
+            width: 50%;
+            box-sizing: border-box;
+            cursor: pointer;
         }
 
         .my-alarm-tag.active {
@@ -857,23 +870,25 @@
                     }
                 }
                 
-                // Alarm tag is ALWAYS displayed first.
-                const activeClass = hasAlarm ? 'active' : '';
-                let htmlContent = `<span class="my-alarm-tag ${activeClass}">⏰ 알람</span>`;
+                // Alarm tag is ALWAYS displayed first (on the left) and is interactive.
+                const alarmActiveClass = hasAlarm ? 'active' : '';
+                let htmlContent = `<span class="my-alarm-tag ${alarmActiveClass}" onclick="toggleAlarm(event, '${movieKey}')">⏰ 알람</span>`;
 
+                let ratingHtml = `<span class="my-rating-tag">내 평점 ☆☆☆☆☆</span>`;
                 if (hasRating) {
                     try {
                         const data = JSON.parse(savedRating);
                         if (data && data.score > 0) {
-                            const starCount = data.score > 5 ? data.score / 2 : data.score;
+                            const starCount = data.score / 2; // Strictly divide score by 2
                             const fullStars = '★'.repeat(Math.round(starCount));
                             const emptyStars = '☆'.repeat(5 - Math.round(starCount));
-                            htmlContent += `<span class="my-rating-tag">내 평점 ${fullStars}${emptyStars}</span>`;
+                            ratingHtml = `<span class="my-rating-tag active">내 평점 ${fullStars}${emptyStars}</span>`;
                         }
                     } catch (e) {
                         console.error('Error parsing rating for ' + movieKey, e);
                     }
                 }
+                htmlContent += ratingHtml;
 
                 row.innerHTML = htmlContent;
             });
@@ -989,13 +1004,28 @@
             localStorage.setItem('tug_alarm_colony', 'true');
         }
 
-        // Setup dynamic random featured movie banner on load
+        // Setup dynamic random featured movie banner on load (prioritizing rated movies)
         function setupFeaturedMovie() {
             const cards = Array.from(document.querySelectorAll('.movie-card'));
             if (cards.length === 0) return;
             
-            const randomIndex = Math.floor(Math.random() * cards.length);
-            const card = cards[randomIndex];
+            // Filter cards that have a rating score > 0 in LocalStorage
+            const ratedCards = cards.filter(card => {
+                const movieKey = card.getAttribute('data-movie-key');
+                if (!movieKey) return false;
+                const savedRating = localStorage.getItem('tug_rating_' + movieKey);
+                if (savedRating) {
+                    try {
+                        const data = JSON.parse(savedRating);
+                        return data && data.score > 0;
+                    } catch(e) {}
+                }
+                return false;
+            });
+
+            const targetCards = ratedCards.length > 0 ? ratedCards : cards;
+            const randomIndex = Math.floor(Math.random() * targetCards.length);
+            const card = targetCards[randomIndex];
             
             const title = card.getAttribute('data-title');
             const meta = card.getAttribute('data-meta') || `${card.getAttribute('data-director')} 감독 • ${card.getAttribute('data-year')}년 개봉`;

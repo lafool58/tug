@@ -1222,7 +1222,7 @@
                 try {
                     const data = JSON.parse(savedData);
                     if (data) {
-                        selectedRating = data.score || 0;
+                        selectedRating = (data.score || 0) / 2;
                         commentInput.value = data.comment || '';
                         updateStars(selectedRating);
                     }
@@ -1292,8 +1292,8 @@
                                 timestamp: new Date().toISOString()
                             };
                             localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(newData));
-                            selectedRating = score;
-                            updateStars(score);
+                            selectedRating = score / 2;
+                            updateStars(selectedRating);
                         }
                     }
                 })
@@ -1307,7 +1307,7 @@
                 pushToCloud(movieKey + '_rating', null);
             } else {
                 const dataToSave = {
-                    score: selectedRating,
+                    score: selectedRating * 2,
                     comment: commentInput.value.trim(),
                     timestamp: new Date().toISOString()
                 };
