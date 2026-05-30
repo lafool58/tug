@@ -596,6 +596,13 @@
 
         // Initialize mobile elements
         loadMyRatings();
+
+        // Option A: Real-Time Tab Sync without Page Reload
+        window.addEventListener('storage', (e) => {
+            if (e.key && (e.key.startsWith('tug_rating_') || e.key.startsWith('tug_alarm_'))) {
+                loadMyRatings();
+            }
+        });
     </script>
 </body>
 </html>

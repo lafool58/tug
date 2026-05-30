@@ -1125,7 +1125,8 @@
         stars.forEach(star => {
             star.addEventListener('click', (e) => {
                 const rect = star.getBoundingClientRect();
-                const isHalf = (e.clientX - rect.left) < rect.width / 2;
+                const clientX = e.clientX || (e.changedTouches && e.changedTouches[0] && e.changedTouches[0].clientX);
+                const isHalf = clientX !== undefined ? (clientX - rect.left) < rect.width / 2 : false;
                 const value = parseInt(star.getAttribute('data-value'));
                 const clickedValue = isHalf ? value - 0.5 : value;
                 
@@ -1142,9 +1143,36 @@
                 updateStars(selectedRating);
             });
 
+            // Touch events for mobile dragging preview
+            star.addEventListener('touchstart', (e) => {
+                const rect = star.getBoundingClientRect();
+                const clientX = e.touches[0].clientX;
+                const isHalf = (clientX - rect.left) < rect.width / 2;
+                const value = parseInt(star.getAttribute('data-value'));
+                const hoverValue = isHalf ? value - 0.5 : value;
+                highlightStars(hoverValue);
+            });
+
+            star.addEventListener('touchmove', (e) => {
+                const touch = e.touches[0];
+                const targetStar = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (targetStar && targetStar.classList.contains('star-icon')) {
+                    const rect = targetStar.getBoundingClientRect();
+                    const isHalf = (touch.clientX - rect.left) < rect.width / 2;
+                    const value = parseInt(targetStar.getAttribute('data-value'));
+                    const hoverValue = isHalf ? value - 0.5 : value;
+                    highlightStars(hoverValue);
+                }
+            });
+
+            star.addEventListener('touchend', (e) => {
+                updateStars(selectedRating);
+            });
+
             star.addEventListener('mousemove', (e) => {
                 const rect = star.getBoundingClientRect();
-                const isHalf = (e.clientX - rect.left) < rect.width / 2;
+                const clientX = e.clientX || (e.touches && e.touches[0] && e.touches[0].clientX);
+                const isHalf = clientX !== undefined ? (clientX - rect.left) < rect.width / 2 : false;
                 const value = parseInt(star.getAttribute('data-value'));
                 const hoverValue = isHalf ? value - 0.5 : value;
                 highlightStars(hoverValue);
