@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 디스클로저 데이 (Disclosure Day) 입체 대시보드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.06);
+            --accent-blue: #2980b9;
+            --accent-red: #c0392b;
+            --accent-gold: #f39c12;
+            --text-primary: #1a252f;
+            --text-secondary: #7f8c8d;
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            width: 90%;
+            max-width: 1200px;
+            margin: 25px 0 15px 0;
+            padding: 15px 25px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-light);
+            border-top: 4px solid var(--accent-red);
+            z-index: 10;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-tagline {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 2px 8px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .back-home-btn {
+            background: var(--bg-color);
+            padding: 8px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .back-home-btn:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            border-color: var(--accent-red);
+            transform: translateX(-3px);
+        }
+
+        /* Cinematic Hero Banner */
+        .hero-banner {
+            width: 90%;
+            max-width: 1200px;
+            height: 400px;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            background: #000;
+            margin-bottom: 40px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0c0c0c;
+            background-image: url('media/disclosure_bg.png');
+            background-size: cover;
+            background-position: center 30%;
+            filter: brightness(0.9);
+            transform: scale(1.01);
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .hero-banner:hover .hero-bg {
+            transform: scale(1.04);
+        }
+
+        .hero-gradient {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.4) 60%, transparent 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            left: 40px;
+            bottom: 40px;
+            right: 40px;
+            z-index: 2;
+            color: #ffffff;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 30px;
+            align-items: flex-end;
+        }
+
+        .hero-poster-wrapper {
+            width: 180px;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: #2c3e50;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .hero-banner:hover .hero-poster-wrapper {
+            transform: translateY(10px) scale(1.02);
+        }
+
+        .hero-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 10px;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            font-weight: 800;
+            background: var(--accent-red);
+            color: #ffffff;
+            padding: 3px 12px;
+            border-radius: 100px;
+            align-self: flex-start;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-size: 38px;
+            font-weight: 900;
+            font-family: 'Playfair Display', 'Noto Sans KR', serif;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-title span {
+            font-size: 22px;
+            font-weight: 500;
+            color: #bdc3c7;
+            margin-left: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-meta {
+            font-size: 13px;
+            color: #e5e8e8;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .meta-divider {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-meta-tags {
+            display: flex;
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        .hero-tag-item {
+            font-size: 10px;
+            font-weight: 700;
+            background: rgba(255,255,255,0.15);
+            color: #ffffff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-tag-award {
+            background: rgba(243, 156, 18, 0.25);
+            color: var(--accent-gold);
+            border: 1.5px solid rgba(243, 156, 18, 0.4);
+        }
+
+        /* Dashboard Overview Grid */
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+        }
+
+        /* Left Side: Score & Editor Card */
+        .editorial-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px 24px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--accent-red), var(--accent-gold));
+        }
+
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        /* SVG Main Gauge */
+        .main-gauge-wrapper {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin-bottom: 20px;
+        }
+
+        .gauge-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .gauge-circle-bg {
+            fill: none;
+            stroke: #eaeded;
+            stroke-width: 9px;
+        }
+
+        .gauge-circle-fill {
+            fill: none;
+            stroke: url(#gauge-gradient);
+            stroke-width: 9px;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .gauge-inner-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gauge-number {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gauge-denom {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .stars-row {
+            color: var(--accent-gold);
+            font-size: 18px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .sidebar-quote {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #566573;
+            font-style: italic;
+            background: #faf8f4;
+            padding: 15px 18px;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-gold);
+            text-align: justify;
+        }
+
+        /* Clara Card Info */
+        .clara-editor-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+            text-align: left;
+        }
+
+        .clara-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #ebeded;
+            border: 2px solid var(--accent-red);
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .clara-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.35);
+        }
+
+        .clara-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clara-name {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .clara-role {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-red);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* My Rating Card */
+        .my-rating-card {
+            border-top: 4px solid var(--accent-red);
+            padding: 25px 20px;
+        }
+
+        .my-rating-card::before {
+            display: none;
+        }
+
+        .my-rating-display {
+            display: none !important;
+            align-items: baseline;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .my-gauge-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .interactive-stars {
+            display: flex;
+            gap: 2px;
+            font-size: 26px;
+            color: #eaeded;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .interactive-stars span {
+            transition: color 0.15s, transform 0.15s;
+            user-select: none;
+        }
+
+        .interactive-stars span:hover {
+            transform: scale(1.2);
+        }
+
+        .interactive-stars span.active {
+            color: var(--accent-gold);
+        }
+
+        .comment-input {
+            width: 100%;
+            height: 90px;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: #fcfcfc;
+            font-size: 12px;
+            color: var(--text-primary);
+            resize: none;
+            margin-bottom: 15px;
+            outline: none;
+            font-family: inherit;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .comment-input:focus {
+            border-color: var(--accent-red);
+            background: #ffffff;
+        }
+
+        .save-rating-btn {
+            width: 100%;
+            background: var(--text-primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 800;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .save-rating-btn:hover {
+            background: var(--accent-red);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(192, 57, 43, 0.2);
+        }
+
+        .save-confirm-msg {
+            font-size: 11px;
+            font-weight: 700;
+            color: #27ae60;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .save-confirm-msg.show {
+            opacity: 1;
+        }
+
+        /* Right Side: 2x2 Quadrant Grid */
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .quadrant-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s;
+            position: relative;
+        }
+
+        .quadrant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .quadrant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* Set borders per quadrant */
+        .quad-kr-critic::before { background: var(--accent-blue); }
+        .quad-kr-aud::before { background: #3498db; }
+        .quad-gl-critic::before { background: #e67e22; }
+        .quad-gl-aud::before { background: #d35400; }
+
+        .quadrant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quadrant-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .quadrant-title {
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-primary);
+        }
+
+        .quadrant-branding-logos {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quad-logo-tag {
+            background: #f0f3f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        /* SVG Mini Score Gauge */
+        .mini-gauge-wrapper {
+            overflow: visible;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .mini-gauge-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .mini-circle-bg {
+            fill: none;
+            stroke: #f2f4f4;
+            stroke-width: 8px;
+        }
+
+        .mini-circle-fill {
+            fill: none;
+            stroke-width: 8px;
+            stroke-linecap: round;
+            stroke-dasharray: 125.7;
+            stroke-dashoffset: 125.7;
+            transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        /* Mini gauge colors */
+        .quad-kr-critic .mini-circle-fill { stroke: var(--accent-blue); }
+        .quad-kr-aud .mini-circle-fill { stroke: #3498db; }
+        .quad-gl-critic .mini-circle-fill { stroke: #e67e22; }
+        .quad-gl-aud .mini-circle-fill { stroke: #d35400; }
+
+        .mini-gauge-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Review Item List */
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .review-card-item {
+            background: #fafbfc;
+            border: 1px solid var(--border-color);
+            padding: 12px 14px;
+            border-radius: 12px;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .review-card-item:hover {
+            background: #ffffff;
+            border-color: rgba(0,0,0,0.12);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transform: scale(1.01);
+        }
+
+        .review-card-item.highlight {
+            background: #fffdf5;
+            border-color: rgba(243, 156, 18, 0.2);
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .review-card-item.highlight:hover {
+            background: #fffdf0;
+            border-color: rgba(243, 156, 18, 0.35);
+        }
+
+        .review-text-quote {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #34495e;
+            font-style: italic;
+        }
+
+        .review-author-source {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .review-modal-link {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-decoration: none;
+            background: #fdf2f1;
+            padding: 2px 8px;
+            border-radius: 6px;
+            align-self: flex-start;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(192, 57, 43, 0.05);
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .review-modal-link:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        /* Modal Pop-up Reader */
+        .modal-overlay {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 37, 47, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window {
+            background: #ffffff;
+            width: 90%;
+            max-width: 760px;
+            max-height: 85vh;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .modal-overlay.active .modal-window {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            padding: 30px 40px;
+            color: #ffffff;
+            position: relative;
+            background: #1a252f;
+        }
+
+        .modal-outlet-tag {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .modal-main-quote {
+            font-family: 'Playfair Display', 'Noto Sans KR', serif;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.4;
+            font-style: italic;
+            margin-bottom: 12px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .modal-meta-row {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 500;
+            display: flex;
+            gap: 15px;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body-scroll {
+            padding: 35px 40px;
+            overflow-y: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .modal-section-title {
+            font-family: 'Playfair Display', 'Noto Sans KR', serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-primary);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--bg-color);
+        }
+
+        .modal-body-scroll p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+        }
+
+        .modal-highlight-quote {
+            background: #fcfcfc;
+            border-left: 4px solid var(--accent-red);
+            border-radius: 0 12px 12px 0;
+            padding: 18px 22px;
+            margin: 15px 0;
+            box-shadow: inset 2px 2px 8px rgba(0,0,0,0.01);
+            border-top: 1px solid rgba(0,0,0,0.01);
+            border-right: 1px solid rgba(0,0,0,0.01);
+            border-bottom: 1px solid rgba(0,0,0,0.01);
+        }
+
+        .modal-highlight-quote p {
+            font-family: 'Playfair Display', 'Noto Sans KR', serif;
+            font-size: 15px;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .modal-highlight-source {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .modal-footer {
+            padding: 20px 40px;
+            background: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .modal-link-out {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-red);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .modal-link-out:hover {
+            color: var(--text-primary);
+        }
+
+        /* Clara Profile Modal */
+        .clara-profile-modal-overlay {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 37, 47, 0.45);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .clara-profile-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .clara-profile-window {
+            background: #ffffff;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .clara-profile-modal-overlay.active .clara-profile-window {
+            transform: scale(1);
+        }
+
+        /* Image Preview Modal */
+        .image-preview-overlay {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(15px);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-preview-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .preview-img-container {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .preview-img-container img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+    </style>
+    <style>
+        /* CSS Gradient for the circle gauge fill */
+        svg defs {
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <svg style="position: absolute; width: 0; height: 0;" width="0" height="0">
+        <defs>
+            <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c0392b" />
+                <stop offset="100%" stop-color="#f39c12" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand-section" onclick="location.href='index.html'">
+            <span class="brand-logo">TUG <span style="font-weight:400; color:var(--text-secondary);">CineMag</span></span>
+            <div class="brand-tagline">TUG</div>
+        </div>
+        <a href="index.html" class="back-home-btn">
+            <span>&larr;</span> 메인 포털로 돌아가기
+        </a>
+    </header>
+
+    <!-- Cinematic Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-bg"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <div class="hero-poster-wrapper">
+                <img class="hero-poster" src="media/disclosure_official_poster.png" alt="디스클로저 데이 포스터">
+            </div>
+            <div class="hero-text">
+                <div class="hero-tag">TUG Recommend</div>
+                <h1 class="hero-title">디스클로저 데이 <span>Disclosure Day, 2026</span></h1>
+                <div class="hero-meta">
+                    <span>스티븐 스필버그 감독</span>
+                    <span class="meta-divider">|</span>
+                    <span>SF • 미스터리 • 드라마</span>
+                    <span class="meta-divider">|</span>
+                    <span>미국</span>
+                    <span class="meta-divider">|</span>
+                    <span>12세이상관람가</span>
+                    <span class="meta-divider">|</span>
+                    <span>135분</span>
+                </div>
+                <div class="hero-meta-tags">
+                    <span class="hero-tag-item hero-tag-award">🎬 IMAX</span>
+                    <span class="hero-tag-item hero-tag-award">🔊 Dolby Cinema</span>
+                    <span class="hero-tag-item hero-tag-award">🌀 4DX</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Main Grid -->
+    <div class="dashboard-container">
+        
+        <!-- Left Side: Editorial Sidebar -->
+        <div class="editorial-sidebar">
+            
+            <!-- TUG Unified Score Card -->
+            <div class="sidebar-card score-card">
+                <div class="sidebar-title">TUG UNIFIED SCORE</div>
+                
+                <div class="main-gauge-wrapper">
+                    <svg class="gauge-svg" viewBox="0 0 160 160">
+                        <circle class="gauge-circle-bg" cx="80" cy="80" r="70" />
+                        <circle id="mainGaugeFill" class="gauge-circle-fill" cx="80" cy="80" r="70" />
+                    </svg>
+                    <div class="gauge-inner-content">
+                        <span class="gauge-number">9.5</span>
+                        <span class="gauge-denom">/ 10</span>
+                    </div>
+                </div>
+
+                <div class="stars-row">★★★★★</div>
+                
+                <p class="sidebar-quote">
+                    "미지와의 조우에서 쏘아 올린 순수한 동경의 신호가 거장의 50년 성찰을 거쳐 마침내 지상에서 가장 숭고한 인간적 응답으로 당도했다."
+                </p>
+
+                <!-- Clara Harrison Avatar Card -->
+                <div class="clara-editor-info">
+                    <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison"
+                         onclick="openClaraProfile()"
+                         onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
+                    <div class="clara-meta">
+                        <span class="clara-name" style="cursor:pointer;" onclick="openClaraProfile()">Clara Harrison</span>
+                        <span class="clara-role">Chief Film Critic</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Rating Personal Card -->
+            <div class="sidebar-card my-rating-card" id="myRatingCard">
+                <div class="sidebar-title" style="color:var(--accent-red);">MY RATING</div>
+                
+                <div class="my-rating-display">
+                    <span class="my-gauge-number" id="myRatingScore">0.0</span>
+                    <span class="gauge-denom">/ 10</span>
+                </div>
+
+                <div class="interactive-stars" id="interactiveStars">
+                    <span data-val="2">★</span><span data-val="4">★</span><span data-val="6">★</span><span data-val="8">★</span><span data-val="10">★</span>
+                </div>
+                
+                <textarea class="comment-input" id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..."></textarea>
+                <button id="saveRatingBtn" class="save-rating-btn">평가 저장하기</button>
+                <div id="saveConfirmMsg" class="save-confirm-msg">저장되었습니다 ✓</div>
+            </div>
+
+            <!-- TUG Theater Format Recommendation Card -->
+            <div class="sidebar-card theater-guide-card" id="theaterGuideCard" style="align-items: flex-start;">
+                <div class="sidebar-title" style="color:var(--accent-gold); align-self: center; margin-bottom: 12px;">THEATER GUIDE (관람 가이드)</div>
+                
+                <div class="theater-guide-intro" style="font-size: 11px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.5;">
+                    TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
+                </div>
+
+                <!-- IMAX Recommendation -->
+                <div class="theater-metric-row" style="width: 100%;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">IMAX (스케일)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.8 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill imax-gauge-fill" style="background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🪐 **추천**: 광활한 밤하늘과 압도적인 UFO 하강 스케일이 IMAX 스크린에 가득 찰 때의 압도적 개방감은 필수 관람 요소.
+                    </div>
+                </div>
+
+                <!-- Dolby Cinema Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Dolby Cinema (화질/음향)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.6 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill dolby-gauge-fill" style="background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 8px rgba(46, 204, 113, 0.4);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🔊 **추천**: 완벽한 암흑 속 백색 광원의 놀라운 명암비 묘사, 성간 비행 및 신호 수신음의 입체적 서라운드 최상급.
+                    </div>
+                </div>
+
+                <!-- 4DX Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">4DX (역동성)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">8.0 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill fourdx-gauge-fill" style="background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 8px rgba(230, 126, 34, 0.6);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🌀 **추천**: 미지의 존재가 등장할 때 발생하는 저주파 진동 및 환경 연출은 준수하나, 드라마 비중이 높아 가성비는 평이함.
+                    </div>
+                </div>
+
+                <!-- Standard Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Standard 일반관 (안정성)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">7.5 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill standard-gauge-fill" style="background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 8px rgba(149, 165, 166, 0.4);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        💺 **추천**: 시선 피로감 없이 편하게 거장의 대사 딕션과 심오한 인물 간 드라마에 집중하고 싶을 때 적절한 대안.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: 4-Quadrant Reviews Grid -->
+        <div class="quadrant-grid">
+            
+            <!-- Q1: 국내 평론가 -->
+            <div class="quadrant-card quad-kr-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🇰🇷 국내 평론가</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Cine21</span>
+                            <span class="quad-logo-tag">Btv</span>
+                            <span class="quad-logo-tag">왓챠</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">9.4</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"거장의 필생이 담긴 걸작. 미학적 경외감과 정서적 교감이 가장 완벽한 밸런스로 조화된 SF 드라마."</p>
+                        <div class="review-author-source">
+                            <span>이동진 평론가 (★★★★★)</span>
+                            <a class="review-modal-link" onclick="openReader('leedongjin')">🔗 비평 전문 독점공개</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"외계인이라는 장엄한 타자를 앞에 둔 채 지극히 작고 나약한 가족의 상처를 들여다보는 현미경."</p>
+                        <div class="review-author-source">
+                            <span>김혜리 평론가 (★★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"거장의 혜안. 억지 부리지 않는 웅장함, 끝내 심장을 저미는 경외감."</p>
+                        <div class="review-author-source">
+                            <span>박평식 평론가 (★★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"문명의 공포를 넘어서는 대화와 평화의 힘. 스필버그 SF 서사의 가장 성숙하고 아름다운 도달점."</p>
+                        <div class="review-author-source">
+                            <span>황진미 평론가 (★★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"스크린의 존재 가치를 온몸으로 웅변한다. 침묵과 빛이 빚어낸 황홀한 2시간."</p>
+                        <div class="review-author-source">
+                            <span>송경원 평론가 (★★★★☆)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2: 국내 관객 -->
+            <div class="quadrant-card quad-kr-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🇰🇷 국내 관객</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">CGV 에그지수</span>
+                            <span class="quad-logo-tag">네이버</span>
+                            <span class="quad-logo-tag">유튜브</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">9.6</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"억만불짜리 우주 전쟁보다 눈앞에 선 작은 생명의 손길에 눈시울이 붉어집니다. 인생 영화 등극."</p>
+                        <div class="review-author-source">
+                            <span>유튜버 거의없다 (★★★★★)</span>
+                            <a class="review-modal-link" onclick="openReader('almostmainstream')">🎬 유튜브 비평 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"아이맥스로 무조건 보세요. 미지의 비행체 내려앉을 때 사운드 압도적이고 눈물이 왈칵 쏟아졌습니다."</p>
+                        <div class="review-author-source">
+                            <span>네이버 인기 댓글 (9.8/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"부모님 모시고 갔는데 너무 좋아하심. 자극적이지 않으면서도 온몸에 전율이 도는 명작."</p>
+                        <div class="review-author-source">
+                            <span>CGV 골든에그지수 (96%)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"스필버그의 클래식한 따뜻함이 살아있다. 그저 갓벽한 이 시대 최고의 감동."</p>
+                        <div class="review-author-source">
+                            <span>왓챠피디아 유저 평점 (★★★★★)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"스타워즈와는 또 다른 우주 판타지 본연의 경외감을 선사한다. 가슴 웅장해지는 마스터피스."</p>
+                        <div class="review-author-source">
+                            <span>스타워즈 네이버 카페 유저 (★★★★☆)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3: 해외 평론가 -->
+            <div class="quadrant-card quad-gl-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🌎 해외 평론가</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Variety</span>
+                            <span class="quad-logo-tag">The Guardian</span>
+                            <span class="quad-logo-tag">Empire</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">9.5</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"스필버그는 할리우드가 오랫동안 망각하고 있던 아날로그의 향수와 감정적 연대를 경이롭게 부활시켰다."</p>
+                        <div class="review-author-source">
+                            <span>Variety · 저스틴 창 (9.5/10)</span>
+                            <a class="review-modal-link" onclick="openReader('justinchang')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"1977년 미지와의 조우가 선사했던 오리지널 경외감이 반세기를 지나 완전히 회복되었다."</p>
+                        <div class="review-author-source">
+                            <span>The Guardian · Bradshaw (★★★★★)</span>
+                            <a class="review-modal-link" onclick="openReader('guardian')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"압도적인 음향과 빛의 연출, 지극히 시각적인 스토리텔링의 장엄한 교향곡."</p>
+                        <div class="review-author-source">
+                            <span>Empire (★★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"거대한 미지의 존재를 마주한 인류의 고뇌와 관계의 회복을 엄숙하고 훌륭하게 다루었다."</p>
+                        <div class="review-author-source">
+                            <span>Hollywood Reporter (9.0/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"현대 SF 블록버스터가 나아가야 할 가장 인간적이고 숭고한 방향성."</p>
+                        <div class="review-author-source">
+                            <span>IndieWire · 데이비드 얼리치 (9.0/10)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4: 해외 관객 -->
+            <div class="quadrant-card quad-gl-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🌎 해외 관객</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">IMDb</span>
+                            <span class="quad-logo-tag">Rotten Tomatoes</span>
+                            <span class="quad-logo-tag">Letterboxd</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">9.7</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"This is pure cinema! 스필버그 필생의 역작. 엔딩의 묵직한 감동은 앞으로도 영원히 잊지 못할 것입니다."</p>
+                        <div class="review-author-source">
+                            <span>유튜버 크리스 스턱만 (★★★★★)</span>
+                            <a class="review-modal-link" onclick="openReader('stuckmann')">🎬 유튜브 비평 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"최근 10년간 본 SF 영화 중 가장 시적이고 가슴 뭉클한 가족 드라마."</p>
+                        <div class="review-author-source">
+                            <span>Letterboxd 평점 (★★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"경이롭고, 서스펜스 넘치며, 끝내 따뜻하게 안아주는 영화. 극장 의자를 꽉 움켜쥐게 만든다."</p>
+                        <div class="review-author-source">
+                            <span>Rotten Tomatoes 관객 (97%)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"사운드트랙과 조명의 정수. 영화관 스크린 앞에서 전율과 함께 전 인류적 유대를 느끼다."</p>
+                        <div class="review-author-source">
+                            <span>IMDb 유저 평점 (9.1/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"미지와의 조우와 콘택트를 뛰어넘는다. 거장의 50년 경력이 이 한 편의 완성도를 위해 달려온 것 같다."</p>
+                        <div class="review-author-source">
+                            <span>Reddit 무비 서브레딧 유저 (9.5/10)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clara Profile Modal Overlay -->
+    <div id="claraProfileModal" class="clara-profile-modal-overlay" onclick="closeClaraProfile(event)">
+        <div class="clara-profile-window" onclick="event.stopPropagation()">
+            <!-- Loaded from clara_harrison_profile.md dynamically via JS -->
+            <div id="claraProfileContent" style="padding:0; overflow-y:auto; max-height:80vh;">
+                <div style="padding: 30px; text-align: center;">
+                    <div style="font-size:14px; color:var(--text-secondary);">프로필 데이터를 불러오는 중...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview Overlay -->
+    <div id="imagePreviewModal" class="image-preview-overlay" onclick="closeImagePreview(event)">
+        <div class="preview-img-container" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeImagePreview()" style="top: -40px; right: 0;">✕</button>
+            <img id="previewImage" src="" alt="크게 보기">
+        </div>
+    </div>
+
+    <script>
+        const MOVIE_KEY = 'tug_rating_disclosure';
+        const CLOUD_KEY = 'disclosure_rating';
+        const SYNC_BASE = 'https://keyvalue.imkee.de';
+        const SYNC_TOKEN = '7c2e3914a4c52084df24';
+
+        // Base64 helper functions
+        function safeBtoa(str) {
+            if (!str) return "";
+            try {
+                const utf8Str = unescape(encodeURIComponent(str));
+                const base64 = btoa(utf8Str);
+                return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+            } catch(e) {
+                return "";
+            }
+        }
+
+        function safeAtob(str) {
+            if (!str) return "";
+            try {
+                let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+                while (base64.length % 4) {
+                    base64 += '=';
+                }
+                const base64Decoded = atob(base64);
+                return decodeURIComponent(escape(base64Decoded));
+            } catch(e) {
+                return "";
+            }
+        }
+
+        // Mock Translator data representing expanded critic reviews
+        const translatorData = {
+            leedongjin: {
+                outlet: "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
+                title: `"거장의 필생이 담긴 걸작. 미학적 경외감과 정서적 교감이 완벽히 조화된 SF"`,
+                author: "이동진 평론가",
+                score: "★★★★★ (5.0)",
+                gradient: "linear-gradient(135deg, #1e272e 0%, #2f3640 100%)",
+                link: "https://pedia.watcha.com/",
+                sections: [
+                    {
+                        title: "🚀 스타워즈와 E.T.를 넘어선 필생의 도약",
+                        text: "《디스클로저 데이》(2026)는 스필버그가 반세기에 걸쳐 축적해 온 SF 장르적 혜안과 휴머니즘의 정수를 집대성한 필생의 역작이다. 영화는 외계 존재의 공식 선포(Disclosure) 직전의 차가운 긴장감을 2.39:1 화면비 가득 압도적인 콘트라스트로 담아낸다. 거장은 빛과 어둠의 정교한 매칭, 미니어처 느낌의 아날로그 프로덕션 텍스처를 통해 현대 컴퓨터 그래픽 중심 SF의 피로감을 영리하게 타파해 낸다."
+                    },
+                    {
+                        title: "🟢 미지의 빛 앞에서 마주한 지극히 숭고한 인간성의 깊이",
+                        text: "이 영화의 진정한 울림은 거대 미지의 하강을 마주하며 겪는 문명의 붕괴가 아니라, 그 아래 발을 붙이고 서서 요동치는 작은 가족의 내밀한 붕괴와 회복을 스필버그다운 따뜻한 온기로 조명하는 지점에 있다. 딘 자린의 베스카 헬멧처럼 단단한 현실의 장벽 속에서도, 거장은 침묵과 시선, 그리고 숭고한 소통의 연대를 빚어내어 관객의 심금을 울린다. 존 윌리엄스의 쓸쓸하면서도 웅장한 사운드가 조용히 귓가를 파고들 때, 인류의 사랑이라는 가치가 은막 위에 영광스럽게 복원된다."
+                    },
+                    {
+                        quote: "은하계 너머 미지의 영역에서 당도한 장엄한 경외감, 그 속에서 스펙터클을 이겨내는 인간적인 대화와 소통의 숭고한 찬가.",
+                        quoteSource: "이동진 평론가 (평점 5.0 / 5.0)"
+                    }
+                ]
+            },
+            almostmainstream: {
+                outlet: "🎬 유튜브 영화 비평 채널 · 거의없다",
+                title: `"영화관 특별관이 존재하는 진짜 이유를 시각과 소리로 증명하다"`,
+                author: "유튜버 거의없다",
+                score: "★★★★★ (5.0)",
+                gradient: "linear-gradient(135deg, #d35400 0%, #e67e22 100%)",
+                link: "https://www.youtube.com/",
+                sections: [
+                    {
+                        title: "🍼 극장을 꽉 채우는 소리와 빛의 초압도적인 스펙터클",
+                        text: "영화 전문 크리에이터 거의없다는 이번 영상 비평을 통해, 영화의 공식 발표(Disclosure)와 성간 물체의 착륙 씬이 자아내는 압도적인 스케일과 공포에 격정적인 찬사를 보냈습니다. IMAX 대화면에 쏟아지는 찬란한 우주 백색 광선과 심장을 쥐어짜는 루트비히 요란손의 저주파 진동 사운드는 온몸의 솜털이 돋아나게 하기에 충분합니다. 자극적인 파괴 액션 없이, 오로지 연출적 서스펜스만으로 관객을 얼어붙게 만드는 거장의 위엄입니다."
+                    },
+                    {
+                        title: "🛡️ 거친 웨스턴의 고독함 위에 쌓아올린 교감의 낭만",
+                        text: "비평가는 단순한 외계인의 침공이 아닌, 국가의 통제와 소외 속에서 고독하게 달리는 인물들의 교감을 통해 차가운 쇠붙이 같은 문명 속에서도 결코 꺼지지 않는 따뜻한 불꽃을 그려낸 파브로의 시나리오와 스필버그의 뚝심을 높게 샀습니다. 그 어떤 신파적 장치 없이 오직 소통의 갈망과 교감만으로 가슴 벅찬 전율을 느끼게 합니다."
+                    }
+                ]
+            },
+            justinchang: {
+                outlet: "📰 Variety · 저스틴 창 (Justin Chang)",
+                title: `"스필버그는 할리우드가 잊어가던 아날로그의 향수와 정서적 기교의 공존을 일구어냈다"`,
+                author: "저스틴 창 (Variety 수석 평론가)",
+                score: "9.5/10",
+                gradient: "linear-gradient(135deg, #1abc9c 0%, #16a085 100%)",
+                link: "https://variety.com/",
+                sections: [
+                    {
+                        title: "🌌 문명의 시스템 붕괴보다 인격적 유대를 움켜쥐는 혜안",
+                        text: "Variety의 수석 평론가 저스틴 창은 이 영화가 텔레비전 매체가 주는 친밀함(intimacy)의 장점을 스크린의 장엄한 2.39:1 와이드스크린 스케일로 자연스럽게 전이시켜 낸 거장의 뚝심에 찬사를 보냈습니다. 영화는 거시적인 문명의 충돌을 그리는 우를 범하지 않고, 가장 작고 평범한 인간들이 마주한 '알 권리'와 '대면의 경이로움'을 내밀하게 현미경으로 관찰하듯 렌더링해 냅니다."
+                    },
+                    {
+                        quote: "거대한 미지의 캔버스 앞에 그려낸 가장 작고 숭고한 가족 서사시. SF 장르가 지향해야 할 품격 높은 마스터피스.",
+                        quoteSource: "저스틴 창 (Variety 평론가)"
+                    }
+                ]
+            },
+            guardian: {
+                outlet: "📰 The Guardian · 피터 브래드쇼 (Peter Bradshaw)",
+                title: `"1977년 미지와의 조우가 선사했던 오리지널 경외감의 완벽한 부활"`,
+                author: "피터 브래드쇼 (The Guardian 수석 영화 비평가)",
+                score: "★★★★★ (5.0)",
+                gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
+                link: "https://www.theguardian.com/",
+                sections: [
+                    {
+                        title: "🛸 현대 공상과학 스펙터클의 이정표이자 클래식의 장엄한 찬가",
+                        text: "피터 브래드쇼 평론가는 이 신작을 '과도한 CG와 볼거리 중심의 지루한 프랜차이즈 시장에 스필버그가 던지는 묵직한 경종'이라고 해석했습니다. 아날로그적 온기와 찬란하게 쏟아지는 백색 도광 연출, 인물들의 내면적 정서 교감이 극도로 풍부한 오케스트레이션과 맞물려 숨 막히는 서사적 카타르시스를 연출해 냅니다."
+                    }
+                ]
+            },
+            stuckmann: {
+                outlet: "🎬 유튜브 영화 전문 비평가 · Chris Stuckmann",
+                title: `"This is pure cinema! 스필버그 인생 후반기 최고의 마스터피스"`,
+                author: "크리스 스턱만",
+                score: "★★★★★ (5.0)",
+                gradient: "linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%)",
+                link: "https://www.youtube.com/",
+                sections: [
+                    {
+                        title: "🌌 올드 시네마의 영광을 기억하는 시네필들에게 선사하는 최고의 찬사",
+                        text: "스턱만은 격정적인 찬사와 함께 영화 비평을 이끌었습니다. 그로구가 뿜어내던 순수한 애니마트로닉스 표정처럼, 《디스클로저 데이》는 특수효과의 자극을 배제하고 인물 간의 관계와 경이로움이라는 시네마틱 아트의 원초적인 즐거움을 복원시켰습니다. 극장의 불이 꺼지는 순간, 보게 될 2시간의 우주 비행은 잊지 못할 경이의 체험입니다."
+                    }
+                ]
+            }
+        };
+
+        // Modal Elements
+        const modalOverlay = document.getElementById('readerModal');
+        const modalHeader = document.getElementById('modalHeader');
+        const modalOutlet = document.getElementById('modalOutlet');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMetaAuthor = document.getElementById('modalMetaAuthor');
+        const modalMetaScore = document.getElementById('modalMetaScore');
+        const modalContent = document.getElementById('modalContent');
+        const modalSourceLink = document.getElementById('modalSourceLink');
+
+        // Clara Profile Modal Elements
+        const claraProfileModal = document.getElementById('claraProfileModal');
+        const claraProfileContent = document.getElementById('claraProfileContent');
+        const imagePreviewModal = document.getElementById('imagePreviewModal');
+        const previewImage = document.getElementById('previewImage');
+
+        function openReader(key) {
+            const data = translatorData[key];
+            if (!data) return;
+
+            modalHeader.style.background = data.gradient;
+            modalOutlet.innerText = data.outlet;
+            modalTitle.innerText = data.title;
+            modalMetaAuthor.innerText = `작성자: ${data.author}`;
+            modalMetaScore.innerText = `평점: ${data.score}`;
+            
+            modalContent.innerHTML = '';
+            data.sections.forEach(sec => {
+                if (sec.title && sec.text) {
+                    const sectionTitle = document.createElement('h3');
+                    sectionTitle.className = 'modal-section-title';
+                    sectionTitle.innerText = sec.title;
+                    
+                    const paragraph = document.createElement('p');
+                    paragraph.innerText = sec.text;
+
+                    modalContent.appendChild(sectionTitle);
+                    modalContent.appendChild(paragraph);
+                } else if (sec.quote) {
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.className = 'modal-highlight-quote';
+                    
+                    const qParagraph = document.createElement('p');
+                    qParagraph.innerText = `"${sec.quote}"`;
+                    
+                    const qSource = document.createElement('div');
+                    qSource.className = 'modal-highlight-source';
+                    qSource.innerText = `— ${sec.quoteSource}`;
+
+                    quoteDiv.appendChild(qParagraph);
+                    quoteDiv.appendChild(qSource);
+                    modalContent.appendChild(quoteDiv);
+                }
+            });
+
+            modalSourceLink.href = data.link;
+
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeReader(event) {
+            if (event && event.target !== modalOverlay && !event.target.classList.contains('modal-close-btn')) {
+                return;
+            }
+            modalOverlay.classList.remove('active');
+            // Keep page scroll locked if Clara profile is still open, otherwise restore
+            if (!claraProfileModal.classList.contains('active')) {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Open Clara Harrison Profile Modal & load content dynamically
+        function openClaraProfile() {
+            claraProfileModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+
+            // Load from clara_harrison_profile.md
+            fetch('profiles/clara_harrison_profile.md')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response not ok');
+                    return response.text();
+                })
+                .then(markdown => {
+                    // Modern HTML rendering of profile markdown
+                    let htmlContent = parseProfileMarkdown(markdown);
+                    claraProfileContent.innerHTML = htmlContent;
+                })
+                .catch(error => {
+                    console.error('Failed to load Clara profile:', error);
+                    claraProfileContent.innerHTML = `
+                        <div style="padding: 40px; text-align: center;">
+                            <h3 style="color:var(--accent-red); margin-bottom: 10px;">데이터 로딩 실패</h3>
+                            <p style="font-size:12px; color:var(--text-secondary);">프로필 데이터를 불러올 수 없습니다. 로컬 파일 시스템을 확인하십시오.</p>
+                            <button class="save-rating-btn" onclick="closeClaraProfile()" style="margin-top:20px; width:120px; padding:8px;">닫기</button>
+                        </div>
+                    `;
+                });
+        }
+
+        function closeClaraProfile(event) {
+            if (event && event.target !== claraProfileModal && !event.target.classList.contains('clara-close-btn')) return;
+            claraProfileModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore background scroll
+        }
+
+        // Basic Profile Markdown Parser for visual excellence
+        function parseProfileMarkdown(md) {
+            let lines = md.split('\n');
+            let html = '<div style="font-family:\'Noto Sans KR\', sans-serif;">';
+            
+            // Premium Profile Cover Image Header
+            html += `
+                <div style="width:100%; height:160px; background:linear-gradient(135deg, #2c3e50, #2980b9); position:relative;">
+                    <button class="clara-close-btn" onclick="closeClaraProfile()" style="position:absolute; right:15px; top:15px; background:rgba(255,255,255,0.2); border:none; width:30px; height:30px; border-radius:50%; color:#ffffff; font-size:16px; cursor:pointer; display:flex; justify-content:center; align-items:center;">✕</button>
+                    <div style="position:absolute; left:25px; bottom:-35px; width:80px; height:80px; border-radius:50%; border:3px solid #ffffff; overflow:hidden; background:#ebeded; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <img src="media/clara_harrison_custom.png" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
+                    </div>
+                </div>
+                <div style="padding: 45px 25px 25px 25px;">
+            `;
+
+            let inList = false;
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i].trim();
+                
+                if (line.startsWith('# ')) {
+                    html += `<h2 style="font-family:'Playfair Display', serif; font-weight:900; font-size:24px; color:var(--text-primary); margin-bottom:5px;">${line.substring(2)}</h2>`;
+                } else if (line.startsWith('## ')) {
+                    let text = line.substring(3);
+                    if (text === "인사말") continue; // Skip redundant headers
+                    html += `<h3 style="font-size:15px; font-weight:800; color:var(--accent-red); margin-top:20px; margin-bottom:12px; border-left:3.5px solid var(--accent-red); padding-left:10px; text-transform:uppercase;">${text}</h3>`;
+                } else if (line.startsWith('*') || line.startsWith('-')) {
+                    if (!inList) {
+                        html += '<ul style="padding-left:20px; margin-bottom:15px; font-size:12.5px; color:#4a5568; line-height:1.75;">';
+                        inList = true;
+                    }
+                    // Parse strong markdown inside list items
+                    let itemText = line.substring(1).trim().replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--text-primary);">$1</strong>');
+                    html += `<li style="margin-bottom:6px;">${itemText}</li>`;
+                } else if (line.startsWith('>')) {
+                    html += `<blockquote style="background:#faf8f4; border-left:3px solid var(--accent-gold); padding:12px 16px; border-radius:0 12px 12px 0; font-style:italic; font-size:12.5px; line-height:1.7; color:#566573; margin:15px 0;">${line.substring(1).trim()}</blockquote>`;
+                } else if (line === "") {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                } else {
+                    // General paragraph text
+                    if (line.includes('![') && line.includes('](')) {
+                        // Extract image path
+                        let match = line.match(/!\[(.*?)\]\((.*?)\)/);
+                        if (match) {
+                            html += `
+                                <div style="margin: 15px 0; text-align: center; cursor: pointer;" onclick="openImagePreview('${match[2]}')">
+                                    <img src="${match[2]}" alt="${match[1]}" style="width:100%; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.06); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
+                                    <span style="font-size:10.5px; color:var(--text-secondary); display:block; margin-top:6px;">🔍 터치하여 원본 사진 보기</span>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        let paraText = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                        html += `<p style="font-size:13px; line-height:1.75; color:#4a5568; margin-bottom:12px; text-align:justify;">${paraText}</p>`;
+                    }
+                }
+            }
+
+            if (inList) html += '</ul>';
+            
+            html += '</div></div>';
+            return html;
+        }
+
+        // Image Preview Modal Activations
+        function openImagePreview(src) {
+            previewImage.src = src;
+            imagePreviewModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                if (previewImage) previewImage.style.transform = 'scale(1)';
+            }, 50);
+        }
+
+        function closeImagePreview(event) {
+            if (event && event.target !== imagePreviewModal && !event.target.classList.contains('modal-close-btn')) return;
+            if (previewImage) previewImage.style.transform = 'scale(0.95)';
+            if (imagePreviewModal) imagePreviewModal.classList.remove('active');
+            if (!claraProfileModal.classList.contains('active')) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+    <script>
+        // My Rating Interactive Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('#interactiveStars span');
+            const scoreDisplay = document.getElementById('myRatingScore');
+            const saveBtn = document.getElementById('saveRatingBtn');
+            const confirmMsg = document.getElementById('saveConfirmMsg');
+
+            const MOVIE_KEY = 'tug_rating_disclosure';
+            let currentScore = 0;
+
+            // Update star visuals
+            const updateStars = (score) => {
+                stars.forEach(s => {
+                    const val = parseInt(s.getAttribute('data-val'));
+                    s.classList.remove('active', 'half');
+                    s.style.background = '';
+                    s.style.webkitBackgroundClip = '';
+                    s.style.webkitTextFillColor = '';
+                    
+                    if (val <= score) {
+                        s.classList.add('active');
+                    }
+                });
+            };
+
+            // Rating Stars click listener (Integer Ratings ONLY - Half star logic strictly removed)
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const val = parseInt(star.getAttribute('data-val'));
+                    currentScore = val;
+                    scoreDisplay.textContent = currentScore.toFixed(1);
+                    updateStars(currentScore);
+                    
+                    // Live Auto-Save triggers instantly on star click
+                    saveRatingLocallyAndCloud();
+                });
+            });
+
+            // Load rating & comment from LocalStorage on load
+            const loadRating = () => {
+                const saved = localStorage.getItem(MOVIE_KEY);
+                if (saved) {
+                    try {
+                        const data = JSON.parse(saved);
+                        currentScore = parseFloat(data.score) || 0;
+                        scoreDisplay.textContent = currentScore.toFixed(1);
+                        updateStars(currentScore);
+                        if (commentInput) commentInput.value = data.comment || '';
+                    } catch(e) {
+                        resetRatingUI();
+                    }
+                } else {
+                    resetRatingUI();
+                }
+            };
+
+            const resetRatingUI = () => {
+                currentScore = 0;
+                scoreDisplay.textContent = "0.0";
+                updateStars(0);
+                if (commentInput) commentInput.value = '';
+            };
+
+            // Local & Cloud Save Function
+            const saveRatingLocallyAndCloud = () => {
+                const commentText = commentInput ? commentInput.value.trim() : '';
+                const ratingData = {
+                    score: currentScore,
+                    comment: commentText
+                };
+                
+                // 1. LocalStorage Save
+                localStorage.setItem(MOVIE_KEY, JSON.stringify(ratingData));
+                
+                // 2. Cloud DB Sync (Auto-save)
+                pushToCloud(CLOUD_KEY, currentScore.toString());
+                pushToCloud(CLOUD_KEY.replace('rating', 'comment'), safeBtoa(commentText));
+            };
+
+            const pushToCloud = (key, val) => {
+                fetch(`${SYNC_BASE}/SetValue/${SYNC_TOKEN}/${key}/${encodeURIComponent(val)}`)
+                    .catch(e => console.warn('TUG Cloud Sync: push failed'));
+            };
+
+            // Hybrid Cloud Sync Engine (Periodical Pull)
+            const syncWithCloud = () => {
+                fetch(`${SYNC_BASE}/GetValue/${SYNC_TOKEN}/${CLOUD_KEY}`)
+                    .then(res => {
+                        if (!res.ok) throw new Error();
+                        return res.text();
+                    })
+                    .then(text => {
+                        if (text && text.trim() !== "" && text !== "null") {
+                            const score = parseFloat(text.replace(/^"|"$/g, '')) || 0;
+                            
+                            // Fetch comment
+                            const commentKey = CLOUD_KEY.replace('rating', 'comment');
+                            fetch(`${SYNC_BASE}/GetValue/${SYNC_TOKEN}/${commentKey}`)
+                                .then(res2 => res2.text())
+                                .then(text2 => {
+                                    let commentText = "";
+                                    if (text2 && text2.trim() !== "" && text2 !== "null") {
+                                        let cleanComment = text2.trim().replace(/^"|"$/g, '');
+                                        commentText = safeAtob(cleanComment);
+                                    }
+
+                                    const localData = JSON.stringify({ score: score, comment: commentText });
+                                    const saved = localStorage.getItem(MOVIE_KEY);
+                                    let needUpdate = false;
+                                    if (!saved) {
+                                        needUpdate = true;
+                                    } else {
+                                        try {
+                                            const parsed = JSON.parse(saved);
+                                            if (parsed.score !== score || parsed.comment !== commentText) {
+                                                needUpdate = true;
+                                            }
+                                        } catch(e) {
+                                            needUpdate = true;
+                                        }
+                                    }
+
+                                    if (needUpdate) {
+                                        localStorage.setItem(MOVIE_KEY, localData);
+                                        currentScore = score;
+                                        scoreDisplay.textContent = currentScore.toFixed(1);
+                                        updateStars(currentScore);
+                                        if (commentInput) commentInput.value = commentText;
+                                    }
+                                });
+                        }
+                    })
+                    .catch(e => console.warn('TUG Cloud Sync: pull failed'));
+            };
+
+            // Save button
+            saveBtn.addEventListener('click', () => {
+                saveRatingLocallyAndCloud();
+                confirmMsg.classList.add('show');
+                setTimeout(() => {
+                    confirmMsg.classList.remove('show');
+                }, 2000);
+            });
+
+            loadRating();
+            syncWithCloud();
+            setInterval(syncWithCloud, 3000);
+
+            // Sync instantly when another tab (e.g. mobile dashboard) updates localStorage
+            window.addEventListener('storage', (e) => {
+                if (e.key === MOVIE_KEY) loadRating();
+            });
+        });
+    </script>
+    <script>
+        // Animate gauges smoothly on load
+        setTimeout(() => {
+            const circleFill = document.getElementById('mainGaugeFill');
+            if (circleFill) {
+                // 9.5 out of 10 score translates to stroke dashoffset
+                // Circumference is 2 * pi * r = 2 * 3.14159 * 70 = 439.8 (approx 440)
+                // Offset = 440 - (440 * (score / 10))
+                const score = 9.5;
+                const offset = 440 - (440 * (score / 10));
+                circleFill.style.strokeDashoffset = offset;
+            }
+
+            // Animate mini quadrant gauges
+            const krCriticFill = document.getElementById('gaugeFillKrCritic');
+            const krAudFill = document.getElementById('gaugeFillKrAud');
+            const glCriticFill = document.getElementById('gaugeFillGlCritic');
+            const glAudFill = document.getElementById('gaugeFillGlAud');
+
+            // Circumference of mini circle: 2 * pi * 20 = 125.7
+            if (krCriticFill) krCriticFill.style.strokeDashoffset = 125.7 - (125.7 * (9.4 / 10));
+            if (krAudFill) krAudFill.style.strokeDashoffset = 125.7 - (125.7 * (9.6 / 10));
+            if (glCriticFill) glCriticFill.style.strokeDashoffset = 125.7 - (125.7 * (9.5 / 10));
+            if (glAudFill) glAudFill.style.strokeDashoffset = 125.7 - (125.7 * (9.7 / 10));
+        }, 150);
+    </script>
+</body>
+</html>

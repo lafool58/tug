@@ -720,6 +720,39 @@
             </div>
         </div>
 
+        <!-- Card 3: 디스클로저 데이 -->
+        <div class="movie-card" data-movie-key="disclosure" 
+             data-title="디스클로저 데이" 
+             data-director="스티븐 스필버그" 
+             data-genre="SF" 
+             data-score="9.5" 
+             data-year="2026" 
+             data-link="disclosure_dashboard.html"
+             data-meta="스티븐 스필버그 감독 • 톰 행크스, 미셸 윌리엄스 주연 • 12세이상관람가"
+             data-desc="미지와의 만남이 자아내는 웅장한 침묵과 경외감. 거장 스필버그의 평생 SF 역작 《디스클로저 데이》. TUG 평론단이 국내외 비평가 및 관객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁을 독점 공개합니다."
+             data-backdrop="media/disclosure_bg.png"
+             data-backdrop-gradient="linear-gradient(135deg, #0b0d10 0%, #16171f 50%, #0c0d10 100%)"
+             onclick="location.href='disclosure_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/disclosure_official_poster.png" alt="디스클로저 데이">
+            </div>
+            <div class="card-info">
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-4dx">4DX</span>
+                </div>
+                <h3 class="card-title">디스클로저 데이 (2026)</h3>
+                <p class="card-meta">스티븐 스필버그 감독 • 톰 행크스, 미셸 윌리엄스 주연</p>
+                <div class="card-spacer"></div>
+                <div class="my-rating-row"></div>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="card-score">★ <span class="card-score-accent">9.5</span>/10</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Empty/Welcome State Screen -->
         <div class="empty-state" id="emptyState" style="display: none; grid-column: 1 / -1; max-width: 600px; margin: 40px auto; padding: 60px 40px; border-radius: 24px; border: 2px dashed rgba(192, 57, 43, 0.2); background: var(--card-bg); text-align: center; box-shadow: var(--shadow-light);">
             <div class="empty-icon" style="font-size: 55px; margin-bottom: 20px; animation: pulse 2s infinite;">🎬</div>
@@ -859,7 +892,7 @@
                 
                 // Alarm tag is ALWAYS displayed first.
                 const activeClass = hasAlarm ? 'active' : '';
-                let htmlContent = `<span class="my-alarm-tag ${activeClass}">⏰ 알람</span>`;
+                let htmlContent = `<span class="my-alarm-tag ${activeClass}" onclick="toggleAlarm(event, '${movieKey}')">⏰ 알람</span>`;
 
                 if (hasRating) {
                     try {
@@ -911,8 +944,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'mandalorian_rating', 'colony_rating',
-                'mandalorian_alarm', 'colony_alarm'
+                'mandalorian_rating', 'colony_rating', 'disclosure_rating',
+                'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -922,7 +955,12 @@
                         if (text && text.trim() !== "" && text !== "null") {
                             let cleanVal = text.trim().replace(/^"|"$/g, '');
                             const isRating = key.endsWith('rating');
-                            const movieKey = key.startsWith('mandalorian') ? 'mandalorian' : 'colony';
+                            let movieKey = 'colony';
+                            if (key.startsWith('mandalorian')) {
+                                movieKey = 'mandalorian';
+                            } else if (key.startsWith('disclosure')) {
+                                movieKey = 'disclosure';
+                            }
                             const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             
                             let localData = localStorage.getItem(localKey);
@@ -992,6 +1030,12 @@
             pushToCloud('hailmary_alarm', 'false');
             pushToCloud('mandalorian_alarm', 'false');
             pushToCloud('colony_alarm', 'false');
+        }
+
+        // Initialize disclosure alarm to false specifically to prevent forced alarm activation
+        if (!localStorage.getItem('tug_alarm_disclosure')) {
+            localStorage.setItem('tug_alarm_disclosure', 'false');
+            pushToCloud('disclosure_alarm', 'false');
         }
 
         // Setup dynamic random featured movie banner on load
