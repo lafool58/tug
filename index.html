@@ -490,11 +490,16 @@
 
         .card-rating-row {
             border-top: 1px solid var(--border-color);
-            margin-top: auto;
             padding-top: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .card-bottom-fixed {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-stars {
@@ -544,7 +549,8 @@
             gap: 6px;
             flex-wrap: nowrap;
             white-space: nowrap;
-            margin-top: 4px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
             animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
@@ -688,9 +694,12 @@
                 </div>
                 <h3 class="card-title">만달로리안 앤 그로구 (2026)</h3>
                 <p class="card-meta">존 파브로 감독 • 개봉 예정작 (특별관 확정)</p>
-                <div class="card-rating-row">
-                    <span class="card-stars">★★★★☆</span>
-                    <span class="card-score">★ <span class="card-score-accent">8.5</span>/10</span>
+                <div class="card-bottom-fixed">
+                    <div class="card-rating-row">
+                        <span class="card-stars">★★★★☆</span>
+                        <span class="card-score">★ <span class="card-score-accent">8.5</span>/10</span>
+                    </div>
+                    <div class="my-rating-row"></div>
                 </div>
             </div>
         </div>
@@ -723,9 +732,12 @@
                 </div>
                 <h3 class="card-title">군체 (2026)</h3>
                 <p class="card-meta">연상호 감독 • 개봉 예정작 (특별관 확정)</p>
-                <div class="card-rating-row">
-                    <span class="card-stars">★★★☆</span>
-                    <span class="card-score">★ <span class="card-score-accent">7.2</span>/10</span>
+                <div class="card-bottom-fixed">
+                    <div class="card-rating-row">
+                        <span class="card-stars">★★★☆</span>
+                        <span class="card-score">★ <span class="card-score-accent">7.2</span>/10</span>
+                    </div>
+                    <div class="my-rating-row"></div>
                 </div>
             </div>
         </div>
@@ -857,12 +869,12 @@
                 
                 let row = card.querySelector('.my-rating-row');
                 if (!row) {
+                    // Fallback: create row if not already in HTML
                     row = document.createElement('div');
                     row.className = 'my-rating-row';
-                    const ratingRow = card.querySelector('.card-rating-row');
-                    const cardInfo = card.querySelector('.card-info');
-                    if (cardInfo && ratingRow) {
-                        cardInfo.insertBefore(row, ratingRow);
+                    const cardBottomFixed = card.querySelector('.card-bottom-fixed');
+                    if (cardBottomFixed) {
+                        cardBottomFixed.appendChild(row);
                     }
                 }
                 
