@@ -539,7 +539,7 @@
                     try {
                         const data = JSON.parse(savedRating);
                         if (data && data.score > 0) {
-                            const starCount = data.score > 5 ? data.score / 2 : data.score;
+                            const starCount = data.score / 2;
                             const fullStars = '★'.repeat(Math.round(starCount));
                             const emptyStars = '☆'.repeat(5 - Math.round(starCount));
                             htmlContent += `<span class="my-rating-tag">내 평점 ${fullStars}${emptyStars}</span>`;
