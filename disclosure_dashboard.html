@@ -975,6 +975,28 @@
             transform: scale(0.95);
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
+
+        /* TUG Theater Guide HUD Gauge Styling */
+        .hud-gauge-container {
+            width: 100%;
+            margin-bottom: 2px;
+        }
+
+        .hud-gauge-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(234, 237, 237, 0.6);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hud-gauge-fill {
+            height: 100%;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
     </style>
     <style>
         /* CSS Gradient for the circle gauge fill */
@@ -1102,27 +1124,11 @@
                     TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
                 </div>
 
-                <!-- IMAX Recommendation -->
+                <!-- Dolby Cinema Recommendation -->
                 <div class="theater-metric-row" style="width: 100%;">
                     <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">IMAX (스케일)</span>
-                        <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.8 / 10</span>
-                    </div>
-                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
-                        <div class="hud-gauge-track">
-                            <div class="hud-gauge-fill imax-gauge-fill" style="background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);"></div>
-                        </div>
-                    </div>
-                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
-                        🪐 **추천**: 광활한 밤하늘과 압도적인 UFO 하강 스케일이 IMAX 스크린에 가득 찰 때의 압도적 개방감은 필수 관람 요소.
-                    </div>
-                </div>
-
-                <!-- Dolby Cinema Recommendation -->
-                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
-                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
                         <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Dolby Cinema (화질/음향)</span>
-                        <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.6 / 10</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.8 / 10</span>
                     </div>
                     <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                         <div class="hud-gauge-track">
@@ -1130,23 +1136,23 @@
                         </div>
                     </div>
                     <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
-                        🔊 **추천**: 완벽한 암흑 속 백색 광원의 놀라운 명암비 묘사, 성간 비행 및 신호 수신음의 입체적 서라운드 최상급.
+                        🔊 **실관람 평단 인용**: "돌비 비전의 완전한 블랙 표현력 덕분에, 안개와 구름 속에서 외계 백색 광선이 뿜어져 나오는 극적인 대비가 눈이 멀 정도로 찬란하게 묘사된다. 루트비히 요란손의 심장박동 같은 초저음 사운드가 돌비 애트모스의 서라운드 채널을 타고 극장 바닥 전체를 울릴 때의 전율은 가히 압도적."
                     </div>
                 </div>
 
-                <!-- 4DX Recommendation -->
+                <!-- IMAX Recommendation -->
                 <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
                     <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">4DX (역동성)</span>
-                        <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">8.0 / 10</span>
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">IMAX (스케일)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.5 / 10</span>
                     </div>
                     <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                         <div class="hud-gauge-track">
-                            <div class="hud-gauge-fill fourdx-gauge-fill" style="background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 8px rgba(230, 126, 34, 0.6);"></div>
+                            <div class="hud-gauge-fill imax-gauge-fill" style="background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);"></div>
                         </div>
                     </div>
                     <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
-                        🌀 **추천**: 미지의 존재가 등장할 때 발생하는 저주파 진동 및 환경 연출은 준수하나, 드라마 비중이 높아 가성비는 평이함.
+                        🪐 **실관람 평단 인용**: "영화 후반부, 성간 물체가 하늘을 가득 채우며 천천히 하강하는 씬에서 1.43:1 또는 1.9:1의 광활한 아이맥스 화면비가 선사하는 개방감과 스케일은 오직 아이맥스에서만 느낄 수 있는 경외감 그 자체이다. 장엄한 거장 스필버그의 우주적 캔버스를 만끽하기에 최적."
                     </div>
                 </div>
 
@@ -1154,7 +1160,7 @@
                 <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
                     <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
                         <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Standard 일반관 (안정성)</span>
-                        <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">7.5 / 10</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">8.5 / 10</span>
                     </div>
                     <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                         <div class="hud-gauge-track">
@@ -1162,7 +1168,23 @@
                         </div>
                     </div>
                     <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
-                        💺 **추천**: 시선 피로감 없이 편하게 거장의 대사 딕션과 심오한 인물 간 드라마에 집중하고 싶을 때 적절한 대안.
+                        💺 **실관람 평단 인용**: "자극적인 파괴 액션이 배제되고 톰 행크스와 미셸 윌리엄스의 내밀한 가족 드라마와 인물 간 소통이 서사의 핵심을 이루기에, 굳이 시선 피로도가 높은 특별관이 아니더라도 일반관의 편안한 시야에서 거장의 대사와 깊은 눈빛에 집중하는 것만으로도 온전한 서사적 카타르시스를 느낄 수 있다."
+                    </div>
+                </div>
+
+                <!-- 4DX Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">4DX (역동성)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">6.0 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill fourdx-gauge-fill" style="background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 8px rgba(230, 126, 34, 0.6);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🌀 **실관람 평단 인용**: "외계 비행체의 비행이나 중력 왜곡 현상이 발생하는 특정 씬에서 모션 체어와 진동, 바람 효과가 영화적 흥미를 일부 돋우기는 하나, 대사와 인물 간 드라마 중심의 전개가 주를 이루는 영화적 특성상 4DX 효과의 비중이 매우 낮아 가성비 측면에서 다소 아쉽다."
                     </div>
                 </div>
             </div>
@@ -1942,6 +1964,17 @@
             if (krAudFill) krAudFill.style.strokeDashoffset = 125.7 - (125.7 * (9.6 / 10));
             if (glCriticFill) glCriticFill.style.strokeDashoffset = 125.7 - (125.7 * (9.5 / 10));
             if (glAudFill) glAudFill.style.strokeDashoffset = 125.7 - (125.7 * (9.7 / 10));
+
+            // Animate TUG Theater Guide HUD Gauges
+            const imaxFill = document.querySelector('.imax-gauge-fill');
+            const dolbyFill = document.querySelector('.dolby-gauge-fill');
+            const fourdxFill = document.querySelector('.fourdx-gauge-fill');
+            const standardFill = document.querySelector('.standard-gauge-fill');
+
+            if (dolbyFill) dolbyFill.style.width = '98%';
+            if (imaxFill) imaxFill.style.width = '95%';
+            if (standardFill) standardFill.style.width = '85%';
+            if (fourdxFill) fourdxFill.style.width = '60%';
         }, 150);
     </script>
 </body>
