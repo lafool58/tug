@@ -1232,23 +1232,73 @@
             }
         }
 
-        const SYNC_TOKEN = "tug_cinemag_boss_hun_token_2026";
-        const SYNC_BASE = "https://api.keyvalue.xyz/" + SYNC_TOKEN;
+        const SYNC_TOKEN = "9cmvofbs";
+        const SYNC_BASE = "https://keyvalue.immanuel.co/api/KeyVal";
 
         function pushToCloud(key, value) {
-            if (value === null) {
-                fetch(`${SYNC_BASE}/${key}`, {
-                    method: 'POST',
-                    body: 'null'
-                }).catch(e => console.error(e));
-                return;
+            let cloudVal = "0";
+            if (value && typeof value === 'object' && value.score !== undefined) {
+                cloudVal = String(value.score).replace('.', '_');
+            } else if (value && typeof value === 'string') {
+                try {
+                    const parsed = JSON.parse(value);
+                    cloudVal = String(parsed.score || 0).replace('.', '_');
+                } catch(e) {
+                    cloudVal = value.replace('.', '_');
+                }
+            } else {
+                cloudVal = "0";
             }
-            const dataStr = JSON.stringify(value);
-            fetch(`${SYNC_BASE}/${key}`, {
+
+            fetch(`${SYNC_BASE}/UpdateValue/${SYNC_TOKEN}/${key}/${cloudVal}`, {
                 method: 'POST',
-                body: dataStr
+                body: ''
             }).catch(e => console.error('TUG Cloud Sync: push failed', e));
         }
+
+        const syncWithCloud = () => {
+            fetch(`${SYNC_BASE}/GetValue/${SYNC_TOKEN}/${movieKey}_rating`)
+                .then(res => res.text())
+                .then(text => {
+                    if (text && text.trim() !== "" && text !== "null") {
+                        let cleanVal = text.trim().replace(/^"|"$/g, '');
+                        if (cleanVal === "0" || cleanVal === "") {
+                            const savedData = localStorage.getItem('tug_rating_' + movieKey);
+                            if (savedData) {
+                                localStorage.removeItem('tug_rating_' + movieKey);
+                                selectedRating = 0;
+                                updateStars(0);
+                            }
+                            return;
+                        }
+                        const score = parseFloat(cleanVal.replace('_', '.'));
+                        
+                        // Check if we need to update local storage
+                        const savedData = localStorage.getItem('tug_rating_' + movieKey);
+                        let localScore = 0;
+                        let localComment = "";
+                        if (savedData) {
+                            try {
+                                const parsed = JSON.parse(savedData);
+                                localScore = parsed.score || 0;
+                                localComment = parsed.comment || "";
+                            } catch(e) {}
+                        }
+
+                        if (localScore !== score) {
+                            const newData = {
+                                score: score,
+                                comment: localComment,
+                                timestamp: new Date().toISOString()
+                            };
+                            localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(newData));
+                            selectedRating = score;
+                            updateStars(score);
+                        }
+                    }
+                })
+                .catch(e => console.warn('TUG Cloud Sync: pull failed'));
+        };
 
         // Save rating data to LocalStorage & Cloud
         submitBtn.addEventListener('click', () => {
@@ -1470,6 +1520,8 @@
 
         // Initialize rating data and animate theater guide gauges reactively on load
         loadRatingData();
+        syncWithCloud();
+        setInterval(syncWithCloud, 3000);
         
         setTimeout(() => {
             const imaxFill = document.querySelector('.theater-guide-widget .imax-gauge-fill');

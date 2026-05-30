@@ -573,15 +573,32 @@
             });
         }
 
-        const SYNC_TOKEN = "tug_cinemag_boss_hun_token_2026";
-        const SYNC_BASE = "https://api.keyvalue.xyz/" + SYNC_TOKEN;
+        const SYNC_TOKEN = "9cmvofbs";
+        const SYNC_BASE = "https://keyvalue.immanuel.co/api/KeyVal";
 
         // Cloud sync (PUT/POST)
         function pushToCloud(key, value) {
-            const dataStr = typeof value === 'object' ? JSON.stringify(value) : String(value);
-            fetch(`${SYNC_BASE}/${key}`, {
+            let cloudVal = "0";
+            if (key.endsWith('rating')) {
+                if (value && typeof value === 'object' && value.score !== undefined) {
+                    cloudVal = String(value.score).replace('.', '_');
+                } else if (value && typeof value === 'string') {
+                    try {
+                        const parsed = JSON.parse(value);
+                        cloudVal = String(parsed.score || 0).replace('.', '_');
+                    } catch(e) {
+                        cloudVal = value.replace('.', '_');
+                    }
+                } else {
+                    cloudVal = "0";
+                }
+            } else {
+                cloudVal = String(value);
+            }
+
+            fetch(`${SYNC_BASE}/UpdateValue/${SYNC_TOKEN}/${key}/${cloudVal}`, {
                 method: 'POST',
-                body: dataStr
+                body: ''
             }).catch(e => console.error('TUG Cloud Sync: push failed for ' + key, e));
         }
 
@@ -593,17 +610,34 @@
             ];
             
             syncKeys.forEach(key => {
-                fetch(`${SYNC_BASE}/${key}`)
+                fetch(`${SYNC_BASE}/GetValue/${SYNC_TOKEN}/${key}`)
                     .then(res => res.text())
                     .then(text => {
                         if (text && text.trim() !== "" && text !== "null") {
+                            let cleanVal = text.trim().replace(/^"|"$/g, '');
                             const isRating = key.endsWith('rating');
                             const movieKey = key.startsWith('mandalorian') ? 'mandalorian' : 'colony';
                             const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             
-                            const localData = localStorage.getItem(localKey);
-                            if (!localData || localData !== text) {
-                                localStorage.setItem(localKey, text);
+                            let localData = localStorage.getItem(localKey);
+                            let targetLocalVal = "";
+
+                            if (isRating) {
+                                if (cleanVal === "0" || cleanVal === "") {
+                                    if (localData) {
+                                        localStorage.removeItem(localKey);
+                                        loadMyRatings();
+                                    }
+                                    return;
+                                }
+                                const score = parseFloat(cleanVal.replace('_', '.'));
+                                targetLocalVal = JSON.stringify({ score: score });
+                            } else {
+                                targetLocalVal = cleanVal;
+                            }
+
+                            if (localData !== targetLocalVal) {
+                                localStorage.setItem(localKey, targetLocalVal);
                                 loadMyRatings();
                             }
                         }
@@ -640,8 +674,9 @@
         // Initialize mobile elements
         loadMyRatings();
         
-        // Trigger Hybrid Cloud Sync
+        // Trigger Hybrid Cloud Sync and poll periodically
         syncWithCloud();
+        setInterval(syncWithCloud, 3000);
 
         // Option A: Real-Time Tab Sync without Page Reload
         window.addEventListener('storage', (e) => {
