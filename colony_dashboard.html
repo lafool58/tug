@@ -1908,33 +1908,69 @@
                 });
             });
 
-        const SYNC_TOKEN = "tug_cinemag_boss_hun_token_2026";
-        const SYNC_BASE = "https://api.keyvalue.xyz/" + SYNC_TOKEN;
+        const SYNC_TOKEN = "9cmvofbs";
+        const SYNC_BASE = "https://keyvalue.immanuel.co/api/KeyVal";
+        const CLOUD_KEY = MOVIE_KEY.replace('tug_rating_', '') + '_rating';
 
         function pushToCloud(key, value) {
-            if (value === null) {
-                fetch(`${SYNC_BASE}/${key}`, {
-                    method: 'POST',
-                    body: 'null'
-                }).catch(e => console.error(e));
-                return;
+            let cloudVal = "0";
+            if (value && typeof value === 'object' && value.score !== undefined) {
+                cloudVal = String(value.score).replace('.', '_');
+            } else if (value && typeof value === 'string') {
+                try {
+                    const parsed = JSON.parse(value);
+                    cloudVal = String(parsed.score || 0).replace('.', '_');
+                } catch(e) {
+                    cloudVal = value.replace('.', '_');
+                }
+            } else {
+                cloudVal = "0";
             }
-            const dataStr = JSON.stringify(value);
-            fetch(`${SYNC_BASE}/${key}`, {
+
+            fetch(`${SYNC_BASE}/UpdateValue/${SYNC_TOKEN}/${key}/${cloudVal}`, {
                 method: 'POST',
-                body: dataStr
+                body: ''
             }).catch(e => console.error('TUG Cloud Sync: push failed', e));
         }
+
+        const syncWithCloud = () => {
+            fetch(`${SYNC_BASE}/GetValue/${SYNC_TOKEN}/${CLOUD_KEY}`)
+                .then(res => res.text())
+                .then(text => {
+                    if (text && text.trim() !== "" && text !== "null") {
+                        let cleanVal = text.trim().replace(/^"|"$/g, '');
+                        if (cleanVal === "0" || cleanVal === "") {
+                            if (localStorage.getItem(MOVIE_KEY)) {
+                                localStorage.removeItem(MOVIE_KEY);
+                                currentScore = 0;
+                                scoreDisplay.textContent = "0.0";
+                                updateStars(0);
+                            }
+                            return;
+                        }
+                        const score = parseFloat(cleanVal.replace('_', '.'));
+                        const localData = JSON.stringify({ score: score });
+                        
+                        if (localStorage.getItem(MOVIE_KEY) !== localData) {
+                            localStorage.setItem(MOVIE_KEY, localData);
+                            currentScore = score;
+                            scoreDisplay.textContent = currentScore.toFixed(1);
+                            updateStars(currentScore);
+                        }
+                    }
+                })
+                .catch(e => console.warn('TUG Cloud Sync: pull failed'));
+        };
 
         // Save button
         saveBtn.addEventListener('click', () => {
             if (currentScore === 0) {
                 localStorage.removeItem(MOVIE_KEY);
-                pushToCloud('colony_rating', null);
+                pushToCloud(CLOUD_KEY, null);
             } else {
                 const data = { score: currentScore };
                 localStorage.setItem(MOVIE_KEY, JSON.stringify(data));
-                pushToCloud('colony_rating', data);
+                pushToCloud(CLOUD_KEY, data);
             }
             confirmMsg.classList.add('show');
             setTimeout(() => {
@@ -1943,6 +1979,8 @@
         });
 
             loadRating();
+            syncWithCloud();
+            setInterval(syncWithCloud, 3000);
         });
     </script>
 </body>
