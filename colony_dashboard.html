@@ -1996,7 +1996,7 @@
         function pushValueToCloud(key, val) {
             fetch(`${SYNC_BASE}/UpdateValue/${SYNC_TOKEN}/${key}/${val}`, {
                 method: 'POST',
-                body: ''
+                body: '0'
             }).catch(e => console.error('TUG Cloud Sync: push failed for ' + key, e));
         }
 

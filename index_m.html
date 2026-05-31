@@ -110,6 +110,11 @@
             position: relative;
             height: 180px;
             box-shadow: var(--shadow-light);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .featured-m-banner:active {
+            transform: scale(0.98);
         }
 
         .featured-bg {
@@ -412,6 +417,7 @@
         
         <!-- Card 1: 디스클로저 데이 -->
         <a href="disclosure_dashboard_m.html" class="movie-card" data-movie-key="disclosure" 
+           data-reg-order="1"
            data-title="디스클로저 데이 (DISCLOSURE DAY)" 
            data-director="스티븐 스필버그" 
            data-genre="SF" 
@@ -440,6 +446,7 @@
 
         <!-- Card 2: 군체 -->
         <a href="colony_dashboard_m.html" class="movie-card" data-movie-key="colony" 
+           data-reg-order="2"
            data-title="군체 (COLONY)" 
            data-director="연상호" 
            data-genre="스릴러" 
@@ -468,6 +475,7 @@
 
         <!-- Card 3: 만달로리안 앤 그로구 -->
         <a href="mandalorian_dashboard_m.html" class="movie-card" data-movie-key="mandalorian" 
+           data-reg-order="3"
            data-title="만달로리안 앤 그로구 (THE MANDALORIAN & GROGU)" 
            data-director="존 파브로" 
            data-genre="SF" 
@@ -611,7 +619,7 @@
 
             fetch(`${SYNC_BASE}/UpdateValue/${SYNC_TOKEN}/${key}/${cloudVal}`, {
                 method: 'POST',
-                body: ''
+                body: '0'
             }).catch(e => console.error('TUG Cloud Sync: push failed for ' + key, e));
         }
 
@@ -700,13 +708,50 @@
             pushToCloud('colony_alarm', 'false');
         }
 
-        // Initialize disclosure alarm to false specifically to prevent forced alarm activation
-        if (!localStorage.getItem('tug_alarm_disclosure')) {
-            localStorage.setItem('tug_alarm_disclosure', 'false');
-            pushToCloud('disclosure_alarm', 'false');
+        // Initialize disclosure alarm to true specifically to align with user's activation request and preserve state
+        if (!localStorage.getItem('tug_alarm_disclosure_v3')) {
+            localStorage.setItem('tug_alarm_disclosure', 'true');
+            localStorage.setItem('tug_alarm_disclosure_v3', 'true');
+            pushToCloud('disclosure_alarm', 'true');
+        }
+
+        // Setup dynamic random featured movie banner on load for Mobile
+        function setupFeaturedMovie() {
+            const cards = Array.from(document.querySelectorAll('.movie-card'));
+            if (cards.length === 0) return;
+            
+            // Randomly select from all movie cards
+            const randomIndex = Math.floor(Math.random() * cards.length);
+            const card = cards[randomIndex];
+            
+            const title = card.getAttribute('data-title').split(' (')[0];
+            const desc = card.getAttribute('data-desc') || "TUG 평론단이 분석한 4분할 입체 비평 및 맞춤 팁을 지금 만나보세요.";
+            const backdrop = card.getAttribute('data-backdrop');
+            const link = card.getAttribute('href');
+            
+            const featuredBanner = document.querySelector('.featured-m-banner');
+            const featuredTitle = document.querySelector('.featured-title');
+            const featuredDesc = document.querySelector('.featured-desc');
+            const featuredBg = document.querySelector('.featured-bg');
+            
+            if (featuredTitle) featuredTitle.textContent = title;
+            if (featuredDesc) featuredDesc.textContent = desc;
+            
+            if (featuredBg && backdrop) {
+                featuredBg.style.backgroundImage = `url('${backdrop}')`;
+                featuredBg.style.backgroundSize = "cover";
+                featuredBg.style.backgroundPosition = "center 20%";
+            }
+            
+            if (featuredBanner && link) {
+                featuredBanner.onclick = function() {
+                    location.href = link;
+                };
+            }
         }
 
         // Initialize mobile elements
+        setupFeaturedMovie();
         loadMyRatings();
         
         // Trigger Hybrid Cloud Sync and poll periodically

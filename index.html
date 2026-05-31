@@ -636,6 +636,7 @@
                 <input type="text" id="searchInput" class="search-input" placeholder="영화 제목, 감독, 장르를 검색하세요...">
             </div>
             <select id="sortSelect" class="sort-select">
+                <option value="reg-desc" selected>최신 등록 순</option>
                 <option value="score-desc">평점 높은 순</option>
                 <option value="score-asc">평점 낮은 순</option>
                 <option value="my-score-desc">내 평점 높은 순</option>
@@ -656,6 +657,7 @@
         
         <!-- Card 1: 디스클로저 데이 -->
         <div class="movie-card" data-movie-key="disclosure" 
+             data-reg-order="1"
              data-title="디스클로저 데이" 
              data-director="스티븐 스필버그" 
              data-genre="SF" 
@@ -689,6 +691,7 @@
 
         <!-- Card 2: 군체 -->
         <div class="movie-card" data-movie-key="colony" 
+             data-reg-order="2"
              data-title="군체 (COLONY)" 
              data-director="연상호" 
              data-genre="스릴러" 
@@ -722,6 +725,7 @@
 
         <!-- Card 3: 만달로리안 앤 그로구 -->
         <div class="movie-card" data-movie-key="mandalorian" 
+             data-reg-order="3"
              data-title="만달로리안 앤 그로구 (THE MANDALORIAN & GROGU)" 
              data-director="존 파브로" 
              data-genre="SF" 
@@ -823,7 +827,9 @@
 
             // Perform Sorting
             const sortedCards = movieCards.filter(card => card.style.display !== 'none').sort((a, b) => {
-                if (sortBy === 'score-desc') {
+                if (sortBy === 'reg-desc') {
+                    return parseInt(a.getAttribute('data-reg-order')) - parseInt(b.getAttribute('data-reg-order'));
+                } else if (sortBy === 'score-desc') {
                     return parseFloat(b.getAttribute('data-score')) - parseFloat(a.getAttribute('data-score'));
                 } else if (sortBy === 'score-asc') {
                     return parseFloat(a.getAttribute('data-score')) - parseFloat(b.getAttribute('data-score'));
@@ -937,7 +943,7 @@
 
             fetch(`${SYNC_BASE}/UpdateValue/${SYNC_TOKEN}/${key}/${cloudVal}`, {
                 method: 'POST',
-                body: ''
+                body: '0'
             }).catch(e => console.error('TUG Cloud Sync: push failed for ' + key, e));
         }
 
@@ -1032,10 +1038,11 @@
             pushToCloud('colony_alarm', 'false');
         }
 
-        // Initialize disclosure alarm to false specifically to prevent forced alarm activation
-        if (!localStorage.getItem('tug_alarm_disclosure')) {
-            localStorage.setItem('tug_alarm_disclosure', 'false');
-            pushToCloud('disclosure_alarm', 'false');
+        // Initialize disclosure alarm to true specifically to align with user's activation request and preserve state
+        if (!localStorage.getItem('tug_alarm_disclosure_v3')) {
+            localStorage.setItem('tug_alarm_disclosure', 'true');
+            localStorage.setItem('tug_alarm_disclosure_v3', 'true');
+            pushToCloud('disclosure_alarm', 'true');
         }
 
         // Setup dynamic random featured movie banner on load
@@ -1043,17 +1050,9 @@
             const cards = Array.from(document.querySelectorAll('.movie-card'));
             if (cards.length === 0) return;
             
-            // Prefer rated movies (score > 0 in localStorage), fallback to all cards
-            var ratedCards = cards.filter(function(c) {
-                var key = c.getAttribute('data-movie-key');
-                if (!key) return false;
-                var saved = localStorage.getItem('tug_rating_' + key);
-                if (!saved) return false;
-                try { var d = JSON.parse(saved); return d && d.score > 0; } catch(e) { return false; }
-            });
-            var pool = ratedCards.length > 0 ? ratedCards : cards;
-            const randomIndex = Math.floor(Math.random() * pool.length);
-            const card = pool[randomIndex];
+            // Strictly select randomly from all movie cards as requested
+            const randomIndex = Math.floor(Math.random() * cards.length);
+            const card = cards[randomIndex];
             
             const title = card.getAttribute('data-title');
             const meta = card.getAttribute('data-meta') || `${card.getAttribute('data-director')} 감독 • ${card.getAttribute('data-year')}년 개봉`;
