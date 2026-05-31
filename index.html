@@ -690,6 +690,40 @@
             </div>
         </div>
 
+        <!-- Card 1: 군체 -->
+        <div class="movie-card" data-movie-key="colony" 
+             data-reg-order="1"
+             data-title="군체 (COLONY)" 
+             data-director="연상호" 
+             data-genre="SF" 
+             data-score="7.2" 
+             data-year="2026" 
+             data-link="colony_dashboard.html"
+             data-meta="연상호 감독 • 전지현, 구교환, 지창욱 주연 • 15세 관람가"
+             data-desc="집단 지성을 가진 변종 좀비 바이러스가 한반도를 뒤덮은 가운데, 생존자들이 최후의 보루인 통제 구역을 지키기 위해 벌이는 처절한 사투를 그린 한국형 좀비 블록버스터 대작. 제79회 칸 국제영화제 미드나잇 스크리닝 초청작!"
+             data-backdrop="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&q=80&w=1200"
+             data-backdrop-gradient="linear-gradient(135deg, #130f40 0%, #1e272e 50%, #2c3e50 100%)"
+             onclick="location.href='colony_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA1MThfODMg%2FMDAxNzE2MDExNTY3Njgx.P0pBwWjL-77WlG0Q_5mU7f6Wv9V9qB629K9g5t5t5t5g.JPEG%2Fcolony_official_poster.jpg&type=w1200" alt="군체" onerror="this.src='https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&q=80&w=400';">
+            </div>
+            <div class="card-info">
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-4dx">4DX</span>
+                </div>
+                <h3 class="card-title">군체 (2026)</h3>
+                <p class="card-meta">연상호 감독 • 전지현, 구교환, 지창욱 주연</p>
+                <div class="card-spacer"></div>
+                <div class="my-rating-row"></div>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★☆☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">7.2</span>/10</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Empty/Welcome State Screen -->
         <div class="empty-state" id="emptyState" style="display: none; grid-column: 1 / -1; max-width: 600px; margin: 40px auto; padding: 60px 40px; border-radius: 24px; border: 2px dashed rgba(192, 57, 43, 0.2); background: var(--card-bg); text-align: center; box-shadow: var(--shadow-light);">
             <div class="empty-icon" style="font-size: 55px; margin-bottom: 20px; animation: pulse 2s infinite;">🎬</div>
@@ -963,14 +997,19 @@
         if (!localStorage.getItem('tug_alarm_cleaned_v2')) {
             localStorage.setItem('tug_alarm_hailmary', 'false');
             localStorage.setItem('tug_alarm_mandalorian', 'false');
-            localStorage.setItem('tug_alarm_colony', 'false');
             localStorage.setItem('tug_alarm_initialized', 'true');
             localStorage.setItem('tug_alarm_cleaned_v2', 'true');
             
             // Push reset state to cloud reactively
             pushToCloud('hailmary_alarm', 'false');
             pushToCloud('mandalorian_alarm', 'false');
-            pushToCloud('colony_alarm', 'false');
+        }
+
+        // Initialize Colony alarm to true (Enabled) specifically to align with user's pre-production request
+        if (!localStorage.getItem('tug_alarm_colony_v3')) {
+            localStorage.setItem('tug_alarm_colony', 'true');
+            localStorage.setItem('tug_alarm_colony_v3', 'true');
+            pushToCloud('colony_alarm', 'true');
         }
 
         // Initialize disclosure alarm to true specifically to align with user's activation request and preserve state
