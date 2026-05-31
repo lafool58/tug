@@ -312,6 +312,11 @@
             font-weight: 800;
             line-height: 1.3;
             color: var(--text-primary);
+            height: 2.6em; /* Reserves space for exactly 2 lines */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .card-meta {
