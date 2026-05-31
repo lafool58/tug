@@ -551,6 +551,29 @@ window.addEventListener('storage', (e) => {
     if (e.key === 'tug_rating_' + movieKey) loadRatingData();
 });
 
+// Dynamically sort theater format recommendations in descending order of score (Mobile)
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.theater-guide-widget');
+    if (container) {
+        const rows = Array.from(container.querySelectorAll('.theater-metric-row'));
+        const parseScore = (row) => {
+            const scoreSpan = row.querySelector('.theater-metric-score');
+            if (!scoreSpan) return 0;
+            const text = scoreSpan.textContent;
+            const match = text.match(/([0-9.]+)\s*\/\s*10/);
+            return match ? parseFloat(match[1]) : parseFloat(text) || 0;
+        };
+        const hasValidScores = rows.some(r => {
+            const val = parseScore(r);
+            return !isNaN(val) && val > 0;
+        });
+        if (hasValidScores) {
+            rows.sort((a, b) => parseScore(b) - parseScore(a));
+            rows.forEach(row => container.appendChild(row));
+        }
+    }
+});
+
 setTimeout(() => {
     const isColony = (document.body.getAttribute('data-movie-key') === 'colony');
     const imaxFill = document.querySelector('.theater-guide-widget .imax-gauge-fill');
