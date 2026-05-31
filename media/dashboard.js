@@ -117,6 +117,116 @@ const translatorData = {
                 text: "그는 대규모 스페이스 독파이트와 황량한 개척 행성에서의 긴장감 넘치는 추격전들이 영화 전체의 템포를 지루할 틈 없이 이끌고 가며, 후반부 거대한 위협 앞에서도 서로의 신조(Creed)를 지키기 위해 행동하는 딘 자린의 비장한 건파이트 액션은 눈시울을 붉히게 만들기에 충분하다고 평했습니다. 스타워즈의 영광스러운 오리지널리티와 새로운 시대의 트렌드가 가장 모범적으로 융합된 최고의 엔터테인먼트이자 팬들의 열광적인 지지를 이끌어낼 기념비적인 역작이라는 최종 평가를 전했습니다."
             }
         ]
+    },
+    colony_leedongjin: {
+        outlet: "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
+        title: `"거대한 담론에 짓눌린 인물들"`,
+        author: "이동진 평론가",
+        score: "★★★☆ (3.5)",
+        gradient: "linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%)",
+        link: "https://pedia.watcha.com/",
+        sections: [
+            {
+                title: "🎬 군중이라는 괴물, 개별성의 소멸",
+                text: "이동진 평론가는 연상호 감독의 <군체>가 그리는 디스토피아의 핵심을 '개별성의 상실'로 보았습니다. 영화 속 좀비들은 더 이상 단순한 괴물이 아닙니다. 그들은 '집단 지성'이라는 이름 하에 완벽하게 통제되고 조직된 하나의 거대한 유기체, 즉 '군체' 그 자체입니다. 이는 현대 사회에서 알고리즘과 집단 사고에 의해 획일화되어 가는 인간 군상에 대한 탁월한 은유로 기능합니다."
+            },
+            {
+                title: "🎭 장르의 외연 확장, 그러나 줄어든 여백",
+                text: "그러나 이동진 평론가는 영화가 담아내려는 철학적 담론이 너무 거대해진 나머지, 정작 영화를 이끌어가는 인물들이 숨 쉴 공간이 부족해졌다고 아쉬움을 표합니다. 세계관을 설명하고 묘사하는 데 힘을 쏟으면서 등장인물들은 다소 평면적인 장기말처럼 움직이는 경향이 있습니다."
+            },
+            {
+                quote: "집단 지성 좀비라는 새로운 개념이 만들어내는 아크로바틱한 공포. 그러나 거대한 담론에 짓눌린 인물들이 만들어내는 빈약한 파장.",
+                quoteSource: "이동진 평론가 (평점 3.5 / 5.0)"
+            }
+        ]
+    },
+    colony_heojiwung: {
+        outlet: "📰 씨네21 — 허지웅의 경사기도권 · 국내 장문 평론",
+        title: `"K-좀비의 진화와 딜레마"`,
+        author: "허지웅 평론가",
+        score: "★★★☆ (3.5)",
+        gradient: "linear-gradient(135deg, #2c3e50 0%, #34495e 100%)",
+        link: "http://www.cine21.com/",
+        sections: [
+            {
+                title: "🎬 집단 지성이라는 새로운 무기",
+                text: "연상호 감독의 신작 <군체>는 그가 개척한 '한국형 좀비'의 진화를 보여줍니다. 개별적으로 달려드는 단순한 감염체를 넘어, 마치 하나의 거대한 유기체처럼 서로 정보를 교류하고 진화하는 '집단 지성 좀비'의 등장은 시각적으로 대단한 압도감을 줍니다. 특히 고층 건물과 비좁은 실내 공간을 아크로바틱하게 활용하는 액션 시퀀스는 이 영화의 가장 큰 성취입니다."
+            },
+            {
+                title: "🎭 기술적 성취 뒤에 가려진 감정적 여운",
+                text: "그러나 허지웅 평론가는 영화가 거대한 시스템과 군중의 은유에 집중한 나머지, 개별 캐릭터들이 그 스펙터클을 위한 기능적 도구로 소모되는 측면을 지적합니다. 전지현, 구교환 등 걸출한 배우들의 앙상블은 훌륭하지만, 각자가 지닌 서사의 밀도는 이전 작인 <부산행>이 주었던 감정적 파도에 미치지 못합니다."
+            },
+            {
+                quote: "기술적 성취는 눈부시나 감정적 여운은 다소 옅다. 우리는 좀비 떼의 진화에 놀라면서도, 결국 잊을 수 없는 것은 인간의 나약하고도 이기적인 맨얼굴이라는 것을 깨닫게 된다.",
+                quoteSource: "허지웅 평론가, 씨네21 '허지웅의 경사기도권'"
+            }
+        ]
+    },
+    colony_guardian: {
+        outlet: "📰 The Guardian — Full Review Translation (★★★★☆ 4/5)",
+        title: `"숨 쉴 틈 없이 질주하는 롤러코스터"`,
+        author: "피터 브래드쇼 (The Guardian 수석 영화 비평가)",
+        score: "★★★★☆ (4.0)",
+        gradient: "linear-gradient(135deg, #1e5128 0%, #145a32 100%)",
+        link: "https://www.theguardian.com/",
+        sections: [
+            {
+                title: "🎬 감염체 장르의 재발명",
+                text: "The Guardian의 피터 브래드쇼는 <군체>가 기존의 좀비 영화 문법을 영리하게 비틀었다고 평합니다. 현대 사회의 초연결성과 SNS 알고리즘에서 영감을 받은 듯한 '집단 지성 좀비'는 단순한 괴물이 아니라, 시스템화된 재난 그 자체로 묘사됩니다. 이들이 하나의 거대한 파도처럼 움직일 때의 그 시각적 충격은 칸 영화제의 미드나잇 스크리닝을 열광시키기에 충분했습니다."
+            },
+            {
+                title: "🎭 아쉬움 속에서도 빛나는 속도감",
+                text: "물론 다소 도식화된 캐릭터 설정과 급하게 마무리되는 듯한 3막의 전개는 아쉽습니다. 하지만 이 영화가 목표로 하는 '숨 막히는 미드나잇 스릴러'로서의 가치는 충분히 증명해냅니다."
+            },
+            {
+                quote: "감염체 장르를 완전히 새롭게 발명해 낸 숨 막히는 야간 열차. 거대한 야심만큼 빈틈도 있지만, 그 속도감 앞에서는 아무것도 생각할 수 없다.",
+                quoteSource: "The Guardian, 피터 브래드쇼 (★★★★☆ 4/5)"
+            }
+        ]
+    },
+    colony_indiewire: {
+        outlet: "📰 IndieWire — Full Review Translation (Grade: B-)",
+        title: `"스펙터클을 위해 희생된 감정적 코어"`,
+        author: "데이비드 에를리치 (IndieWire 수석 평론가)",
+        score: "★★★☆☆ (3.0)",
+        gradient: "linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)",
+        link: "https://www.indiewire.com/",
+        sections: [
+            {
+                title: "🎬 전대미문의 좀비 안무(Choreography)",
+                text: "IndieWire의 데이비드 에를리치는 연상호 감독이 <반도> 이후 다시 한번 스케일을 키워 돌아왔음을 환영했습니다. 특히 폐허가 된 도심의 고층 빌딩에서 벌어지는 좀비들의 집단 이동은 단순한 CG의 향연이 아니라, 마치 현대 무용을 보는 듯한 기괴하고도 아름다운 '안무(choreography)'라고 극찬했습니다."
+            },
+            {
+                title: "🎭 감정이 메마른 화려한 시각적 롤러코스터",
+                text: "그러나 문제는 스펙터클 그 자체에 있습니다. 좀비들의 움직임이 정교해지고 화려해질수록, 이를 피해 도망치는 인간 군상의 드라마는 얄팍해졌습니다. 인물들은 각자의 고뇌와 서사를 가질 여유 없이, 그저 다음 액션 시퀀스로 넘어가기 위한 체스말처럼 소비됩니다."
+            },
+            {
+                quote: "연상호는 새롭고 끔찍한 쾌감을 선사하는 '좀비 안무'를 만들어냈다. 하지만 이 압도적인 스펙터클을 위해 영화의 감정적 코어는 희생되고 말았다.",
+                quoteSource: "IndieWire, 데이비드 에를리치"
+            }
+        ]
+    },
+    colony_variety: {
+        outlet: "📰 Variety — Full Review Translation",
+        title: `"스스로의 무게에 비틀거리는 흥미로운 진화"`,
+        author: "매기 리 (Variety 영화 평론가)",
+        score: "★★★☆ (3.5)",
+        gradient: "linear-gradient(135deg, #c0392b 0%, #8e44ad 100%)",
+        link: "https://variety.com/",
+        sections: [
+            {
+                title: "🎬 진화하는 K-좀비, 개념의 확장",
+                text: "Variety의 매기 리는 연상호 감독의 <군체(Colony)>가 한국형 좀비(K-Zombie) 장르를 한 단계 더 흥미로운 방향으로 진화시켰다고 평가합니다. 단순히 육체적인 굶주림으로 움직이는 시체들이 아니라, '집단 지성'과 곤충의 '군집 행동'을 연상케 하는 좀비들의 유기적인 움직임은 그 자체로 시각적인 스펙터클이자 원초적인 공포를 불러일으킵니다."
+            },
+            {
+                title: "🎭 거시적 서사와 미시적 감정의 불균형",
+                text: "하지만 영화가 시도한 개념적 확장이 오히려 독이 된 측면도 존재합니다. 좁은 공간 안에서의 생존 투쟁과, 그들을 덮치는 거대한 '군체'의 개념을 설명하느라 정작 관객이 이입해야 할 인물들의 감정선은 희생되고 말았습니다. <부산행>에서 보여주었던 인물들 간의 끈끈한 유대감은 찾아보기 힘듭니다."
+            },
+            {
+                quote: "K-좀비 장르의 매혹적인 진화. 집단 지성과 원초적 호러를 결합했지만, 가끔은 스스로가 만들어낸 거대한 개념적 무게에 짓눌려 비틀거리기도 한다.",
+                quoteSource: "Variety, 매기 리"
+            }
+        ]
     }
 };
 
@@ -208,20 +318,27 @@ function animateGauge(circleId, score, maxScore) {
 window.addEventListener('load', () => {
     // Delay slightly to allow the DOM rendering and CSS gradients
     setTimeout(() => {
-        // Main score (8.5 out of 10, perimeter 440)
-        animateGauge('mainGaugeFill', 8.5, 10.0);
+        const isColony = (document.body.getAttribute('data-movie-key') === 'colony');
+        const mainScore = isColony ? 7.2 : 8.5;
+        const q1 = isColony ? 6.5 : 8.2;
+        const q2 = isColony ? 7.5 : 8.6;
+        const q3 = isColony ? 7.2 : 8.4;
+        const q4 = isColony ? 7.6 : 8.8;
 
-        // Q1: 8.2 / 10
-        animateGauge('gaugeFillKrCritic', 8.2, 10.0);
+        // Main score (perimeter 440)
+        animateGauge('mainGaugeFill', mainScore, 10.0);
 
-        // Q2: 8.6 / 10
-        animateGauge('gaugeFillKrAud', 8.6, 10.0);
+        // Q1: 국내 평론가
+        animateGauge('gaugeFillKrCritic', q1, 10.0);
 
-        // Q3: 8.4 / 10
-        animateGauge('gaugeFillGlCritic', 8.4, 10.0);
+        // Q2: 국내 관객
+        animateGauge('gaugeFillKrAud', q2, 10.0);
 
-        // Q4: 8.8 / 10
-        animateGauge('gaugeFillGlAud', 8.8, 10.0);
+        // Q3: 해외 평론가
+        animateGauge('gaugeFillGlCritic', q3, 10.0);
+
+        // Q4: 해외 관객
+        animateGauge('gaugeFillGlAud', q4, 10.0);
 
         // TUG 극장별 추천 가이드 HUD 게이지 애니메이션 (최종 결재 승인 사양)
         const imaxFill = document.querySelector('.imax-gauge-fill');
@@ -229,10 +346,10 @@ window.addEventListener('load', () => {
         const fourdxFill = document.querySelector('.fourdx-gauge-fill');
         const standardFill = document.querySelector('.standard-gauge-fill');
         
-        if (imaxFill) imaxFill.style.width = '96%';
-        if (dolbyFill) dolbyFill.style.width = '94%';
-        if (fourdxFill) fourdxFill.style.width = '82%';
-        if (standardFill) standardFill.style.width = '75%';
+        if (imaxFill) imaxFill.style.width = isColony ? '85%' : '96%';
+        if (dolbyFill) dolbyFill.style.width = isColony ? '92%' : '94%';
+        if (fourdxFill) fourdxFill.style.width = isColony ? '80%' : '82%';
+        if (standardFill) standardFill.style.width = isColony ? '78%' : '75%';
     }, 100);
 });
 
@@ -289,7 +406,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveBtn = document.getElementById('saveRatingBtn');
     const confirmMsg = document.getElementById('saveConfirmMsg');
 
-    const MOVIE_KEY = 'tug_rating_mandalorian';
+    const movieKey = document.body.getAttribute('data-movie-key') || 'mandalorian';
+    const MOVIE_KEY = 'tug_rating_' + movieKey;
     let currentScore = 0;
 
     // Update star visuals
