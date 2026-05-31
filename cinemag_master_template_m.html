@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | CineMag Master Template (Mobile)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        // Redirect to Desktop version if not accessed from a mobile device
+        if (!/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("cinemag_master_template.html");
+        }
+    </script>
+    <link rel="stylesheet" href="media/dashboard_m.css">
+</head>
+<body data-movie-key="template">
+
+    <!-- Header Navigation -->
+    <header>
+        <button class="back-btn" onclick="location.href='index_m.html'">‹</button>
+        <div class="brand-section">
+            <a href="index_m.html" class="brand-logo" style="text-decoration: none; color: inherit;">TUG <span>CineMag</span></a>
+            <div class="brand-tagline">TUG</div>
+        </div>
+    </header>
+
+    <!-- Main Mobile Dashboard Container Card -->
+    <div class="dashboard-card">
+        
+        <!-- Movie Poster -->
+        <div class="poster-wrapper">
+            <img class="poster-image" src="{{MOVIE_POSTER_URL}}" alt="{{MOVIE_TITLE}} 포스터">
+            <div class="poster-badges">
+                <div class="poster-badge-special special-imax">IMAX</div>
+                <div class="poster-badge-special special-dolby">Dolby Cinema</div>
+                <div class="poster-badge-special special-4dx">4DX</div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="title-section">
+            <h1 class="movie-title">{{MOVIE_TITLE}} ({{MOVIE_YEAR}})</h1>
+            <p class="movie-meta">{{MOVIE_GENRE}} • {{MOVIE_COUNTRY}} • {{MOVIE_AGE_RATING}} • {{MOVIE_DURATION}}분</p>
+        </div>
+
+        <!-- Circular Score Gauge -->
+        <div class="score-gauge-container">
+            <div class="gauge-svg-wrapper">
+                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width: 100%; height: 100%;">
+                    <!-- Background Circle -->
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#f2f4f4" stroke-width="4"></circle>
+                    <!-- TUG Crimson Arc (Calculated from {{MOVIE_SCORE}}) -->
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
+                            stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_DASH_OFFSET}}" stroke-linecap="round"></circle>
+                </svg>
+                <div class="gauge-text">
+                    <span class="gauge-score">{{MOVIE_SCORE}}</span>
+                </div>
+            </div>
+            <span class="gauge-label">TUG Unified Score</span>
+            <span class="gauge-sublabel">통합 평점</span>
+        </div>
+
+        <!-- Credits -->
+        <div class="credits-section">
+            <div class="credits-item">감독: <span>{{MOVIE_DIRECTOR}}</span></div>
+            <div class="credits-item">주연배우: <span>{{MOVIE_CAST}}</span></div>
+            <div class="credits-item">상영시간: <span>{{MOVIE_DURATION}}분</span></div>
+            <div class="credits-item">등급: <span>{{MOVIE_AGE_RATING}}</span></div>
+            <div class="credits-item">한국개봉일: <span>{{MOVIE_RELEASE_DATE}}</span></div>
+        </div>
+
+        <!-- Synopsis -->
+        <div class="synopsis-section">
+            <h2 class="section-title">시놉시스</h2>
+            <p class="synopsis-text">
+                {{MOVIE_SYNOPSIS}}
+            </p>
+        </div>
+
+        <!-- 4-Quadrant Category Reviews -->
+        <div class="quadrants-section">
+            <h2 class="section-title">4분할 입체 상세 비평</h2>
+            <div class="quadrant-list">
+
+                <!-- Q1: 국내 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Cine21</span>
+                                <span class="quad-tag">Btv</span>
+                                <span class="quad-tag">왓챠</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q1_DASH_OFFSET}}" />
+                                </svg>
+                                <span class="mini-score-val">{{SCORE_Q1}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"{{Q1_REVIEW_TEXT_1}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q1_REVIEW_AUTHOR_1}} <a class="review-modal-link" onclick="openReader('{{Q1_REVIEW_KEY_1}}')">🔗 전문보기</a></span>
+                                <span class="author-score">{{Q1_REVIEW_STARS_1}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q1_REVIEW_TEXT_2}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q1_REVIEW_AUTHOR_2}}</span>
+                                <span class="author-score">{{Q1_REVIEW_SCORE_2}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q1_REVIEW_TEXT_3}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q1_REVIEW_AUTHOR_3}}</span>
+                                <span class="author-score">{{Q1_REVIEW_SCORE_3}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q1_REVIEW_TEXT_4}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q1_REVIEW_AUTHOR_4}}</span>
+                                <span class="author-score">{{Q1_REVIEW_SCORE_4}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q1_REVIEW_TEXT_5}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q1_REVIEW_AUTHOR_5}}</span>
+                                <span class="author-score">{{Q1_REVIEW_SCORE_5}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2: 국내 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">CGV 에그지수</span>
+                                <span class="quad-tag">네이버</span>
+                                <span class="quad-tag">유튜브</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q2_DASH_OFFSET}}" />
+                                </svg>
+                                <span class="mini-score-val">{{SCORE_Q2}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"{{Q2_REVIEW_TEXT_1}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q2_REVIEW_AUTHOR_1}} <a class="review-modal-link" onclick="openReader('{{Q2_REVIEW_KEY_1}}')">🎬 전문보기</a></span>
+                                <span class="author-score">{{Q2_REVIEW_SCORE_1}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q2_REVIEW_TEXT_2}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q2_REVIEW_AUTHOR_2}}</span>
+                                <span class="author-score">{{Q2_REVIEW_SCORE_2}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q2_REVIEW_TEXT_3}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q2_REVIEW_AUTHOR_3}}</span>
+                                <span class="author-score">{{Q2_REVIEW_SCORE_3}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q2_REVIEW_TEXT_4}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q2_REVIEW_AUTHOR_4}}</span>
+                                <span class="author-score">{{Q2_REVIEW_SCORE_4}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q2_REVIEW_TEXT_5}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q2_REVIEW_AUTHOR_5}}</span>
+                                <span class="author-score">{{Q2_REVIEW_SCORE_5}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3: 해외 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Variety</span>
+                                <span class="quad-tag">The Guardian</span>
+                                <span class="quad-tag">THR</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q3_DASH_OFFSET}}" />
+                                </svg>
+                                <span class="mini-score-val">{{SCORE_Q3}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"{{Q3_REVIEW_TEXT_1}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q3_REVIEW_AUTHOR_1}} <a class="review-modal-link" onclick="openReader('{{Q3_REVIEW_KEY_1}}')">🌎 전문보기</a></span>
+                                <span class="author-score">{{Q3_REVIEW_SCORE_1}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"{{Q3_REVIEW_TEXT_2}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q3_REVIEW_AUTHOR_2}} <a class="review-modal-link" onclick="openReader('{{Q3_REVIEW_KEY_2}}')">🌎 전문보기</a></span>
+                                <span class="author-score">{{Q3_REVIEW_SCORE_2}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q3_REVIEW_TEXT_3}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q3_REVIEW_AUTHOR_3}}</span>
+                                <span class="author-score">{{Q3_REVIEW_SCORE_3}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q3_REVIEW_TEXT_4}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q3_REVIEW_AUTHOR_4}}</span>
+                                <span class="author-score">{{Q3_REVIEW_SCORE_4}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q3_REVIEW_TEXT_5}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q3_REVIEW_AUTHOR_5}}</span>
+                                <span class="author-score">{{Q3_REVIEW_SCORE_5}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4: 해외 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">IMDb</span>
+                                <span class="quad-tag">Rotten Tomatoes</span>
+                                <span class="quad-tag">Letterboxd</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q4_DASH_OFFSET}}" />
+                                </svg>
+                                <span class="mini-score-val">{{SCORE_Q4}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"{{Q4_REVIEW_TEXT_1}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q4_REVIEW_AUTHOR_1}} <a class="review-modal-link" onclick="openReader('{{Q4_REVIEW_KEY_1}}')">🎬 전문보기</a></span>
+                                <span class="author-score">{{Q4_REVIEW_SCORE_1}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q4_REVIEW_TEXT_2}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q4_REVIEW_AUTHOR_2}}</span>
+                                <span class="author-score">{{Q4_REVIEW_SCORE_2}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q4_REVIEW_TEXT_3}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q4_REVIEW_AUTHOR_3}}</span>
+                                <span class="author-score">{{Q4_REVIEW_SCORE_3}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q4_REVIEW_TEXT_4}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q4_REVIEW_AUTHOR_4}}</span>
+                                <span class="author-score">{{Q4_REVIEW_SCORE_4}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"{{Q4_REVIEW_TEXT_5}}"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">{{Q4_REVIEW_AUTHOR_5}}</span>
+                                <span class="author-score">{{Q4_REVIEW_SCORE_5}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- My Rating Widget -->
+        <div class="rating-widget">
+            <span class="widget-title">✍️ 보스의 감상평 (My Rating)</span>
+            <div class="stars-container" id="starsContainer">
+                <span class="star-icon" data-value="1">★</span>
+                <span class="star-icon" data-value="2">★</span>
+                <span class="star-icon" data-value="3">★</span>
+                <span class="star-icon" data-value="4">★</span>
+                <span class="star-icon" data-value="5">★</span>
+            </div>
+            <textarea class="comment-input" id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..."></textarea>
+            <button class="rate-submit-btn" id="submitBtn">평가 저장하기</button>
+            <div class="save-toast" id="saveToast">✓ 평가가 안전하게 저장되었습니다.</div>
+        </div>
+
+        <!-- TUG Theater Format Recommendation Widget -->
+        <div class="theater-guide-widget" style="background: #fffbf5; border: 1px dashed rgba(243, 156, 18, 0.3); border-radius: 16px; width: 100%; padding: 18px 15px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 25px; margin-bottom: 10px; box-sizing: border-box;">
+            <span class="widget-title" style="align-self: center; font-size: 13px; font-weight: 900; color: var(--accent-gold); letter-spacing: 0.3px; margin-bottom: 5px;">🎬 극장별 추천 가이드 (Theater Guide)</span>
+            
+            <div class="theater-guide-intro" style="font-size: 10.5px; color: #718096; line-height: 1.4; text-align: center; width: 100%;">
+                TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
+            </div>
+
+            <!-- IMAX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">IMAX (스케일)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">{{THEATER_IMAX_SCORE}} / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_IMAX_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🎬 **추천**: {{THEATER_IMAX_TIP}}
+                </div>
+            </div>
+
+            <!-- Dolby Cinema Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Dolby Cinema (화질/음향)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">{{THEATER_DOLBY_SCORE}} / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_DOLBY_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🔊 **추천**: {{THEATER_DOLBY_TIP}}
+                </div>
+            </div>
+
+            <!-- 4DX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #e67e22;">4DX (역동성)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">{{THEATER_4DX_SCORE}} / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_4DX_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🌀 **추천**: {{THEATER_4DX_TIP}}
+                </div>
+            </div>
+
+            <!-- Standard Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #95a5a6;">Standard 일반관 (안정성)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">{{THEATER_STANDARD_SCORE}} / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_STANDARD_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    💺 **추천**: {{THEATER_STANDARD_TIP}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI (Mobile-Responsive Version) -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="media/dashboard_m.js" defer></script>
+</body>
+</html>

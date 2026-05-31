@@ -1,0 +1,77 @@
+<!-- TUG CineMag: 영화 카드 마크업 마스터 템플릿 (CineMag Master Template Card) -->
+
+<!-- 
+================================================================================
+[PC용 영화 카드 템플릿 - index.html 반영용]
+================================================================================
+- 아래 HTML 블록을 복사하여 index.html의 <div class="magazine-grid" id="movieGrid"> 내부 알맞은 순서에 삽입하십시오.
+- 중괄호 {{ }} 플레이스홀더를 신규 등록할 영화 정보로 치환하십시오.
+- data-reg-order의 경우, 직전 영화 카드의 순번 + 1로 순차 설정하십시오.
+-->
+<!-- Card: {{MOVIE_TITLE}} -->
+<div class="movie-card" data-movie-key="{{MOVIE_KEY}}" 
+     data-reg-order="{{REG_ORDER}}"
+     data-title="{{MOVIE_TITLE}} ({{MOVIE_TITLE_EN}})" 
+     data-director="{{MOVIE_DIRECTOR}}" 
+     data-genre="{{MOVIE_GENRE}}" 
+     data-score="{{MOVIE_SCORE}}" 
+     data-year="{{MOVIE_YEAR}}" 
+     data-link="{{MOVIE_LINK_HTML}}"
+     data-meta="{{MOVIE_DIRECTOR}} 감독 • {{MOVIE_CAST}} 주연 • {{MOVIE_AGE_RATING}}"
+     data-desc="{{MOVIE_DESCRIPTION}}"
+     data-backdrop="{{MOVIE_BACKDROP_URL}}"
+     data-backdrop-gradient="linear-gradient(135deg, #0c0f12 0%, #101626 50%, #1e1136 100%)"
+     onclick="location.href='{{MOVIE_LINK_HTML}}'">
+    <div class="card-image-wrapper">
+        <img class="card-image" src="{{MOVIE_POSTER_URL}}" alt="{{MOVIE_TITLE}}">
+    </div>
+    <div class="card-info">
+        <div class="card-badges">
+            <span class="card-badge-special special-imax">IMAX</span>
+            <span class="card-badge-special special-dolby">Dolby</span>
+            <span class="card-badge-special special-4dx">4DX</span>
+        </div>
+        <h3 class="card-title">{{MOVIE_TITLE}} ({{MOVIE_YEAR}})</h3>
+        <p class="card-meta">{{MOVIE_DIRECTOR}} 감독 • {{MOVIE_CAST}} 주연</p>
+        <div class="card-spacer"></div>
+        <div class="my-rating-row"></div>
+        <div class="card-rating-row">
+            <span class="card-stars">★★★★☆</span>
+            <span class="card-score">★ <span class="card-score-accent">{{MOVIE_SCORE}}</span>/10</span>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+================================================================================
+[모바일용 영화 카드 템플릿 - index_m.html 반영용]
+================================================================================
+- 아래 HTML 블록을 복사하여 index_m.html의 <div class="magazine-grid" id="movieGrid"> 내부 알맞은 순서에 삽입하십시오.
+- 중괄호 {{ }} 플레이스홀더를 신규 등록할 영화 정보로 치환하십시오.
+-->
+<!-- Card: {{MOVIE_TITLE}} (Mobile) -->
+<a href="{{MOVIE_LINK_M_HTML}}" class="movie-card" data-movie-key="{{MOVIE_KEY}}" 
+   data-title="{{MOVIE_TITLE}} ({{MOVIE_TITLE_EN}})" 
+   data-director="{{MOVIE_DIRECTOR}}" 
+   data-genre="{{MOVIE_GENRE}}" 
+   data-score="{{MOVIE_SCORE}}" 
+   data-year="{{MOVIE_YEAR}}" 
+   data-backdrop="{{MOVIE_BACKDROP_URL}}">
+    <div class="card-image-wrapper">
+        <img class="card-image" src="{{MOVIE_POSTER_URL}}" alt="{{MOVIE_TITLE}}">
+    </div>
+    <div class="card-info">
+        <h3 class="card-title">{{MOVIE_TITLE}}</h3>
+        <p class="card-meta">{{MOVIE_DIRECTOR}} 감독 · {{MOVIE_YEAR}}</p>
+        <div class="card-badges">
+            <span class="card-badge-special special-imax">IMAX</span>
+            <span class="card-badge-special special-dolby">Dolby</span>
+            <span class="card-badge-special special-4dx">4DX</span>
+        </div>
+        <div class="card-rating-row">
+            <span class="card-score">★ <span class="card-score-accent">{{MOVIE_SCORE}}</span></span>
+        </div>
+        <div class="my-rating-row"></div>
+    </div>
+</a>
