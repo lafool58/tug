@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 황해 (The Yellow Sea) 모바일 대시보드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        // Redirect to Desktop version if not accessed from a mobile device
+        if (!/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("movie_dashboard_template.html");
+        }
+    </script>
+    <style>
+        :root {
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --accent-blue: #2980b9;
+            --accent-red: #c0392b;
+            --accent-gold: #f39c12;
+            --text-primary: #1a252f;
+            --text-secondary: #7f8c8d;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        /* Top Header Area (Compact Mobile Style) */
+        header {
+            width: 100%;
+            background: var(--card-bg);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow-light);
+            border-top: 3px solid var(--accent-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-grow: 1;
+        }
+
+        .brand-logo {
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-logo span {
+            color: var(--accent-red);
+        }
+
+        .brand-tagline {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 1px 6px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Container Card (Matches Mockup exactly) */
+        .dashboard-card {
+            background: var(--card-bg);
+            margin: 15px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Movie Poster inside card */
+        .poster-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+            aspect-ratio: 2 / 2.85;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        .poster-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Floating Badges on Poster */
+        .poster-badges {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* Top-right overlay matching light mockup */
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 5;
+        }
+
+        .poster-badge-special {
+            font-size: 8px;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .special-imax {
+            color: #2980b9;
+            background: rgba(41, 128, 185, 0.08);
+            border-color: rgba(41, 128, 185, 0.25);
+        }
+
+        .special-dolby {
+            color: #1a252f;
+            background: rgba(26, 37, 47, 0.05);
+            border-color: rgba(26, 37, 47, 0.15);
+        }
+
+        .special-4dx {
+            color: #000000;
+            background: rgba(0, 0, 0, 0.06);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Title Area */
+        .title-section {
+            text-align: center;
+            width: 100%;
+        }
+
+        .movie-title {
+            font-size: 19px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .movie-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Unified circular score gauge */
+        .score-gauge-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .gauge-svg-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .gauge-text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gauge-score {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gauge-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .gauge-sublabel {
+            font-size: 9px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Detailed credits */
+        .credits-section {
+            width: 100%;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .credits-item {
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .credits-item span {
+            font-weight: 800;
+            color: var(--accent-red);
+        }
+
+        /* Synopsis */
+        .synopsis-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent-red);
+            padding-left: 8px;
+        }
+
+        .synopsis-text {
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #4a5568;
+            text-align: justify;
+        }
+
+        /* Interactive Rating Section */
+        .rating-widget {
+            background: #fffdf9;
+            border: 1px dashed rgba(243, 156, 18, 0.3);
+            border-radius: 16px;
+            width: 100%;
+            padding: 18px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .widget-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--accent-gold);
+            letter-spacing: 0.3px;
+        }
+
+        .stars-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .star-icon {
+            font-size: 26px;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.1s, color 0.1s;
+        }
+
+        .star-icon.active {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .star-icon.half {
+            background: linear-gradient(90deg, var(--accent-gold) 50%, #e2e8f0 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: scale(1.1);
+        }
+
+        .comment-input {
+            width: 100%;
+            height: 60px;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            resize: none;
+            outline: none;
+            color: var(--text-primary);
+        }
+
+        .comment-input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .rate-submit-btn {
+            width: 100%;
+            background: var(--accent-red);
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.15);
+        }
+
+        .rate-submit-btn:active {
+            transform: scale(0.98);
+            background: #a93226;
+        }
+
+        .save-toast {
+            font-size: 11px;
+            font-weight: 700;
+            color: #27ae60;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* 4-Quadrant Category Reviews */
+        .quadrants-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .quadrant-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .quadrant-group-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            width: 100%;
+        }
+
+        .quadrant-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1.5px solid var(--accent-red);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quadrant-card-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--text-primary);
+        }
+
+        .quadrant-card-tags {
+            display: flex;
+            gap: 4px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .quad-tag {
+            font-size: 8px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            background: var(--bg-color);
+            padding: 1px 5px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .mini-gauge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mini-circle-wrapper {
+            position: relative;
+            width: 32px;
+            height: 32px;
+        }
+
+        .mini-score-val {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .mini-circle-bg {
+            fill: none;
+            stroke: #f2f4f4;
+            stroke-width: 4;
+        }
+
+        .mini-circle-fill {
+            fill: none;
+            stroke: var(--accent-red);
+            stroke-width: 4.5;
+            stroke-linecap: round;
+        }
+
+        /* Review Item List */
+        .review-quote-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .review-quote-item {
+            border-left: 2px solid var(--border-color);
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .review-quote-item.highlighted {
+            border-left-color: var(--accent-red);
+            background: rgba(192, 57, 43, 0.02);
+            padding: 8px 10px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .review-quote-text {
+            font-size: 11.5px;
+            line-height: 1.5;
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        .review-quote-author {
+            font-size: 10.5px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .review-quote-author span.author-name {
+            color: var(--text-primary);
+        }
+
+        .review-quote-author span.author-score {
+            color: var(--accent-red);
+            font-weight: 800;
+        }
+
+        /* View Full Review (Modal Trigger Links) */
+        .review-modal-link {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 1px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+            margin-top: 2px;
+        }
+
+        .review-modal-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsive Reader Modal Overlays */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 30, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Slide up from bottom on mobile */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window {
+            background: #ffffff;
+            width: 100%;
+            border-radius: 20px 20px 0 0; /* Bottom sheet style for mobile */
+            overflow: hidden;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .modal-overlay.active .modal-window {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 25px 20px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .modal-outlet-tag {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .modal-main-quote {
+            font-size: 15px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .modal-meta-row {
+            display: flex;
+            gap: 8px;
+            font-size: 10.5px;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .modal-body-scroll {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-section-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent-red);
+            padding-left: 8px;
+            margin-top: 5px;
+        }
+
+        .modal-body-scroll p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        .modal-highlight-quote {
+            background: #fffcf4;
+            border-left: 3.5px solid var(--accent-gold);
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin: 8px 0;
+        }
+
+        .modal-highlight-quote p {
+            font-style: italic;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        .modal-highlight-source {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            text-align: right;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            background: #f8f9f9;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+        }
+
+        .modal-link-out {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <button class="back-btn" onclick="location.href='index_m.html'">‹</button>
+        <div class="brand-section">
+            <a href="index_m.html" class="brand-logo" style="text-decoration: none; color: inherit;">TUG <span>CineMag</span></a>
+            <div class="brand-tagline">TUG</div>
+        </div>
+    </header>
+
+    <!-- Main Mobile Dashboard Container Card -->
+    <div class="dashboard-card">
+        
+        <!-- Movie Poster -->
+        <div class="poster-wrapper">
+            <img class="poster-image" src="media/yellow_sea_poster_1779948571796.png" alt="황해 포스터">
+            <div class="poster-badges">
+                <div class="poster-badge-special special-imax">IMAX</div>
+                <div class="poster-badge-special special-dolby">Dolby Cinema</div>
+                <div class="poster-badge-special special-4dx">4DX</div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="title-section">
+            <h1 class="movie-title">황해 (The Yellow Sea) (2010)</h1>
+            <p class="movie-meta">스릴러, 범죄, 드라마 • 한국 • 청소년관람불가 • 156분</p>
+        </div>
+
+        <!-- Circular Score Gauge -->
+        <div class="score-gauge-container">
+            <div class="gauge-svg-wrapper">
+                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width: 100%; height: 100%;">
+                    <!-- Background Circle -->
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#f2f4f4" stroke-width="4"></circle>
+                    <!-- TUG Crimson Arc -->
+                    <circle id="mainGaugeFill" cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
+                            stroke-dasharray="125.6" stroke-dashoffset="125.6" stroke-linecap="round"></circle>
+                </svg>
+                <div class="gauge-text">
+                    <span class="gauge-score">7.7</span>
+                </div>
+            </div>
+            <span class="gauge-label">TUG Unified Score</span>
+            <span class="gauge-sublabel">통합 평점</span>
+        </div>
+
+        <!-- Credits -->
+        <div class="credits-section">
+            <div class="credits-item">감독: <span>나홍진</span></div>
+            <div class="credits-item">주연배우: <span>하정우 · 김윤석 · 조성하 · 이철민</span></div>
+            <div class="credits-item">상영시간: <span>156분</span></div>
+            <div class="credits-item">등급: <span>청소년관람불가</span></div>
+            <div class="credits-item">한국개봉일: <span>2010.12.22</span></div>
+        </div>
+
+        <!-- Synopsis -->
+        <div class="synopsis-section">
+            <h2 class="section-title">시놉시스</h2>
+            <p class="synopsis-text">
+                연변에서 택시를 몰며 빚더미에 쌓인 구남(하정우 분)은 아내를 찾기 위해 청부살인 의뢰를 수락하고 황해를 건넌다. 그러나 서울에 도착하자마자 살인 현장을 목격하고 살인 누명을 쓴 채 경찰과 그를 쫓는 잔혹한 브로커 면정학(김윤석 분)의 추격 속에 처절한 밀실 같은 도시 속을 질주하게 되는 지독하고 처절한 생존 투쟁의 하드보일드 서사시.
+            </p>
+        </div>
+
+        <!-- 4-Quadrant Category Reviews (Web-synced rich content - Exactly 5 reviews per category) -->
+        <div class="quadrants-section">
+            <h2 class="section-title">4분할 입체 상세 비평</h2>
+            <div class="quadrant-list">
+
+                <!-- Q1: 국내 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Cine21</span>
+                                <span class="quad-tag">Btv</span>
+                                <span class="quad-tag">왓챠</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="32.65" />
+                                </svg>
+                                <span class="mini-score-val">7.4</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"야심도 재능이다. 에너지가 펄펄 끓는 괴물 같은 장르 영화. 육체적 고통과 절박함을 날것 그대로 전달하는 강력한 마스터피스."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">이동진 평론가 <a class="review-modal-link" onclick="openReader('leedongjin')">🔗 전문보기</a></span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"인과의 도치로 엮은 올무. 인물들이 도망치려 발버둥 칠수록 운명이라는 사슬이 목을 졸라오는 서늘한 쾌감."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">김혜리 평론가</span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"지루하진 않으나 지친다, 지쳐! 너무 팽팽하게만 당겨진 시위 탓에 피로감이 엄습한다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">박평식 평론가</span>
+                                <span class="author-score">6.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"남성 잔혹 스릴러의 막장에서 발견한 서글픈 야만과 결핍의 무한 루프. 구남과 면가의 결투는 생존을 향한 짐승들의 처절한 비명과도 같다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">황진미 평론가</span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"가차 없이 돌진하는 피비린내 나는 폭력의 물량 공세. 연출적 뚝심과 질주는 타의 추종을 불허하지만, 끝내 관객을 심신 미약 상태로 몰아넣는다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">송경원 평론가</span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2: 국내 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">에그지수</span>
+                                <span class="quad-tag">네이버</span>
+                                <span class="quad-tag">유튜브</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="28.89" />
+                                </svg>
+                                <span class="mini-score-val">7.7</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"잔혹함 이면에 숨겨진 영화적 밀도와 연출력은 대단하다. 단, 뼈다귀 액션의 강렬함만큼이나 호불호는 우주 끝까지 갈 것."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">유튜버 거의없다 <a class="review-modal-link" onclick="openReader('almostmainstream')">🎬 전문보기</a></span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"하정우 김윤석 연기는 대박인데 솔직히 너무 징그럽고 잔인해서 눈 절반 감고 봄ㅠㅠ 면정학 뼈다귀 신은 진짜 충격 그 자체."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">트위터(X) 인기 반응</span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"배우들 연기가 압도적이네요. 특히 면가의 족발 뼈다귀 무쌍은 존재감이 장난 아닙니다. 하지만 러닝타임이 너무 길고 분위기가 내내 우울해서 다소 피곤해요."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">CGV 골든에그</span>
+                                <span class="author-score">78%</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"지독하고 잔혹하며 뜨겁다. 연출력 하나만큼은 나홍진 감독이 한국 영화계에서 최고 수준임을 입증한 괴물 같은 걸작."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">왓챠피디아 유저 평점</span>
+                                <span class="author-score">3.5/5</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"하정우 김치 먹방, 감자 먹방 보러 갔다가 뼈다귀 액션에 심장 터지는 줄... 호불호는 진짜 엄청 심하게 갈릴 만한 영화입니다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">네이버 실관람객 평점</span>
+                                <span class="author-score">7.9/10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3: 해외 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Variety</span>
+                                <span class="quad-tag">Guardian</span>
+                                <span class="quad-tag">Empire</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="28.89" />
+                                </svg>
+                                <span class="mini-score-val">7.7</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"심장을 요동치게 만드는, 잔혹하고도 유머러스한 장르 영화. 비록 플롯이 꼬여있지만 가슴 찌릿한 비극적 차원에 도달했다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Variety · 저스틴 창 <a class="review-modal-link" onclick="openReader('justinchang')">🌎 번역해설</a></span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"들끓는 스태미나, 자비 없는 폭력, 속사포 같은 편집. 결말부에서 미스터리가 다소 어수선하게 매듭지어지며 피로를 유발한다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">THR · 매기 리 <a class="review-modal-link" onclick="openReader('maggielee')">🌎 번역해설</a></span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"나홍진은 박찬욱의 복수심과 마이클 맨의 밤거리 감각을 훌륭히 결합하여 엄청난 힘의 한국형 갱스터 서사시를 창조해냈다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">The Guardian <a class="review-modal-link" onclick="openReader('guardian')">🌎 번역해설</a></span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"하정우의 절박함과 김윤석의 짐승 같은 카리스마가 서사를 거침없이 끌어당긴다. 지나친 폭력이 주는 피로감마저 스타일로 승화시킨다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">NY Times</span>
+                                <span class="author-score">7.5/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"추격전의 속도감과 타격감은 전율적이지만, 인물들의 내면적 절망을 깊이 탐구하기엔 액션과 피의 물결이 너무 거대하게 앞선다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">RogerEbert.com</span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4: 해외 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">IMDb</span>
+                                <span class="quad-tag">RottenTomatoes</span>
+                                <span class="quad-tag">Letterboxd</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="23.86" />
+                                </svg>
+                                <span class="mini-score-val">8.1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"한국 장르 영화가 왜 전 세계 스릴러 팬들과 비평가들에게 대단한 찬사를 받는지 확실히 증명하는 강렬한 영화."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">유튜버 크리스 스턱만</span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"황해는 정말이지 맹수 같은 스릴러다. 뼈다귀 결투 장면은 그야말로 전설적이다. 악당 면정학으로 분한 김윤석의 존재감은 온몸에 소름을 돋게 만든다!"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">트위터(X) 글로벌 반응</span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"어떤 타협도 없이 밀고 나가는 지독하고 멈춤 없는 한국 스릴러 영화. 서사가 다소 복잡해 집중력이 요구되지만 장르 팬들에게는 궁극의 카타르시스를 준다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">IMDb 유저 평점</span>
+                                <span class="author-score">7.3/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"경이로운 카메라 워크와 쉼 없이 조여오는 속도감. 하정우는 절박한 생존자의 극한을 구현해냈다. 폭력적이고 지극히 어둡지만 단연 명작 수준의 가치가 있다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Letterboxd 평점</span>
+                                <span class="author-score">4.0/5.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"믿기 힘든 놀라운 액션 시퀀스들로 채워진 잔혹한 추격극. 러닝타임이 조금 길게 느껴지기도 하지만, 훌륭한 연기와 날것 그대로의 거친 현실감이 숨을 죽이게 만든다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Rotten Tomatoes 관객지수</span>
+                                <span class="author-score">81%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Rating Widget -->
+        <div class="rating-widget">
+            <span class="widget-title">✍️ 보스의 감상평 (My Rating)</span>
+            <div class="stars-container" id="starsContainer">
+                <span class="star-icon" data-value="1">★</span>
+                <span class="star-icon" data-value="2">★</span>
+                <span class="star-icon" data-value="3">★</span>
+                <span class="star-icon" data-value="4">★</span>
+                <span class="star-icon" data-value="5">★</span>
+            </div>
+            <textarea class="comment-input" id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..."></textarea>
+            <button class="rate-submit-btn" id="submitBtn">평가 저장하기</button>
+            <div class="save-toast" id="saveToast">✓ 평가가 안전하게 저장되었습니다.</div>
+        </div>
+
+        <!-- TUG Theater Format Recommendation Widget (Relocated to Dashboard Body) -->
+        <div class="theater-guide-widget" style="background: #fffbf5; border: 1px dashed rgba(243, 156, 18, 0.3); border-radius: 16px; width: 100%; padding: 18px 15px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 25px; margin-bottom: 10px; box-sizing: border-box;">
+            <span class="widget-title" style="align-self: center; font-size: 13px; font-weight: 900; color: var(--accent-gold); letter-spacing: 0.3px; margin-bottom: 5px;">🎬 극장별 추천 가이드 (Theater Guide)</span>
+            
+            <div class="theater-guide-intro" style="font-size: 10.5px; color: #718096; line-height: 1.4; text-align: center; width: 100%;">
+                TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
+            </div>
+
+            <!-- Dolby Cinema Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Dolby Cinema (화질/음향)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.8 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🔊 **실관람 평단 인용**: "돌비 비전의 완전한 블랙 표현력 덕분에, 안개와 구름 속에서 외계 백색 광선이 뿜어져 나오는 극적인 대비가 눈이 멀 정도로 찬란하게 묘사된다. 루트비히 요란손의 심장박동 같은 초저음 사운드가 극장 바닥 전체를 울릴 때의 전율은 압도적."
+                </div>
+            </div>
+
+            <!-- IMAX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">IMAX (스케일)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.5 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🪐 **실관람 평단 인용**: "영화 후반부, 성간 물체가 하늘을 가득 채우며 천천히 하강하는 씬에서 1.43:1 또는 1.9:1의 광활한 아이맥스 화면비가 선사하는 개방감과 스케일은 오직 아이맥스에서만 느낄 수 있는 경외감 그 자체이다."
+                </div>
+            </div>
+
+            <!-- Standard Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Standard 일반관 (안정성)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">8.5 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    💺 **실관람 평단 인용**: "자극적인 파괴 액션이 배제되고 톰 행크스와 미셸 윌리엄스의 내밀한 가족 드라마 and 인물 간 소통이 서사의 핵심을 이루기에, 일반관의 편안한 시야에서 거장의 대사와 깊은 눈빛에 집중하는 것만으로도 온전한 서사적 카타르시스를 느낄 수 있다."
+                </div>
+            </div>
+
+            <!-- 4DX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">4DX (역동성)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">6.0 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🌀 **실관람 평단 인용**: "외계 비행체의 비행이나 중력 왜곡 현상이 발생하는 특정 씬에서 모션 효과가 영화적 흥미를 일부 돋우기는 하나, 대사와 인물 간 드라마 중심의 전개가 주를 이루는 특성상 4DX 효과의 비중이 매우 낮아 다소 아쉽다."
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI (Mobile-Responsive Version) -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const movieKey = 'yellowsea';
+        const stars = Array.from(document.querySelectorAll('.star-icon'));
+        const commentInput = document.getElementById('commentInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const saveToast = document.getElementById('saveToast');
+        
+        let selectedRating = 0;
+
+        // Base64 helper functions (synced with desktop)
+        function safeBtoa(str) {
+            if (!str) return "";
+            try {
+                const utf8Str = unescape(encodeURIComponent(str));
+                const base64 = btoa(utf8Str);
+                return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+            } catch(e) {
+                return "";
+            }
+        }
+
+        function safeAtob(str) {
+            if (!str) return "";
+            try {
+                let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+                while (base64.length % 4) {
+                    base64 += '=';
+                }
+                const base64Decoded = atob(base64);
+                return decodeURIComponent(escape(base64Decoded));
+            } catch(e) {
+                return "";
+            }
+        }
+
+        // Mock Translator data representing expanded critic reviews
+        const translatorData = {
+            leedongjin: {
+                outlet: "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
+                title: `"야심도 재능이다. 에너지가 펄펄 끓는 괴물 같은 장르 영화"`,
+                author: "이동진 평론가",
+                score: "★★★★☆ (8.0/10)",
+                gradient: "linear-gradient(135deg, #1e272e 0%, #2f3640 100%)",
+                link: "https://pedia.watcha.com/",
+                sections: [
+                    {
+                        title: "🔥 야성과 기교의 야심 찬 충돌",
+                        text: "이동진 평론가는 《황해》(2010)를 나홍진 감독의 범죄 스릴러 장르적 기교와 거대한 뚝심이 정점에서 맞물린 에너지의 폭발로 분석했습니다. 주인공 구남(하정우 분)이 살기 위해, 그리고 아내를 찾기 위해 연변에서 한국으로 건너오며 시작되는 생존의 투쟁은 보는 이들의 숨통을 옥죄는 압도적인 속도감으로 서사를 몰아칩니다."
+                    },
+                    {
+                        title: "🩸 극사실주의적 묘사와 생존의 처절함",
+                        text: "영화 속 수많은 액션과 폭력 묘사는 단순히 오락적 전시를 넘어, 생생한 생활의 비린내와 육체적 고통을 동반한 극사실주의적 색채를 띱니다. 이동진 평론가는 가학적으로 느껴지는 지독한 폭력 장면에 대해 '할리우드식 액션 영화의 미끈한 조율과 세련된 합이 제거되었기 때문'에 더 날것 그대로 다가온다고 해석했습니다. 생존을 위해 몸부림치는 구남과 돈을 좇아 개 뼈다귀를 휘두르는 짐승 같은 면가(김윤석 분)의 질주는 마치 야생동물의 영역 싸움을 현미경으로 관찰하는 듯한 야만성을 보여줍니다."
+                    },
+                    {
+                        quote: "지독한 야성과 경이로운 기교가 빚어낸 괴물 같은 영화. 나홍진은 이 영화를 통해 야심 또한 감독에게 가장 위대한 재능 중 하나임을 스스로 입증해냈다.",
+                        quoteSource: "이동진 평론가 (평점 4.0 / 5.0)"
+                    },
+                    {
+                        title: "⚖️ 서사의 과잉과 호흡 조절의 피로감",
+                        text: "그러나 중반부를 지나면서 복잡하게 얽히는 김승현 살인사건의 배후 세력들과 쫓고 쫓기는 캐릭터의 중첩은 다소 서사의 질주를 어수선하게 매듭짓는다는 아쉬움도 남깁니다. 156분의 긴 러닝타임 내내 단 한 순간도 긴장감을 늦추지 않고 끊임없이 당겨진 활시위처럼 서사를 가속화하기 때문에, 크레딧이 올라갈 때 즈음에는 관객에게 깊은 피로감과 심적 탈진을 선사한다는 장르적 한계 역시 짚었습니다."
+                    }
+                ]
+            },
+            almostmainstream: {
+                outlet: "🎬 유튜브 영화 비평 채널 · 거의없다",
+                title: `"잔혹함 이면에 숨겨진 영화적 밀도와 연출력은 대단하다. 단, 호불호는 우주 끝까지 갈 것"`,
+                author: "유튜버 거의없다",
+                score: "★ 8.0/10 (별점 4.0점)",
+                gradient: "linear-gradient(135deg, #d35400 0%, #e67e22 100%)",
+                link: "https://www.youtube.com/@almost_mainstream",
+                sections: [
+                    {
+                        title: "🍖 면정학이라는 압도적인 야수의 출현",
+                        text: "영화 유튜버 '거의없다'는 영상 비평을 통해 《황해》에서 김윤석 배우가 연기한 '면정학(면가)' 캐릭터가 한국 영화계에 남긴 충격을 심도 있게 짚었습니다. 정장을 차려입은 말끔한 할리우드식 청부업자가 아닌, 족발 뼈다귀와 커다란 식칼을 휘두르는 면가의 날것 같은 포악함은 공포심을 자아내며 극의 중심을 강력하게 흔들어 놓습니다. 특히 여관방에서 덮쳐오는 조직원들을 날것의 개 뼈다귀 하나로 초토화시키는 장면은 장르 영화사에서 손에 꼽을 불멸의 쾌감을 제공한다고 극찬했습니다."
+                    },
+                    {
+                        title: "🏃‍♂️ 구남의 피 말리는 질주와 생활형 묘사",
+                        text: "반면 하정우가 분한 '구남'은 빚더미에 올라 아내를 찾기 위해 밀항선을 타고 서해를 건너온, 지극히 초라하고 절박한 생존 기계로 묘사됩니다. 거의없다는 이 영화가 구남의 절박함을 표현하는 독창적인 방식으로 '먹방'을 꼽았습니다. 그가 핫바를 우적우적 씹어 먹거나 컵라면을 들이켜고, 편의점 호빵을 게걸스럽게 삼키는 장면들은 그가 생물학적으로 '살기 위해 먹어야만 하는' 짐승의 연장선에 있음을 아주 리얼하게 웅변하는 장치입니다."
+                    },
+                    {
+                        quote: "영화의 완성도와 연출적 뚝심은 나홍진 감독의 장기인 지독함을 120% 보여준다. 하지만 뼈다귀 액션이 상징하듯 지나칠 정도의 잔인함 탓에 호불호가 극명하게 나뉠 수밖에 없는 작품.",
+                        quoteSource: "유튜브 거의없다 리뷰"
+                    },
+                    {
+                        title: "⚖️ 일반 관객들의 위장을 시험하는 지독함",
+                        text: "하지만 그는 일반 관객들에게 이 영화를 추천할 때 '단단한 각오'가 필요하다고 선을 그었습니다. 사지가 찢기고 피가 사방으로 튀며 둔기가 뼈를 으스러뜨리는 소리가 156분 동안 반복되기 때문에 잔인한 묘사에 취약한 대중에게는 고문과 같은 시간이 될 수 있다고 경고했습니다. 촘촘히 엮인 스토리를 과도하게 흔들리는 핸드헬드 카메라와 빠른 컷 전환으로 담아내서 발생하는 눈의 피로감과 서사적 난해함 역시 관객에 따라 큰 단점으로 꼽힐 것이라고 균형감 있게 짚었습니다."
+                    }
+                ]
+            },
+            justinchang: {
+                outlet: "📰 Variety · 저스틴 창 (Justin Chang)",
+                title: `"심장을 요동치게 만드는, 잔혹하고도 유머러스한 장르 영화"`,
+                author: "저스틴 창 (Variety 수석 평론가)",
+                score: "8 / 10",
+                gradient: "linear-gradient(135deg, #1abc9c 0%, #16a085 100%)",
+                link: "https://variety.com/2011/film/reviews/the-yellow-sea-1117945326/",
+                sections: [
+                    {
+                        title: "🚗 전율을 일으키는 아날로그 카체이싱과 리얼 타격감",
+                        text: "Variety의 저스틴 창은 《황해》가 선사하는 엄청난 키네틱 에너지에 높은 점수를 부여했습니다. 도심 속에서 휘몰아치는 추격전과 자동차들의 격렬한 충돌은 인위적인 CG 대신 철저한 실사 스턴트와 정교한 아날로그 카메라 워킹을 통해 관객들의 아드레날린을 직접 자극합니다. 인물들이 사방으로 넘어지고 부딪치며 몸뚱이 하나로 버텨내는 리얼리티는 최근 할리우드 장르 영화들이 상실한 날것의 육체성을 선사합니다."
+                    },
+                    {
+                        title: "💔 소외된 이방인의 비극을 담은 묵직함",
+                        text: "단순한 청부살인과 범죄 스릴러에 머물 수 있었던 서사는, 연변 조선족 구남이 겪는 지독한 사회적 고립과 감정적 절박함을 통해 묵직한 사회적 울림과 비극적 차원에 성공적으로 도달합니다. 돈과 아내를 찾아 나선 그의 슬픈 여정은 현대 자본주의 그늘에 가려진 소외 계층의 어두운 초상화와 맞닿아 있으며, 이를 무겁고 진지하게 다루는 나홍진 감독의 시선은 영화에 Tragic Dimension(비극적 깊이)을 선사합니다."
+                    },
+                    {
+                        quote: "심장을 요동치게 만드는, 잔혹하고도 씁쓸한 유머를 갖춘 뛰어난 장르 영화. 비록 플롯이 꼬여있지만 아주 진지하고 묵직하게 비극적 차원에 발을 디뎠다.",
+                        quoteSource: "저스틴 창 (Variety 평론가)"
+                    },
+                    {
+                        title: "🗺️ 다소 조급하고 어지럽게 꼬인 미로식 플롯",
+                        text: "그는 단점으로 후반부의 과도한 복잡성을 지적했습니다. 여러 배후 인물들이 서로 물고 물리며 얽히는 전개 과정은 관객이 직관적으로 따라가기에 다소 조급하고 거칠게 조율되어 어수선한 인상을 줍니다. 또한 지독하게 몰아치는 파괴와 폭력이 후반부 서사의 드라마틱한 핵심을 삼켜버려 피로감이 유발된다는 점 역시 짚어두었습니다."
+                    }
+                ]
+            },
+            maggielee: {
+                outlet: "📰 Hollywood Reporter · 매기 리 (Maggie Lee)",
+                title: `"들끓는 스태미나와 맹렬한 폭력 속에서 소멸해간 미스터리"`,
+                author: "매기 리 (THR 아시아 영화 평론가)",
+                score: "7 / 10",
+                gradient: "linear-gradient(135deg, #130f40 0%, #30336b 100%)",
+                link: "https://www.hollywoodreporter.com/news/general-news/yellow-sea-film-review-206680/",
+                sections: [
+                    {
+                        title: "🏃‍♂️ 지칠 줄 모르는 뚝심, 광란에 가까운 스태미나",
+                        text: "The Hollywood Reporter의 매기 리는 《황해》가 보여주는 끝도 없는 육체적 스태미나에 깊은 인상을 받았습니다. 연변의 추위 속에서 시작해 대한민국의 도심 속 빌딩 숲과 항구를 오가는 추격전은 관객들에게 숨돌릴 틈조차 허용하지 않습니다. 거침없는 핸드헬드 촬영과 숨 가쁘게 컷이 전환되는 편집 템포는 인물들의 다급한 생존 의지와 결합하여, 마치 스크린 전체가 맥박치며 도망치는 듯한 야성적인 속도감을 뿜어냅니다."
+                    },
+                    {
+                        title: "🗡️ 장르적 피비린내 속에 흐려져 버린 결말부 미스터리",
+                        text: "그러나 매기 리는 영화의 후반부가 지나치게 파괴와 혈투에 매몰되어 영리했던 초반의 서사적 미스터리가 빛을 잃었다는 비판적 지적을 덧붙였습니다. 구남이 처음에 의뢰받았던 살인 청부 배후 of 촘촘한 이해관계는, 족발 뼈와 정육점 칼을 동반한 피비린내 나는 폭력의 소용돌이 속으로 빨려 들어갑니다. 미스터리 추리극으로서의 해결보다는 짐승들의 어지러운 치고받기식 난장으로 결말을 향해 질주함으로써 관객에게 큰 피로감과 아쉬움을 동시에 남깁니다."
+                    },
+                    {
+                        quote: "맹렬한 스태미나와 무자비한 폭력, 그리고 쉼 없이 몰아붙이는 편집과 무뚝뚝한 전개. 다만 영화의 중심 미스터리는 이 징글징글하고 혼란스러운 장르의 소용돌이 속에서 아쉽게 소멸해버린다.",
+                        quoteSource: "매기 리 (Hollywood Reporter 평론가)"
+                    },
+                    {
+                        title: "🎭 야수들의 숨결이 살아있는 파워풀한 연기 앙상블",
+                        text: "그럼에도 불구하고 두 주연 배우의 파워풀한 열연은 영화의 결점을 상당 부분 보완합니다. 하정우는 절망에 울부짖으면서도 본능에 따라 살아남으려는 슬픈 짐승의 눈빛을 완벽히 보여주며, 김윤석은 인간이라기보다는 하나의 천재지변에 가까운 파괴력을 온몸으로 분출합니다. 이들의 처절하고 살벌한 에너지 덕분에, 다소 과장되고 늘어지는 중반부마저 강한 상업적 매력과 몰입력을 유지합니다."
+                    }
+                ]
+            },
+            guardian: {
+                outlet: "📰 The Guardian · 피터 브래드쇼 (Peter Bradshaw)",
+                title: `"귀를 먹먹하게 하는 폭력과 야만, 에너지의 맹렬한 대폭발"`,
+                author: "피터 브래드쇼 (The Guardian 수석 평론가)",
+                score: "★★★★☆ (8/10)",
+                gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
+                link: "https://www.theguardian.com/film/2011/oct/20/the-yellow-sea-review",
+                sections: [
+                    {
+                        title: "💥 박찬욱과 마이클 맨의 영혼을 흡수한 범죄 액션 누아르",
+                        text: "The Guardian의 피터 브래드쇼는 나홍진 감독의 《황해》를 '에너지와 끔찍한 폭력, 그리고 카오스가 뒤섞인 귀를 먹먹하게 하는 대폭발'이라고 설명했습니다. 그는 감독 나홍진이 복수와 처절한 인간의 운명을 다루는 박찬욱의 어두운 영혼과 도심 속 밤거리의 세련되면서도 생생한 하드보일드 감각을 그리는 마이클 맨의 쌍둥이 영혼을 통째로 빨아들여, 압도적인 힘의 한국형 갱스터 대서사시를 창조해 냈다고 극찬했습니다."
+                    },
+                    {
+                        title: "⏳ 지독한 서사적 활력과 약간의 과잉",
+                        text: "브래드쇼는 영화가 뿜어내는 '맹렬함과 스타일(brashness and style)'에 큰 찬사를 보냈지만, 동시에 156분에 달하는 긴 러닝타임에 대해서는 다소 타이트하게 편집하여 약 30분 정도 줄였더라면 더 완벽하게 극적 텐션이 폭발했을 것이라는 아쉬움도 내비쳤습니다. 그럼에도 불구하고 끝도 없이 관객의 멱살을 잡고 거침없이 돌진하는 이 영화의 '물어뜯는 듯한 이빨의 파괴력(bite-strength)'은 한순간도 지루해할 틈을 주지 않는 영리한 서사 구조와 카메라 연출에 기반합니다."
+                    },
+                    {
+                        quote: "에너지와 끔찍한 폭력, 그리고 카오스가 뒤섞인 귀를 먹먹하게 하는 폭발. 나홍진은 박찬욱의 복수심과 마이클 맨의 차가운 도시 액션 감각을 결합해 극도의 파괴적 서사시를 빚어냈다.",
+                        quoteSource: "피터 브래드쇼 (The Guardian 수석 영화 비평가)"
+                    },
+                    {
+                        title: "🐺 절박함의 끝에 선 구남과 본능의 화신 면가",
+                        text: "구남(하정우 분)의 처절한 생존 투쟁과 그를 사냥하기 위해 맹렬하게 활개 치는 면가(김윤석 분)의 야수성은 영화 내내 팽팽한 불꽃을 일으킵니다. 평론가는 두 주연 배우의 야성적이고 소박한 캐릭터 소화력 덕분에 영화의 과격하고 잔혹한 액션 묘사들이 허황된 만화적 묘사로 빠지지 않고, 깊은 인간적 절박함과 리얼한 생존 투쟁의 설득력을 끝까지 움켜쥐게 만든다고 평했습니다."
+                    }
+                ]
+            }
+        };
+
+        // Modal Elements
+        const modalOverlay = document.getElementById('readerModal');
+        const modalHeader = document.getElementById('modalHeader');
+        const modalOutlet = document.getElementById('modalOutlet');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMetaAuthor = document.getElementById('modalMetaAuthor');
+        const modalMetaScore = document.getElementById('modalMetaScore');
+        const modalContent = document.getElementById('modalContent');
+        const modalSourceLink = document.getElementById('modalSourceLink');
+
+        function openReader(key) {
+            const data = translatorData[key];
+            if (!data) return;
+
+            modalHeader.style.background = data.gradient;
+            modalOutlet.innerText = data.outlet;
+            modalTitle.innerText = data.title;
+            modalMetaAuthor.innerText = `작성자: ${data.author}`;
+            modalMetaScore.innerText = `평점: ${data.score}`;
+            
+            modalContent.innerHTML = '';
+            data.sections.forEach(sec => {
+                if (sec.title && sec.text) {
+                    const sectionTitle = document.createElement('h3');
+                    sectionTitle.className = 'modal-section-title';
+                    sectionTitle.innerText = sec.title;
+                    
+                    const paragraph = document.createElement('p');
+                    paragraph.innerText = sec.text;
+
+                    modalContent.appendChild(sectionTitle);
+                    modalContent.appendChild(paragraph);
+                } else if (sec.quote) {
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.className = 'modal-highlight-quote';
+                    
+                    const qParagraph = document.createElement('p');
+                    qParagraph.innerText = `"${sec.quote}"`;
+                    
+                    const qSource = document.createElement('div');
+                    qSource.className = 'modal-highlight-source';
+                    qSource.innerText = `— ${sec.quoteSource}`;
+
+                    quoteDiv.appendChild(qParagraph);
+                    quoteDiv.appendChild(qSource);
+                    modalContent.appendChild(quoteDiv);
+                }
+            });
+
+            modalSourceLink.href = data.link;
+
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock main scroll
+        }
+
+        function closeReader(event) {
+            if (event && event.target !== modalOverlay && !event.target.classList.contains('modal-close-btn')) {
+                return;
+            }
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Unlock main scroll
+        }
+
+        // Active rating interaction (Integer Ratings ONLY - Half star logic strictly removed)
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const val = parseInt(star.getAttribute('data-value'));
+                selectedRating = val;
+                updateStars(selectedRating);
+                
+                // Live Auto-Save triggers instantly on star click
+                saveRatingLocallyAndCloud();
+            });
+        });
+
+        function updateStars(rating) {
+            stars.forEach(star => {
+                const val = parseInt(star.getAttribute('data-value'));
+                star.classList.remove('active', 'half');
+                star.style.background = '';
+                star.style.webkitBackgroundClip = '';
+                star.style.webkitTextFillColor = '';
+                
+                if (val <= rating) {
+                    star.classList.add('active');
+                }
+            });
+        }
+
+        // Load data from LocalStorage
+        function loadRatingData() {
+            const saved = localStorage.getItem('tug_rating_' + movieKey);
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    // 10 scale to 5 scale conversion for Mobile UI
+                    selectedRating = Math.round(parseFloat(data.score) / 2) || 0;
+                    updateStars(selectedRating);
+                    if (commentInput) commentInput.value = data.comment || '';
+                } catch(e) {
+                    resetRatingUI();
+                }
+            } else {
+                resetRatingUI();
+            }
+        }
+
+        // Reset Rating UI
+        function resetRatingUI() {
+            selectedRating = 0;
+            updateStars(0);
+            if (commentInput) commentInput.value = '';
+        }
+
+        // Local & Cloud Save Function
+        function saveRatingLocallyAndCloud() {
+            const commentText = commentInput ? commentInput.value.trim() : '';
+            // Scale selectedRating (0~5) up to 10 scale (0~10) for data consistency
+            const finalScore10 = selectedRating * 2;
+            const ratingData = {
+                score: finalScore10,
+                comment: commentText
+            };
+            
+            // 1. LocalStorage Save
+            localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(ratingData));
+            
+            // 2. Cloud DB Sync (Auto-save)
+            pushToCloud(movieKey + '_rating', finalScore10.toString());
+            pushToCloud(movieKey + '_comment', safeBtoa(commentText));
+        }
+
+        function pushToCloud(key, val) {
+            fetch(`https://keyvalue.imkee.de/SetValue/7c2e3914a4c52084df24/${key}/${encodeURIComponent(val)}`)
+                .catch(e => console.warn('TUG Cloud Sync: push failed'));
+        }
+
+        // Hybrid Cloud Sync Engine (Periodical Pull)
+        function syncWithCloud() {
+            const CLOUD_KEY = movieKey + '_rating';
+            fetch(`https://keyvalue.imkee.de/GetValue/7c2e3914a4c52084df24/${CLOUD_KEY}`)
+                .then(res => {
+                    if (!res.ok) throw new Error();
+                    return res.text();
+                })
+                .then(text => {
+                    if (text && text.trim() !== "" && text !== "null") {
+                        const score = parseFloat(text.replace(/^"|"$/g, '')) || 0;
+                        
+                        // Fetch comment
+                        const commentKey = movieKey + '_comment';
+                        fetch(`https://keyvalue.imkee.de/GetValue/7c2e3914a4c52084df24/${commentKey}`)
+                            .then(res2 => res2.text())
+                            .then(text2 => {
+                                let commentText = "";
+                                if (text2 && text2.trim() !== "" && text2 !== "null") {
+                                    let cleanComment = text2.trim().replace(/^"|"$/g, '');
+                                    commentText = safeAtob(cleanComment);
+                                }
+
+                                const localData = JSON.stringify({ score: score, comment: commentText });
+                                const saved = localStorage.getItem('tug_rating_' + movieKey);
+                                let needUpdate = false;
+                                if (!saved) {
+                                    needUpdate = true;
+                                } else {
+                                    try {
+                                        const parsed = JSON.parse(saved);
+                                        if (parsed.score !== score || parsed.comment !== commentText) {
+                                            needUpdate = true;
+                                        }
+                                    } catch(e) {
+                                        needUpdate = true;
+                                    }
+                                }
+
+                                if (needUpdate) {
+                                    localStorage.setItem('tug_rating_' + movieKey, localData);
+                                    selectedRating = Math.round(score / 2) || 0;
+                                    updateStars(selectedRating);
+                                    if (commentInput) commentInput.value = commentText;
+                                }
+                            });
+                    }
+                })
+                .catch(e => console.warn('TUG Cloud Sync: pull failed'));
+        }
+
+        // Submit Button Trigger (manual save triggers confirming msg)
+        submitBtn.addEventListener('click', () => {
+            saveRatingLocallyAndCloud();
+            saveToast.classList.add('show');
+            setTimeout(() => {
+                saveToast.classList.remove('show');
+            }, 2000);
+        });
+
+        // Initialize rating data and animate theater guide gauges reactively on load
+        loadRatingData();
+        syncWithCloud();
+        setInterval(syncWithCloud, 3000);
+
+        // Sync instantly when another tab (e.g. desktop dashboard) updates localStorage
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'tug_rating_' + movieKey) loadRatingData();
+        });
+        
+        setTimeout(() => {
+            const imaxFill = document.querySelector('.theater-guide-widget .imax-gauge-fill');
+            const dolbyFill = document.querySelector('.theater-guide-widget .dolby-gauge-fill');
+            const fourdxFill = document.querySelector('.theater-guide-widget .fourdx-gauge-fill');
+            const standardFill = document.querySelector('.theater-guide-widget .standard-gauge-fill');
+            
+            if (dolbyFill) dolbyFill.style.width = '98%';
+            if (imaxFill) imaxFill.style.width = '95%';
+            if (standardFill) standardFill.style.width = '85%';
+            if (fourdxFill) fourdxFill.style.width = '60%';
+        }, 150);
+    </script>
+    <script>
+        // Animate circular unified gauge smoothly on load
+        setTimeout(() => {
+            const mainGaugeFill = document.getElementById('mainGaugeFill');
+            if (mainGaugeFill) {
+                // Unified score is 7.7 out of 10. Dashoffset = 125.7 - (125.7 * (7.7 / 10))
+                const score = 7.7;
+                const offset = 125.7 - (125.7 * (score / 10));
+                mainGaugeFill.style.strokeDashoffset = offset;
+            }
+        }, 150);
+    </script>
+</body>
+</html>
