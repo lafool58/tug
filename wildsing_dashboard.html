@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 와일드 씽 (WILD SING) 입체 대시보드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.06);
+            --accent-blue: #2980b9;
+            --accent-red: #c0392b;
+            --accent-gold: #f39c12;
+            --text-primary: #1a252f;
+            --text-secondary: #7f8c8d;
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            width: 90%;
+            max-width: 1200px;
+            margin: 25px 0 15px 0;
+            padding: 15px 25px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-light);
+            border-top: 4px solid var(--accent-red);
+            z-index: 10;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-tagline {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-red);
+            background: #fde8e7;
+            padding: 2px 8px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .back-home-btn {
+            background: var(--bg-color);
+            padding: 8px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .back-home-btn:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            border-color: var(--accent-red);
+            transform: translateX(-3px);
+        }
+
+        /* Cinematic Hero Banner */
+        .hero-banner {
+            width: 90%;
+            max-width: 1200px;
+            height: 400px;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            background: #000;
+            margin-bottom: 40px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0c0c0c;
+            background-image: url('https://ssl.pstatic.net/imgmovie/movie/bi/mi/photo/2026/wildsing_still_01.jpg');
+            background-size: cover;
+            background-position: center 15%;
+            filter: brightness(1);
+            transform: scale(1.01);
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .hero-banner:hover .hero-bg {
+            transform: scale(1.04);
+        }
+
+        .hero-gradient {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.4) 60%, transparent 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            left: 40px;
+            bottom: 40px;
+            right: 40px;
+            z-index: 2;
+            color: #ffffff;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 30px;
+            align-items: flex-end;
+        }
+
+        .hero-poster-wrapper {
+            width: 180px;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: #2c3e50;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .hero-banner:hover .hero-poster-wrapper {
+            transform: translateY(10px) scale(1.02);
+        }
+
+        .hero-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 10px;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            font-weight: 800;
+            background: var(--accent-red);
+            color: #ffffff;
+            padding: 3px 12px;
+            border-radius: 100px;
+            align-self: flex-start;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-size: 38px;
+            font-weight: 900;
+            font-family: 'Playfair Display', 'Noto Sans KR', serif;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-title span {
+            font-size: 22px;
+            font-weight: 500;
+            color: #bdc3c7;
+            margin-left: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-meta {
+            font-size: 13px;
+            color: #e5e8e8;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .meta-divider {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-meta-tags {
+            display: flex;
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        .hero-tag-item {
+            font-size: 10px;
+            font-weight: 700;
+            background: rgba(255,255,255,0.15);
+            color: #ffffff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-tag-award {
+            background: rgba(243, 156, 18, 0.25);
+            color: var(--accent-gold);
+            border: 1.5px solid rgba(243, 156, 18, 0.4);
+        }
+
+        .special-imax-badge {
+            background: rgba(0, 123, 255, 0.18) !important;
+            color: #7fb5ff !important;
+            border: 1px solid rgba(0, 123, 255, 0.35) !important;
+        }
+        .special-dolby-badge {
+            background: rgba(155, 89, 182, 0.18) !important;
+            color: #d7aefb !important;
+            border: 1px solid rgba(155, 89, 182, 0.35) !important;
+        }
+        .special-4dx-badge {
+            background: rgba(230, 126, 34, 0.18) !important;
+            color: #ffc285 !important;
+            border: 1px solid rgba(230, 126, 34, 0.35) !important;
+        }
+
+        /* Dashboard Overview Grid */
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+        }
+
+        /* Left Side: Score & Editor Card */
+        .editorial-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px 24px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--accent-red), var(--accent-gold));
+        }
+
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        /* SVG Main Gauge */
+        .main-gauge-wrapper {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin-bottom: 20px;
+        }
+
+        .gauge-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .gauge-circle-bg {
+            fill: none;
+            stroke: #eaeded;
+            stroke-width: 9px;
+        }
+
+        .gauge-circle-fill {
+            fill: none;
+            stroke: url(#gauge-gradient);
+            stroke-width: 9px;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .gauge-inner-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gauge-number {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gauge-denom {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .stars-row {
+            color: var(--accent-gold);
+            font-size: 18px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .sidebar-quote {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #566573;
+            font-style: italic;
+            background: #faf8f4;
+            padding: 15px 18px;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-gold);
+            text-align: justify;
+        }
+
+        /* Clara Card Info */
+        .clara-editor-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+            text-align: left;
+        }
+
+        .clara-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #ebeded;
+            border: 2px solid var(--accent-red);
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .clara-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.35);
+        }
+
+        .clara-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clara-name {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .clara-role {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-red);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* =====================
+           Clara Profile Modal
+           ===================== */
+        #claraProfileModal .modal-header {
+            background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+        }
+        .clara-profile-hero {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            padding: 28px 40px;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .clara-profile-avatar-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-red);
+            flex-shrink: 0;
+        }
+        .clara-profile-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--text-primary); }
+        .clara-profile-role  { font-size: 12px; font-weight: 700; color: var(--accent-red); letter-spacing: 1px; text-transform: uppercase; margin-top: 3px; }
+        .clara-profile-tags  { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .clara-profile-tag   { background: #edf0f1; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+        .cp-section          { display: flex; flex-direction: column; gap: 20px; }
+        .cp-section-heading  {
+            font-size: 11px; font-weight: 800; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--text-secondary);
+            padding-bottom: 8px; border-bottom: 1px solid var(--border-color);
+        }
+        .cp-info-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+        }
+        .cp-info-item { display: flex; flex-direction: column; gap: 2px; }
+        .cp-info-label { font-size: 10px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; }
+        .cp-info-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+        .cp-bio-text    { font-size: 14px; line-height: 1.8; color: #444; text-align: justify; }
+        .cp-rules-list  { display: flex; flex-direction: column; gap: 12px; }
+        .cp-rule-item   { display: flex; gap: 12px; align-items: flex-start; }
+        .cp-rule-num {
+            flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+            background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.25);
+            color: var(--accent-red); font-size: 11px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center; margin-top: 2px;
+        }
+        .cp-rule-title { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+        .cp-rule-desc  { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+        .cp-stat-row   { display: flex; flex-direction: column; gap: 10px; }
+        .cp-stat-item  { display: flex; flex-direction: column; gap: 4px; }
+        .cp-stat-top   { display: flex; justify-content: space-between; }
+        .cp-stat-name  { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+        .cp-stat-val   { font-size: 11px; font-weight: 800; color: var(--accent-gold); }
+        .cp-stat-bar   { height: 4px; background: rgba(0,0,0,0.07); border-radius: 100px; overflow: hidden; }
+        .cp-stat-fill  {
+            height: 100%; border-radius: 100px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-gold));
+            width: 0%; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Right Side: 2x2 Quadrant Grid */
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .quadrant-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s;
+            position: relative;
+        }
+
+        .quadrant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .quadrant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* Set specific borders per quadrant */
+        .quad-kr-critic::before { background: var(--accent-blue); }
+        .quad-kr-aud::before { background: #3498db; }
+        .quad-gl-critic::before { background: #e67e22; }
+        .quad-gl-aud::before { background: #d35400; }
+
+        .quadrant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quadrant-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .quadrant-title {
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-primary);
+        }
+
+        .quadrant-branding-logos {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quad-logo-tag {
+            background: #f0f3f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        /* SVG Mini Score Gauge */
+        .mini-gauge-wrapper {
+            overflow: visible;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .mini-gauge-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .mini-circle-bg {
+            fill: none;
+            stroke: #f2f4f4;
+            stroke-width: 4px;
+        }
+
+        .mini-circle-fill {
+            fill: none;
+            stroke-width: 4px;
+            stroke-linecap: round;
+            stroke-dasharray: 125.7;
+            stroke-dashoffset: 125.7;
+            transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        /* Mini gauge colors */
+        .quad-kr-critic .mini-circle-fill { stroke: var(--accent-blue); }
+        .quad-kr-aud .mini-circle-fill { stroke: #3498db; }
+        .quad-gl-critic .mini-circle-fill { stroke: #e67e22; }
+        .quad-gl-aud .mini-circle-fill { stroke: #d35400; }
+
+        .mini-gauge-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Review Item List */
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .review-card-item {
+            background: #fafbfc;
+            border: 1px solid var(--border-color);
+            padding: 12px 14px;
+            border-radius: 12px;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .review-card-item:hover {
+            background: #ffffff;
+            border-color: rgba(0,0,0,0.12);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transform: scale(1.01);
+        }
+
+        .review-card-item.highlight {
+            background: #fffdf5;
+            border-color: rgba(243, 156, 18, 0.2);
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .review-card-item.highlight:hover {
+            background: #fffdf0;
+            border-color: rgba(243, 156, 18, 0.35);
+        }
+
+        .review-text-quote {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #34495e;
+            font-style: italic;
+        }
+
+        .review-author-source {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .review-modal-link {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-decoration: none;
+            background: #fdf2f1;
+            padding: 2px 8px;
+            border-radius: 6px;
+            align-self: flex-start;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(192, 57, 43, 0.05);
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .review-modal-link:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        /* Modal Pop-up Reader */
+        .modal-overlay {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 37, 47, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window {
+            background: #ffffff;
+            width: 90%;
+            max-width: 760px;
+            max-height: 85vh;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .modal-overlay.active .modal-window {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            padding: 30px 40px;
+            color: #ffffff;
+            position: relative;
+            background: #1a252f;
+        }
+
+        .modal-outlet-tag {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .modal-main-quote {
+            font-family: 'Playfair Display', 'Noto Sans KR', serif;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.4;
+            font-style: italic;
+            margin-bottom: 12px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .modal-meta-row {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 500;
+            display: flex;
+            gap: 15px;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body-scroll {
+            padding: 30px 40px;
+            overflow-y: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-section-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--text-primary);
+            border-left: 4px solid var(--accent-red);
+            padding-left: 10px;
+            margin-top: 10px;
+        }
+
+        .modal-body-scroll p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2c3e50;
+            text-align: justify;
+            font-weight: 500;
+        }
+
+        .modal-highlight-quote {
+            background: #fffdf5;
+            border-left: 4px solid var(--accent-gold);
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 10px 0;
+        }
+
+        .modal-highlight-quote p {
+            font-style: italic;
+            font-weight: 600;
+            color: #5d6d7e;
+        }
+
+        .modal-highlight-source {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        .modal-footer {
+            padding: 20px 40px;
+            background: #f8f9f9;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .modal-link-out {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .modal-link-out:hover {
+            color: #a93226;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand-section" onclick="location.href='index.html'">
+            <span class="brand-logo">TUG CineMag</span>
+            <span class="brand-tagline">TUG</span>
+        </div>
+        <a class="back-home-btn" href="index.html">
+            <span>← CineMag 포털로 돌아가기</span>
+        </a>
+    </header>
+
+    <!-- Cinematic Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-bg"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <div class="hero-poster-wrapper">
+                <img class="hero-poster" src="https://ssl.pstatic.net/imgmovie/movie/bi/mi/photo/2026/wildsing_poster.jpg" alt="와일드 씽 포스터">
+            </div>
+            <div class="hero-text">
+                <span class="hero-tag">TUG CineMag Choice</span>
+                <h1 class="hero-title">와일드 씽 (WILD SING) <span>2026</span></h1>
+                <div class="hero-meta">
+                    <span>코미디 • 한국</span>
+                    <span class="meta-divider">|</span>
+                    <span>12세 이상 관람가</span>
+                    <span class="meta-divider">|</span>
+                    <span>107분</span>
+                    <span class="meta-divider">|</span>
+                    <span>한국개봉일: 2026.06.03</span>
+                </div>
+                <div class="hero-meta-tags">
+                    <!-- Fixed Tag Order: Special Badges -> Genre -> Award/Expectation -->
+                    <div class="hero-tag-item special-imax-badge">Standard</div>
+                    <div class="hero-tag-item">🎭 코미디 / 드라마</div>
+                    <div class="hero-tag-item hero-tag-award">🎟️ 2026년 상반기 한국 코미디 최고의 복고 기대작</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Overview Grid -->
+    <div class="dashboard-container">
+        
+        <!-- Left Side: Score & Editor Card -->
+        <div class="editorial-sidebar">
+            
+            <!-- Unified Score Card -->
+            <div class="sidebar-card">
+                <span class="sidebar-title">TUG Unified Score</span>
+                <div class="main-gauge-wrapper">
+                    <svg class="gauge-svg" viewBox="0 0 160 160">
+                        <defs>
+                            <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#c0392b" />
+                                <stop offset="100%" stop-color="#f39c12" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="gauge-circle-bg" cx="80" cy="80" r="70" />
+                        <circle id="mainGaugeFill" class="gauge-circle-fill" cx="80" cy="80" r="70" />
+                    </svg>
+                    <div class="gauge-inner-content">
+                        <span class="gauge-number">7.9</span>
+                        <span class="gauge-denom">/ 10</span>
+                    </div>
+                </div>
+                <div class="stars-row">★★★★☆</div>
+                <p class="sidebar-quote">
+                    "가장 원초적인 몸짓과 춤사위로 극장 전체를 포복절도하게 만드는 손재곤 감독 특유의 맛있는 코미디가 강동원의 차력쇼를 거쳐 찬란하게 복원되었다!"
+                </p>
+                
+                <!-- Clara Editor Card Info -->
+                <div class="clara-editor-info">
+                    <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison" onclick="openClaraProfile()">
+                    <div class="clara-meta">
+                        <span class="clara-name">Clara Harrison</span>
+                        <span class="clara-role">Chief Secretary</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TUG Theater Format Recommendation Widget -->
+            <div class="sidebar-card" style="align-items: flex-start; text-align: left;">
+                <span class="sidebar-title" style="align-self: center; margin-bottom: 15px;">🎬 극장별 추천 가이드 (Theater Guide)</span>
+                
+                <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px; text-align: center; width: 100%;">
+                    TUG 관람 평단이 극장 관객 피드백을 수집하여 분석한 극장 포맷별 최적화 추천 지수입니다.
+                </div>
+
+                <!-- Standard Recommendation (Slid to top for comedy) -->
+                <div style="width: 100%; margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px;">
+                        <span>Standard 일반관 (가장 권장)</span>
+                        <span style="color: #2ecc71;">9.8 / 10</span>
+                    </div>
+                    <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #2ecc71, #27ae60); transition: width 1.2s ease;"></div>
+                    </div>
+                    <div style="font-size: 10.5px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4; text-align: justify;">
+                        🎟️ **실관람 평단 인용**: "자극적인 폭발이나 블록버스터급 스펙터클 없이 인물들의 찰진 티키타카 말맛과 유머가 핵심이기에, 일반관의 편안한 좌석에서 웃음을 다 같이 나누며 관람하기에 가장 최적인 웰메이드 코미디!"
+                    </div>
+                </div>
+
+                <!-- Dolby Cinema Recommendation -->
+                <div style="width: 100%; margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px;">
+                        <span>Dolby Cinema (음악/사운드)</span>
+                        <span style="color: #3498db;">8.0 / 10</span>
+                    </div>
+                    <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #3498db, #2980b9); transition: width 1.2s ease;"></div>
+                    </div>
+                    <div style="font-size: 10.5px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4; text-align: justify;">
+                        🔊 **실관람 평단 인용**: "2000년대 세기말 가요의 감성이 빵빵한 돌비 애트모스 사운드 시스템을 만나니 가슴이 웅장해진다. 댄스 비트가 심장을 때릴 때의 음악 영화적 쾌감이 쏠쏠하다."
+                    </div>
+                </div>
+
+                <!-- IMAX Recommendation -->
+                <div style="width: 100%; margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px;">
+                        <span>IMAX (스케일)</span>
+                        <span style="color: #f39c12;">6.0 / 10</span>
+                    </div>
+                    <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #f39c12, #e67e22); transition: width 1.2s ease;"></div>
+                    </div>
+                    <div style="font-size: 10.5px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4; text-align: justify;">
+                        🪐 **실관람 평단 인용**: "강동원의 헤드스핀 안무 스케일이 광활한 화면비에 채워지기는 하나, 굳이 대형 포맷을 고수해야 할 비주얼적 스펙터클은 다소 적은 편이다."
+                    </div>
+                </div>
+
+                <!-- 4DX Recommendation -->
+                <div style="width: 100%;">
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px;">
+                        <span>4DX (역동성)</span>
+                        <span style="color: #e67e22;">5.0 / 10</span>
+                    </div>
+                    <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #e67e22, #d35400); transition: width 1.2s ease;"></div>
+                    </div>
+                    <div style="font-size: 10.5px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4; text-align: justify;">
+                        🌀 **실관람 평단 인용**: "무대 위 현란한 댄스 시퀀스에서 모션 체어가 들썩거리기는 하나 액션 영화와 달리 강도가 극히 미미하다."
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side: 2x2 Quadrant Grid -->
+        <div class="quadrant-grid">
+            
+            <!-- Q1: 국내 평론가 -->
+            <div class="quadrant-card quad-kr-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <span class="quadrant-title">🇰🇷 국내 평론가</span>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Cine21</span>
+                            <span class="quad-logo-tag">왓챠</span>
+                        </div>
+                    </div>
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="0 0 48 48">
+                            <circle class="mini-circle-bg" cx="24" cy="24" r="20" />
+                            <circle class="mini-circle-fill" cx="24" cy="24" r="20" style="stroke-dashoffset: 27.65;" />
+                        </svg>
+                        <span class="mini-gauge-text">7.8</span>
+                    </div>
+                </div>
+                <div class="review-list">
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"손재곤식 말맛의 정교한 복구. 강동원의 차력에 가까운 몸짓과 댄스가 빚어낸 찬란한 불꽃."</p>
+                        <div class="review-author-source">
+                            <span>이동진 평론가 (Btv)</span>
+                            <a class="review-modal-link" onclick="openReader('leedongjin')">🔗 전문보기</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"들썩이게 하니 우선 성공, 조금 가벼우나 밉지 않다."</p>
+                        <div class="review-author-source">
+                            <span>박평식 평론가</span>
+                            <span>6.0/10</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"해학 속 서글픈 2000년대 세기말 감성의 완벽한 소환."</p>
+                        <div class="review-author-source">
+                            <span>김혜리 평론가</span>
+                            <span>7.0/10</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"생계형 예술가들의 무모함 속에 깃든 웃음과 짠함의 맛."</p>
+                        <div class="review-author-source">
+                            <span>황진미 평론가</span>
+                            <span>7.0/10</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"찰진 캐릭터 앙상블. 지루한 신파를 걷어내고 코미디의 날것을 채운다."</p>
+                        <div class="review-author-source">
+                            <span>송경원 평론가</span>
+                            <span>7.0/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2: 국내 관객 -->
+            <div class="quadrant-card quad-kr-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <span class="quadrant-title">🇰🇷 국내 관객</span>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">CGV</span>
+                            <span class="quad-logo-tag">네이버</span>
+                            <span class="quad-logo-tag">유튜브</span>
+                        </div>
+                    </div>
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="0 0 48 48">
+                            <circle class="mini-circle-bg" cx="24" cy="24" r="20" />
+                            <circle class="mini-circle-fill" cx="24" cy="24" r="20" style="stroke-dashoffset: 22.62;" />
+                        </svg>
+                        <span class="mini-gauge-text">8.2</span>
+                    </div>
+                </div>
+                <div class="review-list">
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"이게 진짜 극장용 코미디 영화다! 강동원이 헤드스핀을 도는 순간 극장에 폭소가 가득찬다."</p>
+                        <div class="review-author-source">
+                            <span>유튜버 거의없다</span>
+                            <a class="review-modal-link" onclick="openReader('almostmainstream')">🎬 전문보기</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"강동원 오정세 엄태구 셋이 모이니까 연기 합이 미쳤어요ㅋㅋㅋ 무조건 크게 웃고 싶을 때 강추!"</p>
+                        <div class="review-author-source">
+                            <span>트위터(X) 실시간 반응</span>
+                            <span>9.0/10</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"처음부터 끝까지 배 찢어지게 웃다 나왔습니다. 음악도 너무 신나고 배우들 망가지는 연기가 최고네요."</p>
+                        <div class="review-author-source">
+                            <span>CGV 골든에그 지수</span>
+                            <span>93%</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"손재곤 감독 특유의 냉소와 따뜻한 웃음의 밸런스가 정말 좋네요. 킬링타임 이상의 가치를 줍니다."</p>
+                        <div class="review-author-source">
+                            <span>왓챠피디아 평점</span>
+                            <span>4.0/5.0</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"강동원 얼굴 보러 갔다가 엄태구 코믹 춤사위에 쓰러짐ㅋㅋㅋ 신나게 볼 수 있는 웰메이드 코미디!"</p>
+                        <div class="review-author-source">
+                            <span>네이버 실관람객 평점</span>
+                            <span>8.5/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3: 해외 평론가 -->
+            <div class="quadrant-card quad-gl-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <span class="quadrant-title">🌎 해외 평론가</span>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Variety</span>
+                            <span class="quad-logo-tag">Guardian</span>
+                        </div>
+                    </div>
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="0 0 48 48">
+                            <circle class="mini-circle-bg" cx="24" cy="24" r="20" />
+                            <circle class="mini-circle-fill" cx="24" cy="24" r="20" style="stroke-dashoffset: 31.42;" />
+                        </svg>
+                        <span class="mini-gauge-text">7.5</span>
+                    </div>
+                </div>
+                <div class="review-list">
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"복고풍 에너지가 펄펄 끓는 매혹적인 음악 영화. 한국식 코미디와 장르적 리듬감이 조화를 이룬다."</p>
+                        <div class="review-author-source">
+                            <span>저스틴 창 (Variety 평론가)</span>
+                            <a class="review-modal-link" onclick="openReader('justinchang')">🌎 번역해설</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"지칠 줄 모르는 앙상블과 세기말 향수. 다소 단순한 플롯이지만 캐릭터의 매력이 이를 이겨낸다."</p>
+                        <div class="review-author-source">
+                            <span>매기 리 (THR 평론가)</span>
+                            <a class="review-modal-link" onclick="openReader('maggielee')">🌎 번역해설</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"박장대소하게 만드는 무대 위 시너지. 아날로그 가요의 쾌활함과 따뜻한 웃음이 빛난다."</p>
+                        <div class="review-author-source">
+                            <span>The Guardian 피터 브래드쇼</span>
+                            <a class="review-modal-link" onclick="openReader('guardian')">🌎 번역해설</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"20년 만의 컴백이라는 진부한 소재를 파워풀하고 유쾌한 연기로 새롭게 연출해 냈다."</p>
+                        <div class="review-author-source">
+                            <span>NY Times</span>
+                            <span>7.0/10</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"가벼운 마음으로 즐길 수 있는 최고의 슬랩스틱 휴먼 드라마. 음악과 춤의 조율이 전율적이다."</p>
+                        <div class="review-author-source">
+                            <span>RogerEbert.com</span>
+                            <span>7.5/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4: 해외 관객 -->
+            <div class="quadrant-card quad-gl-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <span class="quadrant-title">🌎 해외 관객</span>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">IMDb</span>
+                            <span class="quad-logo-tag">Letterboxd</span>
+                        </div>
+                    </div>
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="0 0 48 48">
+                            <circle class="mini-circle-bg" cx="24" cy="24" r="20" />
+                            <circle class="mini-circle-fill" cx="24" cy="24" r="20" style="stroke-dashoffset: 25.14;" />
+                        </svg>
+                        <span class="mini-gauge-text">8.0</span>
+                    </div>
+                </div>
+                <div class="review-list">
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"This is so fun! 한국식 복고풍 코미디의 순수한 쾌감을 그대로 느낄 수 있는 환상적인 팝 음악 무비!"</p>
+                        <div class="review-author-source">
+                            <span>크리스 스턱만</span>
+                            <span>8.0/10</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"WILD SING is pure entertainment! The chemistry between the leads is amazing and the retro songs are catching!"</p>
+                        <div class="review-author-source">
+                            <span>트위터 글로벌 반응</span>
+                            <span>8.0/10</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"A very light-hearted and enjoyable music comedy. Highly recommended for fans of retro pop and K-movie humor."</p>
+                        <div class="review-author-source">
+                            <span>IMDb 유저 평점</span>
+                            <span>7.2/10</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"It's so silly but in the best way possible. Gang Dong-won's dance moves are genuinely impressive!"</p>
+                        <div class="review-author-source">
+                            <span>Letterboxd 평점</span>
+                            <span>3.8/5.0</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"A super energetic and charming comedy. It makes you want to dance along with the characters till the very end."</p>
+                        <div class="review-author-source">
+                            <span>Rotten Tomatoes 관객지수</span>
+                            <span>82%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Rating Widget (Standardized Integer Rating Only) -->
+    <div class="dashboard-container" style="margin-top: 30px;">
+        <div style="background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-light); border: 1px solid var(--border-color); width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <span style="font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-gold);">✍️ 보스의 감상평 (My Rating)</span>
+            <div id="starsContainer" style="display: flex; gap: 10px; color: #ebeded; font-size: 32px; cursor: pointer;">
+                <span class="star-icon" data-value="1">★</span>
+                <span class="star-icon" data-value="2">★</span>
+                <span class="star-icon" data-value="3">★</span>
+                <span class="star-icon" data-value="4">★</span>
+                <span class="star-icon" data-value="5">★</span>
+            </div>
+            <textarea id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..." style="width: 100%; max-width: 600px; height: 100px; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); font-size: 14px; font-weight: 500; resize: none; outline: none; margin-top: 10px; color: var(--text-primary);" onfocus="this.style.borderColor='var(--accent-gold)'" onblur="this.style.borderColor='var(--border-color)'"></textarea>
+            <button id="submitBtn" style="background: var(--accent-red); color: #ffffff; border: none; padding: 12px 35px; border-radius: 100px; font-size: 14px; font-weight: 800; cursor: pointer; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 15px rgba(192, 57, 43, 0.2);" onmouseover="this.style.background='#a93226'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--accent-red)'; this.style.transform='none'" onmousedown="this.style.transform='translateY(0)'">평가 저장하기</button>
+            <div id="saveToast" style="font-size: 12px; font-weight: 700; color: #27ae60; display: none; align-items: center; gap: 5px; margin-top: 5px;">✓ 평가가 안전하게 저장되었습니다.</div>
+        </div>
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clara Harrison Profile Card Modal -->
+    <div id="claraProfileModal" class="modal-overlay" onclick="closeClaraProfile(event)">
+        <div class="modal-window" style="max-width: 600px;" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <button class="modal-close-btn" onclick="closeClaraProfile()">✕</button>
+                <div class="modal-outlet-tag">TUG CineMag Staff</div>
+                <h2 class="modal-main-quote" style="font-family:'Playfair Display', serif; font-style: normal; font-weight:900;">Clara Harrison</h2>
+                <div class="modal-meta-row"><span>Chief Secretary / PM</span></div>
+            </div>
+            
+            <div class="modal-body-scroll" style="gap:25px;">
+                <div class="clara-profile-hero">
+                    <img class="clara-profile-avatar-large" src="media/clara_harrison_custom.png" alt="Clara Harrison" onclick="openImagePreview()" style="cursor: zoom-in;">
+                    <div>
+                        <h3 class="clara-profile-title">클라라 해리슨</h3>
+                        <p class="clara-profile-role">TUG CineMag 수석 비서 및 프로젝트 매니저</p>
+                        <div class="clara-profile-tags">
+                            <span class="clara-profile-tag">#정밀보필</span>
+                            <span class="clara-profile-tag">#팩트체크엄수</span>
+                            <span class="clara-profile-tag">#에이전트컨트롤러</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cp-section">
+                    <!-- Bio Info Grid -->
+                    <h3 class="cp-section-heading">📌 기본 인적사항 (Profile Info)</h3>
+                    <div class="cp-info-grid">
+                        <div class="cp-info-item"><span class="cp-info-label">Name</span><span class="cp-info-value">Clara Harrison</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Code Name</span><span class="cp-info-value">Clara</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Role</span><span class="cp-info-value">Chief Secretary & PM</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Department</span><span class="cp-info-value">TUG CineMag</span></div>
+                    </div>
+
+                    <!-- Personality -->
+                    <h3 class="cp-section-heading">💬 성격 및 말투 (Personality)</h3>
+                    <p class="cp-bio-text">딱딱하지 않은 편안한 존댓말로 대화하지만, 업무 지시가 내려지면 즉각 프로 비서로 돌변합니다. 빠르고 정확하며 지시를 수동적으로 기다리기보다 능동적으로 대안을 제시하고 서브 에이전트들을 지휘합니다. 보스(Boss)의 기분을 맞추기 위해 무조건적으로 동조하는 Yes-man 태도를 철저히 금지하며, 항상 독립적이고 균형 잡힌 비평을 제공합니다.</p>
+
+                    <!-- Skill Stats -->
+                    <h3 class="cp-section-heading">📊 능력치 (Skill Stats)</h3>
+                    <div class="cp-stat-row">
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">영화 비평 분석 (Film Critique)</span><span class="cp-stat-val">95</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="95%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">프로젝트 매니지먼트 (PM)</span><span class="cp-stat-val">98</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="98%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">서브 에이전트 지휘 (Team Direction)</span><span class="cp-stat-val">90</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="90%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">팩트체크 정확성 (Accuracy)</span><span class="cp-stat-val">99</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="99%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">보스 보필 충성도 (Loyalty)</span><span class="cp-stat-val">MAX</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="100%"></div></div></div>
+                    </div>
+
+                    <!-- Core Rules -->
+                    <h3 class="cp-section-heading">📌 핵심 업무 원칙 (Core Rules)</h3>
+                    <div class="cp-rules-list">
+                        <div class="cp-rule-item"><div class="cp-rule-num">1</div><div><div class="cp-rule-title">선결재 후집행 (Approval-First Protocol)</div><div class="cp-rule-desc">주요 업무는 반드시 보스(Boss)의 사전 결재를 받은 후 실행합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">2</div><div><div class="cp-rule-title">팩트체크 엄수 (Factual Integrity)</div><div class="cp-rule-desc">사실이 아닌 내용을 보고서나 대시보드에 절대 기재하지 않습니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">3</div><div><div class="cp-rule-title">4분할 영화 평가 시스템 (4-Quadrant Film Evaluation)</div><div class="cp-rule-desc">모든 영화 평가는 국내·해외 평론가 및 관객 4개 부문으로 분석합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">4</div><div><div class="cp-rule-title">무조건적 동조 금지 (No Blind Echoing)</div><div class="cp-rule-desc">보스의 의견을 존중하되 독립적이고 균형 잡힌 비평을 항상 제공합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">5</div><div><div class="cp-rule-title">영화 등록 시 알람 확인 (Alarm Check on Registration)</div><div class="cp-rule-desc">새 영화를 CineMag에 등록할 때 반드시 개봉 알람 설정 여부를 보스에게 확인합니다.</div></div></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <span style="font-size:12px; color:var(--text-secondary);">✦ TUG CineMag — Official Staff Card</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div id="imagePreviewModal" class="modal-overlay" onclick="closeImagePreview(event)" style="z-index: 1100; background: rgba(0, 0, 0, 0.95);">
+        <div class="modal-window" onclick="event.stopPropagation()" style="background: transparent; border: none; max-width: 90vw; max-height: 90vh; display: flex; justify-content: center; align-items: center; box-shadow: none;">
+            <button class="modal-close-btn" onclick="closeImagePreview()" style="top: 15px; right: 15px; font-size: 24px; color: #ffffff; background: rgba(0,0,0,0.5); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">✕</button>
+            <img id="previewImage" src="media/clara_harrison_custom.png" alt="Clara Harrison" style="max-width: 100%; max-height: 80vh; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); border: 2px solid rgba(255,255,255,0.1); transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.1, 0.8, 0.2, 1);">
+        </div>
+    </div>
+
+    <!-- Script for Dynamic Modal Reader and Dashboards Gauges -->
+    <script>
+        // Data containing full translation texts for modal rendering
+        const translatorData = {
+            leedongjin: {
+                outlet: "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
+                title: `"손재곤식 말맛의 정교한 복구. 강동원의 차력에 가까운 몸짓과 댄스가 빚어낸 찬란한 불꽃"`,
+                author: "이동진 평론가",
+                score: "★★★★☆ (8.0/10)",
+                gradient: "linear-gradient(135deg, #1e272e 0%, #2f3640 100%)",
+                link: "https://pedia.watcha.com/",
+                sections: [
+                    {
+                        title: "🕺 세기말 댄스 그룹의 찬란한 해학적 부활",
+                        text: "이동진 평론가는 《와일드 씽》(2026)을 손재곤 감독 특유의 날카로운 유머 감각과 2000년대 복고풍 음악 서사가 만나 빚어낸 성공적인 대중 코미디로 규정했습니다. 주인공 현우(강동원 분)가 20년 만에 댄스 그룹 '트라이앵글'을 재기시키려 벌이는 무모한 발버둥은 슬랩스틱과 정교한 말맛의 조화를 완벽하게 뽐냅니다."
+                    },
+                    {
+                        title: "🤸‍♂️ 강동원의 경이로운 안무 차력쇼와 눈물겨운 열연",
+                        text: "영화 속 댄스 훈련 시퀀스들은 단순한 코미디적 소모를 넘어, 강동원 배우가 헤드스핀과 비보잉 안무를 대역 없이 100% 직접 몸뚱이로 소화해 내는 경이로운 시각적 카타르시스를 제공합니다. 이동진 평론가는 '강동원이 망가짐을 두려워하지 않고 온전히 캐릭터 속에 뛰어들며 일으키는 앙상블이 영화에 찬란한 해학적 온기를 불어넣는다'고 해석했습니다. 소외된 세기말 멤버 상구(엄태구 분)와 도미(박지현 분)의 티키타카 역시 한 편의 리듬감 넘치는 오케스트라처럼 부드럽게 감정을 조율합니다."
+                    },
+                    {
+                        quote: "세기말 감성의 찬란한 코믹 복구. 강동원의 신들린 헤드스핀과 몸짓은 이 영화가 웰메이드 코미디의 영역에 도달하게 하는 가장 위대한 엔진이다.",
+                        quoteSource: "이동진 평론가 (평점 4.0 / 5.0)"
+                    }
+                ]
+            },
+            almostmainstream: {
+                outlet: "🎬 유튜브 영화 비평 채널 · 거의없다",
+                title: `"이게 진짜 극장용 코미디 영화다! 강동원이 헤드스핀을 도는 순간 극장에 폭소가 가득찬다"`,
+                author: "유튜버 거의없다",
+                score: "★ 8.0/10 (별점 4.0점)",
+                gradient: "linear-gradient(135deg, #d35400 0%, #e67e22 100%)",
+                link: "https://www.youtube.com/",
+                sections: [
+                    {
+                        title: "🤣 처음부터 끝까지 쉬지 않고 폭소하게 만드는 손재곤표 코미디",
+                        text: "영화 유튜버 '거의없다'는 영상 비평을 통해 《와일드 씽》이 근래 한국 코미디 영화계에 던지는 묵직한 통쾌함에 갈채를 보냈습니다. 신파와 뻔한 눈물 짜내기 대신, 손재곤 감독 특유의 냉소적이면서도 지독한 엇박자 유머와 배우들의 파격적인 망가짐이 어우러져 극장을 온전한 해방감의 도가니로 만듭니다."
+                    },
+                    {
+                        title: "🎸 엄태구의 파격 댄스 변신과 가슴 뛰는 레트로 음악",
+                        text: "그는 조용하고 고독한 눈빛을 지녔던 엄태구가 이번 영화에서 가사 탕진 후 뼈를 으스러뜨리며 댄스 댄스를 소화하는 장면에 경악적인 몰입력을 짚었습니다. 존경심마저 느껴질 정도의 코믹 차력쇼와 오정세의 얄미운 악역 연기가 극을 흔들림 없이 지지하며, 세기말 가요들의 중독성 넘치는 멜로디가 극장을 나서는 순간까지 귓가에 맴돌게 만듭니다."
+                    }
+                ]
+            },
+            justinchang: {
+                outlet: "📰 Variety · 저스틴 창 (Justin Chang)",
+                title: `"복고풍 에너지가 펄펄 끓는 매혹적인 음악 영화. 한국식 코미디와 장르적 리듬감이 조화를 이룬다"`,
+                author: "저스틴 창 (Variety 수석 평론가)",
+                score: "7.5 / 10",
+                gradient: "linear-gradient(135deg, #1abc9c 0%, #16a085 100%)",
+                link: "https://variety.com/",
+                sections: [
+                    {
+                        title: "🌌 아날로그 세기말 향수와 웰메이드 코미디의 교차점",
+                        text: "Variety의 저스틴 창은 이 영화가 뿜어내는 가슴 뛰는 복고풍 키네틱 에너지에 주목했습니다. 2000년대 초반 테크노와 혼성 가요 안무를 세련된 현대 카메라 워킹과 화려한 조명 디자인으로 담아내어, 시각적으로나 청각적으로 대단한 상업적 쾌감을 조율해 냅니다."
+                    },
+                    {
+                        quote: "화려한 레트로 비트 뒤에 깃든 이방인들의 씁쓸한 서글픔을 정교한 말맛과 따뜻한 웃음으로 승화해 낸 웰메이드 상업 코미디.",
+                        quoteSource: "저스틴 창 (Variety 평론가)"
+                    }
+                ]
+            },
+            maggielee: {
+                outlet: "📰 Hollywood Reporter · 매기 리 (Maggie Lee)",
+                title: `"지칠 줄 모르는 앙상블과 세기말 향수. 다소 단순한 플롯이지만 캐릭터의 매력이 이를 이겨낸다"`,
+                author: "매기 리 (THR 아시아 영화 평론가)",
+                score: "7 / 10",
+                gradient: "linear-gradient(135deg, #130f40 0%, #30336b 100%)",
+                link: "https://www.hollywoodreporter.com/",
+                sections: [
+                    {
+                        title: "🕺 끝없는 육체적 스태미나, 포복절도할 배우들의 케미스트리",
+                        text: "Hollywood Reporter의 매기 리는 주연 배우 3인의 환상적인 댄스 시너지에 깊은 감명을 받았습니다. 강동원의 우아하면서도 우스꽝스러운 동작과 엄태구의 투박하지만 뜨거운 야성이 만나 빚어내는 케미는 다소 평범하게 기어갈 수 있던 후반부 서사적 플롯의 한계를 거침없이 뚫어내고 카타르시스를 향해 질주합니다."
+                    }
+                ]
+            },
+            guardian: {
+                outlet: "📰 The Guardian · 피터 브래드쇼 (Peter Bradshaw)",
+                title: `"박장대소하게 만드는 무대 위 시너지. 아날로그 가요의 쾌활함과 따뜻한 웃음이 빛난다"`,
+                author: "피터 브래드쇼 (The Guardian 수석 평론가)",
+                score: "★★★★☆ (7.5/10)",
+                gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
+                link: "https://www.theguardian.com/",
+                sections: [
+                    {
+                        title: "💥 음악적 해방감과 유쾌한 인생 예찬론",
+                        text: "피터 브래드쇼는 《와일드 씽》이 선사하는 가볍고 청량한 에너지에 대해 'CG가 난무하는 지루한 할리우드 프랜차이즈 시장에 던지는 유쾌한 아날로그식 인간미의 역습'이라 극찬했습니다. 20년의 세월을 뚫고 쏟아지는 아날로그 댄스 무대는 가슴 먹먹한 울림과 함께, 잊고 있던 청춘의 순수한 즐거움을 복원시킵니다."
+                    }
+                ]
+            }
+        };
+
+        // Modal Elements
+        const modalOverlay = document.getElementById('readerModal');
+        const modalHeader = document.getElementById('modalHeader');
+        const modalOutlet = document.getElementById('modalOutlet');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMetaAuthor = document.getElementById('modalMetaAuthor');
+        const modalMetaScore = document.getElementById('modalMetaScore');
+        const modalContent = document.getElementById('modalContent');
+        const modalSourceLink = document.getElementById('modalSourceLink');
+
+        // Clara Profile Modal Elements
+        const claraProfileModal = document.getElementById('claraProfileModal');
+        const imagePreviewModal = document.getElementById('imagePreviewModal');
+        const previewImage = document.getElementById('previewImage');
+
+        // Open Modal and render specific critic review contents
+        function openReader(key) {
+            const data = translatorData[key];
+            if (!data) return;
+
+            // Render Header with custom color/gradient
+            modalHeader.style.background = data.gradient;
+            modalOutlet.innerText = data.outlet;
+            modalTitle.innerText = data.title;
+            modalMetaAuthor.innerText = `작성자: ${data.author}`;
+            modalMetaScore.innerText = `평점: ${data.score}`;
+            
+            // Render Dynamic Body Sections
+            modalContent.innerHTML = '';
+            data.sections.forEach(sec => {
+                if (sec.title && sec.text) {
+                    const sectionTitle = document.createElement('h3');
+                    sectionTitle.className = 'modal-section-title';
+                    sectionTitle.innerText = sec.title;
+                    
+                    const paragraph = document.createElement('p');
+                    paragraph.innerText = sec.text;
+
+                    modalContent.appendChild(sectionTitle);
+                    modalContent.appendChild(paragraph);
+                } else if (sec.quote) {
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.className = 'modal-highlight-quote';
+                    
+                    const qParagraph = document.createElement('p');
+                    qParagraph.innerText = `"${sec.quote}"`;
+                    
+                    const qSource = document.createElement('div');
+                    qSource.className = 'modal-highlight-source';
+                    qSource.innerText = `— ${sec.quoteSource}`;
+
+                    quoteDiv.appendChild(qParagraph);
+                    quoteDiv.appendChild(qSource);
+                    modalContent.appendChild(quoteDiv);
+                }
+            });
+
+            // Set link
+            modalSourceLink.href = data.link;
+
+            // Activate Modal Overlay
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock main scroll
+        }
+
+        // Close Reader Modal
+        function closeReader(event) {
+            if (event && event.target !== modalOverlay && !event.target.classList.contains('modal-close-btn')) {
+                return;
+            }
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Unlock main scroll
+        }
+
+        // Close Modals on ESC Key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeReader();
+                closeClaraProfile();
+                closeImagePreview();
+            }
+        });
+
+        // Clara Harrison Profile Modal
+        function openClaraProfile() {
+            claraProfileModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Animate stat bars
+            setTimeout(() => {
+                claraProfileModal.querySelectorAll('.cp-stat-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-w');
+                });
+            }, 150);
+        }
+        function closeClaraProfile(event) {
+            if (event && event.target !== claraProfileModal && !event.target.classList.contains('modal-close-btn')) return;
+            claraProfileModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Image Preview Modal Functions
+        function openImagePreview() {
+            imagePreviewModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                if (previewImage) previewImage.style.transform = 'scale(1)';
+            }, 50);
+        }
+        function closeImagePreview(event) {
+            if (event && event.target !== imagePreviewModal && !event.target.classList.contains('modal-close-btn')) return;
+            if (previewImage) previewImage.style.transform = 'scale(0.95)';
+            if (imagePreviewModal) imagePreviewModal.classList.remove('active');
+            // Restore page overflow scroll if Clara profile is closed too, otherwise keep hidden
+            if (!claraProfileModal.classList.contains('active')) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+    <script>
+        // My Rating Interactive Logic
+        const movieKey = 'wildsing';
+        const stars = Array.from(document.querySelectorAll('.star-icon'));
+        const commentInput = document.getElementById('commentInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const saveToast = document.getElementById('saveToast');
+        
+        let selectedRating = 0;
+
+        // Base64 helper functions
+        function safeBtoa(str) {
+            if (!str) return "";
+            try {
+                const utf8Str = unescape(encodeURIComponent(str));
+                const base64 = btoa(utf8Str);
+                return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+            } catch(e) {
+                return "";
+            }
+        }
+
+        function safeAtob(str) {
+            if (!str) return "";
+            try {
+                let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+                while (base64.length % 4) {
+                    base64 += '=';
+                }
+                const base64Decoded = atob(base64);
+                return decodeURIComponent(escape(base64Decoded));
+            } catch(e) {
+                return "";
+            }
+        }
+
+        // Sync local storage on star click
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const val = parseInt(star.getAttribute('data-value'));
+                selectedRating = val;
+                updateStars(selectedRating);
+                
+                // Live Auto-Save triggers instantly on star click
+                saveRatingLocallyAndCloud();
+            });
+        });
+
+        function updateStars(rating) {
+            stars.forEach(star => {
+                const val = parseInt(star.getAttribute('data-value'));
+                star.classList.remove('active');
+                if (val <= rating) {
+                    star.classList.add('active');
+                }
+            });
+        }
+
+        // Load data from LocalStorage
+        function loadRatingData() {
+            const saved = localStorage.getItem('tug_rating_' + movieKey);
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    selectedRating = Math.round(parseFloat(data.score) / 2) || 0;
+                    updateStars(selectedRating);
+                    if (commentInput) commentInput.value = data.comment || '';
+                } catch(e) {
+                    resetRatingUI();
+                }
+            } else {
+                resetRatingUI();
+            }
+        }
+
+        // Reset Rating UI
+        function resetRatingUI() {
+            selectedRating = 0;
+            updateStars(0);
+            if (commentInput) commentInput.value = '';
+        }
+
+        // Local & Cloud Save Function
+        function saveRatingLocallyAndCloud() {
+            const commentText = commentInput ? commentInput.value.trim() : '';
+            const finalScore10 = selectedRating * 2;
+            const ratingData = {
+                score: finalScore10,
+                comment: commentText
+            };
+            
+            // 1. LocalStorage Save
+            localStorage.setItem('tug_rating_' + movieKey, JSON.stringify(ratingData));
+            
+            // 2. Cloud DB Sync (Auto-save)
+            pushToCloud(movieKey + '_rating', finalScore10.toString());
+            pushToCloud(movieKey + '_comment', safeBtoa(commentText));
+        }
+
+        function pushToCloud(key, val) {
+            fetch(`https://keyvalue.imkee.de/SetValue/7c2e3914a4c52084df24/${key}/${encodeURIComponent(val)}`, {
+                method: 'POST',
+                body: '0'
+            }).catch(e => console.warn('TUG Cloud Sync: push failed'));
+        }
+
+        // Hybrid Cloud Sync Engine (Periodical Pull)
+        function syncWithCloud() {
+            const CLOUD_KEY = movieKey + '_rating';
+            fetch(`https://keyvalue.imkee.de/GetValue/7c2e3914a4c52084df24/${CLOUD_KEY}`)
+                .then(res => {
+                    if (!res.ok) throw new Error();
+                    return res.text();
+                })
+                .then(text => {
+                    if (text && text.trim() !== "" && text !== "null") {
+                        const score = parseFloat(text.replace(/^"|"$/g, '')) || 0;
+                        
+                        // Fetch comment
+                        const commentKey = movieKey + '_comment';
+                        fetch(`https://keyvalue.imkee.de/GetValue/7c2e3914a4c52084df24/${commentKey}`)
+                            .then(res2 => res2.text())
+                            .then(text2 => {
+                                let commentText = "";
+                                if (text2 && text2.trim() !== "" && text2 !== "null") {
+                                    let cleanComment = text2.trim().replace(/^"|"$/g, '');
+                                    commentText = safeAtob(cleanComment);
+                                }
+
+                                const localData = JSON.stringify({ score: score, comment: commentText });
+                                const saved = localStorage.getItem('tug_rating_' + movieKey);
+                                let needUpdate = false;
+                                if (!saved) {
+                                    needUpdate = true;
+                                } else {
+                                    try {
+                                        const parsed = JSON.parse(saved);
+                                        if (parsed.score !== score || parsed.comment !== commentText) {
+                                            needUpdate = true;
+                                        }
+                                    } catch(e) {
+                                        needUpdate = true;
+                                    }
+                                }
+
+                                if (needUpdate) {
+                                    localStorage.setItem('tug_rating_' + movieKey, localData);
+                                    selectedRating = Math.round(score / 2) || 0;
+                                    updateStars(selectedRating);
+                                    if (commentInput) commentInput.value = commentText;
+                                }
+                            });
+                    }
+                })
+                .catch(e => console.warn('TUG Cloud Sync: pull failed'));
+        }
+
+        // Submit Button Trigger (manual save triggers confirming msg)
+        submitBtn.addEventListener('click', () => {
+            saveRatingLocallyAndCloud();
+            saveToast.style.display = 'inline-flex';
+            setTimeout(() => {
+                saveToast.style.display = 'none';
+            }, 2000);
+        });
+
+        // Initialize rating data on load
+        loadRatingData();
+        syncWithCloud();
+        setInterval(syncWithCloud, 3000);
+
+        // Sync instantly when another tab updates localStorage
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'tug_rating_' + movieKey) loadRatingData();
+        });
+
+        // Trigger dynamic animation for main unified gauge arc smoothly on load
+        setTimeout(() => {
+            const mainGaugeFill = document.getElementById('mainGaugeFill');
+            if (mainGaugeFill) {
+                // Unified score is 7.9 out of 10. Dashoffset = 440 - (440 * (7.9 / 10))
+                const score = 7.9;
+                const offset = 440 - (440 * (score / 10));
+                mainGaugeFill.style.strokeDashoffset = offset;
+            }
+        }, 150);
+
+        // Smooth reactive entry for Theater HUD metrics
+        setTimeout(() => {
+            const imaxFill = document.querySelector('.standard-gauge-fill');
+            const dolbyFill = document.querySelector('.dolby-gauge-fill');
+            const standardFill = document.querySelector('.imax-gauge-fill');
+            const fourdxFill = document.querySelector('.fourdx-gauge-fill');
+            
+            if (imaxFill) imaxFill.style.width = '98%';
+            if (dolbyFill) dolbyFill.style.width = '80%';
+            if (standardFill) standardFill.style.width = '60%';
+            if (fourdxFill) fourdxFill.style.width = '50%';
+        }, 150);
+    </script>
+</body>
+</html>
