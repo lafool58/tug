@@ -401,6 +401,27 @@ function closeImagePreview(event) {
 
 // My Rating Interactive Logic
 document.addEventListener('DOMContentLoaded', () => {
+    // Sort theater metric rows in descending order of score dynamically
+    const theaterGuideCard = document.getElementById('theaterGuideCard');
+    if (theaterGuideCard) {
+        const rows = Array.from(theaterGuideCard.querySelectorAll('.theater-metric-row'));
+        const parseScore = (row) => {
+            const scoreSpan = row.querySelector('.theater-metric-score');
+            if (!scoreSpan) return 0;
+            const text = scoreSpan.textContent;
+            const match = text.match(/([0-9.]+)\s*\/\s*10/);
+            return match ? parseFloat(match[1]) : parseFloat(text) || 0;
+        };
+        const hasValidScores = rows.some(r => {
+            const val = parseScore(r);
+            return !isNaN(val) && val > 0;
+        });
+        if (hasValidScores) {
+            rows.sort((a, b) => parseScore(b) - parseScore(a));
+            rows.forEach(row => theaterGuideCard.appendChild(row));
+        }
+    }
+
     const stars = document.querySelectorAll('#interactiveStars span');
     const scoreDisplay = document.getElementById('myRatingScore');
     const saveBtn = document.getElementById('saveRatingBtn');
