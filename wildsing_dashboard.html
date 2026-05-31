@@ -952,67 +952,75 @@
                 </div>
             </div>
 
-            <!-- TUG Theater Format Recommendation Widget -->
-            <div class="sidebar-card" style="align-items: flex-start; text-align: left;">
-                <span class="sidebar-title" style="align-self: center; margin-bottom: 15px;">🎬 극장별 추천 가이드 (Theater Guide)</span>
+            <!-- TUG Theater Format Recommendation Card -->
+            <div class="sidebar-card theater-guide-card" id="theaterGuideCard" style="align-items: flex-start;">
+                <div class="sidebar-title" style="color:var(--accent-gold); align-self: center; margin-bottom: 12px;">THEATER GUIDE (관람 가이드)</div>
                 
-                <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px; text-align: center; width: 100%;">
-                    TUG 관람 평단이 극장 관객 피드백을 수집하여 분석한 극장 포맷별 최적화 추천 지수입니다.
+                <div class="theater-guide-intro" style="font-size: 11px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.5;">
+                    TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
                 </div>
 
-                <!-- Standard Recommendation (Slid to top for comedy) -->
-                <div style="width: 100%; margin-bottom: 12px;">
-                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px;">
-                        <span>Standard 일반관 (가장 권장)</span>
-                        <span style="color: #2ecc71;">9.8 / 10</span>
+                <!-- Standard Recommendation -->
+                <div class="theater-metric-row" style="width: 100%;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Standard 일반관 (가장 권장)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.8 / 10</span>
                     </div>
-                    <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #2ecc71, #27ae60); transition: width 1.2s ease;"></div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill standard-gauge-fill" style="background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);"></div>
+                        </div>
                     </div>
-                    <div style="font-size: 10.5px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4; text-align: justify;">
-                        🎟️ **실관람 평단 인용**: "자극적인 폭발이나 블록버스터급 스펙터클 없이 인물들의 찰진 티키타카 말맛과 유머가 핵심이기에, 일반관의 편안한 좌석에서 웃음을 다 같이 나누며 관람하기에 가장 최적인 웰메이드 코미디!"
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🎟️ **추천**: 인물들의 말맛과 찰진 티키타카 유머가 핵심이기에, 일반관의 편안한 좌석에서 웃음을 다 같이 나누며 관람하는 것을 가장 추천함.
                     </div>
                 </div>
 
                 <!-- Dolby Cinema Recommendation -->
-                <div style="width: 100%; margin-bottom: 12px;">
-                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px;">
-                        <span>Dolby Cinema (음악/사운드)</span>
-                        <span style="color: #3498db;">8.0 / 10</span>
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Dolby Cinema (음악/사운드)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #3498db;">8.0 / 10</span>
                     </div>
-                    <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #3498db, #2980b9); transition: width 1.2s ease;"></div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill dolby-gauge-fill" style="background: linear-gradient(90deg, #3498db, #2980b9); box-shadow: 0 0 8px rgba(52, 152, 219, 0.6);"></div>
+                        </div>
                     </div>
-                    <div style="font-size: 10.5px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4; text-align: justify;">
-                        🔊 **실관람 평단 인용**: "2000년대 세기말 가요의 감성이 빵빵한 돌비 애트모스 사운드 시스템을 만나니 가슴이 웅장해진다. 댄스 비트가 심장을 때릴 때의 음악 영화적 쾌감이 쏠쏠하다."
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🔊 **추천**: 2000년대 세기말 가요의 감성이 빵빵한 돌비 애트모스 사운드를 만나 가슴이 웅장해지며, 댄스 비트 음악 영화적 쾌감이 쏠쏠함.
                     </div>
                 </div>
 
                 <!-- IMAX Recommendation -->
-                <div style="width: 100%; margin-bottom: 12px;">
-                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px;">
-                        <span>IMAX (스케일)</span>
-                        <span style="color: #f39c12;">6.0 / 10</span>
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">IMAX (스케일)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">6.0 / 10</span>
                     </div>
-                    <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #f39c12, #e67e22); transition: width 1.2s ease;"></div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill imax-gauge-fill" style="background: linear-gradient(90deg, #f39c12, #e67e22); box-shadow: 0 0 8px rgba(243, 156, 18, 0.6);"></div>
+                        </div>
                     </div>
-                    <div style="font-size: 10.5px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4; text-align: justify;">
-                        🪐 **실관람 평단 인용**: "강동원의 헤드스핀 안무 스케일이 광활한 화면비에 채워지기는 하나, 굳이 대형 포맷을 고수해야 할 비주얼적 스펙터클은 다소 적은 편이다."
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🪐 **추천**: 강동원의 헤드스핀 안무 스케일이 화면에 채워지기는 하나, 굳이 대형 포맷을 고수해야 할 비주얼적 스펙터클은 다소 적은 편임.
                     </div>
                 </div>
 
                 <!-- 4DX Recommendation -->
-                <div style="width: 100%;">
-                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px;">
-                        <span>4DX (역동성)</span>
-                        <span style="color: #e67e22;">5.0 / 10</span>
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">4DX (역동성)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">5.0 / 10</span>
                     </div>
-                    <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 10px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #e67e22, #d35400); transition: width 1.2s ease;"></div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill fourdx-gauge-fill" style="background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 8px rgba(230, 126, 34, 0.6);"></div>
+                        </div>
                     </div>
-                    <div style="font-size: 10.5px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4; text-align: justify;">
-                        🌀 **실관람 평단 인용**: "무대 위 현란한 댄스 시퀀스에서 모션 체어가 들썩거리기는 하나 액션 영화와 달리 강도가 극히 미미하다."
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🌀 **추천**: 무대 위 현란한 댄스 시퀀스에서 모션 체어가 들썩거리기는 하나 액션 영화와 달리 강도가 극히 미미함.
                     </div>
                 </div>
             </div>
