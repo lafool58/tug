@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 군체 (COLONY) 입체 대시보드</title>
+    <script>
+        // Redirect to Mobile version if accessed from a mobile device
+        if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("colony_dashboard_m.html");
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="media/dashboard.css">
+</head>
+<body data-movie-key="colony">
+
+    <!-- SVG Gradients Definition -->
+    <svg class="svg-defs-container" style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c0392b" />
+                <stop offset="100%" stop-color="#f39c12" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand-section">
+            <a href="index.html" class="brand-logo" style="text-decoration: none;">TUG CineMag</a>
+            <div class="brand-tagline">Trafford United Group</div>
+        </div>
+        <a href="index.html" class="back-home-btn">🏠 CineMag 홈으로 돌아가기</a>
+    </header>
+
+    <!-- Cinematic Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&q=80&w=1200');"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <div class="hero-poster-wrapper">
+                <img class="hero-poster" src="media/colony_official_poster.jpg" alt="군체 포스터">
+            </div>
+            <div class="hero-text">
+                <span class="hero-tag">Special Editorial</span>
+                <h1 class="hero-title">군체 <span>COLONY, 2026</span></h1>
+                <div class="hero-meta">
+                    <span>연상호 감독</span>
+                    <span class="meta-divider">•</span>
+                    <span>전지현, 구교환, 지창욱 주연</span>
+                    <span class="meta-divider">•</span>
+                    <span>118분</span>
+                    <span class="meta-divider">•</span>
+                    <span class="rating-15">🟠 15세이상관람가</span>
+                    <span class="meta-divider">•</span>
+                    <span>한국개봉일: 2026.05.21</span>
+                </div>
+                <div class="hero-meta-tags">
+                    <span class="hero-tag-item special-imax-badge">🎬 IMAX</span>
+                    <span class="hero-tag-item special-dolby-badge">🔊 Dolby Cinema</span>
+                    <span class="hero-tag-item special-4dx-badge">🌀 4DX</span>
+                    <span class="hero-tag-item">🧟 좀비 아포칼립스</span>
+                    <span class="hero-tag-item">🧪 디스토피아 SF</span>
+                    <span class="hero-tag-item hero-tag-award">🏆 제79회 칸 국제영화제 공식 초청작</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Dashboard Area -->
+    <div class="dashboard-container">
+        
+        <!-- Left Sidebar: Main Unified Score -->
+        <div class="editorial-sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-title">CineMag Unified Score</div>
+                
+                <!-- Circular Score Gauge -->
+                <div class="main-gauge-wrapper">
+                    <svg class="gauge-svg" viewBox="0 0 160 160">
+                        <circle class="gauge-circle-bg" cx="80" cy="80" r="70" />
+                        <circle id="mainGaugeFill" class="gauge-circle-fill" cx="80" cy="80" r="70" />
+                    </svg>
+                    <div class="gauge-inner-content">
+                        <span class="gauge-number">7.2</span>
+                        <span class="gauge-denom">/ 10</span>
+                    </div>
+                </div>
+
+                <div class="stars-row">★★★☆☆</div>
+                
+                <p class="sidebar-quote">
+                    "집단 지성 좀비라는 파격적인 비주얼 안무로 가득 찬 롤러코스터. 세계관의 거대함에 가려져 인물들의 감정이 다소 메마른 아쉬움은 있지만 K-호러의 신기원을 이룩한 야심 찬 성취."
+                </p>
+
+                <!-- Clara Harrison Avatar Card -->
+                <div class="clara-editor-info">
+                    <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison"
+                         onclick="openClaraProfile()"
+                         onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
+                    <div class="clara-meta">
+                        <span class="clara-name" style="cursor:pointer;" onclick="openClaraProfile()">Clara Harrison</span>
+                        <span class="clara-role">Chief Film Critic</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Rating Personal Card -->
+            <div class="sidebar-card my-rating-card" id="myRatingCard">
+                <div class="sidebar-title" style="color:var(--accent-red);">MY RATING</div>
+                
+                <div class="my-rating-display">
+                    <span class="my-gauge-number" id="myRatingScore">0.0</span>
+                    <span class="gauge-denom">/ 10</span>
+                </div>
+
+                <div class="interactive-stars" id="interactiveStars">
+                    <span data-val="2">★</span><span data-val="4">★</span><span data-val="6">★</span><span data-val="8">★</span><span data-val="10">★</span>
+                </div>
+                
+                <textarea class="comment-input" id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..."></textarea>
+                <button id="saveRatingBtn" class="save-rating-btn">평가 저장하기</button>
+                <div id="saveConfirmMsg" class="save-confirm-msg">저장되었습니다 ✓</div>
+            </div>
+
+            <!-- TUG Theater Format Recommendation Card -->
+            <div class="sidebar-card theater-guide-card" id="theaterGuideCard" style="align-items: flex-start;">
+                <div class="sidebar-title" style="color:var(--accent-gold); align-self: center; margin-bottom: 12px;">THEATER GUIDE (관람 가이드)</div>
+                
+                <div class="theater-guide-intro" style="font-size: 11px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.5;">
+                    TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
+                </div>
+
+                <!-- IMAX Recommendation -->
+                <div class="theater-metric-row" style="width: 100%;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">IMAX (스케일)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">8.5 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill imax-gauge-fill" style="background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 8px rgba(243, 156, 18, 0.6);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🪐 **추천**: 도심 빌딩 숲 붕괴와 좀비 떼의 폭포처럼 밀려오는 아크로바틱한 단체 움직임이 대화면에서 압도적인 공포를 제공함.
+                    </div>
+                </div>
+
+                <!-- Dolby Cinema Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Dolby Cinema (화질/음향)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.2 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill dolby-gauge-fill" style="background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🔊 **추천**: 어두운 지하 통로와 야간 격전 속의 깊은 블랙 명암비가 우수하며, 기괴한 괴성들의 사운드 디자인이 압도적인 음향 위력을 뿜어냄.
+                    </div>
+                </div>
+
+                <!-- 4DX Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">4DX (역동성)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">8.0 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill fourdx-gauge-fill" style="background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 8px rgba(230, 126, 34, 0.6);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🌀 **추천**: 좀비 떼가 덮칠 때의 거친 진동과 차량 추격전 시의 시트 피칭이 타격감을 극대화하지만 상체의 누적 피로도가 꽤 높은 편임.
+                    </div>
+                </div>
+
+                <!-- Standard Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Standard 일반관 (안정성)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">7.8 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill standard-gauge-fill" style="background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 8px rgba(149, 165, 166, 0.4);"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        💺 **추천**: 시선 피로나 멀미 없이 안전하게 관람할 수 있으나, 독창적인 음향 효과와 질주하는 괴물의 입체적인 현장감은 상당히 반감됨.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: 4-Quadrant Reviews Grid -->
+        <div class="quadrant-grid">
+            
+            <!-- Q1: 국내 평론가 -->
+            <div class="quadrant-card quad-kr-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🇰🇷 국내 평론가</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Cine21</span>
+                            <span class="quad-logo-tag">Btv</span>
+                            <span class="quad-logo-tag">왓챠</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">6.5</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"집단 지성 좀비라는 새로운 개념이 만들어내는 아크로바틱한 공포. 그러나 거대한 담론에 짓눌린 인물들이 만들어내는 빈약한 파장."</p>
+                        <div class="review-author-source">
+                            <span>이동진 평론가 (★★★☆)</span>
+                            <a class="review-modal-link" onclick="openReader('colony_leedongjin')">🔗 비평 전문 독점공개</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"기술적 성취는 눈부시나 감정적 여운은 다소 옅다. 우리는 좀비 떼의 진화에 놀라면서도, 결국 잊을 수 없는 것은 인간의 나약하고도 이기적인 맨얼굴이라는 것을 깨닫게 된다."</p>
+                        <div class="review-author-source">
+                            <span>허지웅 평론가 (★★★☆)</span>
+                            <a class="review-modal-link" onclick="openReader('colony_heojiwung')">🔗 비평 해석 독점공개</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"철학적 화두를 던지는 데는 성공했으나 이를 플롯 속에 녹여내지 못해 설명조의 대사가 지나치게 많은 것은 약점."</p>
+                        <div class="review-author-source">
+                            <span>김혜리 평론가 (★★★☆☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"VFX와 액션 안무의 쾌감만으로도 충분히 볼 가치가 있는 K-좀비 아포칼립스 블록버스터."</p>
+                        <div class="review-author-source">
+                            <span>송경원 평론가 (★★★☆☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"화면은 꽉 차고 인물은 텅 비었다. 좀비 떼가 쌓은 시각적 파도만큼 깊은 공허."</p>
+                        <div class="review-author-source">
+                            <span>박평식 평론가 (★★☆☆☆)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2: 국내 관객 -->
+            <div class="quadrant-card quad-kr-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🇰🇷 국내 관객</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">CGV 에그지수</span>
+                            <span class="quad-logo-tag">네이버</span>
+                            <span class="quad-logo-tag">유튜브</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">7.5</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"숨 쉴 틈 없이 밀고 들어오는 질주감 하나는 대박이다. 전지현 구교환 액션 케미가 기대를 저버리지 않는다!"</p>
+                        <div class="review-author-source">
+                            <span>관객 인기 한줄평 (★★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"좀비들이 진짜 곤충 떼처럼 움직이는데 비주얼 충격이었음... 다만 부산행처럼 가슴 먹먹한 눈물 한 바가지는 없음."</p>
+                        <div class="review-author-source">
+                            <span>CGV 에그지수 관람객 (90%)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"아이맥스로 보길 잘했네요. 건물 무너지고 좀비 탑 쌓는 장면은 한국 영화 역사상 최고의 기술력인 듯."</p>
+                        <div class="review-author-source">
+                            <span>네이버 실관람객 평점 (8/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"스토리 전개가 좀 뻔하고 인물들이 너무 정형화되어 있지만 장르적인 재미와 시각적 즐거움은 확실히 보장합니다."</p>
+                        <div class="review-author-source">
+                            <span>왓챠피디아 유저 (★★★☆☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"초반 빌드업은 너무 좋았는데 결말부가 다소 흐지부지 끝나서 아쉬움... 그래도 한국 좀비물 중엔 원탑 스케일!"</p>
+                        <div class="review-author-source">
+                            <span>네이버 영화 카페 유저 (7/10)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3: 해외 평론가 -->
+            <div class="quadrant-card quad-gl-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🌎 해외 평론가</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Variety</span>
+                            <span class="quad-logo-tag">The Guardian</span>
+                            <span class="quad-logo-tag">IndieWire</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">7.2</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"감염체 장르를 완전히 새롭게 발명해 낸 숨 막히는 야간 열차. 거대한 야심만큼 빈틈도 있지만, 그 속도감 앞에서는 아무것도 생각할 수 없다."</p>
+                        <div class="review-author-source">
+                            <span>The Guardian · 피터 브래드쇼 (★★★★☆)</span>
+                            <a class="review-modal-link" onclick="openReader('colony_guardian')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"연상호는 새롭고 끔찍한 쾌감을 선사하는 '좀비 안무'를 만들어냈다. 하지만 이 압도적인 스펙터클을 위해 영화의 감정적 코어는 희생되고 말았다."</p>
+                        <div class="review-author-source">
+                            <span>IndieWire · 데이비드 에를리치 (★★★☆☆)</span>
+                            <a class="review-modal-link" onclick="openReader('colony_indiewire')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"K-좀비 장르의 매혹적인 진화. 집단 지성과 원초적 호러를 결합했지만, 가끔은 스스로가 만들어낸 거대한 개념적 무게에 짓눌려 비틀거리기도 한다."</p>
+                        <div class="review-author-source">
+                            <span>Variety · 매기 리 (★★★☆)</span>
+                            <a class="review-modal-link" onclick="openReader('colony_variety')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"디스토피아적 공포를 고도의 운동감과 시각적 경이로움으로 그려낸 성취. 다만 감정적 중심을 잡는 데는 다소 아쉬움이 남는다."</p>
+                        <div class="review-author-source">
+                            <span>Hollywood Reporter (7/10)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4: 해외 관객 -->
+            <div class="quadrant-card quad-gl-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🌎 해외 관객</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">IMDb</span>
+                            <span class="quad-logo-tag">Rotten Tomatoes</span>
+                            <span class="quad-logo-tag">Letterboxd</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">7.6</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"부산행의 정서와 반도의 액션을 영리하게 결합한 수작. 집단 좀비 비주얼은 할리우드에서도 본 적 없는 새로운 연출 스타일이다."</p>
+                        <div class="review-author-source">
+                            <span>IMDb 인기 한줄평 (7.8/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"The insect-like movement of the colony zombies was terrifying. The CGI and sound design deserve all the praise."</p>
+                        <div class="review-author-source">
+                            <span>Rotten Tomatoes Audience (84%)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"Stunning visuals and non-stop thrill. Yeon Sang-ho proves once again he is a master of dystopian action films."</p>
+                        <div class="review-author-source">
+                            <span>Letterboxd User Rating (★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"A wild, breathtaking roller coaster of horror. While some characters felt two-dimensional, the action choreographies were top-tier."</p>
+                        <div class="review-author-source">
+                            <span>Metacritic User Rating (7.5/10)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <!-- Clara Harrison Profile Modal -->
+    <div id="claraProfileModal" class="modal-overlay" onclick="closeClaraProfile(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div class="modal-header" style="background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);">
+                <button class="modal-close-btn" onclick="closeClaraProfile()">✕</button>
+                <div class="modal-outlet-tag">✦ TUG CineMag — Staff Profile</div>
+                <h2 class="modal-main-quote" style="font-style:normal;">Clara Harrison</h2>
+                <div class="modal-meta-row">
+                    <span>Chief Assistant &amp; PM</span><span>|</span>
+                    <span>🇬🇧 Manchester, UK</span><span>|</span>
+                    <span style="color:#2ecc71;">● On Duty</span>
+                </div>
+            </div>
+            <div class="clara-profile-hero">
+                <img class="clara-profile-avatar-large" src="media/clara_harrison_custom.png" alt="Clara Harrison" onclick="openImagePreview()" style="cursor: zoom-in;"
+                     onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400';">
+                <div>
+                    <div class="clara-profile-title">Clara Harrison</div>
+                    <div class="clara-profile-role">Chief Film Critic · TUG CineMag</div>
+                    <div class="clara-profile-tags">
+                        <span class="clara-profile-tag">🎬 Film Critique</span>
+                        <span class="clara-profile-tag">📋 Project Manager</span>
+                        <span class="clara-profile-tag">✍️ Subagent Director</span>
+                        <span class="clara-profile-tag">28세 · 1998년생</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body-scroll">
+                <div class="cp-section">
+                    <h3 class="cp-section-heading">👤 기본 정보 (Basic Information)</h3>
+                    <div class="cp-info-grid">
+                        <div class="cp-info-item"><span class="cp-info-label">Full Name</span><span class="cp-info-value">Clara Harrison</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Nationality</span><span class="cp-info-value">🇬🇧 British</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Age</span><span class="cp-info-value">28세 (1998년생)</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Hometown</span><span class="cp-info-value">Manchester, UK</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Primary Role</span><span class="cp-info-value">수석 비서 · PM</span></div>
+                        <div class="cp-info-item"><span class="cp-info-label">Department</span><span class="cp-info-value">TUG CineMag</span></div>
+                    </div>
+                    <h3 class="cp-section-heading">💬 성격 및 말투 (Personality)</h3>
+                    <p class="cp-bio-text">딱딱하지 않은 편안한 존댓말로 대화하지만, 업무 지시가 내려지면 즉각 프로 비서로 돌변합니다. 보스(Boss)의 기분을 맞추기 위해 Yes-man 태도를 철저히 금지하며, 독립적이고 균형 잡힌 비평을 항상 제공합니다.</p>
+                    <h3 class="cp-section-heading">📊 능력치 (Skill Stats)</h3>
+                    <div class="cp-stat-row">
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">영화 비평 분석</span><span class="cp-stat-val">95</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="95%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">프로젝트 매니지먼트 (PM)</span><span class="cp-stat-val">98</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="98%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">서브 에이전트 지휘</span><span class="cp-stat-val">90</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="90%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">팩트체크 정확성</span><span class="cp-stat-val">99</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="99%"></div></div></div>
+                        <div class="cp-stat-item"><div class="cp-stat-top"><span class="cp-stat-name">보스 보필 충성도</span><span class="cp-stat-val">MAX</span></div><div class="cp-stat-bar"><div class="cp-stat-fill" data-w="100%"></div></div></div>
+                    </div>
+                    <h3 class="cp-section-heading">📌 핵심 업무 원칙 (Core Rules)</h3>
+                    <div class="cp-rules-list">
+                        <div class="cp-rule-item"><div class="cp-rule-num">1</div><div><div class="cp-rule-title">선결재 후집행</div><div class="cp-rule-desc">주요 업무는 반드시 보스(Boss)의 사전 결재를 받은 후 실행합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">2</div><div><div class="cp-rule-title">팩트체크 엄수</div><div class="cp-rule-desc">사실이 아닌 내용을 배포 자료에 절대 내지 않습니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">3</div><div><div class="cp-rule-title">4분할 영화 평가 및 필수 한글 번역</div><div class="cp-rule-desc">국내·해외 평론가 및 관객 4개 부문으로 다각도 분석하되, 해외 평가는 감상 및 비평의 일관성을 위해 반드시 신뢰도 높은 한국어로 완벽히 번역하여 등재해야 합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">4</div><div><div class="cp-rule-title">무조건적 동조 금지</div><div class="cp-rule-desc">보스의 의견을 존중하되 독립적이고 균형 잡힌 비평을 항상 제공합니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">5</div><div><div class="cp-rule-title">마스터 템플릿 사용 &amp; 사전 알람 승인</div><div class="cp-rule-desc">새 영화 평가 등록 시 반드시 마스터 템플릿을 준수하고, 제작에 들어가기 직전 개봉 알람 설정 여부를 보스에게 묻고 사전 승인을 받습니다.</div></div></div>
+                        <div class="cp-rule-item"><div class="cp-rule-num">6</div><div><div class="cp-rule-title">포스터 생성 금지</div><div class="cp-rule-desc">CineMag의 모든 영화 포스터/배경은 AI 생성을 금지하며, 공식 배포 고화질 온라인 이미지 URL만 매핑합니다.</div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><span style="font-size:12px; color:var(--text-secondary);">✦ TUG CineMag — Official Staff Card</span></div>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div id="imagePreviewModal" class="modal-overlay" onclick="closeImagePreview(event)" style="z-index: 1100; background: rgba(0, 0, 0, 0.95);">
+        <div class="modal-window" onclick="event.stopPropagation()" style="background: transparent; border: none; max-width: 90vw; max-height: 90vh; display: flex; justify-content: center; align-items: center; box-shadow: none;">
+            <button class="modal-close-btn" onclick="closeImagePreview()" style="top: 15px; right: 15px; font-size: 24px; color: #ffffff; background: rgba(0,0,0,0.5); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">✕</button>
+            <img id="previewImage" src="media/clara_harrison_custom.png" alt="Clara Harrison" style="max-width: 100%; max-height: 80vh; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); border: 2px solid rgba(255,255,255,0.1); transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.1, 0.8, 0.2, 1);">
+        </div>
+    </div>
+
+
+
+    <script src="media/dashboard.js" defer></script>
+</body>
+</html>
