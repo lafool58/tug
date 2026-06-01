@@ -768,7 +768,7 @@
             // Perform Sorting
             const sortedCards = movieCards.filter(card => card.style.display !== 'none').sort((a, b) => {
                 if (sortBy === 'reg-desc') {
-                    return parseInt(a.getAttribute('data-reg-order')) - parseInt(b.getAttribute('data-reg-order'));
+                    return parseInt(b.getAttribute('data-reg-order')) - parseInt(a.getAttribute('data-reg-order'));
                 } else if (sortBy === 'score-desc') {
                     return parseFloat(b.getAttribute('data-score')) - parseFloat(a.getAttribute('data-score'));
                 } else if (sortBy === 'score-asc') {

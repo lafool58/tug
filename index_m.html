@@ -470,9 +470,10 @@
         const emptyState = document.getElementById('emptyState');
         const movieCards = Array.from(document.querySelectorAll('.movie-card'));
 
-        // Apply simple Search filter
+        // Apply Search filter & Sort by registration order descending (Newest first)
         function applyFilter() {
             const query = searchInput.value.toLowerCase().trim();
+            const movieGrid = document.getElementById('movieGrid');
             let visibleCount = 0;
 
             movieCards.forEach(card => {
@@ -493,6 +494,21 @@
             } else {
                 emptyState.style.display = 'none';
             }
+
+            // Sort visible cards by data-reg-order descending
+            const sortedCards = movieCards.filter(card => card.style.display !== 'none').sort((a, b) => {
+                const orderA = parseInt(a.getAttribute('data-reg-order')) || 0;
+                const orderB = parseInt(b.getAttribute('data-reg-order')) || 0;
+                return orderB - orderA; // Descending (Newest first)
+            });
+
+            // Re-append sorted elements in DOM
+            sortedCards.forEach(card => {
+                movieGrid.appendChild(card);
+            });
+            
+            // Ensure emptyState stays at the end
+            movieGrid.appendChild(emptyState);
         }
 
         searchInput.addEventListener('input', applyFilter);
@@ -710,6 +726,7 @@
         // Initialize mobile elements
         setupFeaturedMovie();
         loadMyRatings();
+        applyFilter();
         
         // Trigger Hybrid Cloud Sync and poll periodically
         syncWithCloud();
@@ -719,6 +736,7 @@
         window.addEventListener('storage', (e) => {
             if (e.key && (e.key.startsWith('tug_rating_') || e.key.startsWith('tug_alarm_'))) {
                 loadMyRatings();
+                applyFilter();
             }
         });
     </script>
