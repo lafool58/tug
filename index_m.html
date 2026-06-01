@@ -421,35 +421,6 @@
     <!-- Movie List -->
     <div class="magazine-m-list" id="movieGrid">
         
-        <!-- Card 2: 디스클로저 데이 -->
-        <a href="disclosure_dashboard_m.html" class="movie-card" data-movie-key="disclosure" 
-           data-reg-order="2"
-           data-title="디스클로저 데이 (DISCLOSURE DAY)" 
-           data-director="스티븐 스필버그" 
-           data-genre="SF" 
-           data-score="9.5" 
-           data-year="2026" 
-           data-meta="스티븐 스필버그 감독 • 톰 행크스, 미셸 윌리엄스 주연 • 12세이상관람가"
-           data-desc="미지와의 만남이 자아내는 웅장한 침묵과 경외감. 거장 스필버그의 평생 SF 역작 《디스클로저 데이》. TUG 평론단이 국내외 비평가 및 관객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁을 독점 공개합니다."
-           data-backdrop="media/disclosure_bg.png">
-            <div class="card-image-wrapper">
-                <img class="card-image" src="media/disclosure_official_poster.png" alt="디스클로저 데이">
-            </div>
-            <div class="card-info">
-                <div class="card-badges">
-                    <span class="card-badge-special special-imax">IMAX</span>
-                    <span class="card-badge-special special-dolby">Dolby</span>
-                    <span class="card-badge-special special-4dx">4DX</span>
-                </div>
-                <h3 class="card-title">디스클로저 데이 (2026)</h3>
-                <p class="card-meta">스티븐 스필버그 감독 • 톰 행크스, 미셸 윌리엄스 주연</p>
-                <div class="card-rating-row">
-                    <span class="card-stars">★★★★★</span>
-                    <span class="card-score">★ <span class="card-score-accent">9.5</span>/10</span>
-                </div>
-            </div>
-        </a>
-
         <!-- Card 1: 군체 -->
         <a href="colony_dashboard_m.html" class="movie-card" data-movie-key="colony" 
            data-reg-order="1"
@@ -651,8 +622,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'mandalorian_rating', 'colony_rating', 'disclosure_rating',
-                'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm'
+                'mandalorian_rating', 'colony_rating',
+                'mandalorian_alarm', 'colony_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -665,8 +636,6 @@
                             let movieKey = 'colony';
                             if (key.startsWith('mandalorian')) {
                                 movieKey = 'mandalorian';
-                            } else if (key.startsWith('disclosure')) {
-                                movieKey = 'disclosure';
                             }
                             const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             
@@ -729,11 +698,9 @@
             localStorage.setItem('tug_alarm_hailmary', 'false');
             localStorage.setItem('tug_alarm_mandalorian', 'false');
             localStorage.setItem('tug_alarm_colony', 'false');
-            localStorage.setItem('tug_alarm_disclosure', 'false');
             localStorage.setItem('tug_alarm_initialized', 'true');
             localStorage.setItem('tug_alarm_cleaned_v2', 'true');
             localStorage.setItem('tug_alarm_colony_v3', 'true');
-            localStorage.setItem('tug_alarm_disclosure_v3', 'true');
             localStorage.setItem('tug_alarm_cleaned_v4', 'true');
             localStorage.setItem('tug_alarm_cleaned_v5', 'true');
             
@@ -741,7 +708,6 @@
             pushToCloud('hailmary_alarm', 'false');
             pushToCloud('mandalorian_alarm', 'false');
             pushToCloud('colony_alarm', 'false');
-            pushToCloud('disclosure_alarm', 'false');
         }
 
         // Setup dynamic random featured movie banner on load for Mobile
