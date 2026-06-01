@@ -611,7 +611,8 @@
                 // Alarm tag is ALWAYS displayed.
                 // If hasAlarm is true, add 'active' class (color). If not, no 'active' class (grayscale).
                 const activeClass = hasAlarm ? 'active' : '';
-                htmlContent += `<span class="my-alarm-tag ${activeClass}" onclick="toggleAlarm(event, '${movieKey}')">⏰ 알람</span>`;
+                const alarmLabel = hasAlarm ? '⏰ 알람 켬' : '⏰ 알람 끔';
+                htmlContent += `<span class="my-alarm-tag ${activeClass}">${alarmLabel}</span>`;
                 
                 row.innerHTML = htmlContent;
             });
