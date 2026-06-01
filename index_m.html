@@ -650,8 +650,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'wildsing_rating',
-                'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'wildsing_alarm'
+                'mandalorian_rating', 'colony_rating', 'disclosure_rating',
+                'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -666,8 +666,6 @@
                                 movieKey = 'mandalorian';
                             } else if (key.startsWith('disclosure')) {
                                 movieKey = 'disclosure';
-                            } else if (key.startsWith('wildsing')) {
-                                movieKey = 'wildsing';
                             }
                             const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             
@@ -731,12 +729,10 @@
             localStorage.setItem('tug_alarm_mandalorian', 'false');
             localStorage.setItem('tug_alarm_colony', 'false');
             localStorage.setItem('tug_alarm_disclosure', 'false');
-            localStorage.setItem('tug_alarm_wildsing', 'false');
             localStorage.setItem('tug_alarm_initialized', 'true');
             localStorage.setItem('tug_alarm_cleaned_v2', 'true');
             localStorage.setItem('tug_alarm_colony_v3', 'true');
             localStorage.setItem('tug_alarm_disclosure_v3', 'true');
-            localStorage.setItem('tug_alarm_wildsing_v1', 'true');
             localStorage.setItem('tug_alarm_cleaned_v4', 'true');
             localStorage.setItem('tug_alarm_cleaned_v5', 'true');
             
@@ -745,7 +741,6 @@
             pushToCloud('mandalorian_alarm', 'false');
             pushToCloud('colony_alarm', 'false');
             pushToCloud('disclosure_alarm', 'false');
-            pushToCloud('wildsing_alarm', 'false');
         }
 
         // Setup dynamic random featured movie banner on load for Mobile

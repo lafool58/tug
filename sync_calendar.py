@@ -26,11 +26,6 @@ MOVIES = {
         "korean": "만달로리안",
         "english": "mandalorian",
         "key": "mandalorian_alarm"
-    },
-    "wildsing": {
-        "korean": "와일드 싱",
-        "english": "wildsing",
-        "key": "wildsing_alarm"
     }
 }
 
