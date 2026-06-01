@@ -26,6 +26,11 @@ MOVIES = {
         "korean": "만달로리안",
         "english": "mandalorian",
         "key": "mandalorian_alarm"
+    },
+    "toystory": {
+        "korean": "토이 스토리",
+        "english": "toystory",
+        "key": "toystory_alarm"
     }
 }
 

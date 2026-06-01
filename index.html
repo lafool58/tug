@@ -469,6 +469,11 @@
             background: #e67e22;
             border-color: #e67e22;
         }
+        .special-3d {
+            color: #ffffff;
+            background: #1abc9c;
+            border-color: #1abc9c;
+        }
 
         .card-title {
             font-size: 18px;
@@ -661,6 +666,40 @@
     <!-- Movie Magazine Grid -->
     <div class="magazine-grid" id="movieGrid">
         
+        <!-- Card 3: 토이 스토리 5 -->
+        <div class="movie-card" data-movie-key="toystory" 
+             data-reg-order="3"
+             data-title="토이 스토리 5 (TOY STORY 5)" 
+             data-director="앤드류 스탠튼" 
+             data-genre="애니메이션" 
+             data-score="9.0" 
+             data-year="2026" 
+             data-link="toystory_dashboard.html"
+             data-meta="앤드류 스탠튼 감독 • 톰 행크스, 팀 알렌 주연 • 전체 관람가 예정"
+             data-desc="장난감들이 직면한 역사상 가장 최신의 적! 스마트 디바이스의 침투에 맞선 우디와 버즈의 가슴 따뜻한 클래식 우정 모험극. TUG 평론단과 보스가 전격 분석한 4분할 입체 비평을 독점 공개합니다."
+             data-backdrop="media/toystory_official_backdrop.jpg"
+             data-backdrop-gradient="linear-gradient(135deg, #0c0f12 0%, #152c4a 50%, #2f1954 100%)"
+             onclick="location.href='toystory_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/toystory_official_poster.jpg" alt="토이 스토리 5">
+            </div>
+            <div class="card-info">
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-3d">3D</span>
+                </div>
+                <h3 class="card-title">토이 스토리 5 (2026)</h3>
+                <p class="card-meta">앤드류 스탠튼 감독 • 톰 행크스, 팀 알렌 주연</p>
+                <div class="card-spacer"></div>
+                <div class="my-rating-row"></div>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">9.0</span>/10</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Card 2: 디스클로저 데이 -->
         <div class="movie-card" data-movie-key="disclosure" 
              data-reg-order="2"
@@ -959,8 +998,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'mandalorian_rating', 'colony_rating', 'disclosure_rating',
-                'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm'
+                'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating',
+                'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -975,6 +1014,8 @@
                                  movieKey = 'mandalorian';
                              } else if (key.startsWith('disclosure')) {
                                  movieKey = 'disclosure';
+                             } else if (key.startsWith('toystory')) {
+                                 movieKey = 'toystory';
                              }
                              const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             
@@ -1044,6 +1085,7 @@
             localStorage.setItem('tug_alarm_mandalorian', 'false');
             localStorage.setItem('tug_alarm_colony', 'false');
             localStorage.setItem('tug_alarm_disclosure', 'true');
+            localStorage.setItem('tug_alarm_toystory', 'true');
             localStorage.setItem('tug_alarm_initialized', 'true');
             localStorage.setItem('tug_alarm_cleaned_v2', 'true');
             localStorage.setItem('tug_alarm_colony_v3', 'true');
@@ -1057,6 +1099,7 @@
             pushToCloud('mandalorian_alarm', 'false');
             pushToCloud('colony_alarm', 'false');
             pushToCloud('disclosure_alarm', 'true');
+            pushToCloud('toystory_alarm', 'true');
         }
 
         // Setup dynamic random featured movie banner on load

@@ -227,6 +227,96 @@ const translatorData = {
                 quoteSource: "Variety, 매기 리"
             }
         ]
+    },
+    toystory_leedongjin: {
+        outlet: "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
+        title: `"장난감들이 직면한 가장 슬프고 가장 찬란한 아날로그 우정"`,
+        author: "이동진 평론가",
+        score: "★★★★☆ (4.0)",
+        gradient: "linear-gradient(135deg, #2c3e50 0%, #1a252f 100%)",
+        link: "https://pedia.watcha.com/",
+        sections: [
+            {
+                title: "🧸 스마트 디바이스 시대와 장난감의 쇠락",
+                text: "《토이 스토리 5》(2026)는 장난감들이 아이들의 손을 떠나 스마트 화면 뒤편의 차가운 가상 세계 속으로 밀려나는 서글픈 시대의 풍경을 비춥니다. 태블릿과 스마트 워치에 마음을 빼앗긴 아이들 속에서 우디와 버즈는 장난감으로서의 자신의 쓸모를 증명하기 위해 마지막 무모한 모험을 시작합니다. 앤드류 스탠튼 감독은 디지털 미디어가 지배하는 차가운 일상 속에서 아날로그적 온기와 촉각적 놀이의 가치를 픽사 특유의 장엄한 모험 서사로 직조해냅니다. 화면 너머로 전해지는 플라스틱 장난감들의 표면 질감과 낡은 실밥의 묘사는 그 자체로 아날로그 세대에 보내는 절절한 헌사입니다."
+            },
+            {
+                title: "🤝 우디와 버즈의 변치 않는 소명과 아날로그의 가치",
+                text: "스마트 장난감과 인공지능 완구들의 범람 속에서 구식 장난감들이 느끼는 고립감은 비장하게 그려집니다. 그러나 영화는 슬픔에 안주하는 대신, 아이들의 가슴에 새겨진 가장 순수한 기억과 추억이 어떻게 아날로그 장난감들의 온기 속에서 회복되는지를 세밀하게 증명합니다. 우디와 버즈가 화면 너머에 갇혀 지내던 아이의 시선을 다시 현실의 따뜻한 손바닥 위로 데려오는 클라이맥스는 픽사가 오랜 팬들에게 건네는 가슴 벅찬 감동의 온도를 최고조로 끌어올립니다."
+            },
+            {
+                quote: "스마트 미디어의 차가운 유혹 속에서 우디와 버즈가 찾은 마지막 온기. 장난감의 유통기한은 다할지언정, 그들과 함께 자란 우리의 어린 날의 마음은 결코 녹슬지 않는다.",
+                quoteSource: "이동진 평론가 (평점 4.0 / 5.0)"
+            }
+        ]
+    },
+    toystory_almostmainstream: {
+        outlet: "🎬 유튜브 영화 비평 채널 · 거의없다",
+        title: `"스마트 기기에 포위된 우디와 버즈의 고군분투, 여전히 뜨겁다"`,
+        author: "유튜버 거의없다",
+        score: "9.0/10",
+        gradient: "linear-gradient(135deg, #1abc9c 0%, #16a085 100%)",
+        link: "https://www.youtube.com/",
+        sections: [
+            {
+                title: "📱 스마트폰이라는 가혹한 현대의 적",
+                text: "유튜브 크리에이터 거의없다는 이번 영상 비평을 통해, 영화가 제시하는 장난감들의 적인 스마트 기기와의 사투를 현대 문명 비판의 측면에서 정밀하게 해부했습니다. 아이들이 하루 종일 손에서 놓지 않는 스마트폰과 알고리즘의 틈새에서 장난감들이 생존을 위해 펼치는 고군분투는 단순히 아동용 모험극을 넘어 현대 성인 관객들의 심장을 거세게 울린다고 극찬했습니다. 특히 우디와 동료들이 아이의 시선을 가상의 화면에서 해방시키기 위해 먼지 쌓인 다락방에서 수천 번의 도미노 게임을 설계하는 연출은 눈물 없이 볼 수 없는 걸작이라 평가했습니다."
+            },
+            {
+                title: "🛠️ 클래식 우정의 깊이와 장난감의 자존심",
+                text: "또한 그는 영화가 억지스러운 신파나 최신 밈을 남발하지 않고, 30년 역사의 클래식 프랜차이즈가 가진 정통적인 가치에 온전히 승부를 건 뚝심에 경의를 표했습니다. 버즈 라이트이어의 가슴 버튼을 누를 때 들리는 아날로그 스피커의 투박한 음성과, 우디의 부드러운 가죽 질감이 아이의 손길과 닿으며 뿜어내는 교감은 극장 사운드를 가득 채우며 픽사의 위대한 시대를 복원해냈습니다."
+            }
+        ]
+    },
+    toystory_variety: {
+        outlet: "📰 Variety · 저스틴 창 (Variety 수석 평론가)",
+        title: `"The Triumph of Analog Warmth in a Digital Era"`,
+        author: "저스틴 창 (Variety 수석 평론가)",
+        score: "9.0/10",
+        gradient: "linear-gradient(135deg, #e67e22 0%, #d35400 100%)",
+        link: "https://variety.com/",
+        sections: [
+            {
+                title: "🧸 A Tactile and Emotional Legacy Rescued",
+                text: "Variety의 저스틴 창은 《토이 스토리 5》가 스마트 디바이스의 침투에 맞선 아날로그의 가치를 정교하게 탐구하며 가슴 시린 감동을 남겼다고 호평했습니다. 가상의 픽셀 화면에 매료되어 먼지만 쌓여가던 우디와 버즈는 아이들의 손길이 주는 아날로그적 온기와 촉각적 놀이의 가치를 잊지 않고 있습니다. 이 촉각적 유산이 현대 디지털 미디어에 갇힌 오늘날의 상상력을 완벽하게 일깨워냅니다."
+            },
+            {
+                title: "🎨 Pixels vs. Plastic: A Visual Masterclass",
+                text: "앤드류 스탠튼 감독은 디지털 화면의 기하학적이고 차가운 그래픽과 장난감들의 빈티지하고 마모된 실감나는 텍스처를 시각적으로 정교하게 대조해내는 비주얼의 극치를 선보입니다. 플라스틱 장난감들의 긁힘과 실밥 하나하나가 현대 문명에 맞서는 가장 강력한 감정적 무기로 작동합니다."
+            },
+            {
+                quote: "A beautiful, tactile, and profoundly moving masterpiece that reminds us why real play and real connection matter. Andrew Stanton has achieved the impossible.",
+                quoteSource: "Justin Chang, Variety"
+            }
+        ]
+    },
+    toystory_guardian: {
+        outlet: "📰 The Guardian · 피터 브래드쇼 (Peter Bradshaw)",
+        title: `"A Touching Masterpiece for the Connected Generation"`,
+        author: "피터 브래드쇼 (The Guardian 영화 비평가)",
+        score: "★★★★☆ (4.0)",
+        gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
+        link: "https://www.theguardian.com/",
+        sections: [
+            {
+                title: "🧸 아날로그 추억의 복원과 연결된 세대에 보내는 온기",
+                text: "The Guardian의 피터 브래드쇼는 이 영화를 '스마트 기기로 단절되고 고립되어 가는 연결된 세대(Connected Generation)에게 픽사가 보내는 가장 따뜻한 사랑의 손길'이라고 정의했습니다. 현대 아이들이 알고리즘의 유혹 속에서 자발적으로 실외 놀이와 실물 완구를 포기해 가는 디지털 디스토피아의 시작점 아래에서, 낡은 장난감들이 아이의 내면에 살아 숨 쉬던 아날로그의 불꽃을 다시 지피는 과정은 숭고한 장엄함을 선사합니다."
+            }
+        ]
+    },
+    toystory_stuckmann: {
+        outlet: "🎬 Chris Stuckmann · YouTube Film Critic",
+        title: `"A Magnificent Return! The Ultimate Heart of Toy Story"`,
+        author: "크리스 스턱만",
+        score: "A (9.5/10)",
+        gradient: "linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%)",
+        link: "https://www.youtube.com/",
+        sections: [
+            {
+                title: "🤖 픽사 최고의 걸작으로 우뚝 선 장난감들의 위대한 연대",
+                text: "크리스 스턱만은 유튜브 비평을 통해 《토이 스토리 5》가 클래식 3부작이 완성했던 장엄한 엔딩의 부담을 완벽하게 이겨낸 기적적인 완성도라고 전율했습니다. 우디와 버즈의 오랜 우정이 새로운 적(스마트 디스플레이) 앞에서도 여전히 깊고 단단하다는 사실을 증명해냄으로써, 극장 안의 모든 성인 관객들의 영혼을 뒤흔드는 진정한 시네마의 기적을 선보였습니다."
+            }
+        ]
     }
 };
 
