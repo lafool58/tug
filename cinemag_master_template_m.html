@@ -50,8 +50,9 @@
                     <!-- Background Circle -->
                     <circle cx="25" cy="25" r="20" fill="none" stroke="#f2f4f4" stroke-width="4"></circle>
                     <!-- TUG Crimson Arc (Calculated from {{MOVIE_SCORE}}) -->
-                    <circle cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
-                            stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_DASH_OFFSET}}" stroke-linecap="round"></circle>
+                    <circle id="mainGaugeFill" cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
+                            stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_DASH_OFFSET}}" stroke-linecap="round"
+                            style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);"></circle>
                 </svg>
                 <div class="gauge-text">
                     <span class="gauge-score">{{MOVIE_SCORE}}</span>
@@ -98,7 +99,7 @@
                             <div class="mini-circle-wrapper">
                                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q1_DASH_OFFSET}}" />
+                                    <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q1_DASH_OFFSET}}" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
                                 </svg>
                                 <span class="mini-score-val">{{SCORE_Q1}}</span>
                             </div>
@@ -158,7 +159,7 @@
                             <div class="mini-circle-wrapper">
                                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q2_DASH_OFFSET}}" />
+                                    <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q2_DASH_OFFSET}}" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
                                 </svg>
                                 <span class="mini-score-val">{{SCORE_Q2}}</span>
                             </div>
@@ -218,7 +219,7 @@
                             <div class="mini-circle-wrapper">
                                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q3_DASH_OFFSET}}" />
+                                    <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q3_DASH_OFFSET}}" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
                                 </svg>
                                 <span class="mini-score-val">{{SCORE_Q3}}</span>
                             </div>
@@ -278,7 +279,7 @@
                             <div class="mini-circle-wrapper">
                                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q4_DASH_OFFSET}}" />
+                                    <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="{{SCORE_Q4_DASH_OFFSET}}" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
                                 </svg>
                                 <span class="mini-score-val">{{SCORE_Q4}}</span>
                             </div>

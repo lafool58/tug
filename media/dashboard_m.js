@@ -500,14 +500,93 @@ document.addEventListener('DOMContentLoaded', () => {
     verifyTranslations();
 });
 
-setTimeout(() => {
-    const imaxFill = document.querySelector('.theater-guide-widget .imax-gauge-fill');
-    const dolbyFill = document.querySelector('.theater-guide-widget .dolby-gauge-fill');
-    const fourdxFill = document.querySelector('.theater-guide-widget .fourdx-gauge-fill');
-    const standardFill = document.querySelector('.theater-guide-widget .standard-gauge-fill');
+// Animation helper to draw circular gauge bar (Mobile)
+function animateGauge(circleId, score, maxScore) {
+    const circle = document.getElementById(circleId);
+    if (!circle) return;
     
-    if (imaxFill) imaxFill.style.width = '96%';
-    if (dolbyFill) dolbyFill.style.width = '94%';
-    if (fourdxFill) fourdxFill.style.width = '82%';
-    if (standardFill) standardFill.style.width = '75%';
-}, 150);
+    // Calculate radius and circumference dynamically
+    const r = parseFloat(circle.getAttribute('r')) || 20;
+    const calculatedCircumference = 2 * Math.PI * r;
+    
+    let strokeDasharray = parseFloat(window.getComputedStyle(circle).strokeDasharray);
+    if (isNaN(strokeDasharray) || strokeDasharray <= 0) {
+        strokeDasharray = calculatedCircumference;
+    }
+    
+    // Ensure stroke-dasharray is set explicitly
+    circle.style.strokeDasharray = strokeDasharray;
+    
+    const progress = score / maxScore;
+    const strokeDashoffset = strokeDasharray - (strokeDasharray * progress);
+    
+    circle.style.strokeDashoffset = strokeDashoffset;
+}
+
+// Initialize and animate all mobile gauges after DOMContentLoaded / Load
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        // --- 📊 Dynamic Gauge Score Parser ---
+        const getScoreFromElement = (selector, defaultValue) => {
+            const el = document.querySelector(selector);
+            if (!el) return defaultValue;
+            const text = el.textContent.trim();
+            const score = parseFloat(text);
+            return isNaN(score) ? defaultValue : score;
+        };
+
+        const getMiniScore = (id, defaultValue) => {
+            const circle = document.getElementById(id);
+            if (!circle) return defaultValue;
+            const wrapper = circle.closest('.mini-circle-wrapper') || circle.closest('.mini-gauge');
+            if (!wrapper) return defaultValue;
+            const textEl = wrapper.querySelector('.mini-score-val') || wrapper.querySelector('.mini-gauge-text');
+            if (!textEl) return defaultValue;
+            const score = parseFloat(textEl.textContent.trim());
+            return isNaN(score) ? defaultValue : score;
+        };
+
+        // Parse scores dynamically from the HTML, with safe fallback defaults for the Master Template preview
+        const mainScore = getScoreFromElement('.gauge-score', 8.5);
+        const q1 = getMiniScore('gaugeFillKrCritic', 8.2);
+        const q2 = getMiniScore('gaugeFillKrAud', 8.6);
+        const q3 = getMiniScore('gaugeFillGlCritic', 8.4);
+        const q4 = getMiniScore('gaugeFillGlAud', 8.8);
+
+        // Main score circle
+        animateGauge('mainGaugeFill', mainScore, 10.0);
+
+        // Mini Q1-Q4 circles
+        animateGauge('gaugeFillKrCritic', q1, 10.0);
+        animateGauge('gaugeFillKrAud', q2, 10.0);
+        animateGauge('gaugeFillGlCritic', q3, 10.0);
+        animateGauge('gaugeFillGlAud', q4, 10.0);
+
+        // --- 🎬 Dynamic Theater Guide HUD Gauge Animation ---
+        const imaxFill = document.querySelector('.theater-guide-widget .imax-gauge-fill');
+        const dolbyFill = document.querySelector('.theater-guide-widget .dolby-gauge-fill');
+        const fourdxFill = document.querySelector('.theater-guide-widget .fourdx-gauge-fill');
+        const standardFill = document.querySelector('.theater-guide-widget .standard-gauge-fill');
+
+        const parseTheaterScore = (fillEl, defaultValue) => {
+            if (!fillEl) return defaultValue;
+            const row = fillEl.closest('.theater-metric-row');
+            if (!row) return defaultValue;
+            const scoreSpan = row.querySelector('.theater-metric-score');
+            if (!scoreSpan) return defaultValue;
+            const text = scoreSpan.textContent;
+            const match = text.match(/([0-9.]+)\s*\/\s*10/);
+            return match ? parseFloat(match[1]) : parseFloat(text) || defaultValue;
+        };
+
+        const imaxScore = parseTheaterScore(imaxFill, 8.5);
+        const dolbyScore = parseTheaterScore(dolbyFill, 9.2);
+        const fourdxScore = parseTheaterScore(fourdxFill, 8.0);
+        const standardScore = parseTheaterScore(standardFill, 7.8);
+
+        if (imaxFill) imaxFill.style.width = (imaxScore * 10) + '%';
+        if (dolbyFill) dolbyFill.style.width = (dolbyScore * 10) + '%';
+        if (fourdxFill) fourdxFill.style.width = (fourdxScore * 10) + '%';
+        if (standardFill) standardFill.style.width = (standardScore * 10) + '%';
+    }, 150);
+});
