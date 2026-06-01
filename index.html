@@ -943,10 +943,7 @@
                     }
                 }
                 
-                // Alarm tag is ALWAYS displayed first.
-                const activeClass = hasAlarm ? 'active' : '';
-                const alarmLabel = hasAlarm ? '⏰ 알람 켬' : '⏰ 알람 끔';
-                let htmlContent = `<span class="my-alarm-tag ${activeClass}">${alarmLabel}</span>`;
+                let htmlContent = '';
 
                 if (hasRating) {
                     try {
@@ -955,7 +952,7 @@
                             const starCount = data.score / 2;
                             const fullStars = '★'.repeat(Math.round(starCount));
                             const emptyStars = '☆'.repeat(5 - Math.round(starCount));
-                            htmlContent += `<span class="my-rating-tag">내 평점 ${fullStars}${emptyStars}</span>`;
+                            htmlContent = `<span class="my-rating-tag">내 평점 ${fullStars}${emptyStars}</span>`;
                         }
                     } catch (e) {
                         console.error('Error parsing rating for ' + movieKey, e);
