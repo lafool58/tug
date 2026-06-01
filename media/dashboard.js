@@ -689,4 +689,41 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('storage', (e) => {
         if (e.key === MOVIE_KEY) loadRating();
     });
+
+    // === 🌎 TUG Translation Self-Verification (Method 1) ===
+    const verifyTranslations = () => {
+        const isLocalDev = window.location.hostname === 'localhost' || 
+                            window.location.hostname === '127.0.0.1' || 
+                            window.location.protocol === 'file:';
+        
+        const reviewTextElements = document.querySelectorAll('.review-text-quote, .review-quote-text');
+        
+        reviewTextElements.forEach(el => {
+            const text = el.textContent || el.innerText || "";
+            const hasEnglish = /[a-zA-Z]{4,}/.test(text);
+            const hasKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+            
+            if (hasEnglish && !hasKorean) {
+                const cardItem = el.closest('.review-card-item, .review-quote-item');
+                if (cardItem) {
+                    if (isLocalDev) {
+                        cardItem.style.border = '2px dashed #e74c3c';
+                        cardItem.style.position = 'relative';
+                        cardItem.style.paddingTop = '24px';
+                        
+                        if (!cardItem.querySelector('.translation-warning-badge')) {
+                            const badge = document.createElement('span');
+                            badge.className = 'translation-warning-badge';
+                            badge.innerText = '⚠️ 번역 누락 감지 (원격 배포 불가)';
+                            badge.style.cssText = 'position: absolute; top: 4px; right: 10px; background: #e74c3c; color: white; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-family: "Noto Sans KR", sans-serif; box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 10;';
+                            cardItem.appendChild(badge);
+                        }
+                    } else {
+                        cardItem.style.display = 'none';
+                    }
+                }
+            }
+        });
+    };
+    verifyTranslations();
 });
