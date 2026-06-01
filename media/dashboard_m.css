@@ -669,3 +669,28 @@ header {
     color: var(--accent-red);
     text-decoration: none;
 }
+
+/* ============================================================================
+   Korean Movie Rating Board (KMRB) Rating Badge Colors
+   ============================================================================ */
+.rating-all {
+    color: #2ecc71 !important; /* 전체관람가 (Green) */
+    font-weight: 700;
+}
+.rating-12 {
+    color: #f1c40f !important; /* 12세이상관람가 (Yellow) */
+    font-weight: 700;
+}
+.rating-15 {
+    color: #e67e22 !important; /* 15세이상관람가 (Orange) */
+    font-weight: 700;
+}
+.rating-18 {
+    color: #e74c3c !important; /* 청소년관람불가 (Red) */
+    font-weight: 700;
+}
+.rating-restricted {
+    color: #95a5a6 !important; /* 제한상영가 (Grey) */
+    font-weight: 700;
+}
+
