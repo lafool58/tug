@@ -147,6 +147,13 @@ header {
     border: 2px solid rgba(255, 255, 255, 0.2);
     transform: translateY(20px);
     transition: transform 0.3s;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .hero-banner:hover .hero-poster-wrapper {
