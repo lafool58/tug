@@ -1166,7 +1166,8 @@
             const desc = card.getAttribute('data-desc') || "TUG 평론단과 일반 관객 여론을 종합한 4분할 입체 비평 및 전용 대시보드가 준비되어 있습니다.";
             const score = card.getAttribute('data-score');
             const link = card.getAttribute('data-link');
-            const backdrop = card.getAttribute('data-backdrop');
+            const posterImg = card.querySelector('.card-image');
+            const poster = posterImg ? posterImg.getAttribute('src') : '';
             const gradient = card.getAttribute('data-backdrop-gradient') || "linear-gradient(135deg, #0c0f12 0%, #1a0808 50%, #251210 100%)";
             
             const featuredTitle = document.querySelector('.featured-title');
@@ -1192,11 +1193,12 @@
                 featuredBtn.setAttribute('href', link);
             }
             if (featuredBg) {
-                if (backdrop) {
-                    featuredBg.style.backgroundImage = `url('${backdrop}')`;
+                if (poster) {
+                    featuredBg.style.backgroundImage = `url('${poster}')`;
                     featuredBg.style.backgroundSize = "cover";
                     featuredBg.style.backgroundPosition = "center 20%";
-                    featuredBg.style.filter = "brightness(0.45)"; // Highly readable text contrast
+                    featuredBg.style.filter = "brightness(0.4) blur(25px)"; // Highly readable text contrast
+                    featuredBg.style.transform = "scale(1.15)"; // Prevent edge artifacts
                 } else {
                     featuredBg.style.background = gradient;
                     featuredBg.style.filter = "brightness(1)";

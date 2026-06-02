@@ -844,7 +844,8 @@
             
             const title = card.getAttribute('data-title').split(' (')[0];
             const desc = card.getAttribute('data-desc') || "TUG 평론단이 분석한 4분할 입체 비평 및 맞춤 팁을 지금 만나보세요.";
-            const backdrop = card.getAttribute('data-backdrop');
+            const posterImg = card.querySelector('.card-image');
+            const poster = posterImg ? posterImg.getAttribute('src') : '';
             const link = card.getAttribute('href');
             
             const featuredBanner = document.querySelector('.featured-m-banner');
@@ -855,10 +856,17 @@
             if (featuredTitle) featuredTitle.textContent = title;
             if (featuredDesc) featuredDesc.textContent = desc;
             
-            if (featuredBg && backdrop) {
-                featuredBg.style.backgroundImage = `url('${backdrop}')`;
-                featuredBg.style.backgroundSize = "cover";
-                featuredBg.style.backgroundPosition = "center 20%";
+            if (featuredBg) {
+                if (poster) {
+                    featuredBg.style.backgroundImage = `url('${poster}')`;
+                    featuredBg.style.backgroundSize = "cover";
+                    featuredBg.style.backgroundPosition = "center 20%";
+                    featuredBg.style.filter = "brightness(0.4) blur(25px)";
+                    featuredBg.style.transform = "scale(1.15)";
+                } else {
+                    featuredBg.style.background = "#1a202c";
+                    featuredBg.style.filter = "brightness(1)";
+                }
             }
             
             if (featuredBanner && link) {
