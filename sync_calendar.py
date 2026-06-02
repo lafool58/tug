@@ -17,6 +17,11 @@ MOVIES = {
         "english": "colony",
         "key": "colony_alarm"
     },
+    "disclosure": {
+        "korean": "디스클로저",
+        "english": "disclosure",
+        "key": "disclosure_alarm"
+    },
     "mandalorian": {
         "korean": "만달로리안",
         "english": "mandalorian",
