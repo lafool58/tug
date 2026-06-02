@@ -70,9 +70,9 @@
                     <span>한국개봉일: {{MOVIE_RELEASE_DATE}}</span>
                 </div>
                 <div class="hero-meta-tags">
-                    <span class="hero-tag-item special-imax-badge">🎬 IMAX</span>
-                    <span class="hero-tag-item special-dolby-badge">🔊 Dolby Cinema</span>
-                    <span class="hero-tag-item special-4dx-badge">🌀 4DX</span>
+                    {{HERO_BADGE_1}}
+                    {{HERO_BADGE_2}}
+                    {{HERO_BADGE_3}}
                     <span class="hero-tag-item">{{MOVIE_GENRE}}</span>
                     <span class="hero-tag-item">{{MOVIE_GENRE_SUB}}</span>
                     <span class="hero-tag-item hero-tag-award">🎟 {{MOVIE_AWARD_TAG}}</span>
@@ -139,16 +139,16 @@
 
             <!-- TUG Theater Format Recommendation Card -->
             <div class="sidebar-card theater-guide-card" id="theaterGuideCard" style="align-items: flex-start;">
-                <div class="sidebar-title" style="color:var(--accent-gold); align-self: center; margin-bottom: 12px;">THEATER GUIDE (관람 가이드)</div>
+                <div class="sidebar-title" style="color:var(--accent-gold); align-self: center; margin-bottom: 12px;">{{THEATER_GUIDE_TITLE}}</div>
                 
                 <div class="theater-guide-intro" style="font-size: 11px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.5;">
-                    TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
+                    {{THEATER_GUIDE_INTRO}}
                 </div>
 
                 <!-- IMAX Recommendation -->
                 <div class="theater-metric-row" style="width: 100%;">
                     <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">IMAX (스케일)</span>
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">{{FORMAT_NAME_1}}</span>
                         <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">{{THEATER_IMAX_SCORE}} / 10</span>
                     </div>
                     <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
@@ -157,14 +157,14 @@
                         </div>
                     </div>
                     <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
-                        🎬 **추천**: {{THEATER_IMAX_TIP}}
+                        {{FORMAT_ICON_1}} **추천**: {{THEATER_IMAX_TIP}}
                     </div>
                 </div>
 
                 <!-- Dolby Cinema Recommendation -->
                 <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
                     <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Dolby Cinema (화질/음향)</span>
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">{{FORMAT_NAME_2}}</span>
                         <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">{{THEATER_DOLBY_SCORE}} / 10</span>
                     </div>
                     <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
@@ -173,14 +173,14 @@
                         </div>
                     </div>
                     <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
-                        🔊 **추천**: {{THEATER_DOLBY_TIP}}
+                        {{FORMAT_ICON_2}} **추천**: {{THEATER_DOLBY_TIP}}
                     </div>
                 </div>
 
                 <!-- 4DX Recommendation -->
                 <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
                     <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">4DX (역동성)</span>
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">{{FORMAT_NAME_3}}</span>
                         <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">{{THEATER_4DX_SCORE}} / 10</span>
                     </div>
                     <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
@@ -189,14 +189,14 @@
                         </div>
                     </div>
                     <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
-                        🌀 **추천**: {{THEATER_4DX_TIP}}
+                        {{FORMAT_ICON_3}} **추천**: {{THEATER_4DX_TIP}}
                     </div>
                 </div>
 
                 <!-- Standard Recommendation -->
                 <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
                     <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Standard 일반관 (안정성)</span>
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">{{FORMAT_NAME_4}}</span>
                         <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">{{THEATER_STANDARD_SCORE}} / 10</span>
                     </div>
                     <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
@@ -205,7 +205,7 @@
                         </div>
                     </div>
                     <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
-                        💺 **추천**: {{THEATER_STANDARD_TIP}}
+                        {{FORMAT_ICON_4}} **추천**: {{THEATER_STANDARD_TIP}}
                     </div>
                 </div>
             </div>
