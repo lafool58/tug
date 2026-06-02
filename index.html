@@ -644,7 +644,7 @@
         <div class="search-row">
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="영화 제목, 감독, 장르를 검색하세요...">
+                <input type="text" id="searchInput" class="search-input" placeholder="영화 제목, 감독, 배우, 장르, 상영 포맷(IMAX, Dolby 등) 검색...">
             </div>
             <select id="sortSelect" class="sort-select">
                 <option value="reg-desc" selected>최신 등록 순</option>
@@ -887,8 +887,21 @@
                 const title = card.getAttribute('data-title').toLowerCase();
                 const director = card.getAttribute('data-director').toLowerCase();
                 const genre = card.getAttribute('data-genre');
+                const meta = card.getAttribute('data-meta') ? card.getAttribute('data-meta').toLowerCase() : '';
+                const desc = card.getAttribute('data-desc') ? card.getAttribute('data-desc').toLowerCase() : '';
                 
-                const matchesQuery = title.includes(query) || director.includes(query) || genre.toLowerCase().includes(query);
+                // Collect format badges
+                const badges = Array.from(card.querySelectorAll('.card-badge-special, .poster-badge-special'))
+                                    .map(badge => badge.textContent.toLowerCase())
+                                    .join(' ');
+                
+                const matchesQuery = title.includes(query) || 
+                                     director.includes(query) || 
+                                     genre.toLowerCase().includes(query) ||
+                                     meta.includes(query) ||
+                                     desc.includes(query) ||
+                                     badges.includes(query);
+                                     
                 const matchesGenre = (currentGenre === 'ALL') || (genre === currentGenre);
 
                 if (matchesQuery && matchesGenre) {

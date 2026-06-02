@@ -426,7 +426,7 @@
     <div class="controls-m" style="margin-top: 15px;">
         <div class="search-m-wrapper">
             <span class="search-m-icon">🔍</span>
-            <input type="text" class="search-m-input" id="searchInput" placeholder="영화 제목, 감독, 장르 검색...">
+            <input type="text" class="search-m-input" id="searchInput" placeholder="제목, 감독, 배우, 장르, 상영 포맷 검색...">
         </div>
     </div>
 
@@ -608,8 +608,22 @@
                 const title = card.getAttribute('data-title').toLowerCase();
                 const director = card.getAttribute('data-director').toLowerCase();
                 const genre = card.getAttribute('data-genre').toLowerCase();
+                const meta = card.getAttribute('data-meta') ? card.getAttribute('data-meta').toLowerCase() : '';
+                const desc = card.getAttribute('data-desc') ? card.getAttribute('data-desc').toLowerCase() : '';
+                
+                // Collect format badges
+                const badges = Array.from(card.querySelectorAll('.card-badge-special, .poster-badge-special'))
+                                    .map(badge => badge.textContent.toLowerCase())
+                                    .join(' ');
 
-                if (title.includes(query) || director.includes(query) || genre.includes(query)) {
+                const matchesQuery = title.includes(query) || 
+                                     director.includes(query) || 
+                                     genre.includes(query) ||
+                                     meta.includes(query) ||
+                                     desc.includes(query) ||
+                                     badges.includes(query);
+
+                if (matchesQuery) {
                     card.style.display = 'flex';
                     visibleCount++;
                 } else {
