@@ -229,15 +229,17 @@
             box-shadow: var(--shadow-light);
             border: 1px solid var(--border-color);
             display: flex;
-            flex-direction: column;
+            flex-direction: row; /* Horizontal flex layout */
             text-decoration: none;
             color: inherit;
+            align-items: stretch;
         }
 
         .card-image-wrapper {
             position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9; /* Landscape crop on mobile lists looks cleaner */
+            width: 100px; /* Fixed width for vertical poster on mobile list */
+            aspect-ratio: 2 / 3; /* Standard 2:3 vertical poster ratio */
+            flex-shrink: 0;
             overflow: hidden;
         }
 
@@ -245,7 +247,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 20%;
+            object-position: center top;
         }
 
         .card-badges {
@@ -292,10 +294,13 @@
         }
 
         .card-info {
-            padding: 15px;
+            padding: 12px 15px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            justify-content: center;
+            gap: 4px;
+            flex-grow: 1;
+            min-width: 0;
         }
 
         .card-genre-row {
@@ -314,15 +319,16 @@
         }
 
         .card-title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             line-height: 1.3;
             color: var(--text-primary);
-            height: 2.6em; /* Reserves space for exactly 2 lines */
+            margin-bottom: 2px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            height: auto;
         }
 
         .card-meta {
