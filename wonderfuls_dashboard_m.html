@@ -1,0 +1,459 @@
+<!-- 
+================================================================================
+[CineMag 마스터 디자인 규정 (Design Guidelines) - Mobile]
+================================================================================
+⚠️ 중요 자산 등록 수칙 (CRITICAL ASSET RULES):
+  1. 절대 AI 생성 이미지(AI-generated images)나 임의의 제네릭 이미지를 영화 포스터 및 배경으로 사용하지 마십시오.
+     - 반드시 배급사/제작사 측에서 공식 배포한 고해상도 공식 포스터 및 보도스틸 실물 파일만을 로컬 이식(media/ 디렉토리)하여 연동하십시오.
+  2. 세로형 포스터와 가로형 백드롭은 엄격히 분리 설정되어야 합니다.
+     - media/wonderfuls_official_backdrop.jpg: 16:9 가로형 초고화질 공식 스틸컷 또는 영화 배경 키아트 매핑.
+     - media/wonderfuls_official_poster.png: 2:3 세로형 정통 단일 메인 공식 포스터 매핑.
+     - 두 플레이스홀더에 세로형 포스터 이미지를 동일하게 중복 대입하면 거대 배경 배너에서 이미지가 심각하게 잘리거나 겹쳐 노출되는 치명적인 시각 오동작이 발생합니다.
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 원더풀스 (The WONDERfools)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        // Redirect to Desktop version if not accessed from a mobile device
+        if (!/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("wonderfuls_dashboard.html");
+        }
+    </script>
+    <link rel="stylesheet" href="media/dashboard_m.css">
+</head>
+<body data-movie-key="wonderfuls">
+
+    <!-- Header Navigation -->
+    <header>
+        <button class="back-btn" onclick="location.href='index_m.html'">‹</button>
+        <div class="brand-section">
+            <a href="index_m.html" class="brand-logo" style="text-decoration: none; color: inherit;">TUG <span>CineMag</span></a>
+            <div class="brand-tagline">TUG</div>
+        </div>
+    </header>
+
+    <!-- Main Mobile Dashboard Container Card -->
+    <div class="dashboard-card">
+        
+        <!-- Movie Poster -->
+        <div class="poster-wrapper">
+            <img class="poster-image" src="media/wonderfuls_official_poster.png" alt="원더풀스 포스터">
+            <div class="poster-badges">
+                <div class="poster-badge-special" style="background:#e50914; border-color:#e50914;">NETFLIX</div>
+                <div class="poster-badge-special">4K UHD</div>
+                <div class="poster-badge-special">Atmos</div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="title-section">
+            <h1 class="movie-title">원더풀스 (2026)</h1>
+            <p class="movie-meta">⚡ 초능력 코미디 • 한국 • 15세 이상 관람가 • 385 (8부작)분</p>
+        </div>
+
+        <!-- Circular Score Gauge -->
+        <div class="score-gauge-container">
+            <div class="gauge-svg-wrapper">
+                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width: 100%; height: 100%;">
+                    <!-- Background Circle -->
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#f2f4f4" stroke-width="4"></circle>
+                    <!-- TUG Crimson Arc (Calculated from 7.5) -->
+                    <circle id="mainGaugeFill" cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
+                            stroke-dasharray="125.6" stroke-dashoffset="31.4" stroke-linecap="round"
+                            style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);"></circle>
+                </svg>
+                <div class="gauge-text">
+                    <span class="gauge-score">7.5</span>
+                </div>
+            </div>
+            <span class="gauge-label">TUG Unified Score</span>
+            <span class="gauge-sublabel">통합 평점</span>
+        </div>
+
+        <!-- Credits -->
+        <div class="credits-section">
+            <div class="credits-item">감독: <span>유인식</span></div>
+            <div class="credits-item">주연배우: <span>박은빈, 차은우, 최대훈, 임성재, 손현주</span></div>
+            <div class="credits-item">상영시간: <span>385 (8부작)분</span></div>
+            <div class="credits-item">등급: <span>15세 이상 관람가</span></div>
+            <div class="credits-item">한국개봉일: <span>2026.05.15</span></div>
+        </div>
+
+        <!-- Synopsis -->
+        <div class="synopsis-section">
+            <h2 class="section-title">시놉시스</h2>
+            <p class="synopsis-text">
+                1999년 세기말, 종말론이 한창이던 해성시. 어느 날 뜻하지 않게 어설픈 초능력을 얻게 된 평범한 소시민들이 악의 무리에 맞서 가족과 골목길 이웃들을 지켜내기 위해 분투하는 요란법석 K-히어로 초능력 액션 코미디.
+            </p>
+        </div>
+
+        <!-- 4-Quadrant Category Reviews -->
+        <div class="quadrants-section">
+            <h2 class="section-title">4분할 입체 상세 비평</h2>
+            <div class="quadrant-list">
+
+                <!-- Q1: 국내 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Cine21</span>
+                                <span class="quad-tag">Btv</span>
+                                <span class="quad-tag">왓챠</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="35.17" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                </svg>
+                                <span class="mini-score-val">7.2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"어설픈 초능력과 세기말 우정이 빚어낸 따뜻한 K-히어로극. 박은빈의 사랑스러운 열연과 유인식 표 휴머니즘이 빛난다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">이동진 평론가 <a class="review-modal-link" onclick="openReader('wonderfuls_leedongjin')">🔗 전문보기</a></span>
+                                <span class="author-score">★★★☆</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"박은빈 특유의 기치 넘치는 감정 조율이 어설픈 초능력자들의 앙상블 극을 빈틈없이 채운다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">씨네21 송경원 평론가</span>
+                                <span class="author-score">★★★☆</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"세기말 종말론의 불안 속에서 피어난 골목길 소시민들의 투박하고 뭉클한 연대기."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">씨네21 김혜리 평론가</span>
+                                <span class="author-score">★★★☆</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"말맛 유머와 착한 정서의 결합은 유쾌하나, 얄팍한 악역과 늘어지는 구성은 흠."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">씨네21 박평식 평론가</span>
+                                <span class="author-score">★★★☆</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"소박한 로파이(Lo-Fi) 영웅들의 분투가 주는 무해한 웃음과 힐링 케미스트리."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">허지웅 평론가</span>
+                                <span class="author-score">★★★☆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2: 국내 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">CGV 에그지수</span>
+                                <span class="quad-tag">네이버</span>
+                                <span class="quad-tag">유튜브</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="18.84" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                </svg>
+                                <span class="mini-score-val">8.5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"차은우의 신선한 변신과 모지리 히어로들의 요란법석 앙상블. 실물 스턴트의 쾌감이 살아있다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">거의없다 <a class="review-modal-link" onclick="openReader('wonderfuls_almostmainstream')">🎬 전문보기</a></span>
+                                <span class="author-score">★★★★☆ (8.0/10)}}</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"박은빈 딕션 최고고 차은우 얼굴만 봐도 극락인데 둘이 코미디 하니까 너무 잘 어울려요!"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">네이버 관객 평</span>
+                                <span class="author-score">9.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"가볍고 유쾌하게 정주행하기 좋은 한국형 히어로 드라마. 8부작이라 딱 주말 순삭이네요."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">왓챠 피디아 관객</span>
+                                <span class="author-score">8.5/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"세기말 소품이나 노스탤지어가 정겹네요. 착한 히어로물이라 가족들과 보기 참 좋습니다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">네이버 네티즌</span>
+                                <span class="author-score">8.8/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"차은우 연기 많이 늘었네! 액션 씬도 생각보다 타격감 있고 소소하게 재밌다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">유튜브 댓글 여론</span>
+                                <span class="author-score">8.2/10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3: 해외 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Variety</span>
+                                <span class="quad-tag">The Guardian</span>
+                                <span class="quad-tag">THR</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="37.68" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                </svg>
+                                <span class="mini-score-val">7.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"A delightful K-hero series that triumphs with its lo-fi analog warmth, though it occasionally falters under predictable conventions."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">저스틴 창 (Variety) <a class="review-modal-link" onclick="openReader('wonderfuls_variety')">🌎 전문보기</a></span>
+                                <span class="author-score">7.5/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"A heartwarming spinoff of everyday superpowers. High praise for the charming cast chemistry."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">피터 브래드쇼 (The Guardian) <a class="review-modal-link" onclick="openReader('wonderfuls_guardian')">🌎 전문보기</a></span>
+                                <span class="author-score">★★★★☆ (4.0)</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"An engaging retro K-drama that mixes family values and quirky sci-fi tropes with mixed results."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">The Hollywood Reporter</span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"Stretches its plot too thin over eight episodes, but the lovable characters keep it afloat."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">IndieWire</span>
+                                <span class="author-score">B-</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"Director Yoo In-shik's warm humanistic touch provides a cozy alternative to hyper-digital Hollywood hero films."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Screen International</span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4: 해외 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">IMDb</span>
+                                <span class="quad-tag">Rotten Tomatoes</span>
+                                <span class="quad-tag">Letterboxd</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="22.61" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                </svg>
+                                <span class="mini-score-val">8.2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"Pure fun and heart! 어설픈 초능력자들의 감동적인 피날레. 박은빈의 열연이 빛난다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Chris Stuckmann <a class="review-modal-link" onclick="openReader('wonderfuls_stuckmann')">🎬 전문보기</a></span>
+                                <span class="author-score">Grade B+</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"Surprisingly heartwarming and fun. The 1999 retro style is extremely nostalgic."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">IMDb User Review</span>
+                                <span class="author-score">8.2/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"A lovely blend of comedy, action, and family drama. Eun-woo and Eun-bin are great together!"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Rotten Tomatoes Audience</span>
+                                <span class="author-score">85%</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"Lo-fi superhero antics that are way more charming than recent Marvel films. Binge-watched it in one sitting!"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Letterboxd User</span>
+                                <span class="author-score">4.0/5.0</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"Simple but highly entertaining. The cast is incredibly charming and lovable."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Metacritic User</span>
+                                <span class="author-score">80</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- My Rating Widget -->
+        <div class="rating-widget">
+            <span class="widget-title">✍️ 보스의 감상평 (My Rating)</span>
+            <div class="stars-container" id="starsContainer">
+                <span class="star-icon" data-value="1">★</span>
+                <span class="star-icon" data-value="2">★</span>
+                <span class="star-icon" data-value="3">★</span>
+                <span class="star-icon" data-value="4">★</span>
+                <span class="star-icon" data-value="5">★</span>
+            </div>
+            <textarea class="comment-input" id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..."></textarea>
+            <button class="rate-submit-btn" id="submitBtn">평가 저장하기</button>
+            <div class="save-toast" id="saveToast">✓ 평가가 안전하게 저장되었습니다.</div>
+        </div>
+
+        <!-- TUG Theater Format Recommendation Widget -->
+        <div class="theater-guide-widget" style="background: #fffbf5; border: 1px dashed rgba(243, 156, 18, 0.3); border-radius: 16px; width: 100%; padding: 18px 15px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 25px; margin-bottom: 10px; box-sizing: border-box;">
+            <span class="widget-title" style="align-self: center; font-size: 13px; font-weight: 900; color: var(--accent-gold); letter-spacing: 0.3px; margin-bottom: 5px;">🎬 극장별 추천 가이드 (Theater Guide)</span>
+            
+            <div class="theater-guide-intro" style="font-size: 10.5px; color: #718096; line-height: 1.4; text-align: center; width: 100%;">
+                TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
+            </div>
+
+            <!-- IMAX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Dolby Vision / Atmos (홈 시어터)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.0 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: 90%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🎬 **추천**: 넷플릭스 4K HDR Dolby Vision과 Atmos 음향을 적극 권장합니다. 세기말 사운드 트랙과 섬세한 초능력 음향 효과의 디테일이 생생합니다.
+                </div>
+            </div>
+
+            <!-- Dolby Cinema Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Large Screen 4K TV (안방 극장)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">8.5 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: 85%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🔊 **추천**: 1999년의 아날로그 질감과 노스탤지어가 대형 TV 화면에서 아늑하게 펼쳐집니다. 가족과 함께 거실에서 관람하기 최적입니다.
+                </div>
+            </div>
+
+            <!-- 4DX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #e67e22;">Mobile / Tablet (이동 중 감상)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">7.5 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: 75%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🌀 **추천**: 8부작 드라마 포맷 특성상 출퇴근 시간 가벼운 정주행으로 손색없으나, 세밀한 소품들의 세기말 정취를 제대로 즐기려면 큰 화면을 권장합니다.
+                </div>
+            </div>
+
+            <!-- Standard Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #95a5a6;">Standard Theater (특별 상영관)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">0.0 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    💺 **추천**: 넷플릭스 독점 오리지널 8부작 드라마 시리즈로, 특별관 및 일반 상영관 극장 개봉 일정이 존재하지 않는 홈 시네마 전용 콘텐츠입니다.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI (Mobile-Responsive Version) -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="media/dashboard_m.js" defer></script>
+</body>
+</html>
