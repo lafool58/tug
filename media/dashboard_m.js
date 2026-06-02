@@ -687,7 +687,7 @@ const translatorData = {
     },
     wonderfuls_variety: {
         outlet: "📰 Variety · 저스틴 창 (Variety 수석 평론가)",
-        title: `"The Triumph of Analog Warmth in a Digital Era"`,
+        title: `"로파이 아날로그의 따뜻함이 빚어낸 유쾌한 K-히어로극"`,
         author: "저스틴 창 (Variety 수석 평론가)",
         score: "7.5/10",
         gradient: "linear-gradient(135deg, #1abc9c 0%, #16a085 100%)",
@@ -695,17 +695,17 @@ const translatorData = {
         sections: [
             {
                 title: "🌌 아날로그 노스탤지어와 로파이(Lo-Fi) 히어로의 매력",
-                text: "Variety의 저스틴 창은 《원더풀스》가 1999년의 세기말 감성과 아날로그적 노스탤지어를 아주 기발한 코믹 톤으로 복원해 냈다다고 평했습니다. 첨단 하이테크 슈트가 아닌 먼지 묻은 점퍼를 입고 날아다니는 평범한 이웃들의 초능력은 다소 어설프지만 감정의 밀도는 깊습니다. 박은빈의 기치 넘치는 코믹 스킬과 차은우의 훌륭한 연기 합은 시종일관 미소를 짓게 만드는 상업적인 밸런스를 성공적으로 획득했습니다."
+                text: "Variety의 저스틴 창은 《원더풀스》가 1999년의 세기말 감성과 아날로그적 노스탤지어를 아주 기발한 코믹 톤으로 복원해 냈다고 평했습니다. 첨단 하이테크 슈트가 아닌 먼지 묻은 점퍼를 입고 날아다니는 평범한 이웃들의 초능력은 다소 어설프지만 감정의 밀도는 깊습니다. 박은빈의 기치 넘치는 코믹 스킬과 차은우의 훌륭한 연기 합은 시종일관 미소를 짓게 만드는 상업적인 밸런스를 성공적으로 획득했습니다."
             },
             {
-                quote: "A delightful K-hero series that triumphs with its lo-fi analog warmth and lovely performances, though it occasionally falters under predictable genre conventions.",
+                quote: "로파이(Lo-Fi) 아날로그 특유의 온기와 배우들의 사랑스러운 열연으로 승리를 거둔 유쾌한 K-히어로 시리즈. 다만 뻔한 장르적 관습 아래서 가끔 비틀거리기도 한다.",
                 quoteSource: "Justin Chang, Variety"
             }
         ]
     },
     wonderfuls_guardian: {
         outlet: "📰 The Guardian · 피터 브래드쇼 (Peter Bradshaw)",
-        title: `"A Heartwarming Spinoff of Everyday Superpowers"`,
+        title: `"일상의 소박한 초능력들이 빚어낸 마음 따뜻한 휴먼 드라마"`,
         author: "피터 브래드쇼 (The Guardian 영화 비평가)",
         score: "★★★★☆ (4.0)",
         gradient: "linear-gradient(135deg, #3498db 0%, #2980b9 100%)",
@@ -719,7 +719,7 @@ const translatorData = {
     },
     wonderfuls_stuckmann: {
         outlet: "🎬 Chris Stuckmann · YouTube Film Critic",
-        title: `"Pure fun and heart! 어설픈 초능력자들의 감동적인 피날레"`,
+        title: `"순수한 재미와 감동! 어설픈 소시민 초능력자들의 유쾌하고 뭉클한 피날레"`,
         author: "크리스 스턱만",
         score: "B+ (8.0/10)",
         gradient: "linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%)",
