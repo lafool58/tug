@@ -35,15 +35,15 @@ MOVIES = {
 }
 
 # AppleScript to query calendar events
-# 1. Search all events in the 'clara' calendar if it exists.
+# 1. Search all events in the 'clara' or 'Clara' calendar if it exists.
 # 2. Search all calendars for events whose summary contains "[CineMag]" as a fallback/signature.
 APPLESCRIPT_TEMPLATE = """
 tell application "Calendar"
     set matchedEvents to {}
     
-    # 1. Try to query the dedicated 'clara' calendar
+    # 1. Try to query the dedicated 'clara' / 'Clara' calendar
     try
-        set claraCal to (first calendar whose name is "clara")
+        set claraCal to (first calendar whose (name is "clara" or name is "Clara"))
         repeat with anEvent in (every event of claraCal)
             copy (summary of anEvent) to end of matchedEvents
         end repeat
@@ -52,7 +52,8 @@ tell application "Calendar"
     # 2. Query all other calendars for CineMag signed events
     repeat with aCal in every calendar
         try
-            if name of aCal is not "clara" then
+            set calName to name of aCal
+            if calName is not "clara" and calName is not "Clara" then
                 set theEvents to (every event of aCal whose summary contains "[CineMag]")
                 repeat with anEvent in theEvents
                     copy (summary of anEvent) to end of matchedEvents
@@ -150,6 +151,14 @@ def main():
 
     # 3. Synchronize with the KeyValue Cloud Database
     print("\nSynchronizing with CineMag KeyValue Cloud DB...")
+    
+    # Check if we are in a 'Cold Start' situation where the Clara/clara calendar has 0 events.
+    # In this case, we prevent overwriting cloud value to 'false' if it was previously 'true'.
+    is_cold_start = (len(events) == 0)
+    if is_cold_start:
+        print("⚠️ [Cold Start Alert] Clara calendar is completely empty.")
+        print("   Active cloud alarms will be preserved to prevent accidental data loss.\n")
+
     for movie_id, meta in MOVIES.items():
         key = meta["key"]
         local_determined_val = current_status[movie_id]
@@ -157,7 +166,10 @@ def main():
         # Fetch current cloud value to avoid unnecessary write requests
         cloud_val = get_cloud_value(key)
         
-        if cloud_val != local_determined_val:
+        if is_cold_start and cloud_val == "true" and local_determined_val == "false":
+            # Cold Start Protection active
+            print(f"  🛡️ [Cold Start Protected] Preserved '{key}' as 'true' (Clara calendar is empty). Please ask agent to restore if needed.")
+        elif cloud_val != local_determined_val:
             print(f"  🔄 Cloud mismatch for '{key}': Cloud={cloud_val} vs Actual={local_determined_val}. Updating...")
             update_cloud_value(key, local_determined_val)
         else:
