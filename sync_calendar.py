@@ -7,6 +7,7 @@ import urllib.error
 import urllib.parse
 import sys
 import json
+import time
 
 SYNC_BASE = "https://keyvalue.immanuel.co/api/KeyVal"
 SYNC_TOKEN = "9cmvofbs"
@@ -39,6 +40,10 @@ MOVIES = {
 # 2. Search all calendars for events whose summary contains "[CineMag]" as a fallback/signature.
 APPLESCRIPT_TEMPLATE = """
 tell application "Calendar"
+    try
+        reload calendars
+        delay 1
+    end try
     set matchedEvents to {}
     
     # 1. Try to query the dedicated 'clara' calendar
@@ -97,31 +102,37 @@ def get_actual_calendar_events():
         return []
 
 def get_cloud_value(key):
-    """Fetches the current value of key from KeyValue cloud."""
+    """Fetches the current value of key from KeyValue cloud with retries."""
     url = f"{SYNC_BASE}/GetValue/{SYNC_TOKEN}/{key}"
-    try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=5) as response:
-            text = response.read().decode('utf-8').strip()
-            # KeyValue server might wrap value in double quotes
-            if text and text != "null":
-                return text.replace('"', '').strip()
-    except Exception as e:
-        print(f"⚠️ Failed to get cloud value for {key}: {e}", file=sys.stderr)
+    for attempt in range(1, 4):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=5) as response:
+                text = response.read().decode('utf-8').strip()
+                if text and text != "null":
+                    return text.replace('"', '').strip()
+                return "false"
+        except Exception as e:
+            print(f"⚠️ Cloud sync pull attempt {attempt}/3 failed for {key}: {e}", file=sys.stderr)
+            if attempt < 3:
+                time.sleep(attempt * 0.5)
     return "false"
 
 def update_cloud_value(key, val_str):
-    """Updates key value in KeyValue cloud."""
+    """Updates key value in KeyValue cloud with retries."""
     url = f"{SYNC_BASE}/UpdateValue/{SYNC_TOKEN}/{key}/{val_str}"
-    try:
-        req = urllib.request.Request(url, data=b'0', headers={'User-Agent': 'Mozilla/5.0'}, method='POST')
-        with urllib.request.urlopen(req, timeout=5) as response:
-            status = response.getcode()
-            if status == 200:
-                print(f"  Successfully updated cloud key '{key}' to '{val_str}'")
-                return True
-    except Exception as e:
-        print(f"⚠️ Failed to update cloud value for {key} to {val_str}: {e}", file=sys.stderr)
+    for attempt in range(1, 4):
+        try:
+            req = urllib.request.Request(url, data=b'0', headers={'User-Agent': 'Mozilla/5.0'}, method='POST')
+            with urllib.request.urlopen(req, timeout=5) as response:
+                status = response.getcode()
+                if status == 200:
+                    print(f"  Successfully updated cloud key '{key}' to '{val_str}'")
+                    return True
+        except Exception as e:
+            print(f"⚠️ Cloud sync push attempt {attempt}/3 failed for {key} to {val_str}: {e}", file=sys.stderr)
+            if attempt < 3:
+                time.sleep(attempt * 0.5)
     return False
 
 def main():
