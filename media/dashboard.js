@@ -175,47 +175,8 @@ window.addEventListener('load', () => {
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeReader();
-        closeClaraProfile();
-        closeImagePreview();
     }
 });
-
-// Clara Harrison Profile Modal
-const claraProfileModal = document.getElementById('claraProfileModal');
-function openClaraProfile() {
-    claraProfileModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-        claraProfileModal.querySelectorAll('.cp-stat-fill').forEach(bar => {
-            bar.style.width = bar.getAttribute('data-w');
-        });
-    }, 150);
-}
-function closeClaraProfile(event) {
-    if (event && event.target !== claraProfileModal && !event.target.classList.contains('modal-close-btn')) return;
-    claraProfileModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-// Image Preview Modal Functions
-const imagePreviewModal = document.getElementById('imagePreviewModal');
-const previewImage = document.getElementById('previewImage');
-function openImagePreview() {
-    imagePreviewModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-        if (previewImage) previewImage.style.transform = 'scale(1)';
-    }, 50);
-}
-function closeImagePreview(event) {
-    if (event && event.target !== imagePreviewModal && !event.target.classList.contains('modal-close-btn')) return;
-    if (previewImage) previewImage.style.transform = 'scale(0.95)';
-    if (imagePreviewModal) imagePreviewModal.classList.remove('active');
-    // Restore page overflow scroll if Clara profile is closed too, otherwise keep hidden
-    if (!claraProfileModal.classList.contains('active')) {
-        document.body.style.overflow = 'auto';
-    }
-}
 
 // My Rating Interactive Logic
 document.addEventListener('DOMContentLoaded', () => {
