@@ -1,9 +1,22 @@
+<!-- 
+================================================================================
+[CineMag 마스터 디자인 규정 (Design Guidelines) - Mobile]
+================================================================================
+⚠️ 중요 자산 등록 수칙 (CRITICAL ASSET RULES):
+  1. 절대 AI 생성 이미지(AI-generated images)나 임의의 제네릭 이미지를 영화 포스터 및 배경으로 사용하지 마십시오.
+     - 반드시 배급사/제작사 측에서 공식 배포한 고해상도 공식 포스터 및 보도스틸 실물 파일만을 로컬 이식(media/ 디렉토리)하여 연동하십시오.
+  2. 세로형 포스터와 가로형 백드롭은 엄격히 분리 설정되어야 합니다.
+     - {{MOVIE_BACKDROP_URL}}: 16:9 가로형 초고화질 공식 스틸컷 또는 영화 배경 키아트 매핑.
+     - media/mandalorian_official_poster.jpg: 2:3 세로형 정통 단일 메인 공식 포스터 매핑.
+     - 두 플레이스홀더에 세로형 포스터 이미지를 동일하게 중복 대입하면 거대 배경 배너에서 이미지가 심각하게 잘리거나 겹쳐 노출되는 치명적인 시각 오동작이 발생합니다.
+================================================================================
+-->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TUG CineMag | 만달로리안 앤 그로구 모바일 대시보드</title>
+    <title>TUG CineMag | 만달로리안 앤 그로구 (THE MANDALORIAN & GROGU)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script>
         // Redirect to Desktop version if not accessed from a mobile device
@@ -13,7 +26,7 @@
     </script>
     <link rel="stylesheet" href="media/dashboard_m.css">
 </head>
-<body>
+<body data-movie-key="mandalorian">
 
     <!-- Header Navigation -->
     <header>
@@ -31,16 +44,16 @@
         <div class="poster-wrapper">
             <img class="poster-image" src="media/mandalorian_official_poster.jpg" alt="만달로리안 앤 그로구 포스터">
             <div class="poster-badges">
-                <div class="poster-badge-special special-imax">IMAX</div>
-                <div class="poster-badge-special special-dolby">Dolby Cinema</div>
-                <div class="poster-badge-special special-4dx">4DX</div>
+                
+                
+                
             </div>
         </div>
 
         <!-- Title -->
         <div class="title-section">
             <h1 class="movie-title">만달로리안 앤 그로구 (2026)</h1>
-            <p class="movie-meta">액션, 모험, SF • 미국 • 12세 관람가 • 142분</p>
+            <p class="movie-meta">{{MOVIE_GENRE}} • {{MOVIE_COUNTRY}} • 12세이상관람가 • 142분</p>
         </div>
 
         <!-- Circular Score Gauge -->
@@ -49,7 +62,7 @@
                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width: 100%; height: 100%;">
                     <!-- Background Circle -->
                     <circle cx="25" cy="25" r="20" fill="none" stroke="#f2f4f4" stroke-width="4"></circle>
-                    <!-- TUG Crimson Arc -->
+                    <!-- TUG Crimson Arc (Calculated from 8.5) -->
                     <circle id="mainGaugeFill" cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
                             stroke-dasharray="125.6" stroke-dashoffset="18.84" stroke-linecap="round"
                             style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);"></circle>
@@ -67,7 +80,7 @@
             <div class="credits-item">감독: <span>존 파브로</span></div>
             <div class="credits-item">주연배우: <span>페드로 파스칼</span></div>
             <div class="credits-item">상영시간: <span>142분</span></div>
-            <div class="credits-item">등급: <span>12세이상관람가 예정</span></div>
+            <div class="credits-item">등급: <span>12세이상관람가</span></div>
             <div class="credits-item">한국개봉일: <span>2026.05.27</span></div>
         </div>
 
@@ -75,11 +88,11 @@
         <div class="synopsis-section">
             <h2 class="section-title">시놉시스</h2>
             <p class="synopsis-text">
-                새로운 시대를 여는 만달로리안 현상금 사냥꾼 딘 자린과 그의 사랑스러운 파운들링 그로구가 은하계를 횡단하며 제국의 잔당에 맞서 싸우는 장대하고 웅장한 SF 스페이스 오페라 대서사시.
+                {{MOVIE_SYNOPSIS}}
             </p>
         </div>
 
-        <!-- 4-Quadrant Category Reviews (Web-synced rich content - Exactly 5 reviews per category) -->
+        <!-- 4-Quadrant Category Reviews -->
         <div class="quadrants-section">
             <h2 class="section-title">4분할 입체 상세 비평</h2>
             <div class="quadrant-list">
@@ -99,7 +112,7 @@
                             <div class="mini-circle-wrapper">
                                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="22.6" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                    <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="22.63" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
                                 </svg>
                                 <span class="mini-score-val">8.2</span>
                             </div>
@@ -107,7 +120,7 @@
                     </div>
                     <div class="review-quote-list">
                         <div class="review-quote-item highlighted">
-                            <p class="review-quote-text">"존 파브로가 스타워즈 세계관에 다시 불어넣은 숨결. 은하계 스케일과 두 주인공의 드라마가 완벽한 조화를 이룬다."</p>
+                            <p class="review-quote-text">"존 파브로가 스타워즈 세계관에 다시 불어넣은 숨결. 은하계 스케일과 두 주인공의 친밀한 드라마가 완벽한 조화를 이룬다."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">이동진 평론가 <a class="review-modal-link" onclick="openReader('leedongjin')">🔗 전문보기</a></span>
                                 <span class="author-score">★★★★☆</span>
@@ -117,28 +130,28 @@
                             <p class="review-quote-text">"클래식 스타워즈의 아날로그 감성과 디즈니의 최첨단 VFX 기술이 빚어낸 영리한 절충점."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">송경원 평론가</span>
-                                <span class="author-score">8.0/10</span>
+                                <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
                             <p class="review-quote-text">"서사의 확장성보다는 관계의 깊이에 안착하며 시리즈 팬들이 원했던 바로 그 온도를 선물한다."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">김혜리 평론가</span>
-                                <span class="author-score">8.0/10</span>
+                                <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
                             <p class="review-quote-text">"귀여운 그로구와 묵직한 만도의 안전 비행. 모험은 흔들림 없이 깊어진다."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">박평식 평론가</span>
-                                <span class="author-score">7.0/10</span>
+                                <span class="author-score">★★★☆☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
                             <p class="review-quote-text">"차가운 베스카 갑옷 밑에 흐르는 포스의 따스한 온기. 스펙터클의 홍수 속에서도 인간성과 관계라는 가장 소중한 알맹이를 지켜냈다."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">허지웅 평론가</span>
-                                <span class="author-score">8.0/10</span>
+                                <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                     </div>
@@ -159,7 +172,7 @@
                             <div class="mini-circle-wrapper">
                                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="17.58" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                    <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="17.60" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
                                 </svg>
                                 <span class="mini-score-val">8.6</span>
                             </div>
@@ -167,21 +180,21 @@
                     </div>
                     <div class="review-quote-list">
                         <div class="review-quote-item highlighted">
-                            <p class="review-quote-text">"드라마를 안 봤어도 그로구의 극장 꽉 찬 귀여움만으로도 티켓값은 200% 뽑았다! 케미가 너무 훌륭함."</p>
+                            <p class="review-quote-text">"드라마 시즌 1~3을 보지 않았더라도 두 사람의 케미에 단숨에 몰입된다. 그로구의 극장 화면 꽉 찬 귀여움만으로도 티켓값은 200% 뽑았다!"</p>
                             <div class="review-quote-author">
                                 <span class="author-name">유튜버 거의없다 <a class="review-modal-link" onclick="openReader('almostmainstream')">🎬 전문보기</a></span>
-                                <span class="author-score">8.5/10</span>
+                                <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
-                            <p class="review-quote-text">"스타워즈 프리퀄 이후 가장 만족스러운 극장 영화. 존 파브로와 데이브 필로니는 진짜 은하계의 구원자다."</p>
+                            <p class="review-quote-text">"스타워즈 프리퀄 이후 가장 만족스러운 극장용 영화. 존 파브로와 데이브 필로니는 진짜 은하계의 구원자다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">네이버 인기 네티즌</span>
-                                <span class="author-score">9.0/10</span>
+                                <span class="author-name">네이버 인기 댓글</span>
+                                <span class="author-score">9/10</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
-                            <p class="review-quote-text">"아이맥스로 무조건 봐야 하는 압도적인 스페이스 독파이트 액션! 클래식 테마곡 울릴 때 소름 돋았다."</p>
+                            <p class="review-quote-text">"아이맥스로 무조건 봐야 하는 압도적인 스페이스 독파이트 액션! 클래식 테마곡 울릴 때 전율이 돋았다."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">CGV 골든에그지수</span>
                                 <span class="author-score">94%</span>
@@ -191,14 +204,14 @@
                             <p class="review-quote-text">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호함ㅋㅋ 스타워즈의 오리지널 웅장한 감성이 온전히 돌아옴."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">왓챠피디아 유저 평점</span>
-                                <span class="author-score">★★★★☆ 4.3</span>
+                                <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
                             <p class="review-quote-text">"드라마 시즌을 다 챙겨본 찐팬으로서 감동의 눈물이 흐릅니다. 딘과 그로구의 극장 귀환은 역사적인 순간입니다!"</p>
                             <div class="review-quote-author">
-                                <span class="author-name">스타워즈 대표 카페 유저</span>
-                                <span class="author-score">9.5/10</span>
+                                <span class="author-name">스타워즈 네이버 대표 카페 유저</span>
+                                <span class="author-score">★★★★★</span>
                             </div>
                         </div>
                     </div>
@@ -219,7 +232,7 @@
                             <div class="mini-circle-wrapper">
                                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="20.1" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                    <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="20.11" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
                                 </svg>
                                 <span class="mini-score-val">8.4</span>
                             </div>
@@ -227,38 +240,38 @@
                     </div>
                     <div class="review-quote-list">
                         <div class="review-quote-item highlighted">
-                            <p class="review-quote-text">"존 파브로 감독은 대형 스크린에 어울리는 압도적 스케일을 선보이면서도, 시리즈의 정수인 인격적 유대를 잃지 않았다."</p>
+                            <p class="review-quote-text">"스타워즈 사가에 새로운 활력을 불어넣는 대작. 존 파브로 감독은 대형 스크린에 어울리는 압도적 스케일을 선보이면서도, 시리즈의 정수인 인격적 유대를 잃지 않았다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">Variety · 저스틴 창 <a class="review-modal-link" onclick="openReader('justinchang')">🌎 번역해설 전문</a></span>
+                                <span class="author-name">Variety · 저스틴 창 <a class="review-modal-link" onclick="openReader('justinchang')">🌎 전문보기</a></span>
                                 <span class="author-score">8.5/10</span>
                             </div>
                         </div>
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"만달로리안 앤 그로구는 스페이스 오페라의 정점을 다시 찍었다. 액션 시퀀스는 역동적이며 비주얼은 숨이 막힌다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">The Guardian · Bradshaw <a class="review-modal-link" onclick="openReader('guardian')">🌎 번역해설 전문</a></span>
+                                <span class="author-name">The Guardian · 피터 브래드쇼 <a class="review-modal-link" onclick="openReader('guardian')">🌎 전문보기</a></span>
                                 <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
                             <p class="review-quote-text">"필로니와 파브로 콤비가 디즈니 플러스의 한계를 넘어 시네마틱 스케일로 우뚝 서다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">Empire 매거진</span>
-                                <span class="author-score">★★★★☆ 4.5</span>
+                                <span class="author-name">Empire</span>
+                                <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
                             <p class="review-quote-text">"그로구와 만도의 매력은 은하계를 넘어 전 우주적이다. 거대한 우주 전투 씬은 감탄을 자아내기에 충분하다."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">Hollywood Reporter</span>
-                                <span class="author-score">8.0/10</span>
+                                <span class="author-score">8/10</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
                             <p class="review-quote-text">"존 파브로는 클래식 스타워즈의 우주 판타지 감성을 고스란히 담아내는 데 성공했다. 그로구의 귀여움과 시네마틱 스케일의 조화가 무척 눈부시다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">IndieWire · 얼리치</span>
-                                <span class="author-score">8.0/10</span>
+                                <span class="author-name">IndieWire · 데이비드 얼리치</span>
+                                <span class="author-score">8/10</span>
                             </div>
                         </div>
                     </div>
@@ -279,7 +292,7 @@
                             <div class="mini-circle-wrapper">
                                 <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
                                     <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
-                                    <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="15.07" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                    <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="15.08" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
                                 </svg>
                                 <span class="mini-score-val">8.8</span>
                             </div>
@@ -289,19 +302,19 @@
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"This is the way! 스타워즈의 황금기가 마침내 돌아왔다. 만도와 그로구의 스토리는 극장 영화의 대서사시로 완성되었다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">크리스 스턱만 <a class="review-modal-link" onclick="openReader('stuckmann')">🎬 전문보기</a></span>
-                                <span class="author-score">8.5/10</span>
+                                <span class="author-name">유튜버 크리스 스턱만 <a class="review-modal-link" onclick="openReader('stuckmann')">🎬 전문보기</a></span>
+                                <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
-                            <p class="review-quote-text">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호했다. 스타워즈 팬이라면 절대 놓쳐선 안 될 명작."</p>
+                            <p class="review-quote-text">"그로구의 포스 능력이 대형 스크린에서 연출될 때 극장 전체가 환호했다. 스타워즈 팬이라면 평생을 후회하지 않을 마스터피스."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">Letterboxd 유저 평점</span>
-                                <span class="author-score">★★★★☆ 4.3</span>
+                                <span class="author-name">Letterboxd 평점</span>
+                                <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
                         <div class="review-quote-item">
-                            <p class="review-quote-text">"감정선이 풍부하고 액션은 지루할 틈이 없으며, 클래식 3부작의 오리지널 우주적 정취를 완벽히 뿜어낸다."</p>
+                            <p class="review-quote-text">"존 파브로가 또 한 번 해냈다. 감정선이 풍부하고 액션은 지루할 틈이 없으며, 클래식 삼부작의 우주적 정취를 완벽히 뿜어낸다."</p>
                             <div class="review-quote-author">
                                 <span class="author-name">Rotten Tomatoes 관객</span>
                                 <span class="author-score">92%</span>
@@ -317,7 +330,7 @@
                         <div class="review-quote-item">
                             <p class="review-quote-text">"향수와 깊은 감정의 우주 여정. 만도와 그로구의 극장 스펙터클 비행은 앞으로도 영원히 잊지 못할 것입니다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">Reddit 스타워즈 유저</span>
+                                <span class="author-name">Reddit 스타워즈 서브레딧 유저</span>
                                 <span class="author-score">9.0/10</span>
                             </div>
                         </div>
@@ -342,7 +355,7 @@
             <div class="save-toast" id="saveToast">✓ 평가가 안전하게 저장되었습니다.</div>
         </div>
 
-        <!-- TUG Theater Format Recommendation Widget (Relocated to Dashboard Body) -->
+        <!-- TUG Theater Format Recommendation Widget -->
         <div class="theater-guide-widget" style="background: #fffbf5; border: 1px dashed rgba(243, 156, 18, 0.3); border-radius: 16px; width: 100%; padding: 18px 15px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 25px; margin-bottom: 10px; box-sizing: border-box;">
             <span class="widget-title" style="align-self: center; font-size: 13px; font-weight: 900; color: var(--accent-gold); letter-spacing: 0.3px; margin-bottom: 5px;">🎬 극장별 추천 가이드 (Theater Guide)</span>
             
@@ -353,64 +366,64 @@
             <!-- IMAX Recommendation -->
             <div class="theater-metric-row" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
                 <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">IMAX (스케일)</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.6 / 10</span>
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">{{FORMAT_NAME_1}}</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">{{THEATER_IMAX_SCORE}} / 10</span>
                 </div>
                 <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                     <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
+                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_IMAX_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    🪐 **추천**: 1.43:1 우주 화면비 확장으로 스케일과 개방감이 환상적임. (최강의 몰입감)
+                    {{FORMAT_ICON_1}} **추천**: {{THEATER_IMAX_TIP}}
                 </div>
             </div>
 
             <!-- Dolby Cinema Recommendation -->
             <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
                 <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Dolby Cinema (화질/음향)</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.4 / 10</span>
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">{{FORMAT_NAME_2}}</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">{{THEATER_DOLBY_SCORE}} / 10</span>
                 </div>
                 <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                     <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
+                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_DOLBY_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    🔊 **추천**: 입체 음향의 방향 분리도 및 우주 배경의 깊은 암흑 명암대비가 완전함.
+                    {{FORMAT_ICON_2}} **추천**: {{THEATER_DOLBY_TIP}}
                 </div>
             </div>
 
             <!-- 4DX Recommendation -->
             <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
                 <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">4DX (역동성)</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">8.2 / 10</span>
+                    <span class="theater-format-name" style="font-weight: 800; color: #e67e22;">{{FORMAT_NAME_3}}</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">{{THEATER_4DX_SCORE}} / 10</span>
                 </div>
                 <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                     <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
+                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_4DX_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    🌀 **추천**: 스타파이터 비행 시 모션 감각 및 바람 진동 체감이 우수하나 다소 피로함.
+                    {{FORMAT_ICON_3}} **추천**: {{THEATER_4DX_TIP}}
                 </div>
             </div>
 
             <!-- Standard Recommendation -->
             <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
                 <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #95a5a6;">Standard 일반관 (안정성)</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">7.5 / 10</span>
+                    <span class="theater-format-name" style="font-weight: 800; color: #95a5a6;">{{FORMAT_NAME_4}}</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">{{THEATER_STANDARD_SCORE}} / 10</span>
                 </div>
                 <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                     <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
+                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_STANDARD_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    💺 **추천**: 시선 피로감 없이 편하게 관람하기에는 가성비 최고의 선택이나, 영화의 거대한 음향 효과 체감은 반감됨.
+                    {{FORMAT_ICON_4}} **추천**: {{THEATER_STANDARD_TIP}}
                 </div>
             </div>
         </div>
@@ -440,7 +453,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="media/translations.js" defer></script>
     <script src="media/dashboard_m.js" defer></script>

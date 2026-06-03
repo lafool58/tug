@@ -692,4 +692,9 @@ header {
     color: #95a5a6 !important; /* 제한상영가 (Grey) */
     font-weight: 700;
 }
+.rating-tbd {
+    color: #95a5a6 !important; /* 등급 심사 중 (Grey) */
+    font-weight: 700;
+}
+
 
