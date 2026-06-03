@@ -666,6 +666,40 @@
     <!-- Movie Magazine Grid -->
     <div class="magazine-grid" id="movieGrid">
         
+        <!-- Card 5: 와일드 씽 -->
+        <div class="movie-card" data-movie-key="wildsing" 
+             data-reg-order="5"
+             data-title="와일드 씽 (WILD SING)" 
+             data-director="손재곤" 
+             data-genre="스릴러" 
+             data-score="8.2" 
+             data-year="2026" 
+             data-link="wildsing_dashboard.html"
+             data-meta="손재곤 감독 • 강동원, 엄태구 주연 • 12세이상관람가"
+             data-desc="손재곤 감독 특유의 지적인 엇박자 코미디와 강동원·엄태구의 기묘한 버디 케미가 빚어낸 영리하고 유쾌한 범죄 소동극. TUG 평론단이 국내외 여론을 입체적으로 분석한 추천 지수를 공개합니다."
+             data-backdrop="media/wildsing_official_backdrop.jpg"
+             data-backdrop-gradient="linear-gradient(135deg, #1e272e 0%, #2f3640 100%)"
+             onclick="location.href='wildsing_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/wildsing_official_poster.png" alt="와일드 씽">
+            </div>
+            <div class="card-info">
+                <div class="card-badges">
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special">2K/4K</span>
+                    <span class="card-badge-special">한국어</span>
+                </div>
+                <h3 class="card-title">와일드 씽 (2026)</h3>
+                <p class="card-meta">손재곤 감독 • 강동원, 엄태구 주연</p>
+                <div class="card-spacer"></div>
+                <div class="my-rating-row"></div>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">8.2</span>/10</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Card 4: 원더풀스 -->
         <div class="movie-card" data-movie-key="wonderfuls" 
              data-reg-order="4"
@@ -1042,8 +1076,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating',
-                'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm'
+                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating',
+                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -1054,7 +1088,9 @@
                              let cleanVal = text.trim().replace(/^"|"$/g, '');
                              const isRating = key.endsWith('rating');
                              let movieKey = 'colony';
-                             if (key.startsWith('mandalorian')) {
+                             if (key.startsWith('wildsing')) {
+                                 movieKey = 'wildsing';
+                             } else if (key.startsWith('mandalorian')) {
                                  movieKey = 'mandalorian';
                              } else if (key.startsWith('disclosure')) {
                                  movieKey = 'disclosure';

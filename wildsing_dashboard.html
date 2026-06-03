@@ -1,0 +1,478 @@
+<!-- 
+================================================================================
+[CineMag 마스터 디자인 규정 (Design Guidelines)]
+================================================================================
+⚠️ 중요 자산 등록 수칙 (CRITICAL ASSET RULES):
+  1. 절대 AI 생성 이미지(AI-generated images)나 임의의 제네릭 이미지를 영화 포스터 및 배경으로 사용하지 마십시오.
+     - 반드시 배급사/제작사 측에서 공식 배포한 고해상도 공식 포스터 및 보도스틸 실물 파일만을 로컬 이식(media/ 디렉토리)하여 연동하십시오.
+  2. 세로형 포스터와 가로형 백드롭은 엄격히 분리 설정되어야 합니다.
+     - [MOVIE_BACKDROP_URL]: 16:9 가로형 초고화질 공식 스틸컷 또는 영화 배경 키아트 매핑.
+     - [MOVIE_POSTER_URL]: 2:3 세로형 정통 단일 메인 공식 포스터 매핑.
+     - 두 플레이스홀더에 세로형 포스터 이미지를 동일하게 중복 대입하면 거대 배경 배너에서 이미지가 심각하게 잘리거나 겹쳐 노출되는 치명적인 시각 오동작이 발생합니다.
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 와일드 씽 (WILD SING)</title>
+    <script>
+        // Redirect to Mobile version if accessed from a mobile device
+        if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("wildsing_dashboard_m.html");
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="media/dashboard.css">
+</head>
+<body data-movie-key="wildsing">
+
+    <!-- SVG Gradients Definition -->
+    <svg class="svg-defs-container" style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c0392b" />
+                <stop offset="100%" stop-color="#f39c12" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand-section">
+            <a href="index.html" class="brand-logo" style="text-decoration: none;">TUG CineMag</a>
+            <div class="brand-tagline">Trafford United Group</div>
+        </div>
+        <a href="index.html" class="back-home-btn">🏠 CineMag 홈으로 돌아가기</a>
+    </header>
+
+    <!-- Cinematic Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-bg" style="background-image: url('media/wildsing_official_poster.png');"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <div class="hero-poster-wrapper">
+                <img class="hero-poster" src="media/wildsing_official_poster.png" alt="와일드 씽 포스터">
+            </div>
+            <div class="hero-text">
+                <span class="hero-tag">Special Editorial</span>
+                <h1 class="hero-title">와일드 씽 <span>WILD SING, 2026</span></h1>
+                <div class="hero-meta">
+                    <span>손재곤 감독</span>
+                    <span class="meta-divider">•</span>
+                    <span>강동원, 엄태구, 박지현, 오정세 주연</span>
+                    <span class="meta-divider">•</span>
+                    <span>107분</span>
+                    <span class="meta-divider">•</span>
+                    <span class="rating-12">🟡 12세이상관람가</span>
+                    <span class="meta-divider">•</span>
+                    <span>한국개봉일: 2026.06.03</span>
+                </div>
+                <div class="hero-meta-tags">
+                    <span class="hero-tag-item special-dolby-badge">🔊 Dolby Cinema</span>
+                    <span class="hero-tag-item">📺 2K / 4K</span>
+                    <span class="hero-tag-item">🗣 한국어</span>
+                    <span class="hero-tag-item">🎭 블랙 코미디</span>
+                    <span class="hero-tag-item">💰 범죄 / 소동극</span>
+                    <span class="hero-tag-item hero-tag-award">🎟 🎟 손재곤 감독 & 강동원·엄태구 버디</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Dashboard Area -->
+    <div class="dashboard-container">
+        
+        <!-- Left Sidebar: Main Unified Score -->
+        <div class="editorial-sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-title">CineMag Unified Score</div>
+                
+                <!-- Circular Score Gauge -->
+                <div class="main-gauge-wrapper">
+                    <svg class="gauge-svg" viewBox="0 0 160 160">
+                        <circle class="gauge-circle-bg" cx="80" cy="80" r="70" />
+                        <circle id="mainGaugeFill" class="gauge-circle-fill" cx="80" cy="80" r="70" />
+                    </svg>
+                    <div class="gauge-inner-content">
+                        <span class="gauge-number">8.2</span>
+                        <span class="gauge-denom">/ 10</span>
+                    </div>
+                </div>
+
+                <div class="stars-row">★★★★☆</div>
+                
+                <p class="sidebar-quote">
+                    "손재곤 감독의 엇박자 코미디와 강동원·엄태구의 기묘한 버디 케미가 빚어낸 유쾌하고 영리한 범죄극."
+                </p>
+
+                <!-- Clara Harrison Avatar Card -->
+                <div class="clara-editor-info">
+                    <img class="clara-avatar" src="media/clara_harrison_custom.png" alt="Clara Harrison"
+                         onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200';">
+                    <div class="clara-meta">
+                        <span class="clara-name">Clara Harrison</span>
+                        <span class="clara-role">Chief Film Critic</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Rating Personal Card -->
+            <div class="sidebar-card my-rating-card" id="myRatingCard">
+                <div class="sidebar-title" style="color:var(--accent-red);">MY RATING</div>
+                
+                <div class="my-rating-display">
+                    <span class="my-gauge-number" id="myRatingScore">0.0</span>
+                    <span class="gauge-denom">/ 10</span>
+                </div>
+
+                <div class="interactive-stars" id="interactiveStars">
+                    <span data-val="2">★</span><span data-val="4">★</span><span data-val="6">★</span><span data-val="8">★</span><span data-val="10">★</span>
+                </div>
+                
+                <textarea class="comment-input" id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..."></textarea>
+                <button id="saveRatingBtn" class="save-rating-btn">평가 저장하기</button>
+                <div id="saveConfirmMsg" class="save-confirm-msg">저장되었습니다 ✓</div>
+            </div>
+
+            <!-- TUG Theater Format Recommendation Card -->
+            <div class="sidebar-card theater-guide-card" id="theaterGuideCard" style="align-items: flex-start;">
+                <div class="sidebar-title" style="color:var(--accent-gold); align-self: center; margin-bottom: 12px;">🎬 극장별 추천 가이드 (Theater Guide)</div>
+                
+                <div class="theater-guide-intro" style="font-size: 11px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.5;">
+                    TUG 관람 평단이 실제 특별관 및 일반관 관람객들의 여론을 엄밀히 분석하여 도출한 추천 지수 및 맞춤 팁입니다.
+                </div>
+
+                <!-- IMAX Recommendation -->
+                <div class="theater-metric-row" style="width: 100%;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">IMAX (스케일)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">7.5 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill imax-gauge-fill" style="background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 8px rgba(243, 156, 18, 0.6); width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🪐 **추천**: 코미디 영화라 대화 위주이지만, 화려한 스케일의 소동극과 강동원의 비주얼을 넓은 화면으로 시원하게 즐기기에 무난합니다.
+                    </div>
+                </div>
+
+                <!-- Dolby Cinema Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Dolby Cinema (화질/음향)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">8.8 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill dolby-gauge-fill" style="background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 8px rgba(46, 204, 113, 0.6); width: 88%;"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🔊 **추천**: 다이내믹한 재즈풍 음악과 독특한 효과음이 공간을 가득 채우며 코미디의 긴장감과 몰입감을 배가시킵니다.
+                    </div>
+                </div>
+
+                <!-- 4DX Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">4DX (역동성)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">8.0 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill fourdx-gauge-fill" style="background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 8px rgba(230, 126, 34, 0.6); width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        🌀 **추천**: 후반부의 쫓고 쫓기는 소동극과 액션 씬에서 의자가 흔들리는 모션 효과가 쏠쏠한 재미를 줍니다.
+                    </div>
+                </div>
+
+                <!-- Standard Recommendation -->
+                <div class="theater-metric-row" style="width: 100%; margin-top: 16px;">
+                    <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%;">
+                        <span class="theater-format-name" style="font-weight: 800; color: var(--text-primary);">Standard 일반관 (안정성)</span>
+                        <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">9.2 / 10</span>
+                    </div>
+                    <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                        <div class="hud-gauge-track">
+                            <div class="hud-gauge-fill standard-gauge-fill" style="background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 8px rgba(149, 165, 166, 0.4); width: 92%;"></div>
+                        </div>
+                    </div>
+                    <div class="theater-tip" style="font-size: 11px; color: var(--text-secondary); margin-top: 5px; line-height: 1.4; text-align: justify;">
+                        💺 **추천**: 관객들과 함께 소통하고 웃을 수 있는 코미디 영화인 만큼, 가성비 좋게 웃음을 나눌 수 있는 가장 추천하는 관람 방식입니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: 4-Quadrant Reviews Grid -->
+        <div class="quadrant-grid">
+            
+            <!-- Q1: 국내 평론가 -->
+            <div class="quadrant-card quad-kr-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🇰🇷 국내 평론가</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Cine21</span>
+                            <span class="quad-logo-tag">Btv</span>
+                            <span class="quad-logo-tag">왓챠</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">7.8</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"독특한 리듬의 엇박자 대사와 기발한 상황 설계가 손재곤 감독의 영리한 연출력을 입증한다. 다만 후반부 소동극의 기력이 약해지는 것은 아쉽다."</p>
+                        <div class="review-author-source">
+                            <span>이동진 평론가 (★★★☆)</span>
+                            <a class="review-modal-link" onclick="openReader('wildsing_leedongjin')">🔗 비평 전문 독점공개</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"소동극의 외피를 쓴 엇박자 코미디. 손재곤의 칼날 같은 말맛이 여전히 살아있다."</p>
+                        <div class="review-author-source">
+                            <span>씨네21 송경원 평론가 (★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"기묘한 관계가 자아내는 불협화음의 재미. 인물들의 귀여운 뻔뻔함에 무장해제된다."</p>
+                        <div class="review-author-source">
+                            <span>씨네21 김혜리 평론가 (★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"싱겁게 꼬이고 헐겁게 풀려도, 헛웃음 한 번은 건진다."</p>
+                        <div class="review-author-source">
+                            <span>씨네21 박평식 평론가 (★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"어이없는 웃음 속에서도 묘한 페이소스가 묻어나는 잘 짜인 버디 무비."</p>
+                        <div class="review-author-source">
+                            <span>허지웅 평론가 (★★★☆)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2: 국내 관객 -->
+            <div class="quadrant-card quad-kr-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🇰🇷 국내 관객</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">CGV 에그지수</span>
+                            <span class="quad-logo-tag">네이버</span>
+                            <span class="quad-logo-tag">유튜브</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">8.6</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"강동원의 뻔뻔한 연기와 엄태구의 주눅 든 캐릭터 조합이 아주 찰지다. 최근 한국 코미디 중에서 가장 고급스러운 유머를 구사한다."</p>
+                        <div class="review-author-source">
+                            <span>유튜버 거의없다 (★★★★)</span>
+                            <a class="review-modal-link" onclick="openReader('wildsing_almostmainstream')">🎬 유튜브 비평 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"배우들 조합 신선하고 107분 동안 쉴 틈 없이 웃었습니다! 극장 추천!"</p>
+                        <div class="review-author-source">
+                            <span>CGV 골든에그지수 (93%)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"엄태구 목소리랑 강동원 얼굴 합이 이렇게 좋을 줄 몰랐네요ㅋㅋㅋ 극장용 힐링 코미디로 강추!"</p>
+                        <div class="review-author-source">
+                            <span>왓챠피디아 관객 (★★★★)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"최근 한국 영화 중에서 가장 지적인 코미디. 손재곤 감독 특유의 블랙유머가 너무 내 취향."</p>
+                        <div class="review-author-source">
+                            <span>네이버 네티즌 (9/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"오정세랑 박지현 조연 케미도 미쳤음ㅋㅋㅋ 그냥 가볍게 웃으러 갔다가 영화 만듦새에 감탄함."</p>
+                        <div class="review-author-source">
+                            <span>유튜브 댓글 여론 (★★★★☆)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3: 해외 평론가 -->
+            <div class="quadrant-card quad-gl-critic">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🌎 해외 평론가</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">Variety</span>
+                            <span class="quad-logo-tag">The Guardian</span>
+                            <span class="quad-logo-tag">THR</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">7.5</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"한국 특유의 블랙 코미디 감각이 유쾌하게 빛난다. 감독은 범죄 소동극의 룰을 비틀며 관객을 쥐락펴락한다."</p>
+                        <div class="review-author-source">
+                            <span>피터 브래드쇼 (The Guardian) (★★★★☆)</span>
+                            <a class="review-modal-link" onclick="openReader('wildsing_guardian')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"정교하게 짜인 상황극 and 배우들의 강렬한 페르소나가 결합된 매력적인 영화. 다소 지역색 짙은 코미디일 수 있으나 범우주적 유머가 존재한다."</p>
+                        <div class="review-author-source">
+                            <span>IndieWire (★★★☆)</span>
+                            <a class="review-modal-link" onclick="openReader('wildsing_indiewire')">🌎 번역해설 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"정밀하게 계산된 불협화음과 뛰어난 연기 앙상블. 손재곤 감독은 관습적인 범죄 영화의 클리셰를 영리하게 전복시킨다."</p>
+                        <div class="review-author-source">
+                            <span>Variety · 저스틴 창 (8.0/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"캐릭터의 결함들을 위트로 승화시킨 신선한 범죄 소동극. 주연 배우들의 코믹한 시너지가 극의 완성도를 지탱한다."</p>
+                        <div class="review-author-source">
+                            <span>The Hollywood Reporter (★★★☆)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"어두운 범죄의 이면을 발랄한 희극적 리듬으로 치환하는 솜씨가 놀랍다. 다이내믹한 앙상블이 매력적이다."</p>
+                        <div class="review-author-source">
+                            <span>Screen International (★★★☆)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4: 해외 관객 -->
+            <div class="quadrant-card quad-gl-aud">
+                <div class="quadrant-header">
+                    <div class="quadrant-title-group">
+                        <h3 class="quadrant-title">🌎 해외 관객</h3>
+                        <div class="quadrant-branding-logos">
+                            <span class="quad-logo-tag">IMDb</span>
+                            <span class="quad-logo-tag">Rotten Tomatoes</span>
+                            <span class="quad-logo-tag">Letterboxd</span>
+                        </div>
+                    </div>
+                    <!-- Mini Gauge -->
+                    <div class="mini-gauge-wrapper">
+                        <svg class="mini-gauge-svg" viewBox="-5 -5 60 60">
+                            <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                            <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" />
+                        </svg>
+                        <div class="mini-gauge-text">8.4</div>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <!-- Highlighted Item (has Modal link) -->
+                    <div class="review-card-item highlight">
+                        <p class="review-text-quote">"정말 뜻밖의 발견이다! 강동원과 엄태구의 버디 케미스트리가 상상 이상으로 돋보이고 극장 안은 시종일관 웃음바다였다."</p>
+                        <div class="review-author-source">
+                            <span>Chris Stuckmann (Grade B+)</span>
+                            <a class="review-modal-link" onclick="openReader('wildsing_stuckmann')">🎬 유튜브 비평 전문</a>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"올해 본 가장 유쾌하고 똑똑한 블랙 코미디 중 하나. 두 배우의 얼굴합과 연기 합이 화면을 꽉 채운다."</p>
+                        <div class="review-author-source">
+                            <span>Letterboxd 평점 (★★★★)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"한국 유머의 독특한 리듬을 그대로 느낄 수 있는 영화. 자막으로 봐도 연기와 톤에서 유머가 100% 전달된다."</p>
+                        <div class="review-author-source">
+                            <span>Rotten Tomatoes 관객 (89%)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"매우 재미있고 예측 불가능한 소동극. 마지막 20분 동안은 눈물 흘리며 웃었다."</p>
+                        <div class="review-author-source">
+                            <span>IMDb 유저 평점 (7.8/10)</span>
+                        </div>
+                    </div>
+                    <div class="review-card-item">
+                        <p class="review-text-quote">"강동원과 엄태구라는 상반된 에너지를 가진 배우들이 만나 뿜어내는 기묘한 웃음의 앙상블."</p>
+                        <div class="review-author-source">
+                            <span>Metacritic User (★★★★)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">OUTLET</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <script src="media/translations.js" defer></script>
+    <script src="media/dashboard.js" defer></script>
+</body>
+</html>
