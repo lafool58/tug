@@ -6,8 +6,8 @@
   1. 절대 AI 생성 이미지(AI-generated images)나 임의의 제네릭 이미지를 영화 포스터 및 배경으로 사용하지 마십시오.
      - 반드시 배급사/제작사 측에서 공식 배포한 고해상도 공식 포스터 및 보도스틸 실물 파일만을 로컬 이식(media/ 디렉토리)하여 연동하십시오.
   2. 세로형 포스터와 가로형 백드롭은 엄격히 분리 설정되어야 합니다.
-     - {{MOVIE_BACKDROP_URL}}: 16:9 가로형 초고화질 공식 스틸컷 또는 영화 배경 키아트 매핑.
-     - media/colony_official_poster.jpg: 2:3 세로형 정통 단일 메인 공식 포스터 매핑.
+     - [MOVIE_BACKDROP_URL]: 16:9 가로형 초고화질 공식 스틸컷 또는 영화 배경 키아트 매핑.
+     - [MOVIE_POSTER_URL]: 2:3 세로형 정통 단일 메인 공식 포스터 매핑.
      - 두 플레이스홀더에 세로형 포스터 이미지를 동일하게 중복 대입하면 거대 배경 배너에서 이미지가 심각하게 잘리거나 겹쳐 노출되는 치명적인 시각 오동작이 발생합니다.
 ================================================================================
 -->
@@ -53,7 +53,7 @@
         <!-- Title -->
         <div class="title-section">
             <h1 class="movie-title">군체 (2026)</h1>
-            <p class="movie-meta">{{MOVIE_GENRE}} • {{MOVIE_COUNTRY}} • 15세이상관람가 • 118분</p>
+            <p class="movie-meta">🧟 좀비 아포칼립스 • 한국 • 15세이상관람가 • 118분</p>
         </div>
 
         <!-- Circular Score Gauge -->
@@ -88,7 +88,7 @@
         <div class="synopsis-section">
             <h2 class="section-title">시놉시스</h2>
             <p class="synopsis-text">
-                {{MOVIE_SYNOPSIS}}
+                집단 지성을 장착한 변종 좀비 바이러스가 순식간에 한반도를 뒤덮는다. 인간 사회의 붕괴 속에서 생존의 최후 보루인 통제구역을 지키기 위한 전지현, 구교환, 지창욱의 처절하고 압도적인 사투가 펼쳐진다.
             </p>
         </div>
 
@@ -182,7 +182,7 @@
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"숨 쉴 틈 없이 밀고 들어오는 질주감 하나는 대박이다. 전지현 구교환 액션 케미가 기대를 저버리지 않는다!"</p>
                             <div class="review-quote-author">
-                                <span class="author-name">관객 인기 한줄평 <a class="review-modal-link" onclick="openReader('{{Q2_REVIEW_KEY_1}}')">🎬 전문보기</a></span>
+                                <span class="author-name">관객 인기 한줄평 <a class="review-modal-link" onclick="openReader('colony_almostmainstream')">🎬 전문보기</a></span>
                                 <span class="author-score">★★★★☆</span>
                             </div>
                         </div>
@@ -302,7 +302,7 @@
                         <div class="review-quote-item highlighted">
                             <p class="review-quote-text">"부산행의 정서와 반도의 액션을 영리하게 결합한 수작. 집단 좀비 비주얼은 할리우드에서도 본 적 없는 새로운 연출 스타일이다."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">IMDb 인기 한줄평 <a class="review-modal-link" onclick="openReader('{{Q4_REVIEW_KEY_1}}')">🎬 전문보기</a></span>
+                                <span class="author-name">IMDb 인기 한줄평 <a class="review-modal-link" onclick="openReader('colony_imdb')">🎬 전문보기</a></span>
                                 <span class="author-score">7.8/10</span>
                             </div>
                         </div>
@@ -328,10 +328,10 @@
                             </div>
                         </div>
                         <div class="review-quote-item">
-                            <p class="review-quote-text">"{{Q4_REVIEW_TEXT_5}}"</p>
+                            <p class="review-quote-text">"기성 좀비물의 맛과 연상호표 어두운 서사가 나름의 타협점을 찾았다. 후속작을 기대하게 만드는 스펙터클."</p>
                             <div class="review-quote-author">
-                                <span class="author-name">{{Q4_REVIEW_AUTHOR_5}}</span>
-                                <span class="author-score">{{Q4_REVIEW_SCORE_5}}</span>
+                                <span class="author-name">Reddit 영화 스레드 유저</span>
+                                <span class="author-score">★★★☆☆</span>
                             </div>
                         </div>
                     </div>
@@ -366,64 +366,64 @@
             <!-- IMAX Recommendation -->
             <div class="theater-metric-row" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
                 <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">{{FORMAT_NAME_1}}</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">{{THEATER_IMAX_SCORE}} / 10</span>
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">IMAX (화면/몰입감)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.0 / 10</span>
                 </div>
                 <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                     <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_IMAX_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
+                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: 90%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    {{FORMAT_ICON_1}} **추천**: {{THEATER_IMAX_TIP}}
+                    🪐 **추천**: 도심 빌딩 숲 붕괴와 좀비 떼의 폭포처럼 밀려오는 아크로바틱한 단체 움직임이 대화면에서 압도적인 공포를 제공함.
                 </div>
             </div>
 
             <!-- Dolby Cinema Recommendation -->
             <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
                 <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">{{FORMAT_NAME_2}}</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">{{THEATER_DOLBY_SCORE}} / 10</span>
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Dolby Cinema (화질/음향)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">9.2 / 10</span>
                 </div>
                 <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                     <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_DOLBY_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
+                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: 92%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    {{FORMAT_ICON_2}} **추천**: {{THEATER_DOLBY_TIP}}
+                    🔊 **추천**: 어두운 지하 통로와 야간 격전 속의 깊은 블랙 명암비가 우수하며, 기괴한 괴성들의 사운드 디자인이 압도적인 음향 위력을 뿜어냄.
                 </div>
             </div>
 
             <!-- 4DX Recommendation -->
             <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
                 <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #e67e22;">{{FORMAT_NAME_3}}</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">{{THEATER_4DX_SCORE}} / 10</span>
+                    <span class="theater-format-name" style="font-weight: 800; color: #e67e22;">4DX (역동성)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">8.0 / 10</span>
                 </div>
                 <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                     <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_4DX_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
+                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: 80%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    {{FORMAT_ICON_3}} **추천**: {{THEATER_4DX_TIP}}
+                    🌀 **추천**: 좀비 떼가 덮칠 때의 거친 진동과 차량 추격전 시의 시트 피칭이 타격감을 극대화하지만 상체의 누적 피로도가 꽤 높은 편임.
                 </div>
             </div>
 
             <!-- Standard Recommendation -->
             <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
                 <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
-                    <span class="theater-format-name" style="font-weight: 800; color: #95a5a6;">{{FORMAT_NAME_4}}</span>
-                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">{{THEATER_STANDARD_SCORE}} / 10</span>
+                    <span class="theater-format-name" style="font-weight: 800; color: #95a5a6;">Standard 일반관 (안정성)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">7.8 / 10</span>
                 </div>
                 <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
                     <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
-                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: {{THEATER_STANDARD_PERCENT}}%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
+                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: 78%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
                     </div>
                 </div>
                 <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
-                    {{FORMAT_ICON_4}} **추천**: {{THEATER_STANDARD_TIP}}
+                    💺 **추천**: 시선 피로나 멀미 없이 안전하게 관람할 수 있으나, 독창적인 음향 효과와 질주하는 괴물의 입체적인 현장감은 상당히 반감됨.
                 </div>
             </div>
         </div>

@@ -247,6 +247,58 @@
             }
         ]
     },
+    "colony_almostmainstream": {
+        "outlet": "🎬 YouTube Channel 거의없다 — Professional Review",
+        "title": "\"숨 쉴 틈 없이 질주하는 장르적 스릴과 VFX의 쾌감\"",
+        "author": "거의없다 (영화 전문 크리에이터)",
+        "score": "★★★★☆ (8.0)",
+        "gradient": "linear-gradient(135deg, #1abc9c 0%, #16a085 100%)",
+        "link": "https://www.youtube.com/",
+        "sections": [
+            {
+                "title": "🎬 전대미문의 좀비 물량공세와 안무 디자인",
+                "text": "영화 유튜버 거의없다는 연상호 감독의 신작 《군체》(2026)가 K-좀비 블록버스터가 도달할 수 있는 비주얼 안무의 극단을 보여준다고 평가했습니다. 기존 좀비 영화들이 개인의 육체적 전염 and 식인 욕구에 초점을 맞추었다면, 이 영화는 곤충이나 개미 떼 같은 '집단 지성'으로 뭉쳐 질주하는 새로운 크리처 연출을 시도했습니다. 특히 도심지의 빌딩 숲과 통제 구역 장벽을 무너뜨리기 위해 좀비들이 탑을 쌓고 파도처럼 밀려오는 시퀀스는 그 압도적인 물량 공세만으로도 보는 이의 숨을 틀어막게 만듭니다."
+            },
+            {
+                "title": "🎭 묵직한 액션 연출과 뻔한 신파 클리셰의 과감한 탈피",
+                "text": "배우 전지현과 구교환, 지창욱의 호흡은 이 질주하는 재난 액션의 묵직한 닻 역할을 합니다. 좀비물 특유의 뻔한 전개와 후반부로 갈수록 늘어지는 신파적 신드롬을 과감히 쳐내고, 속도감 있는 전술적 액션과 생존을 위한 이기적이고도 절박한 몸부림을 입체적으로 묘사했습니다. 다만, 거대 세계관의 철학적 메시지를 드러내기 위해 일부 대사들이 설명조로 흐르고 캐릭터들의 서사가 다소 건조하게 소모된 점은 아쉬움으로 남습니다."
+            },
+            {
+                "title": "⚖️ 한국형 상업영화의 시각효과(VFX) 신기원",
+                "text": "그럼에도 불구하고 《군체》는 한국 상업 영화가 보여줄 수 있는 시각 효과(VFX)와 스턴트 안무 디자인의 새로운 지평을 열었습니다. 극장에서 아이맥스나 돌비시네마 등 대화면 포맷으로 사운드를 즐기며 타격감 있는 쾌감을 맛보기엔 이보다 더 훌륭한 선택지가 없을 것입니다. 좀비 아포칼립스 장르의 팬들이라면 무조건 만족할 만한 롤러코스터 같은 엔터테인먼트 무비입니다."
+            },
+            {
+                "quote": "숨 쉴 틈 없이 밀고 들어오는 질주감 하나는 대박이다. 전지현 구교환 액션 케미가 기대를 저버리지 않는다!",
+                "quoteSource": "유튜브 거의없다 리뷰"
+            }
+        ]
+    },
+    "colony_imdb": {
+        "outlet": "🌐 IMDb Audience — Full Review Translation",
+        "title": "\"A Cinematic Thrill Ride with Spectacular Visual Choreography\"",
+        "author": "IMDb Featured Reviewer",
+        "score": "7.8/10",
+        "gradient": "linear-gradient(135deg, #f1c40f 0%, #f39c12 100%)",
+        "link": "https://www.imdb.com/",
+        "sections": [
+            {
+                "title": "🎬 Hive-mind zombies: a visual breakthrough",
+                "text": "Yeon Sang-ho's 'COLONY' (2026) delivers a refreshing and intense take on the saturated zombie genre. By introducing the concept of a 'hive-mind' collective intelligence, the film elevates the horror of the infected to an apocalyptic scale. The sheer kinetic energy of the zombie hordes flowing through city streets like liquid waves is a visual masterpiece, reminiscent of 'World War Z' but with a distinct Korean flavor."
+            },
+            {
+                "title": "🎭 Compelling action and tactical military suspense",
+                "text": "The lead performances by Gianna Jun and Koo Kyo-hwan are compelling, grounding the high-octane action in emotional survival. The CGI and sound design are state-of-the-art, creating an incredibly immersive theatrical experience. However, the film occasionally struggles under the weight of its own philosophical themes, sometimes sacrificing character development for fast-paced action sequences."
+            },
+            {
+                "title": "⚖️ Apocalyptical scale vs empty emotional cores",
+                "text": "Overall, 'COLONY' is a remarkable achievement in East Asian horror cinema. It successfully combines suspenseful military tactics with raw survival horror, making it a highly recommended film for genre fans seeking a visual feast and non-stop thrill ride."
+            },
+            {
+                "quote": "부산행의 정서와 반도의 액션을 영리하게 결합한 수작. 집단 좀비 비주얼은 할리우드에서도 본 적 없는 새로운 연출 스타일이다.",
+                "quoteSource": "IMDb Audience Review"
+            }
+        ]
+    },
     "toystory_leedongjin": {
         "outlet": "📰 Btv 이동진의 파이아키아 / 왓챠 평론",
         "title": "\"장난감들이 직면한 가장 슬프고 가장 찬란한 아날로그 우정\"",
