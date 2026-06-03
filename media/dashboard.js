@@ -601,6 +601,7 @@ const translatorData = {
                 text: "일부 기성 악역의 단순성이나 8부작으로 서사를 살짝 길게 늘려 잡은 빌드업 한계가 눈에 띄지만, 이웃들의 소박한 소통과 가족적 교감이 주는 감동적인 연대는 마블 영화들보다 훨씬 참신합니다. 한 번 앉은 자리에서 끝까지 정주행을 유발하는 무해한 매력이 살아있는 수작으로 강력하게 추천합니다."
             }
         ]
+    }
 };
 
 const modalOverlay = document.getElementById('readerModal');
