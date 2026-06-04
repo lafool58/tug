@@ -992,4 +992,19 @@ header {
     font-weight: 700;
 }
 
+/* No evaluation state */
+.review-card-item.no-evaluation {
+    opacity: 0.55;
+    background: #fdfdfd;
+    border: 1px dashed rgba(0, 0, 0, 0.08);
+    pointer-events: none; /* Disable hover scale effect */
+}
+.review-card-item.no-evaluation .review-text-quote {
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
 

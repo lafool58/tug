@@ -697,4 +697,19 @@ header {
     font-weight: 700;
 }
 
+/* No evaluation state (Mobile) */
+.review-quote-item.no-evaluation {
+    opacity: 0.55;
+    border-left: 2px dashed rgba(0, 0, 0, 0.2);
+    background: #fafafa;
+    pointer-events: none;
+}
+.review-quote-item.no-evaluation .review-quote-text {
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+    padding: 6px 0;
+}
+
+
 

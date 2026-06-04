@@ -379,7 +379,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     verifyTranslations();
+
+    // Handle "평가 없음" styling and link hiding (Mobile)
+    const reviewItems = document.querySelectorAll('.review-quote-item');
+    reviewItems.forEach(item => {
+        const quoteEl = item.querySelector('.review-quote-text');
+        if (quoteEl) {
+            const text = quoteEl.textContent.trim();
+            if (text === '"평가 없음"' || text === '평가 없음' || text === '""평가 없음""' || text === '""') {
+                quoteEl.textContent = '평가 없음';
+                item.classList.add('no-evaluation');
+                item.classList.remove('highlighted');
+                
+                const authorEl = item.querySelector('.review-quote-author');
+                if (authorEl) {
+                    authorEl.style.display = 'none';
+                }
+            }
+        }
+        
+        // Hide modal links if key is invalid/missing
+        const modalLink = item.querySelector('.review-modal-link');
+        if (modalLink) {
+            const clickAttr = modalLink.getAttribute('onclick');
+            const match = clickAttr ? clickAttr.match(/openReader\('([^']*)'\)/) : null;
+            const key = match ? match[1] : null;
+            if (!key || typeof translatorData === 'undefined' || !translatorData[key]) {
+                modalLink.style.display = 'none';
+            }
+        }
+    });
 });
+
 
 // Animation helper to draw circular gauge bar (Mobile)
 function animateGauge(circleId, score, maxScore) {
@@ -412,6 +443,12 @@ window.addEventListener('load', () => {
             const el = document.querySelector(selector);
             if (!el) return defaultValue;
             const text = el.textContent.trim();
+            if (text === "평가 없음" || text === "0.0" || text === "0" || isNaN(parseFloat(text))) {
+                el.textContent = '평가 없음';
+                el.style.fontSize = '8px';
+                el.style.fontWeight = '800';
+                return 0;
+            }
             const score = parseFloat(text);
             return isNaN(score) ? defaultValue : score;
         };
@@ -423,9 +460,16 @@ window.addEventListener('load', () => {
             if (!wrapper) return defaultValue;
             const textEl = wrapper.querySelector('.mini-score-val') || wrapper.querySelector('.mini-gauge-text');
             if (!textEl) return defaultValue;
-            const score = parseFloat(textEl.textContent.trim());
+            const text = textEl.textContent.trim();
+            if (text === "평가 없음" || text === "0.0" || text === "0" || isNaN(parseFloat(text))) {
+                textEl.textContent = '평가 없음';
+                textEl.style.fontSize = '6px';
+                return 0;
+            }
+            const score = parseFloat(text);
             return isNaN(score) ? defaultValue : score;
         };
+
 
         // Parse scores dynamically from the HTML, with safe fallback defaults for the Master Template preview
         const mainScore = getScoreFromElement('.gauge-score', 8.5);
