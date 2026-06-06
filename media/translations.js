@@ -800,75 +800,75 @@ const translatorData = {
     },
     "true_education_scmp": {
         "outlet": "📰 South China Morning Post · Pierce Conran",
-        "title": "\"Corporal Punishment for Bullies in an Alarming School Fantasy\"",
+        "title": "\"체벌을 통한 학폭 응징, 경종을 울리는 교실 판타지\"",
         "author": "Pierce Conran (SCMP 영화 비평가)",
         "score": "★★★☆☆ (6.0/10)",
         "gradient": "linear-gradient(135deg, #2c3e50 0%, #34495e 100%)",
         "link": "https://www.scmp.com/",
         "sections": [
             {
-                "title": "🛡️ A Dark, Vigilante Approach to School Bullying",
-                "text": "Pierce Conran's review in the South China Morning Post highlights how Netflix's 'Teach You a Lesson' positions itself alongside dark K-drama revenge hits like 'The Glory' and 'Weak Hero'. However, instead of student victims rising up, the series introduces elite, military-trained government agents authorized to use state-sanctioned violence against children. This extreme setup provides a shocking level of immediate gratification but simultaneously constructs a worrying power fantasy that values immediate punishment over system reform."
+                "title": "🛡️ 학교 폭력에 대처하는 어두운 자경단적 접근",
+                "text": "사우스 차이나 모닝 포스트(SCMP)의 피어스 콘란은 넷플릭스의 《참교육》이 《더 글로리》나 《약한영웅》과 같은 어두운 K-복수극의 계보를 잇는 작품이라고 짚었습니다. 그러나 학생 피해자들이 스스로 일어서는 대신, 이 시리즈는 아동을 대상으로 국가 공인의 폭력을 행사할 수 있도록 허가받은 특수 군사 훈련을 받은 엘리트 정부 요원을 도입합니다. 이러한 극단적인 설정은 충격적일 정도로 즉각적인 카타르시스를 제공하지만, 동시에 시스템 개혁보다 즉각적인 처벌을 우선시하는 우려스러운 권력 판타지를 구축합니다."
             },
             {
-                "title": "🧭 An Unclear Message Behind the Thrilling Action",
-                "text": "The series is undeniably well-paced and boasts high-caliber action choreography, largely elevated by Kim Mu-yeol's imposing screen presence. Yet, the core message remains deeply ambiguous. By advocating that teachers and state figures must physically dominate unruly students to restore order, the drama simplifies the complex, systemic crisis of the Korean classroom into a binary battle of physical strength. Despite efforts to polish away the source webtoon's past social controversies, the series still walks a fine line between addressing social issues and commercializing violence."
+                "title": "🧭 스릴 넘치는 액션 이면의 모호한 메시지",
+                "text": "이 시리즈는 김무열의 압도적인 화면 장악력에 힘입어 확실한 속도감과 높은 수준의 액션 안무를 선보합니다. 하지만 핵심 메시지는 여전히 매우 모호합니다. 질서를 회복하기 위해 교사와 국가 인물이 문제 학생들을 물리적으로 지배해야 한다고 주장함으로써, 이 드라마는 한국 교실의 복잡하고 구조적인 위기를 물리적인 힘의 이분법적 대결로 단순화합니다. 원작 웹툰의 과거 사회적 논란들을 다듬어내려는 노력에도 불구하고, 이 시리즈는 여전히 사회적 문제를 다루는 것과 폭력을 상업화하는 것 사이의 아슬아슬한 줄타기를 하고 있습니다."
             },
             {
-                "title": "🎬 A Slick Commercial Series That Leaves Lingering Questions",
-                "text": "Netflix's polished production values and Director Hong Jong-chan's sharp direction transform a highly controversial webtoon into a highly digestible commercial thriller. The physical action is crisp, and the emotional pacing keeps viewers hooked. However, the reliance on a central 'Big Brother' authority figure to enforce justice by force leaves a lingering sense of unease that the show doesn't fully resolve. It's a thrilling ride that demands cautious critical viewing."
+                "title": "🎬 여운을 남기는 매끄러운 상업 시리즈",
+                "text": "넷플릭스의 세련된 프로덕션 가치와 홍종찬 감독의 날카로운 연출은 논란이 많은 웹툰을 매우 소화하기 쉬운 상업적 스릴러로 탈바꿈시켰습니다. 물리적인 액션은 명쾌하며 감정적인 템포는 시청자들을 사로잡습니다. 그러나 정의를 실현하기 위해 권력을 가진 '빅브라더'식 인물에 의존하는 방식은 극이 완전히 해결하지 못하는 찜찜한 불안감을 남깁니다. 신중한 비판적 시청이 요구되는 짜릿한 작품입니다."
             },
             {
-                "quote": "A slick, action-heavy power fantasy that tackles classroom decay with controversial state-sanctioned violence. Highly entertaining but morally ambiguous.",
-                "quoteSource": "Pierce Conran, South China Morning Post"
+                "quote": "교실 붕괴를 논란의 여지가 있는 국가 공인 폭력으로 해결하려는 매끄럽고 액션 중심의 권력 판타지. 매우 흥미진진하지만 도덕적으로 모호하다.",
+                "quoteSource": "피어스 콘란 (Pierce Conran), 사우스 차이나 모닝 포스트"
             }
         ]
     },
     "true_education_decider": {
         "outlet": "🎬 Decider · Joel Keller",
-        "title": "\"Slick Action and Social Critique in Netflix's provocative school drama\"",
+        "title": "\"넷플릭스의 도발적인 학원 드라마 속 매끄러운 액션과 사회적 비판\"",
         "author": "Joel Keller (Decider 평론가)",
         "score": "★★★★☆ (7.0/10)",
         "gradient": "linear-gradient(135deg, #d35400 0%, #e67e22 100%)",
         "link": "https://decider.com/",
         "sections": [
             {
-                "title": "🔥 Balancing School System Critique with High-Octane Action",
-                "text": "In his review for Decider, Joel Keller writes that 'Teach You a Lesson' successfully walks the tightrope of being both a grim social critique of South Korea's high-pressure school environment and an incredibly fun, action-oriented vigilante series. The premise of the Educational Rights Protection Bureau and its lead inspector, Na Hwa-jin, taking down high school gangsters is inherently theatrical. The series embraces this comic-book style energy, making the episodes flow with remarkable speed and punchy humor."
+                "title": "🔥 학교 시스템에 대한 비판과 고탄력 액션의 균형",
+                "text": "디사이더(Decider)의 조엘 켈러는 《참교육》이 한국의 고압적인 학교 환경에 대한 우울한 사회적 비판이자 믿을 수 없을 정도로 재미있고 액션 지향적인 자경단 시리즈라는 두 가지 측면의 외줄타기를 성공적으로 수행했다고 썼습니다. 교권보호국과 수석 감독관 나화진이 고등학교 불량배들을 소탕한다는 전제는 본질적으로 연극적입니다. 이 시리즈는 이러한 만화책 스타일의 에너지를 받아들여, 에피소드들을 매우 빠른 속도감과 펀치력 있는 유머로 흘러가게 만듭니다."
             },
             {
-                "title": "🌟 Kim Mu-yeol's Magnetizing Lead Performance",
-                "text": "The biggest asset of the show is Kim Mu-yeol's magnetizing performance as the cool, unflappable, and physically dominant inspector. He brings a perfect balance of cheeky charisma and lethal serious-mindedness that keeps the hero likable even as his actions cross legal lines. The chemistry between him and Jin Ki-joo's more grounded character provides a necessary anchor, helping to flesh out the bureau's operations beyond just physical beatdowns."
+                "title": "🌟 김무열의 자석같이 이끄는 주연 연기",
+                "text": "이 쇼의 가장 큰 자산은 멋지고 흔들림 없으며 물리적으로 압도적인 감독관 역을 맡은 김무열의 매력적인 연기입니다. 그는 장난기 넘치는 카리스마와 치명적으로 진지한 태도의 완벽한 균형을 가져와, 그의 행동이 법적 선을 넘는 순간에도 영웅을 호감 가게 만듭니다. 그와 더 현실적인 캐릭터인 진기주의 케미스트리는 필요한 닻 역할을 하여, 교권보호국의 활동을 단순한 물리적 폭력 이상으로 구체화하는 데 기여합니다."
             },
             {
-                "title": "🎯 It Succeeds More Often Than Not",
-                "text": "While some viewers might find the physical enforcement of classroom authority to be overly simplistic or disturbing, the show's brisk storytelling and stylistic choices make it highly watchable. It tries to have fun with its bizarre premise and, thanks to excellent writing and direction, succeeds more often than not. It is a solid recommendation for anyone looking for a well-made, fast-paced action thriller with a bite of social relevance."
+                "title": "🎯 대체로 성공적으로 작동하는 전개",
+                "text": "일부 시청자들은 물리력을 통한 교실 권력 집행 방식이 지나치게 단순하거나 거북하게 느낄 수 있지만, 이 쇼의 활기찬 스토리텔링과 스타일리시한 연출 방식은 몰입감을 크게 높여줍니다. 기발한 설정을 가지고 재미있게 풀어가려 시도하며, 훌륭한 각본과 연출 덕분에 대체로 기대 이상으로 작동합니다. 사회적 타당성을 갖춘 잘 만들어진 빠른 템포의 액션 스릴러를 찾는 모든 이들에게 든든하게 추천할 수 있는 작품입니다."
             },
             {
-                "quote": "A fast-paced, punchy school action series that manages to be both entertaining and provocative. Kim Mu-yeol is magnetic, and the show succeeds more often than not.",
-                "quoteSource": "Joel Keller, Decider"
+                "quote": "재미와 도발을 동시에 선사하는 빠른 템포의 타격감 넘치는 학원 액션 시리즈. 김무열은 매력적이며 쇼는 대체로 성공적이다.",
+                "quoteSource": "조엘 켈러 (Joel Keller), 디사이더"
             }
         ]
     },
     "true_education_mydramalist": {
         "outlet": "💬 MyDramaList Global Community Review",
-        "title": "\"An incredibly satisfying adaptation with top-tier action and cast\"",
+        "title": "\"최고 수준의 액션과 출연진을 갖춘 믿을 수 없이 만족스러운 각색작\"",
         "author": "MyDramaList 글로벌 관객",
         "score": "★★★★☆ (8.5/10)",
         "gradient": "linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)",
         "link": "https://mydramalist.com/",
         "sections": [
             {
-                "title": "💖 Pure Catharsis and Respect for the Cast's Performance",
-                "text": "Global fans on MyDramaList are overwhelmingly praising 'Teach You a Lesson' for delivering pure, unadulterated catharsis. The way the drama portrays school bullies and corrupt parents getting their absolute comeuppance is described as highly addictive. Kim Mu-yeol's physical training and action sequences are regarded as top-notch, with many calling him the ultimate choice to bring the webtoon protagonist to life. The emotional arcs of the victimized students are also handled with sincere empathy."
+                "title": "💖 순수한 카타르시스와 배우들의 호연에 대한 찬사",
+                "text": "마이드라마리스트(MyDramaList)의 글로벌 팬들은 《참교육》이 선사하는 때 묻지 않은 순수한 카타르시스에 대해 압도적으로 찬사를 보내고 있습니다. 드라마가 학교 폭력 가해자들과 부패한 학부모들이 그들의 만행에 합당한 대가를 철저히 치르는 방식을 묘사한 것은 중독성이 매우 강하다고 평가받습니다. 김무열의 체력 단련과 액션 시퀀스는 최정상급으로 평가되며, 많은 이들이 그를 웹툰 주인공을 실사화할 최고의 적임자로 꼽았습니다. 상처받은 학생들의 정서적 서사 역시 진정성 있는 공감과 함께 다루어집니다."
             },
             {
-                "title": "🔧 Smart Adaptation Choices That Fixed Webtoon Controversies",
-                "text": "Many comments focus on the screenwriter's smart adaptation choices. Knowing the original webtoon was plagued by heavy international controversies regarding race and gender, the drama production crew wisely shifted focus entirely to teacher rights, student safety, and bullying. This change made the series much more universally appealing and easier to root for, avoiding the pitfalls of the source material while preserving the webtoon's signature high-stakes action scenes."
+                "title": "🔧 웹툰의 논란들을 해결한 영리한 각색 전략",
+                "text": "많은 댓글들은 각본가의 영리한 각색 선택에 초점을 맞추고 있습니다. 원작 웹툰이 인종과 젠더와 관련된 무거운 글로벌 논란에 휩싸였던 점을 의식한 듯, 드라마 제작진은 교권 보호, 학생 안전, 그리고 학교 폭력 자체로 초점을 지혜롭게 이동시켰습니다. 이러한 변화는 원작의 아슬아슬한 지뢰밭을 피하면서 웹툰 특유의 긴박감 넘치는 고난도 액션 씬을 고스란히 보존함으로써, 시리즈를 훨씬 더 대중적이고 보편적으로 응원하기 쉽게 만들었습니다."
             },
             {
-                "title": "📺 A Must-Watch K-Drama Action Thriller of the Season",
-                "text": "For fans of action-heavy school dramas like 'Weak Hero' and 'The Glory', this series is an absolute must-watch. The 10 episodes fly by in a single sitting due to the tight pacing and lack of unnecessary filler. While the premise is indeed a fantasy, the emotional core feels very real and reflective of contemporary societal issues. It is a highly polished, energetic, and satisfying watch that fully deserves its high rating."
+                "title": "📺 이번 시즌 놓치지 말아야 할 K-드라마 액션 스릴러",
+                "text": "《약한영웅》이나 《더 글로리》와 같은 강력한 타격감의 학원 액션 드라마 팬들에게 이 시리즈는 절대적인 필수 시청작입니다. 타이트한 속도감과 불필요한 질질 끌기 없는 전개 덕분에 10개의 에피소드가 한 번에 지나갑니다. 비록 전제는 판타지이지만, 감정의 알맹이는 매우 현실적이며 현대 사회문제를 고스란히 반영하고 있습니다. 높은 평점을 받을 가치가 충분한 매우 세련되고 활력 넘치며 만족스러운 작품입니다."
             }
         ]
     }
