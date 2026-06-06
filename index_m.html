@@ -433,6 +433,33 @@
     <!-- Movie List -->
     <div class="magazine-m-list" id="movieGrid">
         
+        <!-- Card 6: 참교육 -->
+        <a href="true_education_dashboard_m.html" class="movie-card" data-movie-key="true_education" 
+           data-reg-order="6"
+           data-title="참교육 (True Education)" 
+           data-director="홍종찬" 
+           data-genre="스릴러" 
+           data-score="7.0" 
+           data-year="2026" 
+           data-backdrop="media/true_education_official_backdrop.jpg">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/true_education_official_poster.png" alt="참교육">
+            </div>
+            <div class="card-info">
+                <h3 class="card-title">참교육</h3>
+                <p class="card-meta">홍종찬 감독 • 김무열, 이성민 주연</p>
+                <div class="card-badges">
+                    <span class="card-badge-special" style="background:#e50914; border-color:#e50914; color:#fff;">NETFLIX</span>
+                    <span class="card-badge-special">4K UHD</span>
+                    <span class="card-badge-special">Atmos</span>
+                </div>
+                <div class="card-rating-row">
+                    <span class="card-score">★ <span class="card-score-accent">7.0</span></span>
+                </div>
+                <div class="my-rating-row"></div>
+            </div>
+        </a>
+
         <!-- Card 5: 와일드 씽 -->
         <a href="wildsing_dashboard_m.html" class="movie-card" data-movie-key="wildsing" 
            data-reg-order="5"
@@ -754,8 +781,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating',
-                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm'
+                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating', 'true_education_rating',
+                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm', 'true_education_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -776,6 +803,8 @@
                                 movieKey = 'toystory';
                             } else if (key.startsWith('wonderfuls')) {
                                 movieKey = 'wonderfuls';
+                            } else if (key.startsWith('true_education')) {
+                                movieKey = 'true_education';
                             }
                             const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             

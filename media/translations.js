@@ -771,5 +771,105 @@ const translatorData = {
                 "text": "복잡한 철학적 상징이나 억지 메시지를 강요하는 다른 예술 영화들과 다르게, 이 영화는 107분 동안 관객을 즐겁게 만들겠다는 희극 본연의 목표에 충실하다. 세련된 사운드트랙과 조밀한 상황극 편집은 상업 오락 영화로서 훌륭한 완성도를 자랑한다. 가벼운 마음으로 극장을 찾을 관객 모두에게 기분 좋은 웃음을 선물할 웰메이드 코미디다."
             }
         ]
+    },
+    "true_education_cine21": {
+        "outlet": "📰 씨네21 · 유선아 평론가 칼럼 비평",
+        "title": "\"체벌 면허를 쥔 빅브라더의 등장, 판타지가 되어버린 교정(敎政)\"",
+        "author": "유선아 평론가",
+        "score": "★★★☆☆ (5.0/10)",
+        "gradient": "linear-gradient(135deg, #1e272e 0%, #2f3640 100%)",
+        "link": "http://www.cine21.com/",
+        "sections": [
+            {
+                "title": "🏫 붕괴된 교실에 도착한 극단적인 공권력의 해결책",
+                "text": "넷플릭스 오리지널 시리즈 《참교육》(2026)은 교권 침해와 학교 폭력이라는 한국 사회의 가장 뜨거운 교육적 난제를 정면으로 겨냥한다. 홍종찬 감독은 가상의 '교권보호국'과 '체벌면허'라는 파격적인 판타지 설정을 도입하여, 법과 제도가 해결하지 못한 교실 내 폭력의 연결고리를 시각적이고 직관적인 타격감으로 끊어내려 시도한다. 김무열이 분한 나화진의 등장은 답답한 부조리를 단숨에 해소하는 자극적인 사이다 쾌감을 전달하는 데 적합하다."
+            },
+            {
+                "title": "🚨 폭력의 면죄부와 단순화된 교육 현실의 딜레마",
+                "text": "그러나 작품이 선사하는 통쾌함의 이면에는 '체벌 미화'와 '국가 공인 사적 보복'이라는 위험한 시선이 도사리고 있다. 학교 현장의 복잡다단한 시스템적 문제를 단순한 개인의 악성과 공권력의 결핍으로 치환하면서, 드라마의 해결책은 가해자를 물리적으로 응징하는 원초적인 징벌에 머문다. 원작 웹툰의 인종·성차별적 노이즈를 걷어내기 위해 고심한 흔적은 역력하지만, 면책된 폭력을 영웅시하는 장르적 문법이 남기는 씁쓸한 뒷맛은 쉽게 지워지지 않는다."
+            },
+            {
+                "title": "🎬 만화적 액션 활극과 사회적 메시지 사이의 어색한 조율",
+                "text": "소년심판에서 보여준 홍종찬 감독 특유의 사회 비판적 시선이 판타지적 히어로 활극이라는 상업적 포맷 속에 안착하기 위해 고군분투합니다. 김무열과 이성민의 팽팽한 연기 텐션이 플롯의 헐거운 설득력을 메우고 있으나, 결국 폭력으로 폭력을 교정하는 악순환의 쾌감이 교육 다큐멘터리식 정서와 부딪치며 불일치를 자아냅니다. 그럼에도 대중적인 흥미와 사이다 오락물로서의 속도감은 확실하게 담보된 팝콘 드라마입니다."
+            },
+            {
+                "quote": "자극적인 참교육 판타지가 주는 일시적 해방감. 그러나 구조적 붕괴를 힘으로 덮으려는 단순한 해법이 남기는 성찰의 찜찜함.",
+                "quoteSource": "유선아 평론가 (씨네21 OTT 리뷰)"
+            }
+        ]
+    },
+    "true_education_scmp": {
+        "outlet": "📰 South China Morning Post · Pierce Conran",
+        "title": "\"Corporal Punishment for Bullies in an Alarming School Fantasy\"",
+        "author": "Pierce Conran (SCMP 영화 비평가)",
+        "score": "★★★☆☆ (6.0/10)",
+        "gradient": "linear-gradient(135deg, #2c3e50 0%, #34495e 100%)",
+        "link": "https://www.scmp.com/",
+        "sections": [
+            {
+                "title": "🛡️ A Dark, Vigilante Approach to School Bullying",
+                "text": "Pierce Conran's review in the South China Morning Post highlights how Netflix's 'Teach You a Lesson' positions itself alongside dark K-drama revenge hits like 'The Glory' and 'Weak Hero'. However, instead of student victims rising up, the series introduces elite, military-trained government agents authorized to use state-sanctioned violence against children. This extreme setup provides a shocking level of immediate gratification but simultaneously constructs a worrying power fantasy that values immediate punishment over system reform."
+            },
+            {
+                "title": "🧭 An Unclear Message Behind the Thrilling Action",
+                "text": "The series is undeniably well-paced and boasts high-caliber action choreography, largely elevated by Kim Mu-yeol's imposing screen presence. Yet, the core message remains deeply ambiguous. By advocating that teachers and state figures must physically dominate unruly students to restore order, the drama simplifies the complex, systemic crisis of the Korean classroom into a binary battle of physical strength. Despite efforts to polish away the source webtoon's past social controversies, the series still walks a fine line between addressing social issues and commercializing violence."
+            },
+            {
+                "title": "🎬 A Slick Commercial Series That Leaves Lingering Questions",
+                "text": "Netflix's polished production values and Director Hong Jong-chan's sharp direction transform a highly controversial webtoon into a highly digestible commercial thriller. The physical action is crisp, and the emotional pacing keeps viewers hooked. However, the reliance on a central 'Big Brother' authority figure to enforce justice by force leaves a lingering sense of unease that the show doesn't fully resolve. It's a thrilling ride that demands cautious critical viewing."
+            },
+            {
+                "quote": "A slick, action-heavy power fantasy that tackles classroom decay with controversial state-sanctioned violence. Highly entertaining but morally ambiguous.",
+                "quoteSource": "Pierce Conran, South China Morning Post"
+            }
+        ]
+    },
+    "true_education_decider": {
+        "outlet": "🎬 Decider · Joel Keller",
+        "title": "\"Slick Action and Social Critique in Netflix's provocative school drama\"",
+        "author": "Joel Keller (Decider 평론가)",
+        "score": "★★★★☆ (7.0/10)",
+        "gradient": "linear-gradient(135deg, #d35400 0%, #e67e22 100%)",
+        "link": "https://decider.com/",
+        "sections": [
+            {
+                "title": "🔥 Balancing School System Critique with High-Octane Action",
+                "text": "In his review for Decider, Joel Keller writes that 'Teach You a Lesson' successfully walks the tightrope of being both a grim social critique of South Korea's high-pressure school environment and an incredibly fun, action-oriented vigilante series. The premise of the Educational Rights Protection Bureau and its lead inspector, Na Hwa-jin, taking down high school gangsters is inherently theatrical. The series embraces this comic-book style energy, making the episodes flow with remarkable speed and punchy humor."
+            },
+            {
+                "title": "🌟 Kim Mu-yeol's Magnetizing Lead Performance",
+                "text": "The biggest asset of the show is Kim Mu-yeol's magnetizing performance as the cool, unflappable, and physically dominant inspector. He brings a perfect balance of cheeky charisma and lethal serious-mindedness that keeps the hero likable even as his actions cross legal lines. The chemistry between him and Jin Ki-joo's more grounded character provides a necessary anchor, helping to flesh out the bureau's operations beyond just physical beatdowns."
+            },
+            {
+                "title": "🎯 It Succeeds More Often Than Not",
+                "text": "While some viewers might find the physical enforcement of classroom authority to be overly simplistic or disturbing, the show's brisk storytelling and stylistic choices make it highly watchable. It tries to have fun with its bizarre premise and, thanks to excellent writing and direction, succeeds more often than not. It is a solid recommendation for anyone looking for a well-made, fast-paced action thriller with a bite of social relevance."
+            },
+            {
+                "quote": "A fast-paced, punchy school action series that manages to be both entertaining and provocative. Kim Mu-yeol is magnetic, and the show succeeds more often than not.",
+                "quoteSource": "Joel Keller, Decider"
+            }
+        ]
+    },
+    "true_education_mydramalist": {
+        "outlet": "💬 MyDramaList Global Community Review",
+        "title": "\"An incredibly satisfying adaptation with top-tier action and cast\"",
+        "author": "MyDramaList 글로벌 관객",
+        "score": "★★★★☆ (8.5/10)",
+        "gradient": "linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)",
+        "link": "https://mydramalist.com/",
+        "sections": [
+            {
+                "title": "💖 Pure Catharsis and Respect for the Cast's Performance",
+                "text": "Global fans on MyDramaList are overwhelmingly praising 'Teach You a Lesson' for delivering pure, unadulterated catharsis. The way the drama portrays school bullies and corrupt parents getting their absolute comeuppance is described as highly addictive. Kim Mu-yeol's physical training and action sequences are regarded as top-notch, with many calling him the ultimate choice to bring the webtoon protagonist to life. The emotional arcs of the victimized students are also handled with sincere empathy."
+            },
+            {
+                "title": "🔧 Smart Adaptation Choices That Fixed Webtoon Controversies",
+                "text": "Many comments focus on the screenwriter's smart adaptation choices. Knowing the original webtoon was plagued by heavy international controversies regarding race and gender, the drama production crew wisely shifted focus entirely to teacher rights, student safety, and bullying. This change made the series much more universally appealing and easier to root for, avoiding the pitfalls of the source material while preserving the webtoon's signature high-stakes action scenes."
+            },
+            {
+                "title": "📺 A Must-Watch K-Drama Action Thriller of the Season",
+                "text": "For fans of action-heavy school dramas like 'Weak Hero' and 'The Glory', this series is an absolute must-watch. The 10 episodes fly by in a single sitting due to the tight pacing and lack of unnecessary filler. While the premise is indeed a fantasy, the emotional core feels very real and reflective of contemporary societal issues. It is a highly polished, energetic, and satisfying watch that fully deserves its high rating."
+            }
+        ]
     }
 };

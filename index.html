@@ -666,6 +666,40 @@
     <!-- Movie Magazine Grid -->
     <div class="magazine-grid" id="movieGrid">
         
+        <!-- Card 6: 참교육 -->
+        <div class="movie-card" data-movie-key="true_education" 
+             data-reg-order="6"
+             data-title="참교육 (True Education)" 
+             data-director="홍종찬" 
+             data-genre="스릴러" 
+             data-score="7.0" 
+             data-year="2026" 
+             data-link="true_education_dashboard.html"
+             data-meta="홍종찬 연출 • 김무열, 이성민, 진기주, 표지훈 주연 • 청소년관람불가 • 10부작"
+             data-desc="무너진 교권을 수호하기 위해 투입된 교권보호국 감독관 나화진의 거침없는 사이다 액션 활극. TUG 평론단이 국내외 비평 및 실관람 여론을 정밀 분석한 추천 가이드를 독점 공개합니다."
+             data-backdrop="media/true_education_official_backdrop.jpg"
+             data-backdrop-gradient="linear-gradient(135deg, #111111 0%, #1e1e1e 100%)"
+             onclick="location.href='true_education_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/true_education_official_poster.png" alt="참교육">
+            </div>
+            <div class="card-info">
+                <div class="card-badges">
+                    <span class="card-badge-special" style="background:#e50914; border-color:#e50914; color:#fff;">NETFLIX</span>
+                    <span class="card-badge-special">4K UHD</span>
+                    <span class="card-badge-special">Atmos</span>
+                </div>
+                <h3 class="card-title">참교육 (2026)</h3>
+                <p class="card-meta">홍종찬 연출 • 김무열, 이성민 주연</p>
+                <div class="card-spacer"></div>
+                <div class="my-rating-row"></div>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★☆☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">7.0</span>/10</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Card 5: 와일드 씽 -->
         <div class="movie-card" data-movie-key="wildsing" 
              data-reg-order="5"
@@ -1078,8 +1112,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating',
-                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm'
+                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating', 'true_education_rating',
+                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm', 'true_education_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -1100,6 +1134,8 @@
                                  movieKey = 'toystory';
                              } else if (key.startsWith('wonderfuls')) {
                                  movieKey = 'wonderfuls';
+                             } else if (key.startsWith('true_education')) {
+                                 movieKey = 'true_education';
                              }
                              const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             

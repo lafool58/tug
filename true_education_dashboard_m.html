@@ -1,0 +1,460 @@
+<!-- 
+================================================================================
+[CineMag 마스터 디자인 규정 (Design Guidelines) - Mobile]
+================================================================================
+⚠️ 중요 자산 등록 수칙 (CRITICAL ASSET RULES):
+  1. 절대 AI 생성 이미지(AI-generated images)나 임의의 제네릭 이미지를 영화 포스터 및 배경으로 사용하지 마십시오.
+     - 반드시 배급사/제작사 측에서 공식 배포한 고해상도 공식 포스터 및 보도스틸 실물 파일만을 로컬 이식(media/ 디렉토리)하여 연동하십시오.
+  2. 세로형 포스터와 가로형 백드롭은 엄격히 분리 설정되어야 합니다.
+     - [MOVIE_BACKDROP_URL]: 16:9 가로형 초고화질 공식 스틸컷 또는 영화 배경 키아트 매핑.
+     - [MOVIE_POSTER_URL]: 2:3 세로형 정통 단일 메인 공식 포스터 매핑.
+     - 두 플레이스홀더에 세로형 포스터 이미지를 동일하게 중복 대입하면 거대 배경 배너에서 이미지가 심각하게 잘리거나 겹쳐 노출되는 치명적인 시각 오동작이 발생합니다.
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUG CineMag | 참교육 (True Education)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        // Redirect to Desktop version if not accessed from a mobile device
+        if (!/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            location.replace("true_education_dashboard.html");
+        }
+    </script>
+    <link rel="stylesheet" href="media/dashboard_m.css">
+</head>
+<body data-movie-key="true_education">
+
+    <!-- Header Navigation -->
+    <header>
+        <button class="back-btn" onclick="location.href='index_m.html'">‹</button>
+        <div class="brand-section">
+            <a href="index_m.html" class="brand-logo" style="text-decoration: none; color: inherit;">TUG <span>CineMag</span></a>
+            <div class="brand-tagline">TUG</div>
+        </div>
+    </header>
+
+    <!-- Main Mobile Dashboard Container Card -->
+    <div class="dashboard-card">
+        
+        <!-- Movie Poster -->
+        <div class="poster-wrapper">
+            <img class="poster-image" src="media/true_education_official_poster.png" alt="참교육 포스터">
+            <div class="poster-badges">
+                
+                
+                
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="title-section">
+            <h1 class="movie-title">참교육 (2026)</h1>
+            <p class="movie-meta">⚡ 학원 액션 • 한국 • 청소년관람불가 • 10부작분</p>
+        </div>
+
+        <!-- Circular Score Gauge -->
+        <div class="score-gauge-container">
+            <div class="gauge-svg-wrapper">
+                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width: 100%; height: 100%;">
+                    <!-- Background Circle -->
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#f2f4f4" stroke-width="4"></circle>
+                    <!-- TUG Crimson Arc (Calculated from 7.0) -->
+                    <circle id="mainGaugeFill" cx="25" cy="25" r="20" fill="none" stroke="#c0392b" stroke-width="4.5" 
+                            stroke-dasharray="125.6" stroke-dashoffset="37.68" stroke-linecap="round"
+                            style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);"></circle>
+                </svg>
+                <div class="gauge-text">
+                    <span class="gauge-score">7.0</span>
+                </div>
+            </div>
+            <span class="gauge-label">CineMag 종합 평점</span>
+            <span class="gauge-sublabel">통합 평점</span>
+        </div>
+
+        <!-- Credits -->
+        <div class="credits-section">
+            <div class="credits-item">감독: <span>홍종찬</span></div>
+            <div class="credits-item">주연배우: <span>김무열, 이성민, 진기주, 표지훈</span></div>
+            <div class="credits-item">상영시간: <span>10부작분</span></div>
+            <div class="credits-item">등급: <span>청소년관람불가</span></div>
+            <div class="credits-item">한국개봉일: <span>2026.06.05</span></div>
+        </div>
+
+        <!-- Synopsis -->
+        <div class="synopsis-section">
+            <h2 class="section-title">시놉시스</h2>
+            <p class="synopsis-text">
+                선 넘는 학생, 무력한 교사, 안하무인 학부모로 인해 붕괴된 교육 현장. 가상의 정부 기관인 교권보호국 감독관 나화진과 임한림이 투입되어 무도한 가해자들을 거침없이 응징하고 무너진 교실의 정의를 다시 쓴다.
+            </p>
+        </div>
+
+        <!-- 4-Quadrant Category Reviews -->
+        <div class="quadrants-section">
+            <h2 class="section-title">4분할 입체 상세 비평</h2>
+            <div class="quadrant-list">
+
+                <!-- Q1: 국내 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Cine21</span>
+                                <span class="quad-tag">Btv</span>
+                                <span class="quad-tag">왓챠</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle id="gaugeFillKrCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="54.01" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                </svg>
+                                <span class="mini-score-val">5.7</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"체벌 면허를 가진 빅브라더의 등장. 현실적인 교육의 부조리를 찌르려 하지만 결국 자극적인 사이다 쾌감을 향해 내달리는 만화적 판타지."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">유선아 기자 (씨네21) <a class="review-modal-link" onclick="openReader('true_education_cine21')">🔗 전문보기</a></span>
+                                <span class="author-score">★★★☆☆</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"깊이 대신 선택한 장르적 쾌감. 원작의 거북한 논란들은 영리하게 걷어내고 교권 침해라는 현실적 소재에 집중해 몰입감과 통쾌함은 확실하다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">장서윤 기자 (데일리안)</span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"면책된 폭력이라는 위험한 해법. 학교 폭력과 교권 붕괴라는 무거운 주제를 지나치게 단순화하여 자극적인 사적 복수극 형태로 소비하게 만든다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">이정희 평론가 (오마이뉴스)</span>
+                                <span class="author-score">5.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"평가 없음"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">-</span>
+                                <span class="author-score">-</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"평가 없음"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">-</span>
+                                <span class="author-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2: 국내 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🇰🇷 국내 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">CGV 에그지수</span>
+                                <span class="quad-tag">네이버</span>
+                                <span class="quad-tag">유튜브</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle id="gaugeFillKrAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="31.40" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                </svg>
+                                <span class="mini-score-val">7.5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"원작의 불필요한 혐오 요소를 지워 몰입하기 훨씬 수월하고 통쾌하다. 김무열의 거침없는 액션 싱크로율이 대박!"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">네이버 네티즌 <a class="review-modal-link" onclick="openReader('')">🎬 전문보기</a></span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"액션은 정말 시원하고 장르적인 쾌감이 넘쳐나지만, 폭력으로 교실을 강제 통제한다는 극단적 해결 방식은 성찰적인 아쉬움을 남긴다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">왓챠피디아 관람객</span>
+                                <span class="author-score">6.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"학폭 가해자들을 참교육할 때 얻어지는 사이다 카타르시스가 상당하다. 고구마 구간 없이 빠르게 진행되어 가벼운 정주행용으로 최적이다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">커뮤니티 시청자</span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"소재는 뉴스에서 볼 법한 무거운 교육 현실인데, 해결 방식은 아주 명료하고 통쾌한 판타지다. 주말에 즐길 수 있는 훌륭한 팝콘 스릴러."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">넷플릭스 유저</span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"평가 없음"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">-</span>
+                                <span class="author-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3: 해외 평론가 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 평론가</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">Variety</span>
+                                <span class="quad-tag">The Guardian</span>
+                                <span class="quad-tag">THR</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle id="gaugeFillGlCritic" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="43.96" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                </svg>
+                                <span class="mini-score-val">6.5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"체벌을 다룬 다소 충격적이고 논란의 여지가 있는 학원 스릴러로, 공권력이 직접 가하는 사적 응징 방식에 가려진 메시지에 질문을 남긴다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Pierce Conran (SCMP) <a class="review-modal-link" onclick="openReader('true_education_scmp')">🌎 전문보기</a></span>
+                                <span class="author-score">6.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"한국의 교권 위기에 대한 날카로운 비판과 가슴 뛰는 오락용 액션 사이에서 영리하게 조화를 꾀하며, 대체로 훌륭하게 작동하는 장르물."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Joel Keller (Decider) <a class="review-modal-link" onclick="openReader('true_education_decider')">🌎 전문보기</a></span>
+                                <span class="author-score">7.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"평가 없음"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">-</span>
+                                <span class="author-score">-</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"평가 없음"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">-</span>
+                                <span class="author-score">-</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"평가 없음"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">-</span>
+                                <span class="author-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4: 해외 관객 -->
+                <div class="quadrant-group-card">
+                    <div class="quadrant-card-header">
+                        <div>
+                            <h3 class="quadrant-card-title">🌎 해외 관객</h3>
+                            <div class="quadrant-card-tags">
+                                <span class="quad-tag">IMDb</span>
+                                <span class="quad-tag">Rotten Tomatoes</span>
+                                <span class="quad-tag">Letterboxd</span>
+                            </div>
+                        </div>
+                        <div class="mini-gauge">
+                            <div class="mini-circle-wrapper">
+                                <svg viewBox="-5 -5 60 60" style="transform: rotate(-90deg); width:100%; height:100%;">
+                                    <circle class="mini-circle-bg" cx="25" cy="25" r="20" />
+                                    <circle id="gaugeFillGlAud" class="mini-circle-fill" cx="25" cy="25" r="20" stroke-dasharray="125.6" stroke-dashoffset="22.61" style="transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.8, 0.2, 1);" />
+                                </svg>
+                                <span class="mini-score-val">8.2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-quote-list">
+                        <div class="review-quote-item highlighted">
+                            <p class="review-quote-text">"원작의 불필요한 잡음들을 정제하고 오락적인 에너지를 최고조로 끌어올린 만족스러운 시리즈. 김무열은 최고의 연기력을 선보였다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">MyDramaList 유저 <a class="review-modal-link" onclick="openReader('true_education_mydramalist')">🎬 전문보기</a></span>
+                                <span class="author-score">8.5/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"단순하고 속도감 넘치는 참교육 복수극의 정석을 보여주는 동시에, 권력이 가질 수 있는 정당성과 그 한계에 대해 묵직한 고민을 남긴다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">IMDb User</span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"원작의 우려 요소를 신중히 각색하여 드라마로 매끄럽게 안착시켰다. 액션 시퀀스의 안무 연출만큼은 올 상반기 한국 시리즈 중 최정상급이다."</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">Reddit User</span>
+                                <span class="author-score">8.0/10</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"평가 없음"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">-</span>
+                                <span class="author-score">-</span>
+                            </div>
+                        </div>
+                        <div class="review-quote-item">
+                            <p class="review-quote-text">"평가 없음"</p>
+                            <div class="review-quote-author">
+                                <span class="author-name">-</span>
+                                <span class="author-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- My Rating Widget -->
+        <div class="rating-widget">
+            <span class="widget-title">✍️ 보스의 감상평 (나의 별점)</span>
+            <div class="stars-container" id="starsContainer">
+                <span class="star-icon" data-value="1">★</span>
+                <span class="star-icon" data-value="2">★</span>
+                <span class="star-icon" data-value="3">★</span>
+                <span class="star-icon" data-value="4">★</span>
+                <span class="star-icon" data-value="5">★</span>
+            </div>
+            <textarea class="comment-input" id="commentInput" placeholder="이 영화에 대한 보스의 감상을 짧게 남겨주세요..."></textarea>
+            <button class="rate-submit-btn" id="submitBtn">평가 저장하기</button>
+            <div class="save-toast" id="saveToast">✓ 평가가 안전하게 저장되었습니다.</div>
+        </div>
+
+        <!-- TUG Theater Format Recommendation Widget -->
+        <div class="theater-guide-widget" style="background: #fffbf5; border: 1px dashed rgba(243, 156, 18, 0.3); border-radius: 16px; width: 100%; padding: 18px 15px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 25px; margin-bottom: 10px; box-sizing: border-box;">
+            <span class="widget-title" style="align-self: center; font-size: 13px; font-weight: 900; color: var(--accent-gold); letter-spacing: 0.3px; margin-bottom: 5px;">🏠 홈 시네마 추천 가이드</span>
+            
+            <div class="theater-guide-intro" style="font-size: 10.5px; color: #718096; line-height: 1.4; text-align: center; width: 100%;">
+                TUG 관람 평단이 스트리밍 서비스 및 홈 시어터 시청 환경의 여론을 분석하여 도출한 추천 지수 및 팁입니다.
+            </div>
+
+            <!-- IMAX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Dolby Vision / Atmos (홈 시어터)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #f39c12;">9.2 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill imax-gauge-fill" style="height: 100%; border-radius: 3px; width: 92%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #f39c12, #f1c40f); box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🎬 **추천**: 넷플릭스 4K Dolby Vision 및 Atmos 입체 음향 시스템을 적극 권장합니다. 타격감 넘치는 격투 액션 효과음과 중저음 비트의 긴장감이 방 안을 가득 채웁니다.
+                </div>
+            </div>
+
+            <!-- Dolby Cinema Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #2d3748;">Large Screen 4K TV (안방 극장)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #2ecc71;">8.5 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill dolby-gauge-fill" style="height: 100%; border-radius: 3px; width: 85%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🔊 **추천**: 김무열의 시원시원한 피지컬 액션과 대규모 학교 폭력 현장의 거친 질감을 제대로 느끼기 위해서는 거실 대형 스마트 TV 시청이 훌륭한 대안입니다.
+                </div>
+            </div>
+
+            <!-- 4DX Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #e67e22;">Mobile / Tablet (이동 중 감상)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #e67e22;">7.0 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill fourdx-gauge-fill" style="height: 100%; border-radius: 3px; width: 70%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #e67e22, #d35400); box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    🌀 **추천**: 10부작 에피소드 호흡으로 출퇴근 시간 모바일 기기로 가볍게 끊어 보기 좋으나, 사운드와 격투 액션의 몰입감을 극대화하기 위해 헤드폰 착용을 권장합니다.
+                </div>
+            </div>
+
+            <!-- Standard Recommendation -->
+            <div class="theater-metric-row" style="width: 100%; margin-top: 10px; box-sizing: border-box;">
+                <div class="theater-metric-header" style="display: flex; justify-content: space-between; width: 100%; font-size: 11px;">
+                    <span class="theater-format-name" style="font-weight: 800; color: #95a5a6;">Standard Theater (특별 상영관)</span>
+                    <span class="theater-metric-score" style="font-weight: 800; color: #95a5a6;">0.0 / 10</span>
+                </div>
+                <div class="hud-gauge-container" style="width: 100%; margin-top: 4px;">
+                    <div class="hud-gauge-track" style="width: 100%; height: 5px; background: rgba(226, 232, 240, 0.8); border-radius: 3px; overflow: hidden; position: relative;">
+                        <div class="hud-gauge-fill standard-gauge-fill" style="height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1); background: linear-gradient(90deg, #95a5a6, #7f8c8d); box-shadow: 0 0 6px rgba(149, 165, 166, 0.35);"></div>
+                    </div>
+                </div>
+                <div class="theater-tip" style="font-size: 10.5px; color: #718096; margin-top: 4px; line-height: 1.35; text-align: justify;">
+                    💺 **추천**: 넷플릭스 독점 오리지널 10부작 드라마 시리즈로, 극장 특별관 및 일반 상영관 개봉 일정이 존재하지 않는 홈 시네마 전용 콘텐츠입니다.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Inline Modal Pop-up Reader UI (Mobile-Responsive Version) -->
+    <div id="readerModal" class="modal-overlay" onclick="closeReader(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div id="modalHeader" class="modal-header">
+                <button class="modal-close-btn" onclick="closeReader()">✕</button>
+                <div id="modalOutlet" class="modal-outlet-tag">매체사</div>
+                <h2 id="modalTitle" class="modal-main-quote">"비평의 메인 구절이 렌더링되는 영역입니다."</h2>
+                <div class="modal-meta-row">
+                    <span id="modalMetaAuthor">작성자: 홍길동</span>
+                    <span>|</span>
+                    <span id="modalMetaScore">평점: 10/10</span>
+                </div>
+            </div>
+            
+            <div id="modalContent" class="modal-body-scroll">
+                <!-- Dynamically Populated Sections -->
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalSourceLink" class="modal-link-out" href="#" target="_blank">🌐 원본 리뷰 사이트 방문하기 &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="media/translations.js" defer></script>
+    <script src="media/dashboard_m.js" defer></script>
+</body>
+</html>
