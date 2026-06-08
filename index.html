@@ -671,6 +671,40 @@
     <!-- Movie Magazine Grid -->
     <div class="magazine-grid" id="movieGrid">
         
+        <!-- Card 7: 호프 -->
+        <div class="movie-card" data-movie-key="hope" 
+             data-reg-order="7"
+             data-title="호프 (HOPE)" 
+             data-director="나홍진" 
+             data-genre="SF" 
+             data-score="7.8" 
+             data-year="2026" 
+             data-link="hope_dashboard.html"
+             data-meta="나홍진 감독 • 황정민, 조인성 주연 • 15세이상관람가"
+             data-desc="비무장지대 외딴 항구 마을에 나타난 정체불명의 존재. 나홍진 감독의 SF 액션 스릴러 대작 《호프》. TUG 평론단과 보스가 전격 분석한 4분할 입체 비평을 독점 공개합니다."
+             data-backdrop="media/hope_official_backdrop.png"
+             data-backdrop-gradient="linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)"
+             onclick="location.href='hope_dashboard.html'">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/hope_official_poster.png" alt="호프">
+            </div>
+            <div class="card-info">
+                <div class="card-badges">
+                    <span class="card-badge-special special-imax">IMAX</span>
+                    <span class="card-badge-special special-dolby">Dolby</span>
+                    <span class="card-badge-special special-4dx">4DX</span>
+                </div>
+                <h3 class="card-title">호프 (2026)</h3>
+                <p class="card-meta">나홍진 감독 • 황정민, 조인성 주연</p>
+                <div class="card-spacer"></div>
+                <div class="my-rating-row"></div>
+                <div class="card-rating-row">
+                    <span class="card-stars">★★★★☆</span>
+                    <span class="card-score">★ <span class="card-score-accent">7.8</span>/10</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Card 6: 참교육 -->
         <div class="movie-card" data-movie-key="true_education" 
              data-reg-order="6"
@@ -1115,8 +1149,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating', 'true_education_rating',
-                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm', 'true_education_alarm'
+                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating', 'true_education_rating', 'hope_rating',
+                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm', 'true_education_alarm', 'hope_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -1139,6 +1173,8 @@
                                  movieKey = 'wonderfuls';
                              } else if (key.startsWith('true_education')) {
                                  movieKey = 'true_education';
+                             } else if (key.startsWith('hope')) {
+                                 movieKey = 'hope';
                              }
                              const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             

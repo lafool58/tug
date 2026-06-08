@@ -438,6 +438,33 @@
     <!-- Movie List -->
     <div class="magazine-m-list" id="movieGrid">
         
+        <!-- Card 7: 호프 -->
+        <a href="hope_dashboard_m.html" class="movie-card" data-movie-key="hope" 
+           data-reg-order="7"
+           data-title="호프 (HOPE)" 
+           data-director="나홍진" 
+           data-genre="SF" 
+           data-score="7.8" 
+           data-year="2026" 
+           data-backdrop="media/hope_official_backdrop.png">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="media/hope_official_poster.png" alt="호프">
+            </div>
+            <div class="card-info">
+                <h3 class="card-title">호프</h3>
+                <p class="card-meta">나홍진 감독 • 황정민, 조인성 주연</p>
+                <div class="card-badges">
+                    <span class="card-badge-special">IMAX</span>
+                    <span class="card-badge-special">Dolby</span>
+                    <span class="card-badge-special">4DX</span>
+                </div>
+                <div class="card-rating-row">
+                    <span class="card-score">★ <span class="card-score-accent">7.8</span></span>
+                </div>
+                <div class="my-rating-row"></div>
+            </div>
+        </a>
+
         <!-- Card 6: 참교육 -->
         <a href="true_education_dashboard_m.html" class="movie-card" data-movie-key="true_education" 
            data-reg-order="6"
@@ -784,8 +811,8 @@
         // Pull from cloud & merge reactively (GET)
         function syncWithCloud() {
             const syncKeys = [
-                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating', 'true_education_rating',
-                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm', 'true_education_alarm'
+                'wildsing_rating', 'mandalorian_rating', 'colony_rating', 'disclosure_rating', 'toystory_rating', 'wonderfuls_rating', 'true_education_rating', 'hope_rating',
+                'wildsing_alarm', 'mandalorian_alarm', 'colony_alarm', 'disclosure_alarm', 'toystory_alarm', 'wonderfuls_alarm', 'true_education_alarm', 'hope_alarm'
             ];
             
             syncKeys.forEach(key => {
@@ -793,22 +820,24 @@
                     .then(res => res.text())
                     .then(text => {
                         if (text && text.trim() !== "" && text !== "null") {
-                            let cleanVal = text.trim().replace(/^"|"$/g, '');
-                            const isRating = key.endsWith('rating');
-                            let movieKey = 'colony';
-                            if (key.startsWith('wildsing')) {
-                                movieKey = 'wildsing';
-                            } else if (key.startsWith('mandalorian')) {
-                                movieKey = 'mandalorian';
-                            } else if (key.startsWith('disclosure')) {
-                                movieKey = 'disclosure';
-                            } else if (key.startsWith('toystory')) {
-                                movieKey = 'toystory';
-                            } else if (key.startsWith('wonderfuls')) {
-                                movieKey = 'wonderfuls';
-                            } else if (key.startsWith('true_education')) {
-                                movieKey = 'true_education';
-                            }
+                             let cleanVal = text.trim().replace(/^"|"$/g, '');
+                             const isRating = key.endsWith('rating');
+                             let movieKey = 'colony';
+                             if (key.startsWith('wildsing')) {
+                                 movieKey = 'wildsing';
+                             } else if (key.startsWith('mandalorian')) {
+                                 movieKey = 'mandalorian';
+                             } else if (key.startsWith('disclosure')) {
+                                 movieKey = 'disclosure';
+                             } else if (key.startsWith('toystory')) {
+                                 movieKey = 'toystory';
+                             } else if (key.startsWith('wonderfuls')) {
+                                 movieKey = 'wonderfuls';
+                             } else if (key.startsWith('true_education')) {
+                                 movieKey = 'true_education';
+                             } else if (key.startsWith('hope')) {
+                                 movieKey = 'hope';
+                             }
                             const localKey = isRating ? 'tug_rating_' + movieKey : 'tug_alarm_' + movieKey;
                             
                             let localData = localStorage.getItem(localKey);
